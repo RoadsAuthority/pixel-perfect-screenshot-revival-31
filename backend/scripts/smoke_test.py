@@ -51,7 +51,10 @@ def call(url: str, body: dict, token: str = "") -> tuple[int, dict]:
 def main() -> None:
     if len(sys.argv) != 2:
         raise SystemExit(__doc__)
-    url = sys.argv[1]
+    url = sys.argv[1].rstrip("/")
+    if not url.endswith("/archive"):
+        url += "/archive"
+        print(f"Using {url}")
 
     status, _ = call(url, {"action": "verify", "user_id": "DOC-001", "pin": "0000", "channel": "web"})
     print(("ok  " if status == 401 else "FAIL") + f" wrong PIN rejected (HTTP {status})")
