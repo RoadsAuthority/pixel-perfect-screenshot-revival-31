@@ -387,6 +387,13 @@ class DispatchTests(unittest.TestCase):
         self.assertIn("Do not discuss patients", sent_to_model)
         self.assertNotIn("SECRET", sent_to_model)  # clerk may not read patient records
 
+    def test_model_is_told_which_patient_record_is_mine(self):
+        token, clients, _ = self._login(PATIENT1)
+        runtime = FakeRuntime({"known": True, "answer": "Penicillin.", "doc_ids": [CONSULT_ID]})
+        self._ask(token, clients, FakeAgentRuntime([chunk(CONSULT_ID)]), runtime, query="What allergies do I have?")
+        sent = runtime.request["messages"][0]["content"][0]["text"]
+        self.assertIn("patient record(s) PAT-001", sent)
+
     def test_unknown_action_returns_400(self):
         with self.assertRaises(handler.ArchiveError) as ctx:
             handler.dispatch({"action": "explode"}, make_clients(), CONFIG)
