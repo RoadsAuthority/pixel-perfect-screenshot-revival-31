@@ -105,7 +105,10 @@ export async function callArchive(
   if (!url.trim()) throw new Error('Add the clinic API URL in connection settings first.');
   let parsed: URL;
   try { parsed = new URL(url); } catch { throw new Error('Enter a valid HTTPS clinic API URL.'); }
-  if (parsed.protocol !== 'https:') throw new Error('The clinic API URL must use HTTPS.');
+  const isLocal = parsed.hostname === 'localhost' || parsed.hostname === '127.0.0.1';
+  if (parsed.protocol !== 'https:' && !(isLocal && parsed.protocol === 'http:')) {
+    throw new Error('The clinic API URL must use HTTPS.');
+  }
   const headers: Record<string, string> = { 'Content-Type': 'application/json' };
   if (token) headers['Authorization'] = `Bearer ${token}`;
   let response: Response;
