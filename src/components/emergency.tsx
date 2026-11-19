@@ -16,8 +16,10 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
-import { callArchive, normalizeAnswer, type Answer, type EmergencyAlert } from '@/lib/archive';
+import { callArchive, normalizeAnswer, type Answer, type EmergencyAlert, type Source } from '@/lib/archive';
 import type { AuthSession } from '@/lib/auth';
+import { AnswerCard } from '@/components/answer-card';
+import { DocumentViewer, MOBILE_FULLSCREEN } from '@/components/document-viewer';
 
 export const CLINIC_EMERGENCY_LINE = '+264 61 555 0199 (fictional)';
 
@@ -127,7 +129,7 @@ export function EmergencyDialog({ open, onOpenChange, session, url }: DialogProp
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-h-[90vh] max-w-lg overflow-y-auto">
+      <DialogContent className={`max-h-[90vh] max-w-lg overflow-y-auto ${MOBILE_FULLSCREEN} max-sm:content-start`}>
         <DialogTitle className="flex items-center gap-2 text-destructive">
           <Siren size={20} /> Get urgent help
         </DialogTitle>
@@ -536,6 +538,7 @@ function RouteBox({ alert }: { alert: EmergencyAlert }) {
 function AlertCard({ alert, session, url, onHandled }: { alert: EmergencyAlert; session: AuthSession; url: string; onHandled: (id: string) => Promise<void> }) {
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState<Answer | null>(null);
+  const [source, setSource] = useState<Source | null>(null);
   const [asking, setAsking] = useState(false);
   const [error, setError] = useState('');
   const patient = alert.patient_ids[0] || alert.claimed_patient_id || '';
@@ -621,18 +624,12 @@ function AlertCard({ alert, session, url, onHandled }: { alert: EmergencyAlert; 
         </form>
         {error && <p className="mt-2 text-sm text-destructive">{error}</p>}
         {answer && (
-          <div className="mt-3 rounded-md border border-border bg-card p-3 text-sm leading-6" aria-live="polite">
-            <p className={answer.is_unknown ? 'text-warning' : ''}>{answer.answer}</p>
-            {answer.sources.length > 0 && (
-              <p className="mt-2 text-xs text-muted-foreground">
-                Sources: {answer.sources.map((s, i) => (
-                  <span key={s.doc_id}>{i > 0 ? ', ' : ''}{s.url ? <a className="text-primary underline" href={s.url} target="_blank" rel="noreferrer">{s.reference}</a> : s.reference}</span>
-                ))}
-              </p>
-            )}
+          <div className="mt-3">
+            <AnswerCard answer={answer} onOpenSource={setSource} />
           </div>
         )}
       </div>
+      <DocumentViewer source={source} onClose={() => setSource(null)} url={url} token={session.token} userId={session.user_id} />
     </article>
   );
 }

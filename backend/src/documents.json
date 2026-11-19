@@ -9,7 +9,8 @@
     "groups": [
       "Clinical"
     ],
-    "s3_key": "archive/Clinical/HCC-CLN-001_Protocol_Anaphylaxis_After_Vaccination.txt"
+    "s3_key": "archive/Clinical/HCC-CLN-001_Protocol_Anaphylaxis_After_Vaccination.txt",
+    "text": "========================================================================\nHOPEWELL COMMUNITY CLINIC\n15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100\nFICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA\n========================================================================\nPROTOCOL - ANAPHYLAXIS AFTER VACCINATION\nDocument ID: HCC-CLN-001\nDate: 2026-03-01\n========================================================================\nFor trained clinical staff. Based on standard anaphylaxis guidance.\n\nRECOGNISE\nSudden onset (usually within 30 minutes) of breathing difficulty, wheeze, swelling of\nthe lips or throat, widespread rash, collapse or low blood pressure.\n\nTREAT\n1. Call for help. Lay the patient flat with legs raised (sitting up if breathing is\n   difficult; recovery position if unconscious).\n2. Give adrenaline 1 mg/mL INTRAMUSCULARLY into the outer thigh:\n   0.01 mL/kg (0.01 mg/kg), maximum 0.5 mL (0.5 mg) adult, 0.3 mL child 6-12 years,\n   0.15 mL child under 6 years.\n3. Repeat after 5 minutes if there is no improvement.\n4. Give oxygen if available. Monitor breathing and pulse.\n5. Transfer every patient with anaphylaxis to hospital, even after recovery.\n\nEvery vaccination session must have an anaphylaxis kit (adrenaline, syringes) ready.\nObserve every vaccinated person for 15 minutes.\n\n------------------------------------------------------------------------\nFICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a\nsubstitute for advice from a qualified health worker.\n"
   },
   {
     "doc_id": "HCC-STF-001",
@@ -21,7 +22,8 @@
     "groups": [
       "Staff"
     ],
-    "s3_key": "archive/Operations/HCC-STF-001_Vaccine_Stock_and_Cold_Chain_Log.txt"
+    "s3_key": "archive/Operations/HCC-STF-001_Vaccine_Stock_and_Cold_Chain_Log.txt",
+    "text": "========================================================================\nHOPEWELL COMMUNITY CLINIC\n15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100\nFICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA\n========================================================================\nVACCINE STOCK AND COLD CHAIN LOG\nDocument ID: HCC-STF-001\nDate: 2026-11-15\n========================================================================\nVACCINE STOCK (fridge 1, checked 2026-11-15 by CLK-001 Selma Amutenya)\n\nVACCINE              BATCH       DOSES   EXPIRY DATE\nBCG                  BCG-2611    40      2027-02-28\nOPV                  OPV-2604    120     2027-05-31\nPentavalent          PEN-2609    60      2027-08-31\nPCV                  PCV-2602    55      2026-12-31   <- use first\nRotavirus            ROT-2607    48      2027-07-31\nMeasles-Rubella      MR-2603     30      2027-03-31\nHPV                  HPV-2610    25      2028-01-31\nTetanus-diphtheria   TD-2512     35      2026-12-15   <- use first, expires soon\n\nCOLD CHAIN\n- Fridge temperature range required: +2 C to +8 C.\n- Temperature excursion on 2026-11-08 (9.5 C for 40 minutes after a power cut);\n  vaccine vial monitors checked by NUR-001, all usable.\n- Fridge thermometer calibration due: 2027-04-30.\n- Next stock order: 2026-12-01 (PCV and Td needed).\n\n------------------------------------------------------------------------\nFICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a\nsubstitute for advice from a qualified health worker.\n"
   },
   {
     "doc_id": "HCC-STF-002",
@@ -33,7 +35,8 @@
     "groups": [
       "Staff"
     ],
-    "s3_key": "archive/Operations/HCC-STF-002_Oxygen_and_Medical_Gas_Supply_Contract.txt"
+    "s3_key": "archive/Operations/HCC-STF-002_Oxygen_and_Medical_Gas_Supply_Contract.txt",
+    "text": "========================================================================\nHOPEWELL COMMUNITY CLINIC\n15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100\nFICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA\n========================================================================\nOXYGEN AND MEDICAL GAS SUPPLY CONTRACT\nDocument ID: HCC-STF-002\nDate: 2026-07-01\n========================================================================\nSupplier: AirMed Supplies (Pty) Ltd (fictional)\nContract number: AMS-HCC-2025-07\nStart date: 2025-07-01\nEnd date: 2027-06-30\nRenewal: the clinic must give written notice of renewal or cancellation by 2027-03-31.\n\nSERVICES\n- Monthly delivery of 4 medical oxygen cylinders (size F)\n- Cylinder pressure testing every 6 months\n- Emergency delivery within 24 hours at no extra cost\n\nPRICE\nN$ 2 450 per month, fixed until the end date.\n\nContact person: Mr K. Iyambo, accounts@airmed.example (fictional)\n\n------------------------------------------------------------------------\nFICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a\nsubstitute for advice from a qualified health worker.\n"
   },
   {
     "doc_id": "HCC-STF-003",
@@ -45,7 +48,8 @@
     "groups": [
       "Staff"
     ],
-    "s3_key": "archive/Operations/HCC-STF-003_Premises_Lease_Agreement.txt"
+    "s3_key": "archive/Operations/HCC-STF-003_Premises_Lease_Agreement.txt",
+    "text": "========================================================================\nHOPEWELL COMMUNITY CLINIC\n15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100\nFICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA\n========================================================================\nPREMISES LEASE AGREEMENT\nDocument ID: HCC-STF-003\nDate: 2024-02-01\n========================================================================\nLandlord: Khomasdal Property Trust (fictional)\nTenant: Hopewell Community Clinic\nPremises: 15 Moringa Street, Khomasdal, Windhoek\n\nLease start: 2024-02-01\nLease end: 2027-01-31\nNotice period: 3 months. Notice to renew or end the lease must be given by 2026-10-31.\nStatus note (2026-10-28, CLK-001): renewal notice sent to the landlord; reply awaited.\n\nMonthly rent: N$ 18 500, increasing by 6% on 2026-02-01 to N$ 19 610.\nMaintenance: the landlord repairs the roof and plumbing; the clinic maintains the\ninterior and the generator.\nThe clinic may not sublet any part of the premises.\n\n------------------------------------------------------------------------\nFICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a\nsubstitute for advice from a qualified health worker.\n"
   },
   {
     "doc_id": "HCC-STF-004",
@@ -57,7 +61,8 @@
     "groups": [
       "Staff"
     ],
-    "s3_key": "archive/Operations/HCC-STF-004_Staff_Roster_and_Contacts.txt"
+    "s3_key": "archive/Operations/HCC-STF-004_Staff_Roster_and_Contacts.txt",
+    "text": "========================================================================\nHOPEWELL COMMUNITY CLINIC\n15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100\nFICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA\n========================================================================\nSTAFF ROSTER AND CONTACTS\nDocument ID: HCC-STF-004\nDate: 2026-11-01\n========================================================================\nSTAFF\n- DOC-001 Dr Anna-Marie van Wyk, medical doctor - Tuesday and Thursday\n- NUR-001 Sister Ndapewa Haufiku, registered nurse - Monday to Friday\n- NUR-002 Nurse Martha Iipinge, enrolled nurse - Monday to Saturday (shifts)\n- CLK-001 Selma Amutenya, clinic clerk - Monday to Friday\n\nON-CALL NURSE, NOVEMBER - DECEMBER 2026\n- Weeks starting 16 Nov and 30 Nov: NUR-001\n- Weeks starting 23 Nov and 7 Dec: NUR-002\n\nClinic emergency line: +264 61 555 0199 (fictional)\nStaff home addresses and personal phone numbers are not kept in this archive.\n\n------------------------------------------------------------------------\nFICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a\nsubstitute for advice from a qualified health worker.\n"
   },
   {
     "doc_id": "PAT-001-LAB",
@@ -70,7 +75,8 @@
       "Clinical",
       "PAT-001"
     ],
-    "s3_key": "archive/Patients/PAT-001-LAB_Laboratory_Results_Maria_Nangolo_2026-10-06.txt"
+    "s3_key": "archive/Patients/PAT-001-LAB_Laboratory_Results_Maria_Nangolo_2026-10-06.txt",
+    "text": "========================================================================\nHOPEWELL COMMUNITY CLINIC\n15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100\nFICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA\n========================================================================\nLABORATORY RESULTS - MARIA NANGOLO - 2026-10-06\nDocument ID: PAT-001-LAB\nDate: 2026-10-06\n========================================================================\nPatient: PAT-001 Maria Nangolo\nSample collected: 2026-10-06\n\nTEST                 RESULT        REFERENCE RANGE     FLAG\nCreatinine           68 umol/L     45-90 umol/L        NORMAL\nTotal cholesterol    5.9 mmol/L    below 5.0 mmol/L    HIGH\nRandom glucose       5.4 mmol/L    3.9-7.8 mmol/L      NORMAL\nHIV test             not requested                     NOT AVAILABLE\n\nComment: cholesterol is above the target. To be discussed at the follow-up visit.\n\n------------------------------------------------------------------------\nFICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a\nsubstitute for advice from a qualified health worker.\n"
   },
   {
     "doc_id": "PAT-001-PRF",
@@ -83,7 +89,8 @@
       "Clinical",
       "PAT-001"
     ],
-    "s3_key": "archive/Patients/PAT-001-PRF_Patient_Profile_Maria_Nangolo.txt"
+    "s3_key": "archive/Patients/PAT-001-PRF_Patient_Profile_Maria_Nangolo.txt",
+    "text": "========================================================================\nHOPEWELL COMMUNITY CLINIC\n15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100\nFICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA\n========================================================================\nPATIENT PROFILE - MARIA NANGOLO\nDocument ID: PAT-001-PRF\nDate: 2026-10-05\n========================================================================\nPatient ID: PAT-001\nName: Maria Nangolo\nDate of birth: 1985-03-12 (age 41)\nSex: Female\nPhone: 081 555 0101 (fictional)\n\nALLERGIES\n- Penicillin: rash and swelling of the face (2019). Do not prescribe penicillins.\n\nLONG-TERM CONDITIONS\n- High blood pressure (diagnosed 2026-10-05)\n\nCURRENT MEDICATION\n- Amlodipine 5 mg once daily (since 2026-10-05)\n\nBlood group: not tested.\nEmergency contact: Petrus Nangolo (husband), 081 555 0102 (fictional)\n\n------------------------------------------------------------------------\nFICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a\nsubstitute for advice from a qualified health worker.\n"
   },
   {
     "doc_id": "PAT-001-VIS",
@@ -96,7 +103,8 @@
       "Clinical",
       "PAT-001"
     ],
-    "s3_key": "archive/Patients/PAT-001-VIS_Visit_Note_Maria_Nangolo_2026-10-05.txt"
+    "s3_key": "archive/Patients/PAT-001-VIS_Visit_Note_Maria_Nangolo_2026-10-05.txt",
+    "text": "========================================================================\nHOPEWELL COMMUNITY CLINIC\n15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100\nFICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA\n========================================================================\nVISIT NOTE - MARIA NANGOLO - 2026-10-05\nDocument ID: PAT-001-VIS\nDate: 2026-10-05\n========================================================================\nPatient: PAT-001 Maria Nangolo\nSeen by: DOC-001 Dr Anna-Marie van Wyk\n\nREASON FOR VISIT\nHeadaches for two weeks.\n\nFINDINGS\n- Blood pressure 148/94 mmHg, repeated 146/92 mmHg\n- Weight 78 kg\n\nASSESSMENT\nHigh blood pressure (hypertension).\n\nPLAN\n- Started amlodipine 5 mg once daily.\n- Reduce salt, walk 30 minutes a day.\n- Follow-up blood pressure check: 2026-11-23 at 09:30 with NUR-001.\n- Blood tests requested: kidney function and cholesterol.\n\nNURSE NOTE 2026-11-02 (NUR-001): blood pressure 132/84 mmHg. Patient feels better.\n\n------------------------------------------------------------------------\nFICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a\nsubstitute for advice from a qualified health worker.\n"
   },
   {
     "doc_id": "PAT-002-LAB",
@@ -109,7 +117,8 @@
       "Clinical",
       "PAT-002"
     ],
-    "s3_key": "archive/Patients/PAT-002-LAB_Laboratory_Results_and_Plan_Johannes_Haufiku_2026-10-12.txt"
+    "s3_key": "archive/Patients/PAT-002-LAB_Laboratory_Results_and_Plan_Johannes_Haufiku_2026-10-12.txt",
+    "text": "========================================================================\nHOPEWELL COMMUNITY CLINIC\n15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100\nFICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA\n========================================================================\nLABORATORY RESULTS AND PLAN - JOHANNES HAUFIKU - 2026-10-12\nDocument ID: PAT-002-LAB\nDate: 2026-10-12\n========================================================================\nPatient: PAT-002 Johannes Haufiku\nSample collected: 2026-10-12. Reviewed by DOC-001 Dr Anna-Marie van Wyk.\n\nTEST                 RESULT        REFERENCE RANGE     FLAG\nHbA1c                8.1 %         4.0-5.6 %           HIGH\nFasting glucose      9.8 mmol/L    3.9-5.5 mmol/L      HIGH\nCreatinine           82 umol/L     60-110 umol/L       NORMAL\nCholesterol          not requested                     NOT AVAILABLE\n\nPLAN\n- Metformin increased to 1000 mg twice daily.\n- Foot and eye check at the next visit.\n- Follow-up appointment: 2026-11-26 at 10:00 with DOC-001.\n- Repeat HbA1c in January 2027.\n\n------------------------------------------------------------------------\nFICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a\nsubstitute for advice from a qualified health worker.\n"
   },
   {
     "doc_id": "PAT-002-PRF",
@@ -122,7 +131,8 @@
       "Clinical",
       "PAT-002"
     ],
-    "s3_key": "archive/Patients/PAT-002-PRF_Patient_Profile_Johannes_Haufiku.txt"
+    "s3_key": "archive/Patients/PAT-002-PRF_Patient_Profile_Johannes_Haufiku.txt",
+    "text": "========================================================================\nHOPEWELL COMMUNITY CLINIC\n15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100\nFICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA\n========================================================================\nPATIENT PROFILE - JOHANNES HAUFIKU\nDocument ID: PAT-002-PRF\nDate: 2026-10-12\n========================================================================\nPatient ID: PAT-002\nName: Johannes Haufiku\nDate of birth: 1968-07-21 (age 58)\nSex: Male\nPhone: 081 555 0201 (fictional)\n\nALLERGIES\n- No known drug allergies.\n\nLONG-TERM CONDITIONS\n- Type 2 diabetes (since 2019)\n\nCURRENT MEDICATION\n- Metformin 1000 mg twice daily with meals (increased from 500 mg on 2026-10-12)\n\nEmergency contact: Hilma Haufiku (daughter), 081 555 0202 (fictional)\n\n------------------------------------------------------------------------\nFICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a\nsubstitute for advice from a qualified health worker.\n"
   },
   {
     "doc_id": "PAT-003-IMM",
@@ -135,7 +145,8 @@
       "Clinical",
       "PAT-003"
     ],
-    "s3_key": "archive/Patients/PAT-003-IMM_Immunisation_Record_Ndapandula_Iipinge.txt"
+    "s3_key": "archive/Patients/PAT-003-IMM_Immunisation_Record_Ndapandula_Iipinge.txt",
+    "text": "========================================================================\nHOPEWELL COMMUNITY CLINIC\n15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100\nFICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA\n========================================================================\nIMMUNISATION RECORD - NDAPANDULA IIPINGE\nDocument ID: PAT-003-IMM\nDate: 2026-11-02\n========================================================================\nPatient ID: PAT-003\nName: Ndapandula Iipinge (child)\nDate of birth: 2026-03-10\nParent/guardian: Loide Iipinge (mother), 081 555 0301 (fictional)\n\nVACCINES GIVEN\n- 2026-03-10  BCG, OPV 0\n- 2026-04-21  Pentavalent 1, OPV 1, PCV 1, Rotavirus 1\n- 2026-05-19  Pentavalent 2, OPV 2, PCV 2, Rotavirus 2\n- 2026-06-16  Pentavalent 3, OPV 3, PCV 3, IPV\n\nNEXT DUE\n- Measles-Rubella 1 at 9 months: on or after 2026-12-10.\n  Suggested: outreach clinic at Havana Primary School on 10 December 2026.\n- Measles-Rubella 2 and DTP booster at 18 months: on or after 2027-09-10.\n\nReactions: none recorded.\n\n------------------------------------------------------------------------\nFICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a\nsubstitute for advice from a qualified health worker.\n"
   },
   {
     "doc_id": "PAT-003-VIS",
@@ -148,7 +159,8 @@
       "Clinical",
       "PAT-003"
     ],
-    "s3_key": "archive/Patients/PAT-003-VIS_Visit_Note_Ndapandula_Iipinge_2026-11-02.txt"
+    "s3_key": "archive/Patients/PAT-003-VIS_Visit_Note_Ndapandula_Iipinge_2026-11-02.txt",
+    "text": "========================================================================\nHOPEWELL COMMUNITY CLINIC\n15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100\nFICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA\n========================================================================\nVISIT NOTE - NDAPANDULA IIPINGE - 2026-11-02\nDocument ID: PAT-003-VIS\nDate: 2026-11-02\n========================================================================\nPatient: PAT-003 Ndapandula Iipinge (8 months)\nSeen by: NUR-002 Nurse Martha Iipinge\n\nREASON FOR VISIT\nWatery diarrhoea for 2 days, still breastfeeding and drinking.\n\nFINDINGS\n- Alert, no signs of severe dehydration\n- Temperature 37.6 C, weight 7.9 kg\n\nTREATMENT\n- Oral rehydration solution (ORS) after every loose stool\n- Zinc 10 mg once daily for 10 days\n- Continue breastfeeding\n\nADVICE TO MOTHER\nReturn immediately if the child cannot drink or breastfeed, vomits everything,\nbecomes very sleepy, or has blood in the stool.\nReview visit: 2026-11-05 (attended, diarrhoea resolved).\n\n------------------------------------------------------------------------\nFICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a\nsubstitute for advice from a qualified health worker.\n"
   },
   {
     "doc_id": "HCC-PUB-001",
@@ -160,7 +172,8 @@
     "groups": [
       "Everyone"
     ],
-    "s3_key": "archive/Public/HCC-PUB-001_Clinic_Opening_Hours_and_Services.txt"
+    "s3_key": "archive/Public/HCC-PUB-001_Clinic_Opening_Hours_and_Services.txt",
+    "text": "========================================================================\nHOPEWELL COMMUNITY CLINIC\n15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100\nFICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA\n========================================================================\nCLINIC OPENING HOURS AND SERVICES\nDocument ID: HCC-PUB-001\nDate: 2026-11-01\n========================================================================\nOPENING HOURS\n- Monday to Friday: 07:30 - 17:00\n- Saturday: 08:00 - 12:00 (immunisation and minor ailments only)\n- Sunday and public holidays: closed. For emergencies call the clinic emergency line\n  +264 61 555 0199 (fictional) or go to Windhoek Central Hospital.\n\nSERVICES\n- General consultations with the doctor (Tuesday and Thursday) and nurses (daily)\n- Childhood and adult immunisation\n- Chronic care: high blood pressure, diabetes, asthma\n- Antenatal care (Wednesday mornings)\n- Basic laboratory tests (blood glucose, HbA1c, haemoglobin, urine tests)\n- Mobile outreach clinic (see the vaccination clinic dates document)\n\nWHAT TO BRING\n- Your clinic card or ID document\n- The child's Road-to-Health booklet for immunisation visits\n- All medicines you currently take\n\n------------------------------------------------------------------------\nFICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a\nsubstitute for advice from a qualified health worker.\n"
   },
   {
     "doc_id": "HCC-PUB-002",
@@ -172,7 +185,8 @@
     "groups": [
       "Everyone"
     ],
-    "s3_key": "archive/Public/HCC-PUB-002_Childhood_Immunisation_Schedule.txt"
+    "s3_key": "archive/Public/HCC-PUB-002_Childhood_Immunisation_Schedule.txt",
+    "text": "========================================================================\nHOPEWELL COMMUNITY CLINIC\n15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100\nFICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA\n========================================================================\nCHILDHOOD IMMUNISATION SCHEDULE\nDocument ID: HCC-PUB-002\nDate: 2026-01-15\n========================================================================\nThis is the routine childhood schedule followed at the clinic. It follows the national\nExpanded Programme on Immunisation (EPI). Always bring the Road-to-Health booklet.\n\nAGE              VACCINES GIVEN\nAt birth         BCG (tuberculosis), OPV 0 (oral polio)\n6 weeks          Pentavalent 1 (DTP-HepB-Hib), OPV 1, PCV 1 (pneumococcal), Rotavirus 1\n10 weeks         Pentavalent 2, OPV 2, PCV 2, Rotavirus 2\n14 weeks         Pentavalent 3, OPV 3, PCV 3, IPV (injectable polio)\n9 months         Measles-Rubella 1 (MR1)\n18 months        Measles-Rubella 2 (MR2), DTP booster\nGirls 9-14 years HPV (cervical cancer prevention), 1 dose\n\nMISSED A DOSE?\nCome to any immunisation day. Missed doses are caught up; the schedule does not\nrestart. A mild fever or sore leg for 1-2 days after vaccination is normal.\n\n------------------------------------------------------------------------\nFICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a\nsubstitute for advice from a qualified health worker.\n"
   },
   {
     "doc_id": "HCC-PUB-003",
@@ -184,7 +198,8 @@
     "groups": [
       "Everyone"
     ],
-    "s3_key": "archive/Public/HCC-PUB-003_Vaccination_Clinic_Days_and_Outreach_Dates_Nov_2026_Feb_2027.txt"
+    "s3_key": "archive/Public/HCC-PUB-003_Vaccination_Clinic_Days_and_Outreach_Dates_Nov_2026_Feb_2027.txt",
+    "text": "========================================================================\nHOPEWELL COMMUNITY CLINIC\n15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100\nFICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA\n========================================================================\nVACCINATION CLINIC DAYS AND OUTREACH DATES NOV 2026 - FEB 2027\nDocument ID: HCC-PUB-003\nDate: 2026-11-01\n========================================================================\nIMMUNISATION DAYS AT THE CLINIC\nEvery Monday and Saturday morning, 08:00 - 12:00. No appointment needed.\n\nMOBILE OUTREACH CLINIC (immunisation, blood pressure and glucose checks)\n- Okahandja Park Community Hall: 3 December 2026, 09:00 - 14:00\n- Havana Primary School: 10 December 2026, 09:00 - 14:00\n- Okahandja Park Community Hall: 7 January 2027, 09:00 - 14:00\n- Havana Primary School: 14 January 2027, 09:00 - 14:00\n- Okahandja Park Community Hall: 4 February 2027, 09:00 - 14:00\n\nSPECIAL CAMPAIGN\nHPV vaccination for girls aged 9-14 years at Havana Primary School on\n10 December 2026. Parents must sign the consent form beforehand.\n\nThe clinic is closed for the holidays from 24 December 2026 to 2 January 2027.\nNo outreach visit takes place in that period.\n\n------------------------------------------------------------------------\nFICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a\nsubstitute for advice from a qualified health worker.\n"
   },
   {
     "doc_id": "HCC-PUB-004",
@@ -196,7 +211,8 @@
     "groups": [
       "Everyone"
     ],
-    "s3_key": "archive/Public/HCC-PUB-004_Emergency_Guide_Choking.txt"
+    "s3_key": "archive/Public/HCC-PUB-004_Emergency_Guide_Choking.txt",
+    "text": "========================================================================\nHOPEWELL COMMUNITY CLINIC\n15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100\nFICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA\n========================================================================\nEMERGENCY GUIDE - CHOKING\nDocument ID: HCC-PUB-004\nDate: 2026-02-01\n========================================================================\nFollows standard first-aid practice (Red Cross / resuscitation council guidance).\n\nADULT OR CHILD OVER 1 YEAR WHO CANNOT BREATHE, COUGH OR SPEAK\n1. If they can cough, encourage them to keep coughing.\n2. If they cannot cough: stand behind them, lean them forward and give up to 5 firm\n   back blows between the shoulder blades with the heel of your hand.\n3. If still choking: give up to 5 abdominal thrusts - fist just above the belly\n   button, pull sharply inwards and upwards.\n4. Repeat 5 back blows and 5 abdominal thrusts. Call for help / the emergency line.\n5. If they become unresponsive, start CPR and get emergency help.\n\nBABY UNDER 1 YEAR\n- Lay the baby face down along your forearm, head lower than the body, and give up\n  to 5 back blows.\n- Then turn the baby face up and give up to 5 chest thrusts with two fingers in the\n  centre of the chest. Do NOT use abdominal thrusts on a baby.\n\nAnyone who received abdominal thrusts must be checked by a health worker afterwards.\n\n------------------------------------------------------------------------\nFICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a\nsubstitute for advice from a qualified health worker.\n"
   },
   {
     "doc_id": "HCC-PUB-005",
@@ -208,7 +224,8 @@
     "groups": [
       "Everyone"
     ],
-    "s3_key": "archive/Public/HCC-PUB-005_Emergency_Guide_Severe_Bleeding.txt"
+    "s3_key": "archive/Public/HCC-PUB-005_Emergency_Guide_Severe_Bleeding.txt",
+    "text": "========================================================================\nHOPEWELL COMMUNITY CLINIC\n15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100\nFICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA\n========================================================================\nEMERGENCY GUIDE - SEVERE BLEEDING\nDocument ID: HCC-PUB-005\nDate: 2026-02-01\n========================================================================\nFollows standard first-aid practice.\n\n1. Protect yourself: use gloves or a plastic bag over your hand if you can.\n2. Press firmly and directly on the wound with a clean cloth or dressing.\n3. Keep pressing without stopping for at least 10 minutes. If blood soaks through,\n   add more cloth on top - do not remove the first one.\n4. If possible, have the person lie down.\n5. Call the emergency line or bring the person to the clinic or hospital.\n6. Do not remove objects stuck in a wound; press around them instead.\n\nSigns of shock (pale, cold, sweaty skin, fast breathing, confusion) mean the person\nneeds urgent hospital care.\n\n------------------------------------------------------------------------\nFICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a\nsubstitute for advice from a qualified health worker.\n"
   },
   {
     "doc_id": "HCC-PUB-006",
@@ -220,7 +237,8 @@
     "groups": [
       "Everyone"
     ],
-    "s3_key": "archive/Public/HCC-PUB-006_Emergency_Guide_Burns.txt"
+    "s3_key": "archive/Public/HCC-PUB-006_Emergency_Guide_Burns.txt",
+    "text": "========================================================================\nHOPEWELL COMMUNITY CLINIC\n15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100\nFICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA\n========================================================================\nEMERGENCY GUIDE - BURNS\nDocument ID: HCC-PUB-006\nDate: 2026-02-01\n========================================================================\nFollows standard first-aid practice.\n\n1. Stop the burning: move away from the heat source.\n2. Cool the burn under cool (not ice-cold) running water for 20 minutes.\n3. Remove rings, watches and clothing near the burn unless stuck to the skin.\n4. Cover loosely with cling film or a clean plastic bag.\n5. Do NOT apply ice, butter, oil, toothpaste or traditional remedies.\n6. Do not burst blisters.\n\nGO TO THE CLINIC OR HOSPITAL IF\n- The burn is larger than the person's palm, is deep, or on the face, hands, feet,\n  genitals or over a joint\n- The person is a child, elderly, or the burn is from electricity or chemicals\n\n------------------------------------------------------------------------\nFICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a\nsubstitute for advice from a qualified health worker.\n"
   },
   {
     "doc_id": "HCC-PUB-007",
@@ -232,7 +250,8 @@
     "groups": [
       "Everyone"
     ],
-    "s3_key": "archive/Public/HCC-PUB-007_Emergency_Guide_Stroke_and_Heart_Attack.txt"
+    "s3_key": "archive/Public/HCC-PUB-007_Emergency_Guide_Stroke_and_Heart_Attack.txt",
+    "text": "========================================================================\nHOPEWELL COMMUNITY CLINIC\n15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100\nFICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA\n========================================================================\nEMERGENCY GUIDE - STROKE AND HEART ATTACK\nDocument ID: HCC-PUB-007\nDate: 2026-02-01\n========================================================================\nFollows standard first-aid practice.\n\nSTROKE - think FAST\n- Face: has one side of the face dropped?\n- Arms: can they lift both arms and keep them up?\n- Speech: is their speech slurred or confused?\n- Time: call for emergency help immediately. Note the time the signs started.\nDo not give food, drink or medicines to someone who may be having a stroke.\n\nHEART ATTACK\nSigns: chest pain or pressure that may spread to the arm, neck, jaw or back;\nshortness of breath; sweating; nausea.\n1. Call for emergency help immediately.\n2. Sit the person down and keep them calm.\n3. If they are not allergic and are able to chew, give one adult aspirin (300 mg)\n   to chew slowly.\n4. If they become unresponsive and are not breathing normally, start CPR.\n\n------------------------------------------------------------------------\nFICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a\nsubstitute for advice from a qualified health worker.\n"
   },
   {
     "doc_id": "HCC-PUB-008",
@@ -244,6 +263,7 @@
     "groups": [
       "Everyone"
     ],
-    "s3_key": "archive/Public/HCC-PUB-008_Emergency_Guide_Snakebite.txt"
+    "s3_key": "archive/Public/HCC-PUB-008_Emergency_Guide_Snakebite.txt",
+    "text": "========================================================================\nHOPEWELL COMMUNITY CLINIC\n15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100\nFICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA\n========================================================================\nEMERGENCY GUIDE - SNAKEBITE\nDocument ID: HCC-PUB-008\nDate: 2026-02-01\n========================================================================\nFollows standard first-aid practice for snakebite in southern Africa.\n\nDO\n1. Move away from the snake. Keep the person calm and still.\n2. Remove rings, watches and tight clothing near the bite (the limb may swell).\n3. Keep the bitten limb still, for example with a splint, at about heart level.\n4. Get the person to a hospital quickly - antivenom is only given in hospital.\n5. If safe, take a photo of the snake. Do not try to catch or kill it.\n\nDO NOT\n- Cut the wound, suck out venom, or apply ice or electric shocks\n- Apply a tight tourniquet\n- Give alcohol or traditional remedies\n\nIf venom was spat into the eyes, rinse the eyes with plenty of water.\n\n------------------------------------------------------------------------\nFICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a\nsubstitute for advice from a qualified health worker.\n"
   }
 ]

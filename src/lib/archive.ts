@@ -18,8 +18,29 @@ export type ArchiveDoc = {
   patient_id: string;
 };
 
-export type Source = { doc_id: string; title: string; snippet: string; reference: string; url?: string | undefined };
-export type Answer = { answer: string; is_unknown: boolean; status: 'answered' | 'unknown' | 'restricted'; sources: Source[] };
+export type Source = {
+  doc_id: string;
+  title: string;
+  snippet: string;
+  reference: string;
+  url?: string | undefined;
+  /** Exact passages from the document that support the answer (verified by the server). */
+  quotes?: string[] | undefined;
+  type?: string | undefined;
+  date?: string | undefined;
+};
+export type Answer = {
+  answer: string;
+  /** One-sentence plain-language summary, when the server provides one. */
+  summary?: string | undefined;
+  /** Short supporting points. */
+  points?: string[] | undefined;
+  is_unknown: boolean;
+  status: 'answered' | 'unknown' | 'restricted';
+  sources: Source[];
+};
+/** A full document, for the highlighted source viewer. */
+export type ArchiveDocText = { doc_id: string; title: string; type: string; date: string; patient_id: string; text: string };
 export type AuditEntry = { timestamp: string; user_id: string; role: Role; channel: 'web' | 'voice' | 'ussd'; question: string; status: Answer['status']; sources: string[] };
 
 type ArchiveRequestBase = { user_id: string };
@@ -28,6 +49,7 @@ export type ArchiveRequest =
   | (ArchiveRequestBase & { action: 'ask'; channel: 'web' | 'voice' | 'ussd'; query: string })
   | (ArchiveRequestBase & { action: 'summary'; channel: 'web' | 'voice' | 'ussd'; query: string; doc_id: string })
   | (ArchiveRequestBase & { action: 'documents' })
+  | (ArchiveRequestBase & { action: 'document'; doc_id: string })
   | (ArchiveRequestBase & { action: 'logs'; channel: 'web'; query: '' })
   | (ArchiveRequestBase & { action: 'ussd'; channel: 'ussd'; query: ''; ussd_session_id: string; ussd_text: string })
   | (ArchiveRequestBase & { action: 'alert_create'; channel: 'web' | 'voice'; message: string; name: string; phone: string; patient_id: string; pin: string; lat?: number | undefined; lng?: number | undefined; accuracy?: number | undefined })
@@ -78,9 +100,20 @@ export function normalizeAnswer(raw: unknown): Answer {
   const sources: Source[] = rawSources.flatMap((value: unknown) => {
     if (!value || typeof value !== 'object') return [];
     const s = value as Record<string, unknown>;
-    return [{ doc_id: String(s['doc_id'] ?? ''), title: String(s['title'] ?? s['document_title'] ?? 'Source document'), snippet: String(s['snippet'] ?? s['quote'] ?? ''), reference: String(s['reference'] ?? s['doc_id'] ?? ''), url: typeof s['url'] === 'string' && /^https:\/\//.test(s['url']) ? s['url'] : undefined }];
+    return [{
+      doc_id: String(s['doc_id'] ?? ''),
+      title: String(s['title'] ?? s['document_title'] ?? 'Source document'),
+      snippet: String(s['snippet'] ?? s['quote'] ?? ''),
+      reference: String(s['reference'] ?? s['doc_id'] ?? ''),
+      url: typeof s['url'] === 'string' && /^https:\/\//.test(s['url']) ? s['url'] : undefined,
+      quotes: Array.isArray(s['quotes']) ? s['quotes'].filter((q): q is string => typeof q === 'string') : [],
+      type: typeof s['type'] === 'string' ? s['type'] : undefined,
+      date: typeof s['date'] === 'string' ? s['date'] : undefined,
+    }];
   });
-  return { answer: text, is_unknown: false, status: 'answered', sources };
+  const points = Array.isArray(data['points']) ? data['points'].filter((p): p is string => typeof p === 'string' && p.trim() !== '') : [];
+  const summary = typeof data['summary'] === 'string' && data['summary'].trim() ? data['summary'] : undefined;
+  return { answer: text, summary, points, is_unknown: false, status: 'answered', sources };
 }
 
 export function normalizeDocuments(raw: Record<string, unknown>): ArchiveDoc[] {

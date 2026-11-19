@@ -394,6 +394,41 @@ class DispatchTests(unittest.TestCase):
         sent = runtime.request["messages"][0]["content"][0]["text"]
         self.assertIn("patient record(s) PAT-001", sent)
 
+    def test_short_answer_with_verified_quotes(self):
+        token, clients, _ = self._login(PATIENT1)
+        runtime = FakeRuntime({
+            "known": True,
+            "summary": "You are allergic to penicillin.",
+            "points": ["It caused a rash and facial swelling in 2019."],
+            "citations": [
+                {"doc_id": CONSULT_ID, "quote": "Penicillin: rash and swelling of the face (2019)"},
+                {"doc_id": CONSULT_ID, "quote": "Allergic to peanuts"},  # invented: not in the record
+            ],
+        })
+        _, body = self._ask(token, clients, FakeAgentRuntime([chunk(CONSULT_ID)]), runtime)
+        self.assertFalse(body["is_unknown"])
+        self.assertEqual(body["summary"], "You are allergic to penicillin.")
+        self.assertEqual(body["points"], ["It caused a rash and facial swelling in 2019."])
+        self.assertIn("• It caused a rash", body["answer"])
+        self.assertEqual(body["sources"][0]["quotes"], ["Penicillin: rash and swelling of the face (2019)"])
+
+    def test_document_viewer_respects_access(self):
+        token, clients, _ = self._login(PATIENT1)
+        status, body = handler.dispatch({"action": "document", "doc_id": CONSULT_ID}, clients, CONFIG,
+                                        auth_header=f"Bearer {token}")
+        self.assertEqual(status, 200)
+        self.assertIn("Penicillin", body["text"])
+        for other in ("PAT-002-PRF", "HCC-STF-003"):  # another patient's record, staff lease
+            with self.assertRaises(handler.ArchiveError) as ctx:
+                handler.dispatch({"action": "document", "doc_id": other}, clients, CONFIG,
+                                 auth_header=f"Bearer {token}")
+            self.assertEqual(ctx.exception.status_code, 404)
+
+    def test_document_list_never_includes_full_text(self):
+        token, clients, _ = self._login(DOCTOR)
+        _, body = handler.dispatch({"action": "documents"}, clients, CONFIG, auth_header=f"Bearer {token}")
+        self.assertNotIn("text", body["documents"][0])
+
     def test_unregistered_person_can_raise_alert(self):
         audit = FakeTable()
         status, body = handler.dispatch(

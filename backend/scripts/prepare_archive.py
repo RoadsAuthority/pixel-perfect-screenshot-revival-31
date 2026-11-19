@@ -70,6 +70,8 @@ def prepare_documents() -> None:
                 "patient_id": entry.get("patientId") or "",
                 "groups": groups,
                 "s3_key": f"archive/{rel.as_posix()}",
+                # Full text, so the API can show a document with the cited passages highlighted.
+                "text": src_txt.read_text(encoding="utf-8"),
             }
         )
     catalog.sort(key=lambda d: (d["folder"], d["doc_id"]))
@@ -103,5 +105,11 @@ def prepare_users() -> None:
 
 
 if __name__ == "__main__":
+    import sys
+
     prepare_documents()
-    prepare_users()
+    # Users are only regenerated on request: new salts would no longer match DynamoDB.
+    if "--users" in sys.argv:
+        prepare_users()
+    else:
+        print("Users unchanged (pass --users to regenerate backend/demo-users/).")

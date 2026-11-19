@@ -56,8 +56,13 @@ SYSTEM_PROMPT = (
     "Use plain, simple language. Do not diagnose, prescribe, or infer facts that are not stated.\n"
     "If a record says a result is not available or was not requested, say so plainly and cite that record.\n"
     "If the excerpts do not answer the question, set known to false.\n"
+    "Keep it SHORT and SIMPLE: a one-sentence summary, then at most 4 short points with only what the "
+    "question needs (no extra history, no repeated details). Use words a patient would understand.\n"
+    "For every fact, add a citation with the doc_id and an EXACT quote copied word for word from that "
+    "excerpt (a short phrase or line, under 150 characters), so the reader can find it in the document.\n"
     "Reply with a single JSON object and nothing else:\n"
-    '{"known": true or false, "answer": "your answer", "doc_ids": ["doc_id of every excerpt you used"]}'
+    '{"known": true or false, "summary": "one short sentence", "points": ["short point", "..."], '
+    '"citations": [{"doc_id": "...", "quote": "exact words from the excerpt"}]}'
 )
 
 UNKNOWN_ANSWER = (
@@ -414,21 +419,55 @@ def generate_answer(query: str, chunks: list, runtime, model_id: str, principal:
         # Model ignored the format: keep its text, cite documents it names.
         known = bool(text) and not text.lower().startswith("i don't know")
         return {"known": known, "answer": text, "doc_ids": [c["doc_id"] for c in chunks if c["doc_id"] in text]}
-    doc_ids = data.get("doc_ids") if isinstance(data.get("doc_ids"), list) else []
+    doc_ids = [str(d) for d in data.get("doc_ids", [])] if isinstance(data.get("doc_ids"), list) else []
+    quotes: dict = {}
+    for c in data.get("citations", []) if isinstance(data.get("citations"), list) else []:
+        if isinstance(c, dict) and c.get("doc_id"):
+            doc = str(c["doc_id"])
+            doc_ids.append(doc)
+            quote = str(c.get("quote", "")).strip()
+            if quote:
+                quotes.setdefault(doc, []).append(quote[:300])
+    points = [str(x).strip() for x in data.get("points", []) if str(x).strip()] if isinstance(data.get("points"), list) else []
+    summary = str(data.get("summary", "") or data.get("answer", "")).strip()
+    answer = summary + ("\n" + "\n".join(f"• {pt}" for pt in points[:6]) if points else "")
     return {
         "known": data.get("known") is True,
-        "answer": str(data.get("answer", "")).strip(),
-        "doc_ids": [str(d) for d in doc_ids],
+        "answer": answer.strip(),
+        "summary": summary,
+        "points": points[:6],
+        "doc_ids": doc_ids,
+        "quotes": quotes,
     }
 
 
-def _source_for(doc_id: str, chunks: list, s3_client, archive_bucket: str) -> dict:
+def _normalise(text: str) -> str:
+    return re.sub(r"\s+", " ", text).strip().lower()
+
+
+def verified_quotes(doc_id: str, quotes: list) -> list:
+    """Keep only quotes that really appear in the document (ignoring case and spacing)."""
+    document = DOCS_BY_ID.get(doc_id)
+    haystack = _normalise(document.get("text", "")) if document else ""
+    kept = []
+    for quote in quotes:
+        q = _normalise(quote).strip(" .\"'")
+        if len(q) >= 3 and q in haystack and quote not in kept:
+            kept.append(quote)
+    return kept[:5]
+
+
+def _source_for(doc_id: str, chunks: list, s3_client, archive_bucket: str, quotes: list | None = None) -> dict:
     document = next(d for d in DOCUMENTS if d["doc_id"] == doc_id)
     snippet = next((c["text"] for c in chunks if c["doc_id"] == doc_id), "")
+    good = verified_quotes(doc_id, quotes or [])
     return {
         "doc_id": doc_id,
         "title": document["title"],
-        "snippet": snippet[:1200],
+        "type": document.get("type", ""),
+        "date": document.get("date", ""),
+        "snippet": (good[0] if good else snippet)[:1200],
+        "quotes": good,
         "reference": doc_id,
         "url": s3_client.generate_presigned_url(
             "get_object",
@@ -450,8 +489,18 @@ def query_knowledge_base(query: str, principal: dict, doc_id: str, clients: dict
         cited = [doc_id] if doc_id in retrieved else []
     if not result["known"] or not result["answer"] or not cited:
         return unknown
-    sources = [_source_for(d, chunks, clients["s3"], config["archive_bucket"]) for d in cited]
-    return {"answer": result["answer"], "is_unknown": False, "status": "answered", "sources": sources}
+    sources = [
+        _source_for(d, chunks, clients["s3"], config["archive_bucket"], result.get("quotes", {}).get(d, []))
+        for d in cited
+    ]
+    return {
+        "answer": result["answer"],
+        "summary": result.get("summary", ""),
+        "points": result.get("points", []),
+        "is_unknown": False,
+        "status": "answered",
+        "sources": sources,
+    }
 
 
 
@@ -793,6 +842,13 @@ def dispatch(body: dict, clients: dict, config: dict, auth_header: str = "") -> 
             if item.get("record_type", "ARCHIVE") == "ARCHIVE"
         ]
         return 200, {"logs": entries}
+
+    if action == "document":
+        doc_id = _required_text(body, "doc_id", 80)
+        document = DOCS_BY_ID.get(doc_id)
+        if document is None or not can_read(principal, document):
+            raise ArchiveError(404, "That document is not available to you.")
+        return 200, {k: document.get(k, "") for k in ("doc_id", "title", "type", "date", "patient_id", "text")}
 
     if action == "alert_create":
         return 200, create_alert(body, principal, clients["audit_table"], clients["users_table"])
