@@ -1,0 +1,3 @@
+DEMO DOCUMENT - FICTIONAL DATA
+
+The mobile clinic visits Riverside Community Hall on the first Tuesday of each month, 09:00-14:00. The next scheduled visits are 1 December 2026 and 5 January 2027. Bring your clinic card and any medicines you take. Patients are seen in arrival order. Contact the clinic before travelling to confirm the visit.

@@ -1,0 +1,3 @@
+DEMO DOCUMENT - FICTIONAL DATA
+
+Patient P099 radiology note dated 6 November 2026. The radiologist reports no acute fracture on the image reviewed. A clinical review is advised if pain persists. The note does not contain a treatment plan.

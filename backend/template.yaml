@@ -1,0 +1,321 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Private rural clinic archive API using Amazon Bedrock and S3.
+
+Parameters:
+  AllowedOrigin:
+    Type: String
+    Description: Exact browser origin allowed to call the API, such as http://127.0.0.1:8081.
+  GenerationModelArn:
+    Type: String
+    Description: Bedrock generation model ARN or inference profile ARN available in this Region.
+
+Resources:
+  ArchiveApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      CorsConfiguration:
+        AllowOrigins:
+          - !Ref AllowedOrigin
+        AllowMethods:
+          - POST
+        AllowHeaders:
+          - content-type
+        MaxAge: 300
+      DefaultRouteSettings:
+        ThrottlingBurstLimit: 20
+        ThrottlingRateLimit: 10
+
+  ArchiveFunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - !Sub arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: ClinicArchiveRuntime
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Sid: ReadUserProfiles
+                Effect: Allow
+                Action:
+                  - dynamodb:GetItem
+                Resource: !GetAtt ArchiveUsersTable.Arn
+              - Sid: ReadAndWriteAuditTrail
+                Effect: Allow
+                Action:
+                  - dynamodb:PutItem
+                  - dynamodb:Query
+                Resource:
+                  - !GetAtt ArchiveAuditTable.Arn
+                  - !Sub ${ArchiveAuditTable.Arn}/index/ByTimestamp
+              - Sid: ReadAndWriteVerifiedSessions
+                Effect: Allow
+                Action:
+                  - dynamodb:GetItem
+                  - dynamodb:PutItem
+                Resource: !GetAtt ArchiveSessionsTable.Arn
+              - Sid: ReadSourceDocuments
+                Effect: Allow
+                Action:
+                  - s3:GetObject
+                Resource: !Sub ${ArchiveDocumentsBucket.Arn}/archive/*
+              - Sid: QueryClinicKnowledgeBase
+                Effect: Allow
+                Action:
+                  - bedrock:RetrieveAndGenerate
+                  - bedrock:Retrieve
+                Resource: !GetAtt ArchiveKnowledgeBase.KnowledgeBaseArn
+              - Sid: InvokeGenerationModel
+                Effect: Allow
+                Action:
+                  - bedrock:InvokeModel
+                Resource: !Ref GenerationModelArn
+
+  ArchiveFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/
+      Handler: handler.lambda_handler
+      Runtime: python3.12
+      Architectures:
+        - arm64
+      MemorySize: 512
+      Timeout: 28
+      Role: !GetAtt ArchiveFunctionRole.Arn
+      Environment:
+        Variables:
+          ALLOWED_ORIGIN: !Ref AllowedOrigin
+          ARCHIVE_BUCKET: !Ref ArchiveDocumentsBucket
+          AUTH_USERS_TABLE: !Ref ArchiveUsersTable
+          AUTH_SESSIONS_TABLE: !Ref ArchiveSessionsTable
+          AUDIT_TABLE: !Ref ArchiveAuditTable
+          KNOWLEDGE_BASE_ID: !GetAtt ArchiveKnowledgeBase.KnowledgeBaseId
+          GENERATION_MODEL_ARN: !Ref GenerationModelArn
+      Events:
+        Archive:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref ArchiveApi
+            Path: /archive
+            Method: POST
+            PayloadFormatVersion: '2.0'
+
+  ArchiveDocumentsBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      VersioningConfiguration:
+        Status: Enabled
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerEnforced
+
+  ArchiveDocumentsBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref ArchiveDocumentsBucket
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: DenyInsecureTransport
+            Effect: Deny
+            Principal: '*'
+            Action: s3:*
+            Resource:
+              - !GetAtt ArchiveDocumentsBucket.Arn
+              - !Sub ${ArchiveDocumentsBucket.Arn}/*
+            Condition:
+              Bool:
+                aws:SecureTransport: false
+
+  ArchiveUsersTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: user_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: user_id
+          KeyType: HASH
+      SSESpecification:
+        SSEEnabled: true
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: true
+
+  ArchiveAuditTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: user_id
+          AttributeType: S
+        - AttributeName: timestamp_request
+          AttributeType: S
+        - AttributeName: record_type
+          AttributeType: S
+      KeySchema:
+        - AttributeName: user_id
+          KeyType: HASH
+        - AttributeName: timestamp_request
+          KeyType: RANGE
+      SSESpecification:
+        SSEEnabled: true
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: true
+      GlobalSecondaryIndexes:
+        - IndexName: ByTimestamp
+          KeySchema:
+            - AttributeName: record_type
+              KeyType: HASH
+            - AttributeName: timestamp_request
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+
+  ArchiveSessionsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: token_hash
+          AttributeType: S
+      KeySchema:
+        - AttributeName: token_hash
+          KeyType: HASH
+      SSESpecification:
+        SSEEnabled: true
+      TimeToLiveSpecification:
+        AttributeName: expires_at
+        Enabled: true
+
+  ArchiveVectorBucket:
+    Type: AWS::S3Vectors::VectorBucket
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      EncryptionConfiguration:
+        SseType: AES256
+
+  ArchiveVectorIndex:
+    Type: AWS::S3Vectors::Index
+    Properties:
+      VectorBucketArn: !GetAtt ArchiveVectorBucket.VectorBucketArn
+      IndexName: clinic-archive-index
+      DataType: float32
+      Dimension: 1024
+      DistanceMetric: cosine
+
+  BedrockKnowledgeBaseRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: bedrock.amazonaws.com
+            Action: sts:AssumeRole
+            Condition:
+              StringEquals:
+                aws:SourceAccount: !Ref AWS::AccountId
+              ArnLike:
+                aws:SourceArn: !Sub arn:${AWS::Partition}:bedrock:${AWS::Region}:${AWS::AccountId}:knowledge-base/*
+      Policies:
+        - PolicyName: ClinicArchiveKnowledgeBase
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Sid: ReadArchiveSourceFiles
+                Effect: Allow
+                Action:
+                  - s3:ListBucket
+                Resource: !GetAtt ArchiveDocumentsBucket.Arn
+              - Sid: ReadArchiveObjects
+                Effect: Allow
+                Action:
+                  - s3:GetObject
+                Resource: !Sub ${ArchiveDocumentsBucket.Arn}/archive/*
+              - Sid: EmbedArchiveDocuments
+                Effect: Allow
+                Action:
+                  - bedrock:InvokeModel
+                Resource: !Sub arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/amazon.titan-embed-text-v2:0
+              - Sid: ReadAndWriteArchiveVectors
+                Effect: Allow
+                Action:
+                  - s3vectors:PutVectors
+                  - s3vectors:GetVectors
+                  - s3vectors:DeleteVectors
+                  - s3vectors:QueryVectors
+                  - s3vectors:GetIndex
+                Resource: !GetAtt ArchiveVectorIndex.IndexArn
+
+  ArchiveKnowledgeBase:
+    Type: AWS::Bedrock::KnowledgeBase
+    Properties:
+      Name: clinic-archive
+      Description: Fictional rural clinic archive with metadata-scoped retrieval.
+      RoleArn: !GetAtt BedrockKnowledgeBaseRole.Arn
+      KnowledgeBaseConfiguration:
+        Type: VECTOR
+        VectorKnowledgeBaseConfiguration:
+          EmbeddingModelArn: !Sub arn:${AWS::Partition}:bedrock:${AWS::Region}::foundation-model/amazon.titan-embed-text-v2:0
+      StorageConfiguration:
+        Type: S3_VECTORS
+        S3VectorsConfiguration:
+          VectorBucketArn: !GetAtt ArchiveVectorBucket.VectorBucketArn
+          IndexName: clinic-archive-index
+
+  ArchiveDataSource:
+    Type: AWS::Bedrock::DataSource
+    Properties:
+      Name: clinic-archive-documents
+      Description: Source documents and access metadata stored in the private S3 archive bucket.
+      KnowledgeBaseId: !GetAtt ArchiveKnowledgeBase.KnowledgeBaseId
+      DataDeletionPolicy: RETAIN
+      DataSourceConfiguration:
+        Type: S3
+        S3Configuration:
+          BucketArn: !GetAtt ArchiveDocumentsBucket.Arn
+          InclusionPrefixes:
+            - archive/
+
+Outputs:
+  ApiUrl:
+    Description: Paste this HTTPS URL into the app's AWS API Gateway URL setting.
+    Value: !Sub https://${ArchiveApi}.execute-api.${AWS::Region}.${AWS::URLSuffix}/archive
+  ArchiveBucketName:
+    Value: !Ref ArchiveDocumentsBucket
+  KnowledgeBaseId:
+    Value: !GetAtt ArchiveKnowledgeBase.KnowledgeBaseId
+  DataSourceId:
+    Value: !GetAtt ArchiveDataSource.DataSourceId
+  UsersTableName:
+    Value: !Ref ArchiveUsersTable
+  AuditTableName:
+    Value: !Ref ArchiveAuditTable
+  SessionsTableName:
+    Value: !Ref ArchiveSessionsTable

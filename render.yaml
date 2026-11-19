@@ -1,0 +1,50 @@
+# render.yaml — lives at the repo root so Render detects it automatically.
+# Docs: https://render.com/docs/infrastructure-as-code
+
+services:
+  - type: web
+    name: clinic-archive-api
+    runtime: python
+    region: oregon        # closest free-tier region; change to frankfurt for lower latency to eu-north-1
+    plan: starter         # free tier (spins down after inactivity); upgrade to standard for always-on
+
+    rootDir: backend      # Render runs all commands from backend/ not the repo root
+
+    buildCommand: pip install -r src/requirements.txt
+    startCommand: uvicorn src.main:app --host 0.0.0.0 --port $PORT
+
+    healthCheckPath: /health
+
+    envVars:
+      # Pre-filled — no action needed
+      - key: AWS_REGION
+        value: eu-north-1
+
+      # Secret values — fill these in the Render dashboard after connecting the repo
+      - key: AWS_ACCESS_KEY_ID
+        sync: false
+
+      - key: AWS_SECRET_ACCESS_KEY
+        sync: false
+
+      - key: KB_ID
+        sync: false
+
+      - key: AUDIT_TABLE
+        sync: false
+
+      - key: BUCKET_NAME
+        sync: false
+
+      - key: AUTH_USERS_TABLE
+        sync: false
+
+      - key: AUTH_SESSIONS_TABLE
+        sync: false
+
+      - key: GENERATION_MODEL_ARN
+        sync: false
+
+      # Set to your Lovable app URL before going live, e.g. https://your-app.lovable.app
+      - key: ALLOWED_ORIGIN
+        value: "*"
