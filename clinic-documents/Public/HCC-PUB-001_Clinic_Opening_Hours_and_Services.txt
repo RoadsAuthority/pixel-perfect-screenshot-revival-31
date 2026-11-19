@@ -1,0 +1,31 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
+========================================================================
+CLINIC OPENING HOURS AND SERVICES
+Document ID: HCC-PUB-001
+Date: 2026-11-01
+========================================================================
+OPENING HOURS
+- Monday to Friday: 07:30 - 17:00
+- Saturday: 08:00 - 12:00 (immunisation and minor ailments only)
+- Sunday and public holidays: closed. For emergencies call the clinic emergency line
+  +264 61 555 0199 (fictional) or go to Windhoek Central Hospital.
+
+SERVICES
+- General consultations with the doctor (Tuesday and Thursday) and nurses (daily)
+- Childhood and adult immunisation
+- Chronic care: high blood pressure, diabetes, asthma
+- Antenatal care (Wednesday mornings)
+- Basic laboratory tests (blood glucose, HbA1c, haemoglobin, urine tests)
+- Mobile outreach clinic (see the vaccination clinic dates document)
+
+WHAT TO BRING
+- Your clinic card or ID document
+- The child's Road-to-Health booklet for immunisation visits
+- All medicines you currently take
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a
+substitute for advice from a qualified health worker.

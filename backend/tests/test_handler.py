@@ -21,10 +21,10 @@ def stored_user(pin: str, user_id: str, groups: list) -> dict:
     }
 
 
-DOCTOR = ("DOC-001", "3333", ["Doctors", "Everyone"])
-CLERK = ("CLK-001", "1111", ["Administration", "Everyone"])
-LAB = ("LAB-001", "4444", ["Laboratory", "Everyone"])
-RECORDS = ("REC-001", "5555", ["Records", "Everyone"])
+DOCTOR = ("DOC-001", "6666", ["Staff", "Clinical", "Everyone"])
+CLERK = ("CLK-001", "4444", ["Staff", "Everyone"])
+PATIENT1 = ("PAT-001", "1111", ["PAT-001", "Everyone"])
+PATIENT2 = ("PAT-002", "2222", ["PAT-002", "Everyone"])
 
 
 class FakeTable:
@@ -112,8 +112,8 @@ def chunk(doc_id: str, text: str = "Snippet from the document.") -> dict:
     return {"content": {"text": text}, "metadata": {"doc_id": doc_id}}
 
 
-POLICY_ID = "HCC-POL-001"
-CONSULT_ID = "HCC-CR-2026-0126"
+POLICY_ID = "HCC-PUB-004"  # public: choking guide
+CONSULT_ID = "PAT-001-PRF"  # Maria Nangolo's patient profile
 
 CONFIG = {
     "knowledge_base_id": "KB12345678",
@@ -127,23 +127,22 @@ def request_filter(agent: FakeAgentRuntime) -> dict:
 
 
 class CatalogTests(unittest.TestCase):
-    def test_catalog_has_all_hopewell_documents(self):
-        self.assertEqual(len(handler.DOCUMENTS), 59)
+    def test_catalog_has_all_documents(self):
+        self.assertEqual(len(handler.DOCUMENTS), 20)
 
-    def test_clerk_cannot_see_consultation_records(self):
+    def test_clerk_sees_operations_but_no_patient_records(self):
         docs = handler.accessible_documents({"groups": CLERK[2]})
         types = {d["type"] for d in docs}
-        self.assertIn("Appointment Register", types)
-        self.assertNotIn("Consultation Record", types)
-        self.assertNotIn("Medication Record", types)
+        self.assertIn("Lease", types)
+        self.assertFalse(any(d["patient_id"] for d in docs))
 
-    def test_lab_sees_lab_reports_but_not_medication(self):
-        types = {d["type"] for d in handler.accessible_documents({"groups": LAB[2]})}
-        self.assertIn("Laboratory Report", types)
-        self.assertNotIn("Medication Record", types)
+    def test_patient_sees_only_own_records(self):
+        docs = handler.accessible_documents({"groups": PATIENT1[2]})
+        self.assertEqual({d["patient_id"] for d in docs if d["patient_id"]}, {"PAT-001"})
+        self.assertNotIn("Lease", {d["type"] for d in docs})
 
-    def test_records_sees_everything(self):
-        self.assertEqual(len(handler.accessible_documents({"groups": RECORDS[2]})), 59)
+    def test_clinical_staff_see_everything(self):
+        self.assertEqual(len(handler.accessible_documents({"groups": DOCTOR[2]})), 20)
 
     def test_public_sees_only_everyone_documents(self):
         docs = handler.accessible_documents(handler.PUBLIC_PRINCIPAL)
@@ -152,13 +151,13 @@ class CatalogTests(unittest.TestCase):
 
 class AccessFilterTests(unittest.TestCase):
     def test_filter_ors_every_group_flag(self):
-        f = handler.access_filter({"groups": ["Doctors", "Everyone"]})
+        f = handler.access_filter({"groups": ["Everyone", "PAT-001"]})
         self.assertEqual(
             f,
             {
                 "orAll": [
-                    {"equals": {"key": "group_doctors", "value": "yes"}},
                     {"equals": {"key": "group_everyone", "value": "yes"}},
+                    {"equals": {"key": "group_pat_001", "value": "yes"}},
                 ]
             },
         )
@@ -168,12 +167,12 @@ class AccessFilterTests(unittest.TestCase):
         self.assertEqual(f, {"equals": {"key": "group_everyone", "value": "yes"}})
 
     def test_summary_adds_document_id(self):
-        f = handler.access_filter({"groups": ["Doctors", "Everyone"]}, doc_id="HCC-CR-2026-0126")
-        self.assertEqual(f["andAll"][1], {"equals": {"key": "doc_id", "value": "HCC-CR-2026-0126"}})
+        f = handler.access_filter({"groups": ["Clinical", "Everyone"]}, doc_id="PAT-001-PRF")
+        self.assertEqual(f["andAll"][1], {"equals": {"key": "doc_id", "value": "PAT-001-PRF"}})
 
     def test_invalid_document_id_rejected(self):
         with self.assertRaises(handler.ArchiveError):
-            handler.access_filter({"groups": ["Doctors"]}, doc_id="../etc/passwd")
+            handler.access_filter({"groups": ["Clinical"]}, doc_id="../etc/passwd")
 
     def test_principal_without_groups_rejected(self):
         with self.assertRaises(handler.ArchiveError):
@@ -187,10 +186,10 @@ class AuthTests(unittest.TestCase):
         self.assertEqual(p["groups"], ["Everyone"])
 
     def test_groups_loaded_and_everyone_added(self):
-        users = FakeTable(stored_user("3333", "DOC-001", ["Doctors"]))
-        p = handler.authenticate("DOC-001", "3333", users)
-        self.assertEqual(p["groups"], ["Doctors", "Everyone"])
-        self.assertEqual(p["role"], "doctors")
+        users = FakeTable(stored_user("1111", "PAT-001", ["PAT-001"]))
+        p = handler.authenticate("PAT-001", "1111", users)
+        self.assertEqual(p["groups"], ["PAT-001", "Everyone"])
+        self.assertEqual(p["role"], "pat-001")
 
     def test_account_without_staff_group_rejected(self):
         users = FakeTable(stored_user("3333", "X-1", ["Everyone"]))
@@ -199,20 +198,20 @@ class AuthTests(unittest.TestCase):
         self.assertEqual(ctx.exception.status_code, 403)
 
     def test_invalid_pin_rejected(self):
-        users = FakeTable(stored_user("3333", "DOC-001", DOCTOR[2]))
+        users = FakeTable(stored_user("6666", "DOC-001", DOCTOR[2]))
         with self.assertRaises(handler.ArchiveError) as ctx:
             handler.authenticate("DOC-001", "9999", users)
         self.assertEqual(ctx.exception.status_code, 401)
         self.assertEqual(users.item["failed_attempts"], 1)
 
     def test_lockout_after_max_failed_attempts(self):
-        users = FakeTable(stored_user("3333", "DOC-001", DOCTOR[2]))
+        users = FakeTable(stored_user("6666", "DOC-001", DOCTOR[2]))
         for _ in range(handler.MAX_FAILED_ATTEMPTS):
             with self.assertRaises(handler.ArchiveError):
                 handler.authenticate("DOC-001", "9999", users)
         self.assertGreater(users.item.get("locked_until", 0), 0)
         with self.assertRaises(handler.ArchiveError):
-            handler.authenticate("DOC-001", "3333", users)
+            handler.authenticate("DOC-001", "6666", users)
 
 
 class DispatchTests(unittest.TestCase):
@@ -237,15 +236,15 @@ class DispatchTests(unittest.TestCase):
 
     def test_verify_returns_groups_and_scope(self):
         _, _, body = self._login(DOCTOR)
-        self.assertEqual(body["groups"], ["Doctors", "Everyone"])
-        self.assertIn("Consultation Record", body["scope"])
+        self.assertEqual(body["groups"], ["Clinical", "Everyone", "Staff"])
+        self.assertIn("Patient Profile", body["scope"])
 
     def test_documents_lists_only_accessible(self):
         token, clients, _ = self._login(CLERK)
         status, body = handler.dispatch({"action": "documents"}, clients, CONFIG, auth_header=f"Bearer {token}")
         self.assertEqual(status, 200)
         types = {d["type"] for d in body["documents"]}
-        self.assertNotIn("Consultation Record", types)
+        self.assertNotIn("Patient Profile", types)
         self.assertNotIn("groups", body["documents"][0])
 
     def test_doctor_answer_cites_and_signs_source(self):
@@ -257,10 +256,10 @@ class DispatchTests(unittest.TestCase):
         status, body = self._ask(token, clients, agent, runtime)
         self.assertEqual(status, 200)
         self.assertFalse(body["is_unknown"])
-        self.assertEqual(body["sources"][0]["title"], "Consultation Record Maria Nangolo 2026-10-05")
+        self.assertEqual(body["sources"][0]["title"], "Patient Profile - Maria Nangolo")
         self.assertEqual(body["sources"][0]["url"], "https://archive.example/signed-source")
-        self.assertTrue(s3.signed[0][0]["Key"].startswith("archive/Medical_Consultations/"))
-        self.assertIn("group_doctors", json.dumps(request_filter(agent)))
+        self.assertTrue(s3.signed[0][0]["Key"].startswith("archive/Patients/"))
+        self.assertIn("group_clinical", json.dumps(request_filter(agent)))
         self.assertEqual(runtime.request["modelId"], CONFIG["generation_model_arn"])
 
     def test_system_prompt_contains_todays_date(self):
@@ -282,7 +281,7 @@ class DispatchTests(unittest.TestCase):
 
     def test_model_citing_unretrieved_document_is_ignored(self):
         token, clients, _ = self._login(DOCTOR)
-        runtime = FakeRuntime({"known": True, "answer": "Something.", "doc_ids": ["HCC-PRF-1003"]})
+        runtime = FakeRuntime({"known": True, "answer": "Something.", "doc_ids": ["PAT-002-PRF"]})
         _, body = self._ask(token, clients, FakeAgentRuntime([chunk(POLICY_ID)]), runtime)
         self.assertTrue(body["is_unknown"])
 
@@ -294,7 +293,7 @@ class DispatchTests(unittest.TestCase):
 
     def test_model_reply_wrapped_in_text_is_parsed(self):
         token, clients, _ = self._login(DOCTOR)
-        reply = 'Here you go:\n{"known": true, "answer": "Keep it confidential.", "doc_ids": ["HCC-POL-001"]}'
+        reply = 'Here you go:\n{"known": true, "answer": "Keep it confidential.", "doc_ids": ["HCC-PUB-004"]}'
         _, body = self._ask(token, clients, FakeAgentRuntime([chunk(POLICY_ID)]), FakeRuntime(reply))
         self.assertFalse(body["is_unknown"])
         self.assertEqual(body["answer"], "Keep it confidential.")
@@ -336,15 +335,15 @@ class DispatchTests(unittest.TestCase):
         self.assertEqual(ctx.exception.status_code, 403)
 
     def test_staff_logs_are_own_records_logs_are_all(self):
-        token, clients, _ = self._login(DOCTOR)
+        token, clients, _ = self._login(PATIENT1)
         handler.dispatch({"action": "logs"}, clients, CONFIG, auth_header=f"Bearer {token}")
         self.assertNotIn("IndexName", clients["audit_table"].last_query)
-        token, clients, _ = self._login(RECORDS)
+        token, clients, _ = self._login(CLERK)
         handler.dispatch({"action": "logs"}, clients, CONFIG, auth_header=f"Bearer {token}")
         self.assertEqual(clients["audit_table"].last_query["IndexName"], "ByTimestamp")
 
     def test_ussd_audit_never_contains_pin(self):
-        users = FakeTable(stored_user("3333", "DOC-001", DOCTOR[2]))
+        users = FakeTable(stored_user("6666", "DOC-001", DOCTOR[2]))
         audit = FakeTable()
         clients = make_clients(
             users=users, audit=audit, bedrock=FakeAgentRuntime([chunk(POLICY_ID)]),
@@ -354,7 +353,7 @@ class DispatchTests(unittest.TestCase):
             {
                 "action": "ussd", "channel": "ussd", "query": "",
                 "ussd_session_id": "session-1",
-                "ussd_text": "DOC-001*3333*3*What is the confidentiality rule?",
+                "ussd_text": "DOC-001*6666*3*What is the confidentiality rule?",
             },
             clients, CONFIG, auth_header="",
         )
@@ -362,7 +361,7 @@ class DispatchTests(unittest.TestCase):
         self.assertTrue(body["next_ussd_screen"].startswith("END"))
         self.assertEqual(body["reference"], POLICY_ID)
         self.assertEqual(audit.items[0]["question"], "What is the confidentiality rule?")
-        self.assertNotIn("3333", json.dumps(audit.items[0]))
+        self.assertNotIn("6666", json.dumps(audit.items[0]))
 
     def test_fallback_identifies_documents_by_s3_location(self):
         # Simulates a Knowledge Base whose metadata was not indexed: the filtered search
@@ -374,9 +373,9 @@ class DispatchTests(unittest.TestCase):
                     return {"retrievalResults": []}
                 return {"retrievalResults": [
                     {"content": {"text": "SECRET diagnosis"},
-                     "location": {"s3Location": {"uri": "s3://clinic-test/archive/Medical_Consultations/HCC-CR-2026-0126_Consultation_Record_Maria_Nangolo_2026_10_05.txt"}}},
+                     "location": {"s3Location": {"uri": "s3://clinic-test/archive/Patients/PAT-001-PRF_Patient_Profile_Maria_Nangolo.txt"}}},
                     {"content": {"text": "Do not discuss patients in public."},
-                     "location": {"s3Location": {"uri": "s3://clinic-test/archive/Clinic_Policies/HCC-POL-001_Clinic_Confidentiality_Policy.txt"}}},
+                     "location": {"s3Location": {"uri": "s3://clinic-test/archive/Public/HCC-PUB-004_Emergency_Guide_Choking.txt"}}},
                 ]}
 
         token, clients, _ = self._login(CLERK)
@@ -386,7 +385,7 @@ class DispatchTests(unittest.TestCase):
         self.assertEqual([s["doc_id"] for s in body["sources"]], [POLICY_ID])
         sent_to_model = runtime.request["messages"][0]["content"][0]["text"]
         self.assertIn("Do not discuss patients", sent_to_model)
-        self.assertNotIn("SECRET", sent_to_model)  # clerk may not read consultation records
+        self.assertNotIn("SECRET", sent_to_model)  # clerk may not read patient records
 
     def test_unknown_action_returns_400(self):
         with self.assertRaises(handler.ArchiveError) as ctx:

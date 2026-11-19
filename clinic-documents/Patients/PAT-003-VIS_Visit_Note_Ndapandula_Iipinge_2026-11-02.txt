@@ -1,0 +1,32 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
+========================================================================
+VISIT NOTE - NDAPANDULA IIPINGE - 2026-11-02
+Document ID: PAT-003-VIS
+Date: 2026-11-02
+========================================================================
+Patient: PAT-003 Ndapandula Iipinge (8 months)
+Seen by: NUR-002 Nurse Martha Iipinge
+
+REASON FOR VISIT
+Watery diarrhoea for 2 days, still breastfeeding and drinking.
+
+FINDINGS
+- Alert, no signs of severe dehydration
+- Temperature 37.6 C, weight 7.9 kg
+
+TREATMENT
+- Oral rehydration solution (ORS) after every loose stool
+- Zinc 10 mg once daily for 10 days
+- Continue breastfeeding
+
+ADVICE TO MOTHER
+Return immediately if the child cannot drink or breastfeed, vomits everything,
+becomes very sleepy, or has blood in the stool.
+Review visit: 2026-11-05 (attended, diarrhoea resolved).
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a
+substitute for advice from a qualified health worker.

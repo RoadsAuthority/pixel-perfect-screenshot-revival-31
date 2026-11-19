@@ -1,0 +1,27 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
+========================================================================
+LABORATORY RESULTS AND PLAN - JOHANNES HAUFIKU - 2026-10-12
+Document ID: PAT-002-LAB
+Date: 2026-10-12
+========================================================================
+Patient: PAT-002 Johannes Haufiku
+Sample collected: 2026-10-12. Reviewed by DOC-001 Dr Anna-Marie van Wyk.
+
+TEST                 RESULT        REFERENCE RANGE     FLAG
+HbA1c                8.1 %         4.0-5.6 %           HIGH
+Fasting glucose      9.8 mmol/L    3.9-5.5 mmol/L      HIGH
+Creatinine           82 umol/L     60-110 umol/L       NORMAL
+Cholesterol          not requested                     NOT AVAILABLE
+
+PLAN
+- Metformin increased to 1000 mg twice daily.
+- Foot and eye check at the next visit.
+- Follow-up appointment: 2026-11-26 at 10:00 with DOC-001.
+- Repeat HbA1c in January 2027.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a
+substitute for advice from a qualified health worker.

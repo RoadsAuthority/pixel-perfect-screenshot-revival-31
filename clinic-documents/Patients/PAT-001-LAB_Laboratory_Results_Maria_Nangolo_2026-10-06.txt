@@ -1,0 +1,23 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
+========================================================================
+LABORATORY RESULTS - MARIA NANGOLO - 2026-10-06
+Document ID: PAT-001-LAB
+Date: 2026-10-06
+========================================================================
+Patient: PAT-001 Maria Nangolo
+Sample collected: 2026-10-06
+
+TEST                 RESULT        REFERENCE RANGE     FLAG
+Creatinine           68 umol/L     45-90 umol/L        NORMAL
+Total cholesterol    5.9 mmol/L    below 5.0 mmol/L    HIGH
+Random glucose       5.4 mmol/L    3.9-7.8 mmol/L      NORMAL
+HIV test             not requested                     NOT AVAILABLE
+
+Comment: cholesterol is above the target. To be discussed at the follow-up visit.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a
+substitute for advice from a qualified health worker.

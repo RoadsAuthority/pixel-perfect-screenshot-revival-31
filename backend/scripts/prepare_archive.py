@@ -1,6 +1,6 @@
 """Prepare the Hopewell Clinic documents for S3 / Bedrock and the backend.
 
-Reads   hopewell-clinic-documents/  (manifest.json, users.json, folders of .txt + .metadata.json)
+Reads   clinic-documents/  (manifest.json, users.json, folders of .txt + .metadata.json)
 Writes  backend/archive-upload/      -> upload the CONTENTS into s3://<bucket>/archive/
         backend/src/documents.json    -> document catalogue the API uses to list documents
         backend/demo-users/*.json     -> DynamoDB items (PINs stored as salted scrypt hashes)
@@ -22,21 +22,11 @@ import shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-SOURCE = ROOT / "hopewell-clinic-documents"
+SOURCE = ROOT / "clinic-documents"
 BACKEND = ROOT / "backend"
 UPLOAD = BACKEND / "archive-upload"
 CATALOG = BACKEND / "src" / "documents.json"
 USERS_OUT = BACKEND / "demo-users"
-
-# Fictional demo PINs, one per staff account in users.json. Never reuse for real people.
-DEMO_PINS = {
-    "CLK-001": "1111",
-    "NUR-001": "2222",
-    "DOC-001": "3333",
-    "LAB-001": "4444",
-    "REC-001": "5555",
-}
-
 
 def group_key(group: str) -> str:
     return "group_" + re.sub(r"[^a-z0-9]+", "_", group.lower()).strip("_")
@@ -97,7 +87,7 @@ def prepare_users() -> None:
         if not match:
             raise SystemExit(f"No staff code in displayName: {user['displayName']}")
         code = match.group(1)
-        pin = DEMO_PINS[code]
+        pin = user["demoPin"]  # fictional demo PIN, stored only as a hash
         name = user["displayName"].replace(f"({code})", "").strip()
         salt, pin_hash = hash_pin(pin)
         item = {

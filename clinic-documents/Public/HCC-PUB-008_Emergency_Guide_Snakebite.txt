@@ -1,0 +1,28 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
+========================================================================
+EMERGENCY GUIDE - SNAKEBITE
+Document ID: HCC-PUB-008
+Date: 2026-02-01
+========================================================================
+Follows standard first-aid practice for snakebite in southern Africa.
+
+DO
+1. Move away from the snake. Keep the person calm and still.
+2. Remove rings, watches and tight clothing near the bite (the limb may swell).
+3. Keep the bitten limb still, for example with a splint, at about heart level.
+4. Get the person to a hospital quickly - antivenom is only given in hospital.
+5. If safe, take a photo of the snake. Do not try to catch or kill it.
+
+DO NOT
+- Cut the wound, suck out venom, or apply ice or electric shocks
+- Apply a tight tourniquet
+- Give alcohol or traditional remedies
+
+If venom was spat into the eyes, rinse the eyes with plenty of water.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a
+substitute for advice from a qualified health worker.

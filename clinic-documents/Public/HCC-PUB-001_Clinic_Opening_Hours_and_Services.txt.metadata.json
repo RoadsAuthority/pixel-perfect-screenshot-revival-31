@@ -1,0 +1,11 @@
+{
+  "metadataAttributes": {
+    "documentId": "HCC-PUB-001",
+    "documentType": "Clinic Information",
+    "folder": "Public",
+    "accessGroups": [
+      "Everyone"
+    ],
+    "documentDate": "2026-11-01"
+  }
+}

@@ -6,12 +6,12 @@
     "S": "selma.amutenya"
   },
   "name": {
-    "S": "Selma Amutenya"
+    "S": "Selma Amutenya, Clinic Clerk"
   },
   "groups": {
     "L": [
       {
-        "S": "Administration"
+        "S": "Staff"
       },
       {
         "S": "Everyone"
@@ -19,9 +19,9 @@
     ]
   },
   "pin_salt": {
-    "S": "77883057b1102481f8954e82bb15e29f"
+    "S": "5b0c46a2b6971bced7b88f4d628d3953"
   },
   "pin_hash": {
-    "S": "e6f3efe5a56d0e85657ecfdc4693c41cddbdd1e3a8cc0ce4853e35e9aa31ccfaf52fff66e013303ddb0b3180bff5d6d8789537ad029740444a5bdbdba9f52514"
+    "S": "eeb97353794fb280d381e64a898dcf38b705a4c6a7ac22aa878d7eea3869263afd4cc61f60d6b1f1b48e004a4158a9ca9375ddd8b40d653552af6135b2f0e9bc"
   }
 }

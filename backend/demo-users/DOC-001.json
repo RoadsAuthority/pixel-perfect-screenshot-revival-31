@@ -6,12 +6,15 @@
     "S": "annamarie.vanwyk"
   },
   "name": {
-    "S": "Dr Anna-Marie van Wyk"
+    "S": "Dr Anna-Marie van Wyk, Doctor"
   },
   "groups": {
     "L": [
       {
-        "S": "Doctors"
+        "S": "Staff"
+      },
+      {
+        "S": "Clinical"
       },
       {
         "S": "Everyone"
@@ -19,9 +22,9 @@
     ]
   },
   "pin_salt": {
-    "S": "a2697bf9b7401b3b784e9a22a15fe0cd"
+    "S": "711ce1138383203d25a559ebf1061256"
   },
   "pin_hash": {
-    "S": "49af856a40f69985616dd30a5157b801cfcd39e9488ba6fa455b6c582fb46bc274d3d47a1d4bb6cb612366b4b587a3abe029b7511f6f5dce06c575666a3aa048"
+    "S": "d966ded05311b5cc7b561d9250bc194445c59da938629b6d6378db32e8d5ecc862b6e666ad4dcec6e4df4ab374b407dec467120f98477c9f0532492a2867e6ba"
   }
 }

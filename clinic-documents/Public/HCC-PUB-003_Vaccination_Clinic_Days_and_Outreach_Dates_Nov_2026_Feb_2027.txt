@@ -1,0 +1,29 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
+========================================================================
+VACCINATION CLINIC DAYS AND OUTREACH DATES NOV 2026 - FEB 2027
+Document ID: HCC-PUB-003
+Date: 2026-11-01
+========================================================================
+IMMUNISATION DAYS AT THE CLINIC
+Every Monday and Saturday morning, 08:00 - 12:00. No appointment needed.
+
+MOBILE OUTREACH CLINIC (immunisation, blood pressure and glucose checks)
+- Okahandja Park Community Hall: 3 December 2026, 09:00 - 14:00
+- Havana Primary School: 10 December 2026, 09:00 - 14:00
+- Okahandja Park Community Hall: 7 January 2027, 09:00 - 14:00
+- Havana Primary School: 14 January 2027, 09:00 - 14:00
+- Okahandja Park Community Hall: 4 February 2027, 09:00 - 14:00
+
+SPECIAL CAMPAIGN
+HPV vaccination for girls aged 9-14 years at Havana Primary School on
+10 December 2026. Parents must sign the consent form beforehand.
+
+The clinic is closed for the holidays from 24 December 2026 to 2 January 2027.
+No outreach visit takes place in that period.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a
+substitute for advice from a qualified health worker.

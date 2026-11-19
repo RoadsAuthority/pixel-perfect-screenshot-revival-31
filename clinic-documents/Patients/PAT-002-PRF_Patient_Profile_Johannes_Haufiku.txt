@@ -1,0 +1,29 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
+========================================================================
+PATIENT PROFILE - JOHANNES HAUFIKU
+Document ID: PAT-002-PRF
+Date: 2026-10-12
+========================================================================
+Patient ID: PAT-002
+Name: Johannes Haufiku
+Date of birth: 1968-07-21 (age 58)
+Sex: Male
+Phone: 081 555 0201 (fictional)
+
+ALLERGIES
+- No known drug allergies.
+
+LONG-TERM CONDITIONS
+- Type 2 diabetes (since 2019)
+
+CURRENT MEDICATION
+- Metformin 1000 mg twice daily with meals (increased from 500 mg on 2026-10-12)
+
+Emergency contact: Hilma Haufiku (daughter), 081 555 0202 (fictional)
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a
+substitute for advice from a qualified health worker.

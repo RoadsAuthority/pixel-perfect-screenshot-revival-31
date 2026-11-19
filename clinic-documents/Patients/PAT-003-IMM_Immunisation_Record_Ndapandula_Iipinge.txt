@@ -1,0 +1,30 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
+========================================================================
+IMMUNISATION RECORD - NDAPANDULA IIPINGE
+Document ID: PAT-003-IMM
+Date: 2026-11-02
+========================================================================
+Patient ID: PAT-003
+Name: Ndapandula Iipinge (child)
+Date of birth: 2026-03-10
+Parent/guardian: Loide Iipinge (mother), 081 555 0301 (fictional)
+
+VACCINES GIVEN
+- 2026-03-10  BCG, OPV 0
+- 2026-04-21  Pentavalent 1, OPV 1, PCV 1, Rotavirus 1
+- 2026-05-19  Pentavalent 2, OPV 2, PCV 2, Rotavirus 2
+- 2026-06-16  Pentavalent 3, OPV 3, PCV 3, IPV
+
+NEXT DUE
+- Measles-Rubella 1 at 9 months: on or after 2026-12-10.
+  Suggested: outreach clinic at Havana Primary School on 10 December 2026.
+- Measles-Rubella 2 and DTP booster at 18 months: on or after 2027-09-10.
+
+Reactions: none recorded.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a
+substitute for advice from a qualified health worker.

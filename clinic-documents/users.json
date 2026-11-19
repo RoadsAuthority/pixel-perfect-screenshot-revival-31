@@ -1,0 +1,58 @@
+[
+  {
+    "username": "maria.nangolo",
+    "displayName": "Maria Nangolo (PAT-001)",
+    "groups": [
+      "PAT-001",
+      "Everyone"
+    ],
+    "demoPin": "1111"
+  },
+  {
+    "username": "johannes.haufiku",
+    "displayName": "Johannes Haufiku (PAT-002)",
+    "groups": [
+      "PAT-002",
+      "Everyone"
+    ],
+    "demoPin": "2222"
+  },
+  {
+    "username": "loide.iipinge",
+    "displayName": "Loide Iipinge, parent of Ndapandula (PAT-003)",
+    "groups": [
+      "PAT-003",
+      "Everyone"
+    ],
+    "demoPin": "3333"
+  },
+  {
+    "username": "selma.amutenya",
+    "displayName": "Selma Amutenya, Clinic Clerk (CLK-001)",
+    "groups": [
+      "Staff",
+      "Everyone"
+    ],
+    "demoPin": "4444"
+  },
+  {
+    "username": "ndapewa.haufiku",
+    "displayName": "Sister Ndapewa Haufiku, Nurse (NUR-001)",
+    "groups": [
+      "Staff",
+      "Clinical",
+      "Everyone"
+    ],
+    "demoPin": "5555"
+  },
+  {
+    "username": "annamarie.vanwyk",
+    "displayName": "Dr Anna-Marie van Wyk, Doctor (DOC-001)",
+    "groups": [
+      "Staff",
+      "Clinical",
+      "Everyone"
+    ],
+    "demoPin": "6666"
+  }
+]

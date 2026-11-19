@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { useEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import {
   AlertTriangle,
   ArrowRight,
@@ -74,38 +74,43 @@ const ALL_TABS = [
 
 type TabId = (typeof ALL_TABS)[number]['id'];
 
-/** Quick questions per access group, taken from the clinic's test questions. */
-const GROUP_PROMPTS: Record<string, { text: string; icon: typeof CalendarDays }[]> = {
-  Doctors: [
-    { text: 'Who has appointments on 2026-11-24?', icon: CalendarDays },
-    { text: 'Which patients are allergic to penicillin?', icon: ClipboardList },
-    { text: "What is Maria Nangolo's diagnosis?", icon: HeartPulse },
-  ],
-  Nursing: [
-    { text: 'Which patients did Sister Ndapewa Haufiku attend?', icon: HeartPulse },
-    { text: 'What medication was administered at the clinic on 2026-11-03?', icon: ClipboardList },
-    { text: "What is Daniel Ipinge's blood group?", icon: FlaskConical },
-  ],
-  Administration: [
-    { text: "When is Joseph Mbumba's next appointment?", icon: CalendarDays },
-    { text: 'Which clerk registered Joseph Mbumba and when?', icon: ClipboardList },
-    { text: "What is Maria Nangolo's diagnosis?", icon: HeartPulse },
-  ],
-  Laboratory: [
-    { text: "What was Tobias Hamutenya's HbA1c?", icon: FlaskConical },
-    { text: "What was Daniel Ipinge's haemoglobin and was it flagged?", icon: FlaskConical },
-    { text: 'What medication is Tobias Hamutenya on?', icon: ClipboardList },
-  ],
-  Records: [
-    { text: 'Did Ester Shikwambi attend her 2026-10-26 appointment?', icon: CalendarDays },
-    { text: 'Why was Joseph Mbumba referred and to whom?', icon: ClipboardList },
-    { text: "What is Maria Nangolo's HIV status?", icon: CircleHelp },
-  ],
-};
+/** Quick questions per access group (see clinic-documents/TEST_QUESTIONS.md). */
+const STAFF_PROMPTS = [
+  { text: 'Which contracts or leases expire next year?', icon: ClipboardList },
+  { text: 'Which vaccines expire soonest?', icon: CalendarDays },
+  { text: "What are Maria Nangolo's allergies?", icon: HeartPulse },
+];
+const CLINICAL_PROMPTS = [
+  { text: "What are Maria Nangolo's allergies?", icon: HeartPulse },
+  { text: "What was Johannes Haufiku's HbA1c result?", icon: FlaskConical },
+  { text: 'What is the dose of adrenaline for anaphylaxis in an adult?', icon: AlertTriangle },
+];
+const PATIENT_PROMPTS = [
+  { text: 'What allergies do I have?', icon: HeartPulse },
+  { text: 'When is my next appointment or vaccine due?', icon: CalendarDays },
+  { text: 'What were my latest test results?', icon: FlaskConical },
+];
 const PUBLIC_PROMPTS = [
-  { text: "What is the clinic's confidentiality rule on discussing patients?", icon: ShieldCheck },
-  { text: 'What should staff do in a medical emergency?', icon: AlertTriangle },
-  { text: 'Who works in the laboratory?', icon: BookOpen },
+  { text: 'When is the next vaccination outreach clinic?', icon: CalendarDays },
+  { text: 'What should I do if a baby is choking?', icon: AlertTriangle },
+  { text: 'How do I treat a burn?', icon: BookOpen },
+];
+
+function promptsFor(groups: string[]) {
+  if (groups.includes('Clinical')) return CLINICAL_PROMPTS;
+  if (groups.includes('Staff')) return STAFF_PROMPTS;
+  if (groups.some((g) => g.startsWith('PAT-'))) return PATIENT_PROMPTS;
+  return PUBLIC_PROMPTS;
+}
+
+/** Fictional demo accounts shown in the sign-in dialog. */
+const DEMO_ACCOUNTS = [
+  { label: 'Maria Nangolo · patient', id: 'PAT-001', pin: '1111' },
+  { label: 'Johannes Haufiku · patient', id: 'PAT-002', pin: '2222' },
+  { label: 'Loide Iipinge · parent', id: 'PAT-003', pin: '3333' },
+  { label: 'Selma Amutenya · clerk', id: 'CLK-001', pin: '4444' },
+  { label: 'Sister Ndapewa Haufiku · nurse', id: 'NUR-001', pin: '5555' },
+  { label: 'Dr Anna-Marie van Wyk · doctor', id: 'DOC-001', pin: '6666' },
 ];
 
 function Index() {
@@ -235,7 +240,7 @@ function Index() {
 
   // ── Group-aware quick prompts ─────────────────────────────────────────────
   const prompts = [
-    ...(groups.length ? groups.flatMap((g) => GROUP_PROMPTS[g] ?? []).slice(0, 3) : PUBLIC_PROMPTS),
+    ...promptsFor(groups),
     { text: 'Summarize a document', icon: FileText },
   ];
 
@@ -403,7 +408,7 @@ function Index() {
               </div>
               <h2 className="text-lg font-semibold">Sign in to see clinic records</h2>
               <p className="mt-1.5 text-sm text-muted-foreground">
-                Clinic policies and the staff directory are open to everyone. Sign in with your staff ID and PIN to see the records your role allows.
+                Clinic hours, vaccination dates and emergency guides are open to everyone. Sign in with your clinic ID and PIN to see your own records, or the records your staff role allows.
               </p>
               <div className="mt-5 flex flex-wrap justify-center gap-3">
                 <Button variant="clinic" size="touch" onClick={() => setGateOpen(true)}>
@@ -472,7 +477,7 @@ function Index() {
                       What would you like to know?
                     </h1>
                     <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                      Ask about patients, appointments, results or clinic policies. Every answer links to its source.
+                      Ask about vaccinations, emergencies, your records or clinic operations. Every answer links to its source.
                     </p>
                   </div>
 
@@ -484,7 +489,7 @@ function Index() {
                       <textarea
                         ref={questionRef}
                         id="question"
-                        placeholder="For example, who has appointments on 2026-11-24?"
+                        placeholder="For example, when is the next vaccination outreach clinic?"
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                         disabled={busy}
@@ -725,7 +730,7 @@ function Index() {
             <div>
               <div className="mb-8">
                 <h1 className="text-2xl font-semibold">Feature Phone (USSD &amp; SMS)</h1>
-                <p className="mt-3 text-sm text-muted-foreground">Clinic answers, even without a smartphone. Sign in on the phone with your staff ID and PIN.</p>
+                <p className="mt-3 text-sm text-muted-foreground">Clinic answers, even without a smartphone. Sign in on the phone with your clinic ID and PIN.</p>
               </div>
               <FeaturePhone
                 key={session?.user_id ?? 'public'}
@@ -748,9 +753,9 @@ function Index() {
                 <div>
                   <h1 className="text-2xl font-semibold">Who Asked What</h1>
                   <p className="mt-3 text-sm text-muted-foreground">
-                    {groups.includes('Records')
-                      ? 'Every question asked in the archive, newest first (Records staff see all users).'
-                      : "Your own questions, newest first. Records staff can see everyone's."}
+                    {groups.includes('Staff')
+                      ? 'Every question asked in the archive, newest first (staff see all users).'
+                      : "Your own questions, newest first. Clinic staff can see everyone's."}
                   </p>
                 </div>
                 <Button variant="outline" size="touch" disabled={busy} onClick={() => void fetchLogs()}>
@@ -821,17 +826,17 @@ function Index() {
             <LockKeyhole size={18} className="text-primary" /> Sign in to the Archive
           </DialogTitle>
           <DialogDescription>
-            Enter your staff ID and 4-digit PIN. Your access group decides which records you can see.
+            Enter your clinic ID and 4-digit PIN. Patients see their own records; staff see what their role allows.
           </DialogDescription>
 
           <form onSubmit={(e) => { void handleGateSubmit(e); }} className="mt-2 space-y-4">
             <div>
-              <label htmlFor="gate-id" className="mb-1.5 block text-sm font-medium">Staff ID</label>
+              <label htmlFor="gate-id" className="mb-1.5 block text-sm font-medium">Clinic ID</label>
               <input
                 id="gate-id"
                 type="text"
                 autoComplete="username"
-                placeholder="e.g. DOC-001"
+                placeholder="e.g. PAT-001 or NUR-001"
                 value={gateUserId}
                 onChange={(e) => setGateUserId(e.target.value)}
                 className="h-12 w-full rounded-md border border-input bg-card px-3 text-sm"
@@ -872,17 +877,17 @@ function Index() {
             </Button>
           </form>
 
-          {/* Fictional demo staff accounts from the Hopewell dataset */}
+          {/* Fictional demo accounts */}
           <details className="mt-3 rounded-md border border-border bg-muted/30 p-3 text-xs">
             <summary className="cursor-pointer select-none font-medium text-muted-foreground hover:text-foreground">
-              Demo staff accounts (fictional)
+              Demo accounts (fictional)
             </summary>
             <div className="mt-3 grid grid-cols-[1fr_auto] gap-x-4 gap-y-1.5 text-muted-foreground">
-              <span>Dr Anna-Marie van Wyk · Doctors</span><span className="font-mono text-foreground">DOC-001 · 3333</span>
-              <span>Sister Ndapewa Haufiku · Nursing</span><span className="font-mono text-foreground">NUR-001 · 2222</span>
-              <span>Selma Amutenya · Administration</span><span className="font-mono text-foreground">CLK-001 · 1111</span>
-              <span>Elias Shilongo · Laboratory</span><span className="font-mono text-foreground">LAB-001 · 4444</span>
-              <span>Beata Nakale · Records</span><span className="font-mono text-foreground">REC-001 · 5555</span>
+              {DEMO_ACCOUNTS.map((a) => (
+                <Fragment key={a.id}>
+                  <span>{a.label}</span><span className="font-mono text-foreground">{a.id} · {a.pin}</span>
+                </Fragment>
+              ))}
             </div>
           </details>
         </DialogContent>

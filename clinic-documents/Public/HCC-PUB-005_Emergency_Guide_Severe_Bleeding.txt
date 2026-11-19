@@ -1,0 +1,25 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
+========================================================================
+EMERGENCY GUIDE - SEVERE BLEEDING
+Document ID: HCC-PUB-005
+Date: 2026-02-01
+========================================================================
+Follows standard first-aid practice.
+
+1. Protect yourself: use gloves or a plastic bag over your hand if you can.
+2. Press firmly and directly on the wound with a clean cloth or dressing.
+3. Keep pressing without stopping for at least 10 minutes. If blood soaks through,
+   add more cloth on top - do not remove the first one.
+4. If possible, have the person lie down.
+5. Call the emergency line or bring the person to the clinic or hospital.
+6. Do not remove objects stuck in a wound; press around them instead.
+
+Signs of shock (pale, cold, sweaty skin, fast breathing, confusion) mean the person
+needs urgent hospital care.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a
+substitute for advice from a qualified health worker.

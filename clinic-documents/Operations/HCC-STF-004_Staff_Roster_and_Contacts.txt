@@ -1,0 +1,25 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
+========================================================================
+STAFF ROSTER AND CONTACTS
+Document ID: HCC-STF-004
+Date: 2026-11-01
+========================================================================
+STAFF
+- DOC-001 Dr Anna-Marie van Wyk, medical doctor - Tuesday and Thursday
+- NUR-001 Sister Ndapewa Haufiku, registered nurse - Monday to Friday
+- NUR-002 Nurse Martha Iipinge, enrolled nurse - Monday to Saturday (shifts)
+- CLK-001 Selma Amutenya, clinic clerk - Monday to Friday
+
+ON-CALL NURSE, NOVEMBER - DECEMBER 2026
+- Weeks starting 16 Nov and 30 Nov: NUR-001
+- Weeks starting 23 Nov and 7 Dec: NUR-002
+
+Clinic emergency line: +264 61 555 0199 (fictional)
+Staff home addresses and personal phone numbers are not kept in this archive.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a
+substitute for advice from a qualified health worker.

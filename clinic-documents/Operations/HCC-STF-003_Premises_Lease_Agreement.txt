@@ -1,0 +1,26 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
+========================================================================
+PREMISES LEASE AGREEMENT
+Document ID: HCC-STF-003
+Date: 2024-02-01
+========================================================================
+Landlord: Khomasdal Property Trust (fictional)
+Tenant: Hopewell Community Clinic
+Premises: 15 Moringa Street, Khomasdal, Windhoek
+
+Lease start: 2024-02-01
+Lease end: 2027-01-31
+Notice period: 3 months. Notice to renew or end the lease must be given by 2026-10-31.
+Status note (2026-10-28, CLK-001): renewal notice sent to the landlord; reply awaited.
+
+Monthly rent: N$ 18 500, increasing by 6% on 2026-02-01 to N$ 19 610.
+Maintenance: the landlord repairs the roof and plumbing; the clinic maintains the
+interior and the generator.
+The clinic may not sublet any part of the premises.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a
+substitute for advice from a qualified health worker.

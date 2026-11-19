@@ -37,11 +37,13 @@ links to sources, and writes every question to a DynamoDB audit table.
 
 Set `VITE_ARCHIVE_API_URL` (see `.env.example`) to `https://<service>.onrender.com/archive`.
 
-## Data: Hopewell Community Clinic (fictional)
+## Data: Hopewell Community Clinic (fictional, 20 documents)
 
-`hopewell-clinic-documents/` holds 59 fictional records, `users.json` (5 staff) and
-`TEST_QUESTIONS.md` (the demo script). Each document's `accessGroups` decides who can
-read it: Administration, Nursing, Doctors, Laboratory, Records, or Everyone.
+`clinic-documents/` holds 20 fictional documents, `users.json` (3 patients, clerk, nurse,
+doctor) and `TEST_QUESTIONS.md` (the demo script). Each document's `accessGroups` decides
+who can read it: Everyone (clinic info, vaccination dates, emergency guides), Staff
+(operations: stock, contracts, lease, roster), Clinical (protocols, all patient records)
+or one patient (PAT-001, PAT-002, PAT-003).
 
 Prepare it for AWS:
 
@@ -54,8 +56,11 @@ then **Sync** the Knowledge Base), `backend/src/documents.json` (the catalogue t
 serves, commit it) and `backend/demo-users/*.json` (paste into the users table with
 "View DynamoDB JSON" on).
 
-Demo staff accounts (fictional): CLK-001/1111, NUR-001/2222, DOC-001/3333,
-LAB-001/4444, REC-001/5555. Records staff can see every user's question history.
+Demo accounts (fictional): PAT-001/1111, PAT-002/2222, PAT-003/3333, CLK-001/4444,
+NUR-001/5555, DOC-001/6666. Staff can see every user's question history; patients see their own.
+
+`backend/scripts/upload_archive.py` replaces `archive/` in S3 with the prepared files
+(reads `backend/.env`); then click Sync on the Knowledge Base.
 
 ## AWS resources (one region, e.g. eu-central-1)
 

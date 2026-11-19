@@ -1,0 +1,13 @@
+{
+  "metadataAttributes": {
+    "documentId": "PAT-003-IMM",
+    "documentType": "Immunisation Record",
+    "folder": "Patients",
+    "accessGroups": [
+      "Clinical",
+      "PAT-003"
+    ],
+    "documentDate": "2026-11-02",
+    "patientId": "PAT-003"
+  }
+}

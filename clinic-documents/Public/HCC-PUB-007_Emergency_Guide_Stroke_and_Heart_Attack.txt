@@ -1,0 +1,30 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
+========================================================================
+EMERGENCY GUIDE - STROKE AND HEART ATTACK
+Document ID: HCC-PUB-007
+Date: 2026-02-01
+========================================================================
+Follows standard first-aid practice.
+
+STROKE - think FAST
+- Face: has one side of the face dropped?
+- Arms: can they lift both arms and keep them up?
+- Speech: is their speech slurred or confused?
+- Time: call for emergency help immediately. Note the time the signs started.
+Do not give food, drink or medicines to someone who may be having a stroke.
+
+HEART ATTACK
+Signs: chest pain or pressure that may spread to the arm, neck, jaw or back;
+shortness of breath; sweating; nausea.
+1. Call for emergency help immediately.
+2. Sit the person down and keep them calm.
+3. If they are not allergic and are able to chew, give one adult aspirin (300 mg)
+   to chew slowly.
+4. If they become unresponsive and are not breathing normally, start CPR.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a
+substitute for advice from a qualified health worker.

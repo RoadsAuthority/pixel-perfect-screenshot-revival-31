@@ -1,0 +1,249 @@
+[
+  {
+    "documentId": "HCC-PUB-001",
+    "title": "Clinic Opening Hours and Services",
+    "documentType": "Clinic Information",
+    "folder": "Public",
+    "file": "Public/HCC-PUB-001_Clinic_Opening_Hours_and_Services.txt",
+    "patientId": null,
+    "date": "2026-11-01",
+    "accessGroups": [
+      "Everyone"
+    ]
+  },
+  {
+    "documentId": "HCC-PUB-002",
+    "title": "Childhood Immunisation Schedule",
+    "documentType": "Vaccination Schedule",
+    "folder": "Public",
+    "file": "Public/HCC-PUB-002_Childhood_Immunisation_Schedule.txt",
+    "patientId": null,
+    "date": "2026-01-15",
+    "accessGroups": [
+      "Everyone"
+    ]
+  },
+  {
+    "documentId": "HCC-PUB-003",
+    "title": "Vaccination Clinic Days and Outreach Dates Nov 2026 - Feb 2027",
+    "documentType": "Vaccination Schedule",
+    "folder": "Public",
+    "file": "Public/HCC-PUB-003_Vaccination_Clinic_Days_and_Outreach_Dates_Nov_2026_Feb_2027.txt",
+    "patientId": null,
+    "date": "2026-11-01",
+    "accessGroups": [
+      "Everyone"
+    ]
+  },
+  {
+    "documentId": "HCC-PUB-004",
+    "title": "Emergency Guide - Choking",
+    "documentType": "Emergency Guide",
+    "folder": "Public",
+    "file": "Public/HCC-PUB-004_Emergency_Guide_Choking.txt",
+    "patientId": null,
+    "date": "2026-02-01",
+    "accessGroups": [
+      "Everyone"
+    ]
+  },
+  {
+    "documentId": "HCC-PUB-005",
+    "title": "Emergency Guide - Severe Bleeding",
+    "documentType": "Emergency Guide",
+    "folder": "Public",
+    "file": "Public/HCC-PUB-005_Emergency_Guide_Severe_Bleeding.txt",
+    "patientId": null,
+    "date": "2026-02-01",
+    "accessGroups": [
+      "Everyone"
+    ]
+  },
+  {
+    "documentId": "HCC-PUB-006",
+    "title": "Emergency Guide - Burns",
+    "documentType": "Emergency Guide",
+    "folder": "Public",
+    "file": "Public/HCC-PUB-006_Emergency_Guide_Burns.txt",
+    "patientId": null,
+    "date": "2026-02-01",
+    "accessGroups": [
+      "Everyone"
+    ]
+  },
+  {
+    "documentId": "HCC-PUB-007",
+    "title": "Emergency Guide - Stroke and Heart Attack",
+    "documentType": "Emergency Guide",
+    "folder": "Public",
+    "file": "Public/HCC-PUB-007_Emergency_Guide_Stroke_and_Heart_Attack.txt",
+    "patientId": null,
+    "date": "2026-02-01",
+    "accessGroups": [
+      "Everyone"
+    ]
+  },
+  {
+    "documentId": "HCC-PUB-008",
+    "title": "Emergency Guide - Snakebite",
+    "documentType": "Emergency Guide",
+    "folder": "Public",
+    "file": "Public/HCC-PUB-008_Emergency_Guide_Snakebite.txt",
+    "patientId": null,
+    "date": "2026-02-01",
+    "accessGroups": [
+      "Everyone"
+    ]
+  },
+  {
+    "documentId": "HCC-STF-001",
+    "title": "Vaccine Stock and Cold Chain Log",
+    "documentType": "Stock Log",
+    "folder": "Operations",
+    "file": "Operations/HCC-STF-001_Vaccine_Stock_and_Cold_Chain_Log.txt",
+    "patientId": null,
+    "date": "2026-11-15",
+    "accessGroups": [
+      "Staff"
+    ]
+  },
+  {
+    "documentId": "HCC-STF-002",
+    "title": "Oxygen and Medical Gas Supply Contract",
+    "documentType": "Contract",
+    "folder": "Operations",
+    "file": "Operations/HCC-STF-002_Oxygen_and_Medical_Gas_Supply_Contract.txt",
+    "patientId": null,
+    "date": "2026-07-01",
+    "accessGroups": [
+      "Staff"
+    ]
+  },
+  {
+    "documentId": "HCC-STF-003",
+    "title": "Premises Lease Agreement",
+    "documentType": "Lease",
+    "folder": "Operations",
+    "file": "Operations/HCC-STF-003_Premises_Lease_Agreement.txt",
+    "patientId": null,
+    "date": "2024-02-01",
+    "accessGroups": [
+      "Staff"
+    ]
+  },
+  {
+    "documentId": "HCC-STF-004",
+    "title": "Staff Roster and Contacts",
+    "documentType": "Staff Roster",
+    "folder": "Operations",
+    "file": "Operations/HCC-STF-004_Staff_Roster_and_Contacts.txt",
+    "patientId": null,
+    "date": "2026-11-01",
+    "accessGroups": [
+      "Staff"
+    ]
+  },
+  {
+    "documentId": "HCC-CLN-001",
+    "title": "Protocol - Anaphylaxis After Vaccination",
+    "documentType": "Clinical Protocol",
+    "folder": "Clinical",
+    "file": "Clinical/HCC-CLN-001_Protocol_Anaphylaxis_After_Vaccination.txt",
+    "patientId": null,
+    "date": "2026-03-01",
+    "accessGroups": [
+      "Clinical"
+    ]
+  },
+  {
+    "documentId": "PAT-001-PRF",
+    "title": "Patient Profile - Maria Nangolo",
+    "documentType": "Patient Profile",
+    "folder": "Patients",
+    "file": "Patients/PAT-001-PRF_Patient_Profile_Maria_Nangolo.txt",
+    "patientId": "PAT-001",
+    "date": "2026-10-05",
+    "accessGroups": [
+      "Clinical",
+      "PAT-001"
+    ]
+  },
+  {
+    "documentId": "PAT-001-VIS",
+    "title": "Visit Note - Maria Nangolo - 2026-10-05",
+    "documentType": "Visit Note",
+    "folder": "Patients",
+    "file": "Patients/PAT-001-VIS_Visit_Note_Maria_Nangolo_2026-10-05.txt",
+    "patientId": "PAT-001",
+    "date": "2026-10-05",
+    "accessGroups": [
+      "Clinical",
+      "PAT-001"
+    ]
+  },
+  {
+    "documentId": "PAT-001-LAB",
+    "title": "Laboratory Results - Maria Nangolo - 2026-10-06",
+    "documentType": "Laboratory Report",
+    "folder": "Patients",
+    "file": "Patients/PAT-001-LAB_Laboratory_Results_Maria_Nangolo_2026-10-06.txt",
+    "patientId": "PAT-001",
+    "date": "2026-10-06",
+    "accessGroups": [
+      "Clinical",
+      "PAT-001"
+    ]
+  },
+  {
+    "documentId": "PAT-002-PRF",
+    "title": "Patient Profile - Johannes Haufiku",
+    "documentType": "Patient Profile",
+    "folder": "Patients",
+    "file": "Patients/PAT-002-PRF_Patient_Profile_Johannes_Haufiku.txt",
+    "patientId": "PAT-002",
+    "date": "2026-10-12",
+    "accessGroups": [
+      "Clinical",
+      "PAT-002"
+    ]
+  },
+  {
+    "documentId": "PAT-002-LAB",
+    "title": "Laboratory Results and Plan - Johannes Haufiku - 2026-10-12",
+    "documentType": "Laboratory Report",
+    "folder": "Patients",
+    "file": "Patients/PAT-002-LAB_Laboratory_Results_and_Plan_Johannes_Haufiku_2026-10-12.txt",
+    "patientId": "PAT-002",
+    "date": "2026-10-12",
+    "accessGroups": [
+      "Clinical",
+      "PAT-002"
+    ]
+  },
+  {
+    "documentId": "PAT-003-IMM",
+    "title": "Immunisation Record - Ndapandula Iipinge",
+    "documentType": "Immunisation Record",
+    "folder": "Patients",
+    "file": "Patients/PAT-003-IMM_Immunisation_Record_Ndapandula_Iipinge.txt",
+    "patientId": "PAT-003",
+    "date": "2026-11-02",
+    "accessGroups": [
+      "Clinical",
+      "PAT-003"
+    ]
+  },
+  {
+    "documentId": "PAT-003-VIS",
+    "title": "Visit Note - Ndapandula Iipinge - 2026-11-02",
+    "documentType": "Visit Note",
+    "folder": "Patients",
+    "file": "Patients/PAT-003-VIS_Visit_Note_Ndapandula_Iipinge_2026-11-02.txt",
+    "patientId": "PAT-003",
+    "date": "2026-11-02",
+    "accessGroups": [
+      "Clinical",
+      "PAT-003"
+    ]
+  }
+]

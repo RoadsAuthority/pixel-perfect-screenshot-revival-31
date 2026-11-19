@@ -57,13 +57,13 @@ function LoginPage() {
               <LockKeyhole size={26} className="text-primary" />
             </div>
             <h1 className="text-2xl font-semibold">Sign in</h1>
-            <p className="mt-2 text-sm text-muted-foreground">Use your staff ID and PIN to access the archive.</p>
+            <p className="mt-2 text-sm text-muted-foreground">Use your clinic ID and PIN to access the archive.</p>
           </div>
 
           <form onSubmit={(e) => { void handleSubmit(e); }} className="space-y-4">
             <div>
-              <label htmlFor="user-id" className="mb-1.5 block text-sm font-medium">Staff ID</label>
-              <input id="user-id" type="text" autoComplete="username" placeholder="e.g. DOC-001" value={userId} onChange={(e) => setUserId(e.target.value)} className="h-12 w-full rounded-md border border-input bg-card px-3 text-sm" required />
+              <label htmlFor="user-id" className="mb-1.5 block text-sm font-medium">Clinic ID</label>
+              <input id="user-id" type="text" autoComplete="username" placeholder="e.g. PAT-001 or NUR-001" value={userId} onChange={(e) => setUserId(e.target.value)} className="h-12 w-full rounded-md border border-input bg-card px-3 text-sm" required />
             </div>
             <div>
               <label htmlFor="pin" className="mb-1.5 block text-sm font-medium">PIN</label>

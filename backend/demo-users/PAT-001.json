@@ -1,0 +1,27 @@
+{
+  "user_id": {
+    "S": "PAT-001"
+  },
+  "username": {
+    "S": "maria.nangolo"
+  },
+  "name": {
+    "S": "Maria Nangolo"
+  },
+  "groups": {
+    "L": [
+      {
+        "S": "PAT-001"
+      },
+      {
+        "S": "Everyone"
+      }
+    ]
+  },
+  "pin_salt": {
+    "S": "2015f3ba7847ce37863902904b98d2d7"
+  },
+  "pin_hash": {
+    "S": "ce78e300d498d58ddd3bf89bf61f5d0269504f14e3f538ea24e1533c122c9741646943a0f01e425b00c593f8ec45f65e19681bb11cfe2d0acb29a4fbfa63be3d"
+  }
+}

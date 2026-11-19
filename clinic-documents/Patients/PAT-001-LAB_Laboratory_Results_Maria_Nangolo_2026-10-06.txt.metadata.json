@@ -1,0 +1,13 @@
+{
+  "metadataAttributes": {
+    "documentId": "PAT-001-LAB",
+    "documentType": "Laboratory Report",
+    "folder": "Patients",
+    "accessGroups": [
+      "Clinical",
+      "PAT-001"
+    ],
+    "documentDate": "2026-10-06",
+    "patientId": "PAT-001"
+  }
+}

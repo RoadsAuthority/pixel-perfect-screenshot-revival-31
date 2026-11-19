@@ -13,7 +13,8 @@ import sys
 from pathlib import Path
 
 ENV_FILE = Path(__file__).resolve().parents[1] / ".env"
-DEMO_PINS = {"CLK-001": "1111", "NUR-001": "2222", "DOC-001": "3333", "LAB-001": "4444", "REC-001": "5555"}
+DEMO_PINS = {"PAT-001": "1111", "PAT-002": "2222", "PAT-003": "3333", "CLK-001": "4444", "NUR-001": "5555", "DOC-001": "6666"}
+DOC_COUNT = len(json.loads((Path(__file__).resolve().parents[1] / "src" / "documents.json").read_text(encoding="utf-8")))
 
 
 def load_env() -> None:
@@ -94,7 +95,8 @@ def main() -> None:
             keys += [o["Key"] for o in page.get("Contents", [])]
         docs = [k for k in keys if k.endswith(".txt")]
         metas = [k for k in keys if k.endswith(".metadata.json")]
-        (ok if len(docs) == 59 and len(metas) == 59 else bad)(f"{len(docs)} documents, {len(metas)} metadata files under archive/ (expected 59 + 59)")
+        (ok if len(docs) == DOC_COUNT and len(metas) == DOC_COUNT else bad)(
+            f"{len(docs)} documents, {len(metas)} metadata files under archive/ (expected {DOC_COUNT} + {DOC_COUNT})")
         old = [k for k in keys if "patient_P0" in k or "oxygen" in k]
         if old:
             bad(f"old sample files still present: {len(old)} — delete them")
@@ -107,7 +109,7 @@ def main() -> None:
             if "doc_id" not in attrs or not any(k.startswith("group_") for k in attrs):
                 untagged.append(key)
         if untagged:
-            bad(f"{len(untagged)} metadata files lack doc_id/group_* tags (uploaded from hopewell-clinic-documents/ "
+            bad(f"{len(untagged)} metadata files lack doc_id/group_* tags (run upload_archive.py again) "
                 f"instead of backend/archive-upload/?) e.g. {untagged[0]}")
         elif metas:
             ok("all metadata files have doc_id and group_* tags")
@@ -142,12 +144,12 @@ def main() -> None:
 
     # Search without and with the access filter the app uses (Doctors).
     runtime = boto3.client("bedrock-agent-runtime", region_name=region)
-    question = "Which patients are allergic to penicillin?"
+    question = "What should I do if a baby is choking?"
     doctors_filter = {"orAll": [
-        {"equals": {"key": "group_doctors", "value": "yes"}},
+        {"equals": {"key": "group_clinical", "value": "yes"}},
         {"equals": {"key": "group_everyone", "value": "yes"}},
     ]}
-    for label, flt in (("without filter", None), ("with Doctors filter", doctors_filter)):
+    for label, flt in (("without filter", None), ("with Clinical filter", doctors_filter)):
         config = {"numberOfResults": 5}
         if flt:
             config["filter"] = flt

@@ -1,0 +1,31 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
+========================================================================
+VACCINE STOCK AND COLD CHAIN LOG
+Document ID: HCC-STF-001
+Date: 2026-11-15
+========================================================================
+VACCINE STOCK (fridge 1, checked 2026-11-15 by CLK-001 Selma Amutenya)
+
+VACCINE              BATCH       DOSES   EXPIRY DATE
+BCG                  BCG-2611    40      2027-02-28
+OPV                  OPV-2604    120     2027-05-31
+Pentavalent          PEN-2609    60      2027-08-31
+PCV                  PCV-2602    55      2026-12-31   <- use first
+Rotavirus            ROT-2607    48      2027-07-31
+Measles-Rubella      MR-2603     30      2027-03-31
+HPV                  HPV-2610    25      2028-01-31
+Tetanus-diphtheria   TD-2512     35      2026-12-15   <- use first, expires soon
+
+COLD CHAIN
+- Fridge temperature range required: +2 C to +8 C.
+- Temperature excursion on 2026-11-08 (9.5 C for 40 minutes after a power cut);
+  vaccine vial monitors checked by NUR-001, all usable.
+- Fridge thermometer calibration due: 2027-04-30.
+- Next stock order: 2026-12-01 (PCV and Td needed).
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a
+substitute for advice from a qualified health worker.

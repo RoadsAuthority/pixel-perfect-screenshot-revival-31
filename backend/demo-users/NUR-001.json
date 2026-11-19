@@ -6,12 +6,15 @@
     "S": "ndapewa.haufiku"
   },
   "name": {
-    "S": "Sister Ndapewa Haufiku"
+    "S": "Sister Ndapewa Haufiku, Nurse"
   },
   "groups": {
     "L": [
       {
-        "S": "Nursing"
+        "S": "Staff"
+      },
+      {
+        "S": "Clinical"
       },
       {
         "S": "Everyone"
@@ -19,9 +22,9 @@
     ]
   },
   "pin_salt": {
-    "S": "b2e345affc9f3f7f47a9c1d779952737"
+    "S": "c58750dcd762524b27307f38819c35ac"
   },
   "pin_hash": {
-    "S": "044bf91568beeb233fb99d9ba01e5bf884d1f834a6c0b2cc5ba3a33dede2e2fafe62601d4d916caa1c052dfc00c3517abf4eaab4ed1b2229eecc4b9d65e76300"
+    "S": "050438642b8ddd802e8392924772874beec8722e713ebd6ca935ad2c7f54b4576dd73c3cc75b7a0dff0e3a49ff2ee485d73d88e7cc00ac3d7f3b95fd8774e2e6"
   }
 }

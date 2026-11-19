@@ -1,0 +1,28 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
+========================================================================
+OXYGEN AND MEDICAL GAS SUPPLY CONTRACT
+Document ID: HCC-STF-002
+Date: 2026-07-01
+========================================================================
+Supplier: AirMed Supplies (Pty) Ltd (fictional)
+Contract number: AMS-HCC-2025-07
+Start date: 2025-07-01
+End date: 2027-06-30
+Renewal: the clinic must give written notice of renewal or cancellation by 2027-03-31.
+
+SERVICES
+- Monthly delivery of 4 medical oxygen cylinders (size F)
+- Cylinder pressure testing every 6 months
+- Emergency delivery within 24 hours at no extra cost
+
+PRICE
+N$ 2 450 per month, fixed until the end date.
+
+Contact person: Mr K. Iyambo, accounts@airmed.example (fictional)
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a
+substitute for advice from a qualified health worker.

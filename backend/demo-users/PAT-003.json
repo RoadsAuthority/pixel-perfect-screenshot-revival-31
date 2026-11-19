@@ -1,0 +1,27 @@
+{
+  "user_id": {
+    "S": "PAT-003"
+  },
+  "username": {
+    "S": "loide.iipinge"
+  },
+  "name": {
+    "S": "Loide Iipinge, parent of Ndapandula"
+  },
+  "groups": {
+    "L": [
+      {
+        "S": "PAT-003"
+      },
+      {
+        "S": "Everyone"
+      }
+    ]
+  },
+  "pin_salt": {
+    "S": "9895ec34bbc9897765049f366184d89d"
+  },
+  "pin_hash": {
+    "S": "ebcac1a5beaec709e7ac530a5d8062be5aaf9085b73b952a097b54b624acc7e890ec2b3f39a7c912b38beeb580bf4c74395a17ecd60bd38c20876f85178c229a"
+  }
+}

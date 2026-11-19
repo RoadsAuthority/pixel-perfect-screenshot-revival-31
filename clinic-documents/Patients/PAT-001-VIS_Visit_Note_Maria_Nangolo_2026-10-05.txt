@@ -1,0 +1,33 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
+========================================================================
+VISIT NOTE - MARIA NANGOLO - 2026-10-05
+Document ID: PAT-001-VIS
+Date: 2026-10-05
+========================================================================
+Patient: PAT-001 Maria Nangolo
+Seen by: DOC-001 Dr Anna-Marie van Wyk
+
+REASON FOR VISIT
+Headaches for two weeks.
+
+FINDINGS
+- Blood pressure 148/94 mmHg, repeated 146/92 mmHg
+- Weight 78 kg
+
+ASSESSMENT
+High blood pressure (hypertension).
+
+PLAN
+- Started amlodipine 5 mg once daily.
+- Reduce salt, walk 30 minutes a day.
+- Follow-up blood pressure check: 2026-11-23 at 09:30 with NUR-001.
+- Blood tests requested: kidney function and cholesterol.
+
+NURSE NOTE 2026-11-02 (NUR-001): blood pressure 132/84 mmHg. Patient feels better.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a
+substitute for advice from a qualified health worker.

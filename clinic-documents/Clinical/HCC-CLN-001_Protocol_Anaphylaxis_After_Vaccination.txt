@@ -1,0 +1,31 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
+========================================================================
+PROTOCOL - ANAPHYLAXIS AFTER VACCINATION
+Document ID: HCC-CLN-001
+Date: 2026-03-01
+========================================================================
+For trained clinical staff. Based on standard anaphylaxis guidance.
+
+RECOGNISE
+Sudden onset (usually within 30 minutes) of breathing difficulty, wheeze, swelling of
+the lips or throat, widespread rash, collapse or low blood pressure.
+
+TREAT
+1. Call for help. Lay the patient flat with legs raised (sitting up if breathing is
+   difficult; recovery position if unconscious).
+2. Give adrenaline 1 mg/mL INTRAMUSCULARLY into the outer thigh:
+   0.01 mL/kg (0.01 mg/kg), maximum 0.5 mL (0.5 mg) adult, 0.3 mL child 6-12 years,
+   0.15 mL child under 6 years.
+3. Repeat after 5 minutes if there is no improvement.
+4. Give oxygen if available. Monitor breathing and pulse.
+5. Transfer every patient with anaphylaxis to hospital, even after recovery.
+
+Every vaccination session must have an anaphylaxis kit (adrenaline, syringes) ready.
+Observe every vaccinated person for 15 minutes.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a
+substitute for advice from a qualified health worker.

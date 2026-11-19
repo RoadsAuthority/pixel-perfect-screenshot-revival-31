@@ -1,0 +1,27 @@
+{
+  "user_id": {
+    "S": "PAT-002"
+  },
+  "username": {
+    "S": "johannes.haufiku"
+  },
+  "name": {
+    "S": "Johannes Haufiku"
+  },
+  "groups": {
+    "L": [
+      {
+        "S": "PAT-002"
+      },
+      {
+        "S": "Everyone"
+      }
+    ]
+  },
+  "pin_salt": {
+    "S": "e675df82a1b70e218a0df2d4cbaabf52"
+  },
+  "pin_hash": {
+    "S": "a36b99a453b016adb01ad3bdef085855970ba3efed3119c8e4967a4bc95a45c5f0781c4245c1f49b242f060c4ba38198376790f6baa2a9ff2b901068b4c283a2"
+  }
+}

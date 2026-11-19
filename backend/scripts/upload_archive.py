@@ -31,8 +31,9 @@ def main() -> None:
     s3 = boto3.client("s3", region_name=os.environ["AWS_REGION"])
 
     files = sorted(p for p in UPLOAD.rglob("*") if p.is_file())
-    if len(files) != 118:
-        raise SystemExit(f"Expected 118 prepared files in {UPLOAD}, found {len(files)}. Run prepare_archive.py first.")
+    expected = 2 * len(json.loads((BACKEND / "src" / "documents.json").read_text(encoding="utf-8")))
+    if len(files) != expected:
+        raise SystemExit(f"Expected {expected} prepared files in {UPLOAD}, found {len(files)}. Run prepare_archive.py first.")
 
     # 1. Delete everything currently under archive/.
     old = []

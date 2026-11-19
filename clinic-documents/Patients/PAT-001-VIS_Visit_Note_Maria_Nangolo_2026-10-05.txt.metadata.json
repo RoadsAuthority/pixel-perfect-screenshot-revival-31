@@ -1,0 +1,13 @@
+{
+  "metadataAttributes": {
+    "documentId": "PAT-001-VIS",
+    "documentType": "Visit Note",
+    "folder": "Patients",
+    "accessGroups": [
+      "Clinical",
+      "PAT-001"
+    ],
+    "documentDate": "2026-10-05",
+    "patientId": "PAT-001"
+  }
+}
