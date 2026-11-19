@@ -412,6 +412,27 @@ class DispatchTests(unittest.TestCase):
         self.assertIn("• It caused a rash", body["answer"])
         self.assertEqual(body["sources"][0]["quotes"], ["Penicillin: rash and swelling of the face (2019)"])
 
+    def test_near_miss_quote_is_mapped_to_the_real_line(self):
+        # The model wrote "8.1%" but the record says "8.1 %" in a table row.
+        passages = handler.verified_quotes("PAT-002-LAB", ["HbA1c 8.1% HIGH"])
+        self.assertEqual(len(passages), 1)
+        self.assertTrue(passages[0].startswith("HbA1c") and "8.1 %" in passages[0] and "HIGH" in passages[0])
+        self.assertIn(passages[0], handler.DOCS_BY_ID["PAT-002-LAB"]["text"])
+
+    def test_no_quotes_falls_back_to_lines_matching_the_answer(self):
+        passages = handler.verified_quotes("PAT-001-PRF", [], "You are allergic to penicillin: it gave you a rash and swelling of the face.")
+        self.assertTrue(passages)
+        self.assertTrue(any("Penicillin" in p for p in passages))
+        for p in passages:
+            self.assertIn(p, handler.DOCS_BY_ID["PAT-001-PRF"]["text"])
+
+    def test_invented_quote_is_never_highlighted(self):
+        self.assertEqual(handler.verified_quotes("PAT-001-PRF", ["Allergic to peanuts and shellfish"]), [])
+
+    def test_page_furniture_is_never_highlighted(self):
+        passages = handler.verified_quotes("PAT-001-PRF", [], "Hopewell Community Clinic fictional demonstration record")
+        self.assertEqual(passages, [])
+
     def test_document_viewer_respects_access(self):
         token, clients, _ = self._login(PATIENT1)
         status, body = handler.dispatch({"action": "document", "doc_id": CONSULT_ID}, clients, CONFIG,

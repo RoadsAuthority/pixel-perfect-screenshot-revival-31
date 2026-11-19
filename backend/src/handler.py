@@ -445,22 +445,83 @@ def _normalise(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip().lower()
 
 
-def verified_quotes(doc_id: str, quotes: list) -> list:
-    """Keep only quotes that really appear in the document (ignoring case and spacing)."""
+_STOPWORDS = {
+    "the", "a", "an", "and", "or", "of", "to", "in", "on", "at", "for", "with", "is", "was", "are",
+    "be", "by", "as", "it", "this", "that", "from", "your", "you", "his", "her", "their", "has", "have",
+}
+# Lines that are page furniture, never worth highlighting.
+_BOILERPLATE = ("====", "----", "hopewell community clinic", "fictional", "document id:", "tel:")
+
+
+def _tokens(text: str) -> set:
+    return {t for t in re.findall(r"[a-z0-9][a-z0-9.%/-]*", text.lower()) if t not in _STOPWORDS and len(t) > 1}
+
+
+def _content_lines(text: str) -> list:
+    lines = []
+    for raw in text.splitlines():
+        line = raw.strip()
+        if len(line) >= 4 and not any(b in line.lower() for b in _BOILERPLATE):
+            lines.append(line)
+    return lines
+
+
+def _best_line(lines: list, target: set, minimum: float) -> str:
+    """The document line sharing the largest share of `target` tokens, if at least `minimum`."""
+    best, best_score = "", 0.0
+    for line in lines:
+        shared = len(_tokens(line) & target)
+        score = shared / max(len(target), 1)
+        if shared >= 2 and score > best_score:
+            best, best_score = line, score
+    return best if best_score >= minimum else ""
+
+
+def verified_quotes(doc_id: str, quotes: list, answer_text: str = "") -> list:
+    """Return passages to highlight that are guaranteed to exist in the document.
+
+    1. A quote that appears in the document (ignoring case and spacing) is kept as is.
+    2. A near-miss quote is replaced by the closest real line of the document.
+    3. If no quote survives, the lines that best match the answer are used.
+    Every returned passage is text that really is in the document.
+    """
     document = DOCS_BY_ID.get(doc_id)
-    haystack = _normalise(document.get("text", "")) if document else ""
-    kept = []
+    if not document:
+        return []
+    text = document.get("text", "")
+    haystack = _normalise(text)
+    lines = _content_lines(text)
+    kept: list = []
+
+    def add(passage: str) -> None:
+        if passage and passage not in kept:
+            kept.append(passage)
+
     for quote in quotes:
         q = _normalise(quote).strip(" .\"'")
-        if len(q) >= 3 and q in haystack and quote not in kept:
-            kept.append(quote)
+        if len(q) >= 3 and q in haystack:
+            add(quote.strip())
+        else:
+            add(_best_line(lines, _tokens(quote), 0.6))
+
+    if not kept and answer_text:
+        target = _tokens(answer_text)
+        scored = sorted(
+            ((len(_tokens(line) & target), line) for line in lines),
+            key=lambda pair: pair[0],
+            reverse=True,
+        )
+        for shared, line in scored[:2]:
+            if shared >= 2:
+                add(line)
     return kept[:5]
 
 
-def _source_for(doc_id: str, chunks: list, s3_client, archive_bucket: str, quotes: list | None = None) -> dict:
+def _source_for(doc_id: str, chunks: list, s3_client, archive_bucket: str, quotes: list | None = None,
+                answer_text: str = "") -> dict:
     document = next(d for d in DOCUMENTS if d["doc_id"] == doc_id)
     snippet = next((c["text"] for c in chunks if c["doc_id"] == doc_id), "")
-    good = verified_quotes(doc_id, quotes or [])
+    good = verified_quotes(doc_id, quotes or [], answer_text)
     return {
         "doc_id": doc_id,
         "title": document["title"],
@@ -490,7 +551,8 @@ def query_knowledge_base(query: str, principal: dict, doc_id: str, clients: dict
     if not result["known"] or not result["answer"] or not cited:
         return unknown
     sources = [
-        _source_for(d, chunks, clients["s3"], config["archive_bucket"], result.get("quotes", {}).get(d, []))
+        _source_for(d, chunks, clients["s3"], config["archive_bucket"], result.get("quotes", {}).get(d, []),
+                    result["answer"])
         for d in cited
     ]
     return {
