@@ -63,14 +63,29 @@ class FakeTable:
         return {}
 
 
-class FakeBedrock:
-    def __init__(self, result):
-        self.result = result
+class FakeAgentRuntime:
+    """Knowledge Base retrieve()."""
+
+    def __init__(self, results=None):
+        self.results = results or []
         self.request = None
 
-    def retrieve_and_generate(self, **request):
+    def retrieve(self, **request):
         self.request = request
-        return self.result
+        return {"retrievalResults": self.results}
+
+
+class FakeRuntime:
+    """bedrock-runtime converse()."""
+
+    def __init__(self, reply=None):
+        self.reply = reply if reply is not None else {"known": False, "answer": "", "doc_ids": []}
+        self.request = None
+
+    def converse(self, **request):
+        self.request = request
+        text = self.reply if isinstance(self.reply, str) else json.dumps(self.reply)
+        return {"output": {"message": {"content": [{"text": text}]}}}
 
 
 class FakeS3:
@@ -82,50 +97,33 @@ class FakeS3:
         return "https://archive.example/signed-source"
 
 
-def make_clients(users=None, sessions=None, audit=None, bedrock=None, s3=None):
+def make_clients(users=None, sessions=None, audit=None, bedrock=None, runtime=None, s3=None):
     return {
         "users_table": users or FakeTable(),
         "sessions_table": sessions or FakeTable(),
         "audit_table": audit or FakeTable(),
-        "bedrock": bedrock or FakeBedrock({"output": {"text": ""}, "citations": []}),
+        "bedrock": bedrock or FakeAgentRuntime(),
+        "bedrock_runtime": runtime or FakeRuntime(),
         "s3": s3 or FakeS3(),
     }
 
 
-def bedrock_citing(doc_id: str, key: str, text: str = "Answer from the archive.") -> dict:
-    return {
-        "output": {"text": text},
-        "citations": [
-            {
-                "retrievedReferences": [
-                    {
-                        "content": {"text": "Snippet from the document."},
-                        "location": {"s3Location": {"uri": f"s3://clinic-test/{key}"}},
-                        "metadata": {"doc_id": doc_id},
-                    }
-                ]
-            }
-        ],
-    }
+def chunk(doc_id: str, text: str = "Snippet from the document.") -> dict:
+    return {"content": {"text": text}, "metadata": {"doc_id": doc_id}}
 
 
-POLICY = bedrock_citing("HCC-POL-001", "archive/Clinic_Policies/HCC-POL-001_Clinic_Confidentiality_Policy.txt")
-CONSULTATION = bedrock_citing(
-    "HCC-CR-2026-0126",
-    "archive/Medical_Consultations/HCC-CR-2026-0126_Consultation_Record_Maria_Nangolo_2026_10_05.txt",
-)
+POLICY_ID = "HCC-POL-001"
+CONSULT_ID = "HCC-CR-2026-0126"
 
 CONFIG = {
     "knowledge_base_id": "KB12345678",
-    "generation_model_arn": "arn:aws:bedrock:eu-central-1::foundation-model/test",
+    "generation_model_arn": "arn:aws:bedrock:eu-central-1:123:inference-profile/eu.test",
     "archive_bucket": "clinic-test",
 }
 
 
-def request_filter(bedrock: FakeBedrock) -> dict:
-    return bedrock.request["retrieveAndGenerateConfiguration"]["knowledgeBaseConfiguration"][
-        "retrievalConfiguration"
-    ]["vectorSearchConfiguration"]["filter"]
+def request_filter(agent: FakeAgentRuntime) -> dict:
+    return agent.request["retrievalConfiguration"]["vectorSearchConfiguration"]["filter"]
 
 
 class CatalogTests(unittest.TestCase):
@@ -230,11 +228,11 @@ class DispatchTests(unittest.TestCase):
         self.assertTrue(body["authenticated"])
         return body["token"], clients, body
 
-    def _ask(self, token, clients, bedrock, query="Question?", **extra):
-        clients["bedrock"] = bedrock
-        body = {"action": "ask", "channel": "web", "query": query, **extra}
-        if "doc_id" in extra:
-            body["action"] = "summary"
+    def _ask(self, token, clients, agent, runtime, query="Question?", doc_id=""):
+        clients["bedrock"], clients["bedrock_runtime"] = agent, runtime
+        body = {"action": "summary" if doc_id else "ask", "channel": "web", "query": query}
+        if doc_id:
+            body["doc_id"] = doc_id
         return handler.dispatch(body, clients, CONFIG, auth_header=f"Bearer {token}")
 
     def test_verify_returns_groups_and_scope(self):
@@ -250,44 +248,76 @@ class DispatchTests(unittest.TestCase):
         self.assertNotIn("Consultation Record", types)
         self.assertNotIn("groups", body["documents"][0])
 
-    def test_doctor_ask_uses_group_filter_and_signs_source(self):
+    def test_doctor_answer_cites_and_signs_source(self):
         token, clients, _ = self._login(DOCTOR)
-        bedrock, s3 = FakeBedrock(CONSULTATION), FakeS3()
+        s3 = FakeS3()
         clients["s3"] = s3
-        status, body = self._ask(token, clients, bedrock)
+        agent = FakeAgentRuntime([chunk(CONSULT_ID, "Diagnosis: essential hypertension.")])
+        runtime = FakeRuntime({"known": True, "answer": "Essential hypertension.", "doc_ids": [CONSULT_ID]})
+        status, body = self._ask(token, clients, agent, runtime)
         self.assertEqual(status, 200)
         self.assertFalse(body["is_unknown"])
         self.assertEqual(body["sources"][0]["title"], "Consultation Record Maria Nangolo 2026-10-05")
         self.assertEqual(body["sources"][0]["url"], "https://archive.example/signed-source")
-        self.assertIn("group_doctors", json.dumps(request_filter(bedrock)))
+        self.assertTrue(s3.signed[0][0]["Key"].startswith("archive/Medical_Consultations/"))
+        self.assertIn("group_doctors", json.dumps(request_filter(agent)))
+        self.assertEqual(runtime.request["modelId"], CONFIG["generation_model_arn"])
 
-    def test_prompt_contains_todays_date(self):
+    def test_system_prompt_contains_todays_date(self):
         token, clients, _ = self._login(DOCTOR)
-        bedrock = FakeBedrock(POLICY)
-        self._ask(token, clients, bedrock)
-        prompt = bedrock.request["retrieveAndGenerateConfiguration"]["knowledgeBaseConfiguration"][
-            "generationConfiguration"
-        ]["promptTemplate"]["textPromptTemplate"]
-        self.assertIn(time.strftime("%Y"), prompt)
-        self.assertNotIn("{today}", prompt)
-        self.assertIn("$search_results$", prompt)
+        runtime = FakeRuntime({"known": True, "answer": "Policy.", "doc_ids": [POLICY_ID]})
+        self._ask(token, clients, FakeAgentRuntime([chunk(POLICY_ID)]), runtime)
+        system = runtime.request["system"][0]["text"]
+        self.assertIn(time.strftime("%Y-%m-%d", time.gmtime()), system)
+        self.assertNotIn("{today}", system)
 
-    def test_answer_citing_forbidden_document_is_withheld(self):
-        # Even if retrieval somehow returned a consultation record, a clerk gets no answer.
+    def test_forbidden_chunk_never_reaches_the_model(self):
+        # Even if retrieval somehow returned a consultation record, a clerk's model call never sees it.
         token, clients, _ = self._login(CLERK)
-        status, body = self._ask(token, clients, FakeBedrock(CONSULTATION))
+        runtime = FakeRuntime({"known": True, "answer": "Leaked!", "doc_ids": [CONSULT_ID]})
+        status, body = self._ask(token, clients, FakeAgentRuntime([chunk(CONSULT_ID, "SECRET diagnosis")]), runtime)
         self.assertEqual(status, 200)
+        self.assertTrue(body["is_unknown"])
+        self.assertIsNone(runtime.request)
+
+    def test_model_citing_unretrieved_document_is_ignored(self):
+        token, clients, _ = self._login(DOCTOR)
+        runtime = FakeRuntime({"known": True, "answer": "Something.", "doc_ids": ["HCC-PRF-1003"]})
+        _, body = self._ask(token, clients, FakeAgentRuntime([chunk(POLICY_ID)]), runtime)
+        self.assertTrue(body["is_unknown"])
+
+    def test_model_saying_unknown_returns_unknown(self):
+        token, clients, _ = self._login(DOCTOR)
+        _, body = self._ask(token, clients, FakeAgentRuntime([chunk(POLICY_ID)]), FakeRuntime())
         self.assertTrue(body["is_unknown"])
         self.assertEqual(body["sources"], [])
 
+    def test_model_reply_wrapped_in_text_is_parsed(self):
+        token, clients, _ = self._login(DOCTOR)
+        reply = 'Here you go:\n{"known": true, "answer": "Keep it confidential.", "doc_ids": ["HCC-POL-001"]}'
+        _, body = self._ask(token, clients, FakeAgentRuntime([chunk(POLICY_ID)]), FakeRuntime(reply))
+        self.assertFalse(body["is_unknown"])
+        self.assertEqual(body["answer"], "Keep it confidential.")
+
+    def test_summary_restricts_retrieval_to_document(self):
+        token, clients, _ = self._login(DOCTOR)
+        agent = FakeAgentRuntime([chunk(CONSULT_ID)])
+        runtime = FakeRuntime({"known": True, "answer": "Summary.", "doc_ids": []})
+        _, body = self._ask(token, clients, agent, runtime, doc_id=CONSULT_ID)
+        self.assertFalse(body["is_unknown"])
+        self.assertEqual(body["sources"][0]["doc_id"], CONSULT_ID)
+        self.assertIn(CONSULT_ID, json.dumps(request_filter(agent)))
+
     def test_public_ask_uses_everyone_filter(self):
-        bedrock = FakeBedrock(POLICY)
+        agent = FakeAgentRuntime([chunk(POLICY_ID)])
+        runtime = FakeRuntime({"known": True, "answer": "Do not discuss patients.", "doc_ids": [POLICY_ID]})
         status, body = handler.dispatch(
             {"action": "ask", "channel": "web", "query": "Confidentiality?"},
-            make_clients(bedrock=bedrock), CONFIG, auth_header="",
+            make_clients(bedrock=agent, runtime=runtime), CONFIG, auth_header="",
         )
         self.assertEqual(status, 200)
-        self.assertEqual(request_filter(bedrock), {"equals": {"key": "group_everyone", "value": "yes"}})
+        self.assertFalse(body["is_unknown"])
+        self.assertEqual(request_filter(agent), {"equals": {"key": "group_everyone", "value": "yes"}})
 
     def test_expired_token_rejected(self):
         token, clients, _ = self._login(DOCTOR)
@@ -297,7 +327,7 @@ class DispatchTests(unittest.TestCase):
             "expires_at": int(time.time()) - 1,
         }
         with self.assertRaises(handler.ArchiveError) as ctx:
-            self._ask(token, clients, FakeBedrock(POLICY))
+            self._ask(token, clients, FakeAgentRuntime(), FakeRuntime())
         self.assertEqual(ctx.exception.status_code, 401)
 
     def test_logs_require_sign_in(self):
@@ -313,32 +343,13 @@ class DispatchTests(unittest.TestCase):
         handler.dispatch({"action": "logs"}, clients, CONFIG, auth_header=f"Bearer {token}")
         self.assertEqual(clients["audit_table"].last_query["IndexName"], "ByTimestamp")
 
-    def test_bedrock_no_citations_returns_unknown(self):
-        result = handler.query_knowledge_base(
-            "What is the answer?", handler.PUBLIC_PRINCIPAL, "",
-            FakeBedrock({"output": {"text": "Possibly true."}, "citations": []}), FakeS3(),
-            CONFIG["knowledge_base_id"], CONFIG["generation_model_arn"], CONFIG["archive_bucket"],
-        )
-        self.assertTrue(result["is_unknown"])
-        self.assertEqual(result["sources"], [])
-
-    def test_source_url_not_signed_for_wrong_bucket(self):
-        s3 = FakeS3()
-        src = handler._source_from_reference(
-            {
-                "location": {"s3Location": {"uri": "s3://other-bucket/archive/file.txt"}},
-                "content": {"text": "text"},
-                "metadata": {"doc_id": "x"},
-            },
-            s3, "clinic-test",
-        )
-        self.assertNotIn("url", src)
-        self.assertEqual(s3.signed, [])
-
     def test_ussd_audit_never_contains_pin(self):
         users = FakeTable(stored_user("3333", "DOC-001", DOCTOR[2]))
         audit = FakeTable()
-        clients = make_clients(users=users, audit=audit, bedrock=FakeBedrock(POLICY))
+        clients = make_clients(
+            users=users, audit=audit, bedrock=FakeAgentRuntime([chunk(POLICY_ID)]),
+            runtime=FakeRuntime({"known": True, "answer": "Keep it confidential.", "doc_ids": [POLICY_ID]}),
+        )
         status, body = handler.dispatch(
             {
                 "action": "ussd", "channel": "ussd", "query": "",
@@ -349,6 +360,7 @@ class DispatchTests(unittest.TestCase):
         )
         self.assertEqual(status, 200)
         self.assertTrue(body["next_ussd_screen"].startswith("END"))
+        self.assertEqual(body["reference"], POLICY_ID)
         self.assertEqual(audit.items[0]["question"], "What is the confidentiality rule?")
         self.assertNotIn("3333", json.dumps(audit.items[0]))
 

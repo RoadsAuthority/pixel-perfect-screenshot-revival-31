@@ -77,7 +77,8 @@ def _get_clients() -> dict:
         "users_table":    dynamodb.Table(_require_env("AUTH_USERS_TABLE")),
         "sessions_table": dynamodb.Table(_require_env("AUTH_SESSIONS_TABLE")),
         "audit_table":    dynamodb.Table(_require_env("AUDIT_TABLE")),
-        "bedrock":        boto3.client("bedrock-agent-runtime", region_name=region),
+        "bedrock":        boto3.client("bedrock-agent-runtime", region_name=region),  # Knowledge Base retrieve
+        "bedrock_runtime": boto3.client("bedrock-runtime", region_name=region),     # Converse (generation)
         "s3":             boto3.client("s3", region_name=region),
     }
     return _clients_cache
