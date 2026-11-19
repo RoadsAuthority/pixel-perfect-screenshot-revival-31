@@ -42,9 +42,12 @@ try:
         DOCUMENTS: list = json.load(_fh)
 except FileNotFoundError:
     DOCUMENTS = []
+DOCS_BY_ID = {d["doc_id"]: d for d in DOCUMENTS}
+DOCS_BY_KEY = {d["s3_key"]: d["doc_id"] for d in DOCUMENTS}
 
 RETRIEVE_RESULTS = 20          # cross-document questions need several records
 RETRIEVE_RESULTS_SUMMARY = 15  # all chunks of one document
+RETRIEVE_RESULTS_WIDE = 100    # unfiltered fallback, filtered on the server
 
 # {today} is filled in per request.
 SYSTEM_PROMPT = (
@@ -284,21 +287,24 @@ def access_filter(principal: dict, doc_id: str = "") -> dict:
 # ── Retrieval (filtered) + generation (Converse) ──────────────────────────────
 
 def _chunk_doc_id(result: dict) -> str:
-    return str((result.get("metadata") or {}).get("doc_id", ""))
+    """Identify a chunk's document from its metadata, or else from its S3 location."""
+    doc_id = str((result.get("metadata") or {}).get("doc_id", "") or "")
+    if doc_id:
+        return doc_id
+    uri = ((result.get("location") or {}).get("s3Location") or {}).get("uri", "")
+    key = uri.split("/", 3)[3] if uri.startswith("s3://") and uri.count("/") >= 3 else ""
+    return DOCS_BY_KEY.get(key, "")
 
 
-def retrieve_chunks(query: str, principal: dict, doc_id: str, agent_runtime, knowledge_base_id: str) -> list:
-    """Retrieve only chunks the principal may read. Returns [{doc_id, text}]."""
+def _search(agent_runtime, knowledge_base_id: str, query: str, count: int, flt: dict | None) -> list:
+    config: dict = {"numberOfResults": count}
+    if flt:
+        config["filter"] = flt
     try:
         response = agent_runtime.retrieve(
             knowledgeBaseId=knowledge_base_id,
             retrievalQuery={"text": query},
-            retrievalConfiguration={
-                "vectorSearchConfiguration": {
-                    "filter": access_filter(principal, doc_id),
-                    "numberOfResults": RETRIEVE_RESULTS_SUMMARY if doc_id else RETRIEVE_RESULTS,
-                }
-            },
+            retrievalConfiguration={"vectorSearchConfiguration": config},
         )
     except ClientError as err:
         code = err.response.get("Error", {}).get("Code", "")
@@ -306,19 +312,46 @@ def retrieve_chunks(query: str, principal: dict, doc_id: str, agent_runtime, kno
             logger.error("Bedrock retrieve error: %s", err)
             raise ArchiveError(502, "The archive search could not run. Check the Knowledge Base settings.")
         raise
+    return response.get("retrievalResults", [])
 
-    catalog = {d["doc_id"]: d for d in DOCUMENTS}
+
+def _permitted(results: list, principal: dict, doc_id: str) -> list:
+    """Keep only chunks of documents this principal may read (and of doc_id, for summaries)."""
     chunks = []
-    for result in response.get("retrievalResults", []):
+    for result in results:
         chunk_doc = _chunk_doc_id(result)
-        text = (result.get("content") or {}).get("text", "")
-        document = catalog.get(chunk_doc)
-        # Defence in depth: the retrieval filter should already exclude these.
+        document = DOCS_BY_ID.get(chunk_doc)
         if document is None or not can_read(principal, document):
-            logger.warning("Discarded chunk from %r for user %s.", chunk_doc, principal.get("user_id"))
             continue
+        if doc_id and chunk_doc != doc_id:
+            continue
+        text = (result.get("content") or {}).get("text", "")
         if isinstance(text, str) and text.strip():
             chunks.append({"doc_id": chunk_doc, "text": text.strip()})
+    return chunks
+
+
+def retrieve_chunks(query: str, principal: dict, doc_id: str, agent_runtime, knowledge_base_id: str) -> list:
+    """Return only chunks the principal may read, as [{doc_id, text}].
+
+    1. Search with the Bedrock metadata filter (pre-retrieval access control).
+    2. If that finds nothing (e.g. metadata not indexed), search unfiltered and
+       apply the same access rules here from the server's document catalogue.
+    Either way the model only ever receives permitted text.
+    """
+    limit = RETRIEVE_RESULTS_SUMMARY if doc_id else RETRIEVE_RESULTS
+    results = _search(agent_runtime, knowledge_base_id, query, limit, access_filter(principal, doc_id))
+    chunks = _permitted(results, principal, doc_id)
+    mode = "filtered"
+    if not chunks:
+        results = _search(agent_runtime, knowledge_base_id, query, RETRIEVE_RESULTS_WIDE, None)
+        chunks = _permitted(results, principal, doc_id)[:limit]
+        mode = "unfiltered+server-side"
+    logger.info(
+        "retrieve user=%s mode=%s results=%d permitted=%d docs=%s",
+        principal.get("user_id"), mode, len(results), len(chunks),
+        sorted({c["doc_id"] for c in chunks})[:8],
+    )
     return chunks
 
 

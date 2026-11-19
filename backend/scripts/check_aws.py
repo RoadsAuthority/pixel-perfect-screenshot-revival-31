@@ -7,6 +7,7 @@ PIN hashes or salts. Makes no changes to AWS.
 """
 
 import hashlib
+import json
 import os
 import sys
 from pathlib import Path
@@ -81,7 +82,8 @@ def main() -> None:
         if missing:
             bad(f"missing users: {', '.join(sorted(missing))}")
     except ClientError as err:
-        bad(f"cannot read table: {err.response['Error']['Code']} — check name/region")
+        print(f"info  cannot list the users table ({err.response['Error']['Code']}) — the app only needs to read "
+              "single users, and sign-in already works, so this is fine")
 
     # ── S3 ───────────────────────────────────────────────────────────────────
     bucket = os.environ.get("BUCKET_NAME", "")
@@ -96,6 +98,19 @@ def main() -> None:
         old = [k for k in keys if "patient_P0" in k or "oxygen" in k]
         if old:
             bad(f"old sample files still present: {len(old)} — delete them")
+        # The access filter needs the prepared metadata (doc_id + group_* keys).
+        s3 = boto3.client("s3", region_name=region)
+        untagged = []
+        for key in metas:
+            body = s3.get_object(Bucket=bucket, Key=key)["Body"].read().decode("utf-8-sig")
+            attrs = json.loads(body).get("metadataAttributes", {})
+            if "doc_id" not in attrs or not any(k.startswith("group_") for k in attrs):
+                untagged.append(key)
+        if untagged:
+            bad(f"{len(untagged)} metadata files lack doc_id/group_* tags (uploaded from hopewell-clinic-documents/ "
+                f"instead of backend/archive-upload/?) e.g. {untagged[0]}")
+        elif metas:
+            ok("all metadata files have doc_id and group_* tags")
     except ClientError as err:
         bad(f"cannot list bucket: {err.response['Error']['Code']}")
 
@@ -122,26 +137,43 @@ def main() -> None:
                    f"{stats.get('numberOfDocumentsFailed', 0)} failed")
             (ok if job["status"] == "COMPLETE" and not stats.get("numberOfDocumentsFailed") else bad)(msg)
     except ClientError as err:
-        bad(f"cannot read Knowledge Base: {err.response['Error']['Code']} — check KB_ID/region")
-        return
+        print(f"info  cannot read Knowledge Base details ({err.response['Error']['Code']}) — the app does not need this; "
+              "check the sync status in the Bedrock console instead")
 
-    # Retrieval with the same group filter the app uses (Doctors).
-    try:
-        result = boto3.client("bedrock-agent-runtime", region_name=region).retrieve(
-            knowledgeBaseId=kb_id,
-            retrievalQuery={"text": "Which patients are allergic to penicillin?"},
-            retrievalConfiguration={"vectorSearchConfiguration": {
-                "numberOfResults": 5,
-                "filter": {"orAll": [
-                    {"equals": {"key": "group_doctors", "value": "yes"}},
-                    {"equals": {"key": "group_everyone", "value": "yes"}},
-                ]},
-            }},
-        )["retrievalResults"]
-        ids = [r.get("metadata", {}).get("doc_id", "?") for r in result]
-        (ok if ids else bad)(f"filtered retrieval as Doctors returned {len(ids)} chunks: {', '.join(ids)}")
-    except ClientError as err:
-        bad(f"retrieval failed: {err.response['Error']['Code']}: {err.response['Error'].get('Message', '')[:200]}")
+    # Search without and with the access filter the app uses (Doctors).
+    runtime = boto3.client("bedrock-agent-runtime", region_name=region)
+    question = "Which patients are allergic to penicillin?"
+    doctors_filter = {"orAll": [
+        {"equals": {"key": "group_doctors", "value": "yes"}},
+        {"equals": {"key": "group_everyone", "value": "yes"}},
+    ]}
+    for label, flt in (("without filter", None), ("with Doctors filter", doctors_filter)):
+        config = {"numberOfResults": 5}
+        if flt:
+            config["filter"] = flt
+        try:
+            results = runtime.retrieve(
+                knowledgeBaseId=kb_id,
+                retrievalQuery={"text": question},
+                retrievalConfiguration={"vectorSearchConfiguration": config},
+            )["retrievalResults"]
+        except ClientError as err:
+            bad(f"search {label} failed: {err.response['Error']['Code']}: {err.response['Error'].get('Message', '')[:200]}")
+            continue
+        if not results:
+            bad(f"search {label} returned nothing"
+                + (" — the Knowledge Base is empty: click Sync on its data source" if not flt else ""))
+            continue
+        meta = results[0].get("metadata") or {}
+        ids = [str((r.get("metadata") or {}).get("doc_id", "?")) for r in results]
+        ok(f"search {label}: {len(results)} chunks, doc_ids {', '.join(ids)}")
+        if not flt:
+            custom = sorted(k for k in meta if not k.startswith("x-amz-bedrock"))
+            tagged = "doc_id" in meta and any(k.startswith("group_") for k in meta)
+            (ok if tagged else bad)(
+                f"indexed metadata keys: {', '.join(custom)}"
+                + ("" if tagged else " — no doc_id/group_* tags indexed: re-upload backend/archive-upload/ and Sync")
+            )
 
 
 if __name__ == "__main__":

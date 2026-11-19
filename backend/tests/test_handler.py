@@ -364,6 +364,30 @@ class DispatchTests(unittest.TestCase):
         self.assertEqual(audit.items[0]["question"], "What is the confidentiality rule?")
         self.assertNotIn("3333", json.dumps(audit.items[0]))
 
+    def test_fallback_identifies_documents_by_s3_location(self):
+        # Simulates a Knowledge Base whose metadata was not indexed: the filtered search
+        # finds nothing, the unfiltered one returns chunks with only an S3 location.
+        class NoMetadataAgent(FakeAgentRuntime):
+            def retrieve(self, **request):
+                self.request = request
+                if "filter" in request["retrievalConfiguration"]["vectorSearchConfiguration"]:
+                    return {"retrievalResults": []}
+                return {"retrievalResults": [
+                    {"content": {"text": "SECRET diagnosis"},
+                     "location": {"s3Location": {"uri": "s3://clinic-test/archive/Medical_Consultations/HCC-CR-2026-0126_Consultation_Record_Maria_Nangolo_2026_10_05.txt"}}},
+                    {"content": {"text": "Do not discuss patients in public."},
+                     "location": {"s3Location": {"uri": "s3://clinic-test/archive/Clinic_Policies/HCC-POL-001_Clinic_Confidentiality_Policy.txt"}}},
+                ]}
+
+        token, clients, _ = self._login(CLERK)
+        runtime = FakeRuntime({"known": True, "answer": "Do not discuss patients.", "doc_ids": [POLICY_ID]})
+        _, body = self._ask(token, clients, NoMetadataAgent(), runtime)
+        self.assertFalse(body["is_unknown"])
+        self.assertEqual([s["doc_id"] for s in body["sources"]], [POLICY_ID])
+        sent_to_model = runtime.request["messages"][0]["content"][0]["text"]
+        self.assertIn("Do not discuss patients", sent_to_model)
+        self.assertNotIn("SECRET", sent_to_model)  # clerk may not read consultation records
+
     def test_unknown_action_returns_400(self):
         with self.assertRaises(handler.ArchiveError) as ctx:
             handler.dispatch({"action": "explode"}, make_clients(), CONFIG)
