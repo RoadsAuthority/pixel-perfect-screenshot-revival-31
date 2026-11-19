@@ -12,6 +12,7 @@ import {
   RefreshCw,
   Send,
   Siren,
+  Volume2,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
@@ -270,41 +271,179 @@ function FacilityList({ facilities, coords }: { facilities: (typeof FACILITIES[n
   );
 }
 
-// ── Urgent alerts panel (clinical staff) ─────────────────────────────────────
+// ── Alert watcher: polls for alerts and pings clinical staff on any tab ─────
 
-type PanelProps = { session: AuthSession; url: string; onCount?: (open: number) => void };
+export type AlertWatch = {
+  alerts: EmergencyAlert[];
+  loading: boolean;
+  error: string;
+  updated: string;
+  refresh: () => Promise<void>;
+  acknowledge: (alertId: string) => Promise<void>;
+  /** The newest alert that arrived since the page loaded and has not been viewed. */
+  newAlert: EmergencyAlert | null;
+  dismissNew: () => void;
+  pingReady: boolean;
+  enablePing: () => void;
+};
 
-export function AlertsPanel({ session, url, onCount }: PanelProps) {
+const POLL_MS = 10000;
+
+function beep(ctx: AudioContext) {
+  // Three short alarm tones.
+  for (let i = 0; i < 3; i++) {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'square';
+    osc.frequency.value = i % 2 ? 660 : 880;
+    gain.gain.value = 0.08;
+    osc.connect(gain).connect(ctx.destination);
+    const t = ctx.currentTime + i * 0.35;
+    osc.start(t);
+    osc.stop(t + 0.25);
+  }
+}
+
+/** Pass a session only for clinical staff; otherwise pass null and nothing is polled. */
+export function useAlertWatcher(session: AuthSession | null, url: string): AlertWatch {
   const [alerts, setAlerts] = useState<EmergencyAlert[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [updated, setUpdated] = useState('');
+  const [newAlert, setNewAlert] = useState<EmergencyAlert | null>(null);
+  const [pingReady, setPingReady] = useState(false);
+  const seen = useRef<Set<string> | null>(null);
+  const audio = useRef<AudioContext | null>(null);
+  const titleTimer = useRef<number | null>(null);
+  const baseTitle = useRef('');
 
-  const load = useCallback(async () => {
+  const stopTitleFlash = useCallback(() => {
+    if (titleTimer.current !== null) {
+      window.clearInterval(titleTimer.current);
+      titleTimer.current = null;
+      document.title = baseTitle.current;
+    }
+  }, []);
+
+  const ping = useCallback((alert: EmergencyAlert) => {
+    setNewAlert(alert);
+    if (audio.current) {
+      void audio.current.resume().then(() => audio.current && beep(audio.current)).catch(() => undefined);
+    }
+    if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
+      const who = alert.name || 'Unknown person';
+      const n = new Notification(`🚨 Emergency: ${who}`, {
+        body: (alert.message || 'Location shared, no message.').slice(0, 140),
+        tag: alert.alert_id,
+        requireInteraction: true,
+      });
+      n.onclick = () => { window.focus(); n.close(); };
+    }
+    if (titleTimer.current === null) {
+      baseTitle.current = document.title;
+      let on = false;
+      titleTimer.current = window.setInterval(() => {
+        on = !on;
+        document.title = on ? '🚨 EMERGENCY ALERT' : baseTitle.current;
+      }, 1000);
+    }
+  }, []);
+
+  const refresh = useCallback(async () => {
+    if (!session) return;
     setLoading(true);
     try {
       const data = await callArchive(url, { action: 'alert_list', user_id: session.user_id }, session.token);
       const list = Array.isArray(data['alerts']) ? (data['alerts'] as EmergencyAlert[]) : [];
       setAlerts(list); setError('');
       setUpdated(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
-      onCount?.(list.filter((a) => a.status === 'open').length);
+      if (seen.current === null) {
+        // First load: remember existing alerts without pinging.
+        seen.current = new Set(list.map((a) => a.alert_id));
+      } else {
+        const fresh = list.filter((a) => a.status === 'open' && !seen.current?.has(a.alert_id));
+        fresh.forEach((a) => seen.current?.add(a.alert_id));
+        if (fresh[0]) ping(fresh[0]);
+      }
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Alerts could not be loaded.');
     } finally { setLoading(false); }
-  }, [url, session, onCount]);
+  }, [url, session, ping]);
 
   useEffect(() => {
-    void load();
-    const timer = window.setInterval(() => void load(), 15000);
-    return () => window.clearInterval(timer);
-  }, [load]);
+    seen.current = null;
+    setAlerts([]); setNewAlert(null);
+    if (!session) { stopTitleFlash(); return; }
+    void refresh();
+    const timer = window.setInterval(() => void refresh(), POLL_MS);
+    return () => { window.clearInterval(timer); stopTitleFlash(); };
+  }, [session, refresh, stopTitleFlash]);
 
-  async function handled(alertId: string) {
+  const acknowledge = useCallback(async (alertId: string) => {
+    if (!session) return;
     try {
       await callArchive(url, { action: 'alert_ack', user_id: session.user_id, alert_id: alertId }, session.token);
-      await load();
+      await refresh();
     } catch (e) { setError(e instanceof Error ? e.message : 'Could not update the alert.'); }
-  }
+  }, [url, session, refresh]);
+
+  const dismissNew = useCallback(() => { setNewAlert(null); stopTitleFlash(); }, [stopTitleFlash]);
+
+  // Browsers only allow sound and notifications after a click, so staff enable them once.
+  const enablePing = useCallback(() => {
+    try {
+      const Ctor = window.AudioContext ?? (window as Window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+      if (Ctor && !audio.current) audio.current = new Ctor();
+      void audio.current?.resume();
+    } catch { /* no audio */ }
+    const done = () => setPingReady(true);
+    if (typeof Notification !== 'undefined' && Notification.permission === 'default') {
+      void Notification.requestPermission().finally(done);
+    } else done();
+  }, []);
+
+  return { alerts, loading, error, updated, refresh, acknowledge, newAlert, dismissNew, pingReady, enablePing };
+}
+
+/** Red bar shown on every tab while there are open alerts. */
+export function AlertBanner({ watch, onView }: { watch: AlertWatch; onView: () => void }) {
+  const open = watch.alerts.filter((a) => a.status === 'open');
+  if (!open.length && !watch.newAlert && watch.pingReady) return null;
+  const latest = watch.newAlert ?? open[0];
+  return (
+    <div role="alert" className={`border-b ${open.length ? 'border-destructive/40 bg-destructive text-destructive-foreground' : 'border-border bg-muted text-foreground'}`}>
+      <div className="app-shell flex flex-wrap items-center justify-between gap-3 py-2.5 text-sm">
+        {open.length ? (
+          <p className="flex items-center gap-2 font-medium">
+            <Siren size={17} className={watch.newAlert ? 'animate-pulse' : ''} />
+            {open.length} open emergency alert{open.length > 1 ? 's' : ''}
+            {latest ? <span className="font-normal opacity-90">· latest: {latest.name || 'Unknown person'}{latest.message ? ` — “${latest.message.slice(0, 60)}${latest.message.length > 60 ? '…' : ''}”` : ''}</span> : null}
+          </p>
+        ) : (
+          <p className="flex items-center gap-2 text-xs"><Siren size={14} /> Turn on the alarm so you hear new emergency alerts on any tab.</p>
+        )}
+        <div className="flex gap-2">
+          {!watch.pingReady && (
+            <Button size="sm" variant={open.length ? 'secondary' : 'outline'} onClick={watch.enablePing}>
+              <Volume2 size={13} /> Turn on alarm &amp; notifications
+            </Button>
+          )}
+          {open.length > 0 && (
+            <Button size="sm" variant="secondary" onClick={() => { watch.dismissNew(); onView(); }}>View alerts</Button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Urgent alerts panel (clinical staff) ─────────────────────────────────────
+
+type PanelProps = { session: AuthSession; url: string; watch: AlertWatch };
+
+export function AlertsPanel({ session, url, watch }: PanelProps) {
+  const { alerts, loading, error, updated, refresh, acknowledge, dismissNew } = watch;
+  useEffect(() => { dismissNew(); }, [dismissNew]);
 
   const open = alerts.filter((a) => a.status === 'open');
   const done = alerts.filter((a) => a.status !== 'open');
@@ -315,10 +454,10 @@ export function AlertsPanel({ session, url, onCount }: PanelProps) {
         <div>
           <h1 className="flex items-center gap-2 text-2xl font-semibold"><Siren className="text-destructive" /> Urgent Alerts</h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            Distress alerts from patients and the public. Refreshes every 15 seconds{updated ? ` · last checked ${updated}` : ''}.
+            Distress alerts from patients and the public. Checked every {POLL_MS / 1000} seconds{updated ? ` · last checked ${updated}` : ''}.
           </p>
         </div>
-        <Button variant="outline" size="touch" disabled={loading} onClick={() => void load()}>
+        <Button variant="outline" size="touch" disabled={loading} onClick={() => void refresh()}>
           <RefreshCw className={loading ? 'animate-spin' : ''} /> Refresh
         </Button>
       </div>
@@ -331,17 +470,66 @@ export function AlertsPanel({ session, url, onCount }: PanelProps) {
         </div>
       )}
       <div className="space-y-4">
-        {open.map((a) => <AlertCard key={a.alert_id} alert={a} session={session} url={url} onHandled={handled} />)}
+        {open.map((a) => <AlertCard key={a.alert_id} alert={a} session={session} url={url} onHandled={acknowledge} />)}
       </div>
       {done.length > 0 && (
         <details className="mt-8">
           <summary className="cursor-pointer text-sm font-semibold text-muted-foreground">Handled ({done.length})</summary>
           <div className="mt-4 space-y-4 opacity-75">
-            {done.map((a) => <AlertCard key={a.alert_id} alert={a} session={session} url={url} onHandled={handled} />)}
+            {done.map((a) => <AlertCard key={a.alert_id} alert={a} session={session} url={url} onHandled={acknowledge} />)}
           </div>
         </details>
       )}
     </div>
+  );
+}
+
+// ── Route to the patient ─────────────────────────────────────────────────────
+
+const AVG_CITY_KMH = 35;   // assumed average driving speed in Windhoek without traffic
+const ROAD_FACTOR = 1.4;   // roads are longer than a straight line
+const CLINIC = { lat: -22.544, lng: 17.05 }; // Hopewell Community Clinic (fictional), Khomasdal
+
+function RouteBox({ alert }: { alert: EmergencyAlert }) {
+  const lat = Number(alert.lat);
+  const lng = Number(alert.lng);
+  if (!alert.lat || !alert.lng || !Number.isFinite(lat) || !Number.isFinite(lng)) {
+    return <p className="mt-4 text-xs text-muted-foreground">No location shared — call the person to find out where they are.</p>;
+  }
+  const clinic = CLINIC;
+  const straightKm = distanceKm(clinic, { lat, lng });
+  const roadKm = straightKm * ROAD_FACTOR;
+  const minutes = Math.max(2, Math.round((roadKm / AVG_CITY_KMH) * 60));
+  const dest = `${lat},${lng}`;
+  const navigate = `https://www.google.com/maps/dir/?api=1&destination=${dest}&travelmode=driving&dir_action=navigate`;
+  const fromClinic = `https://www.google.com/maps/dir/?api=1&origin=${clinic.lat},${clinic.lng}&destination=${dest}&travelmode=driving`;
+  const d = 0.008;
+  const embed = `https://www.openstreetmap.org/export/embed.html?bbox=${lng - d},${lat - d * 0.7},${lng + d},${lat + d * 0.7}&layer=mapnik&marker=${lat},${lng}`;
+  return (
+    <section className="mt-4 grid gap-4 md:grid-cols-[1fr_260px]">
+      <iframe
+        title={`Location of ${alert.name || 'patient'}`}
+        src={embed}
+        loading="lazy"
+        className="h-52 w-full rounded-md border border-border"
+      />
+      <div className="space-y-3 text-sm">
+        <h3 className="flex items-center gap-2 font-semibold"><Navigation size={15} /> Route to the patient</h3>
+        <p>
+          About <strong>{roadKm.toFixed(1)} km</strong> from the clinic.
+          <span className="block text-xs text-muted-foreground">
+            Rough estimate: {minutes} min by car without traffic. Google Maps uses live traffic for the real time and route.
+          </span>
+        </p>
+        <Button asChild variant="destructive" size="sm" className="w-full">
+          <a href={navigate} target="_blank" rel="noreferrer"><Navigation size={13} /> Navigate from my location (live traffic)</a>
+        </Button>
+        <Button asChild variant="outline" size="sm" className="w-full">
+          <a href={fromClinic} target="_blank" rel="noreferrer"><MapPin size={13} /> Route from the clinic</a>
+        </Button>
+        {alert.accuracy_m && <p className="text-xs text-muted-foreground">Location accurate to about {Math.round(Number(alert.accuracy_m))} m.</p>}
+      </div>
+    </section>
   );
 }
 
@@ -396,6 +584,8 @@ function AlertCard({ alert, session, url, onHandled }: { alert: EmergencyAlert; 
       <blockquote className="mt-4 rounded-md border-l-4 border-destructive/50 bg-card p-3 text-sm leading-6">
         {alert.message || <span className="text-muted-foreground">No message — location only.</span>}
       </blockquote>
+
+      <RouteBox alert={alert} />
 
       <div className="mt-4">
         {unverified && (

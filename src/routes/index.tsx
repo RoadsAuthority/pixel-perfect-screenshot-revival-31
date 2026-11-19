@@ -35,7 +35,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { FeaturePhone } from '@/components/feature-phone';
-import { AlertsPanel, EmergencyDialog } from '@/components/emergency';
+import { AlertBanner, AlertsPanel, EmergencyDialog, useAlertWatcher } from '@/components/emergency';
 import {
   callArchive,
   normalizeAnswer,
@@ -164,6 +164,8 @@ function Index() {
   }, [url, session]);
 
   const groups = staffGroups(session);
+  const isClinical = groups.includes('Clinical');
+  const alertWatch = useAlertWatcher(isClinical ? session : null, url);
   const visibleTabs = ALL_TABS.filter((t) => (!t.signedIn || session) && (!t.clinical || groups.includes('Clinical')));
   const docTypes = Array.from(new Set(docs.map((d) => d.type))).sort();
   const filteredDocs = docFilter ? docs.filter((d) => `${d.title} ${d.doc_id} ${d.type}`.toLowerCase().includes(docFilter.toLowerCase())) : docs;
@@ -408,6 +410,10 @@ function Index() {
           </div>
         )}
       </header>
+
+      {isClinical && session && (
+        <AlertBanner watch={alertWatch} onView={() => { setTab('alerts'); setError(''); }} />
+      )}
 
       {/* ── SIGN-IN GATE (shown when not signed in, above workspace) ───────── */}
       {!session && (
@@ -760,7 +766,7 @@ function Index() {
           {/* ── LOGS TAB (staff/admin only — tabs filtered by role) ───────── */}
           {/* ── URGENT ALERTS TAB (clinical staff only) ───────────────────────── */}
           {tab === 'alerts' && session && groups.includes('Clinical') && (
-            <AlertsPanel session={session} url={url} />
+            <AlertsPanel session={session} url={url} watch={alertWatch} />
           )}
 
           {tab === 'logs' && (
