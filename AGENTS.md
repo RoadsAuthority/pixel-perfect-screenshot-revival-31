@@ -28,3 +28,8 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Application boundaries
+- Keep fictional demo documents and access evaluation in a browser-safe archive module; demo verification is illustrative, not production authentication.
+- Send live archive actions directly to the user-configured HTTPS AWS API endpoint; AWS must validate PINs, enforce access control, and retain authoritative audit logs.
+- Keep demo audit history in memory only and mark demo content explicitly; never persist patient information or PINs in browser storage.
