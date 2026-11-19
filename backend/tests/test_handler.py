@@ -47,7 +47,7 @@ class FakeTable:
 
     def query(self, **kwargs):
         self.last_query = kwargs
-        return {"Items": []}
+        return {"Items": [dict(i) for i in reversed(self.items)]}
 
     def update_item(self, **kwargs):
         expression = kwargs["UpdateExpression"]
@@ -393,6 +393,61 @@ class DispatchTests(unittest.TestCase):
         self._ask(token, clients, FakeAgentRuntime([chunk(CONSULT_ID)]), runtime, query="What allergies do I have?")
         sent = runtime.request["messages"][0]["content"][0]["text"]
         self.assertIn("patient record(s) PAT-001", sent)
+
+    def test_unregistered_person_can_raise_alert(self):
+        audit = FakeTable()
+        status, body = handler.dispatch(
+            {"action": "alert_create", "name": "Anna", "phone": "081 000 0000",
+             "message": "My father collapsed", "lat": -22.56, "lng": 17.08, "accuracy": 25},
+            make_clients(audit=audit), CONFIG, auth_header="",
+        )
+        self.assertEqual(status, 200)
+        item = audit.items[0]
+        self.assertEqual(item["record_type"], "ALERT")
+        self.assertEqual(item["user_id"], "PUBLIC")
+        self.assertEqual(item["name"], "Anna")
+        self.assertEqual(item["lat"], "-22.56000")
+        self.assertFalse(item["registered"])
+
+    def test_registered_patient_alert_carries_patient_id(self):
+        token, clients, _ = self._login(PATIENT1)
+        handler.dispatch({"action": "alert_create", "message": "Chest pain", "name": "spoofed"},
+                         clients, CONFIG, auth_header=f"Bearer {token}")
+        item = clients["audit_table"].items[0]
+        self.assertEqual(item["patient_ids"], ["PAT-001"])
+        self.assertEqual(item["name"], "PAT-001")  # from the account, not the request
+        self.assertTrue(item["registered"])
+
+    def test_alert_needs_message_or_location(self):
+        with self.assertRaises(handler.ArchiveError):
+            handler.dispatch({"action": "alert_create"}, make_clients(), CONFIG, auth_header="")
+
+    def test_only_clinical_staff_can_list_and_handle_alerts(self):
+        for user in (PATIENT1, CLERK):
+            token, clients, _ = self._login(user)
+            for action in ("alert_list", "alert_ack"):
+                with self.assertRaises(handler.ArchiveError) as ctx:
+                    handler.dispatch({"action": action, "alert_id": "x"}, clients, CONFIG, auth_header=f"Bearer {token}")
+                self.assertEqual(ctx.exception.status_code, 403)
+
+    def test_nurse_lists_alert_then_marks_it_handled(self):
+        token, clients, _ = self._login(DOCTOR)
+        handler.dispatch({"action": "alert_create", "message": "Help", "lat": "-22.5", "lng": "17.0"},
+                         clients, CONFIG, auth_header="")
+        _, body = handler.dispatch({"action": "alert_list"}, clients, CONFIG, auth_header=f"Bearer {token}")
+        alert = body["alerts"][0]
+        self.assertEqual(alert["status"], "open")
+        handler.dispatch({"action": "alert_ack", "alert_id": alert["alert_id"]}, clients, CONFIG,
+                         auth_header=f"Bearer {token}")
+        _, body = handler.dispatch({"action": "alert_list"}, clients, CONFIG, auth_header=f"Bearer {token}")
+        self.assertEqual(body["alerts"][0]["status"], "handled")
+        self.assertEqual(body["alerts"][0]["handled_by"], "DOC-001")
+
+    def test_alerts_do_not_appear_in_question_history(self):
+        token, clients, _ = self._login(PATIENT1)
+        handler.dispatch({"action": "alert_create", "message": "Help"}, clients, CONFIG, auth_header=f"Bearer {token}")
+        _, body = handler.dispatch({"action": "logs"}, clients, CONFIG, auth_header=f"Bearer {token}")
+        self.assertEqual(body["logs"], [])
 
     def test_unknown_action_returns_400(self):
         with self.assertRaises(handler.ArchiveError) as ctx:

@@ -24,6 +24,7 @@ import {
   MapPin,
   Mic,
   Settings2,
+  Siren,
   ShieldCheck,
   Smartphone,
   Sparkles,
@@ -34,6 +35,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { FeaturePhone } from '@/components/feature-phone';
+import { AlertsPanel, EmergencyDialog } from '@/components/emergency';
 import {
   callArchive,
   normalizeAnswer,
@@ -66,10 +68,11 @@ type Recognition = { lang: string; interimResults: boolean; onresult: ((e: Speec
 type SpeechWindow = Window & { SpeechRecognition?: new () => Recognition; webkitSpeechRecognition?: new () => Recognition };
 
 const ALL_TABS = [
-  { id: 'ask', label: 'Simple Ask & Voice', icon: AudioLines, signedIn: false },
-  { id: 'summaries', label: 'Document Summaries', icon: FileText, signedIn: false },
-  { id: 'phone', label: 'Feature Phone', icon: Smartphone, signedIn: false },
-  { id: 'logs', label: 'Who Asked What', icon: History, signedIn: true },
+  { id: 'ask', label: 'Simple Ask & Voice', icon: AudioLines, signedIn: false, clinical: false },
+  { id: 'summaries', label: 'Document Summaries', icon: FileText, signedIn: false, clinical: false },
+  { id: 'phone', label: 'Feature Phone', icon: Smartphone, signedIn: false, clinical: false },
+  { id: 'alerts', label: 'Urgent Alerts', icon: Siren, signedIn: true, clinical: true },
+  { id: 'logs', label: 'Who Asked What', icon: History, signedIn: true, clinical: false },
 ] as const;
 
 type TabId = (typeof ALL_TABS)[number]['id'];
@@ -161,7 +164,7 @@ function Index() {
   }, [url, session]);
 
   const groups = staffGroups(session);
-  const visibleTabs = ALL_TABS.filter((t) => !t.signedIn || session);
+  const visibleTabs = ALL_TABS.filter((t) => (!t.signedIn || session) && (!t.clinical || groups.includes('Clinical')));
   const docTypes = Array.from(new Set(docs.map((d) => d.type))).sort();
   const filteredDocs = docFilter ? docs.filter((d) => `${d.title} ${d.doc_id} ${d.type}`.toLowerCase().includes(docFilter.toLowerCase())) : docs;
 
@@ -374,6 +377,14 @@ function Index() {
               </>
             )}
             <Button
+              variant="destructive"
+              size="touch"
+              className="text-xs"
+              onClick={() => setDistress(true)}
+            >
+              <Siren size={14} /> <span className="hidden sm:inline">Emergency</span>
+            </Button>
+            <Button
               aria-label="Connection settings"
               variant="ghost"
               size="icon"
@@ -566,9 +577,9 @@ function Index() {
                     <div className="flex items-start gap-2.5">
                       <AlertTriangle size={18} className="mt-0.5 shrink-0 text-destructive" />
                       <div>
-                        <h3 className="text-sm font-semibold text-destructive">Emergency?</h3>
+                        <h3 className="text-sm font-semibold text-destructive">Need urgent care?</h3>
                         <p className="mt-1 text-xs leading-5 text-muted-foreground">
-                          Contact your nearest clinic immediately. This archive does not replace a nurse or doctor.
+                          Chronic illness getting worse, or an emergency? Send your location and what is happening to the clinic, and see the nearest hospital.
                         </p>
                       </div>
                     </div>
@@ -578,7 +589,7 @@ function Index() {
                       className="shrink-0 border-destructive/30 text-xs text-destructive hover:bg-destructive/10"
                       onClick={() => setDistress(true)}
                     >
-                      <MapPin size={13} /> Share location
+                      <Siren size={14} /> Get urgent help
                     </Button>
                   </div>
                 </div>
@@ -747,6 +758,11 @@ function Index() {
           )}
 
           {/* ── LOGS TAB (staff/admin only — tabs filtered by role) ───────── */}
+          {/* ── URGENT ALERTS TAB (clinical staff only) ───────────────────────── */}
+          {tab === 'alerts' && session && groups.includes('Clinical') && (
+            <AlertsPanel session={session} url={url} />
+          )}
+
           {tab === 'logs' && (
             <div className="page-enter">
               <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
@@ -925,45 +941,8 @@ function Index() {
         </DialogContent>
       </Dialog>
 
-      {/* ── DISTRESS DIALOG ───────────────────────────────────────────────── */}
-      <Dialog open={distress} onOpenChange={setDistress}>
-        <DialogContent className="max-w-sm">
-          <DialogTitle className="flex items-center gap-2 text-destructive">
-            <AlertTriangle size={18} /> Emergency
-          </DialogTitle>
-          <DialogDescription>
-            This is not an emergency service. For immediate help, contact your nearest clinic or call your local emergency number.
-          </DialogDescription>
-          <div className="mt-4 space-y-3">
-            <p className="rounded-md bg-destructive/10 p-3 text-sm text-destructive">
-              If this is a medical emergency, call emergency services immediately. Do not wait for an archive response.
-            </p>
-            <Button
-              variant="outline"
-              size="touch"
-              className="w-full border-destructive/30 text-destructive"
-              onClick={() => {
-                if (navigator.geolocation) {
-                  navigator.geolocation.getCurrentPosition(
-                    (pos) => {
-                      const { latitude, longitude } = pos.coords;
-                      window.open(`https://maps.google.com/?q=${latitude},${longitude}`, '_blank');
-                    },
-                    () => window.open('https://maps.google.com/', '_blank'),
-                  );
-                } else {
-                  window.open('https://maps.google.com/', '_blank');
-                }
-              }}
-            >
-              <MapPin size={15} /> Open my location on Maps
-            </Button>
-            <Button variant="ghost" size="touch" className="w-full text-xs" onClick={() => setDistress(false)}>
-              Close
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
+      {/* ── EMERGENCY / DISTRESS DIALOG ─────────────────────────────────── */}
+      <EmergencyDialog open={distress} onOpenChange={setDistress} session={session} url={url} />
 
       {/* ── SOURCE DOCUMENT DIALOG ────────────────────────────────────────── */}
       <Dialog open={!!source} onOpenChange={(v) => { if (!v) setSource(null); }}>

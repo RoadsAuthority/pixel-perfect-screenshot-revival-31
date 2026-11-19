@@ -29,7 +29,29 @@ export type ArchiveRequest =
   | (ArchiveRequestBase & { action: 'summary'; channel: 'web' | 'voice' | 'ussd'; query: string; doc_id: string })
   | (ArchiveRequestBase & { action: 'documents' })
   | (ArchiveRequestBase & { action: 'logs'; channel: 'web'; query: '' })
-  | (ArchiveRequestBase & { action: 'ussd'; channel: 'ussd'; query: ''; ussd_session_id: string; ussd_text: string });
+  | (ArchiveRequestBase & { action: 'ussd'; channel: 'ussd'; query: ''; ussd_session_id: string; ussd_text: string })
+  | (ArchiveRequestBase & { action: 'alert_create'; channel: 'web' | 'voice'; message: string; name: string; phone: string; lat?: number | undefined; lng?: number | undefined; accuracy?: number | undefined })
+  | (ArchiveRequestBase & { action: 'alert_list' })
+  | (ArchiveRequestBase & { action: 'alert_ack'; alert_id: string });
+
+/** A distress alert as returned to clinical staff. */
+export type EmergencyAlert = {
+  alert_id: string;
+  timestamp: string;
+  registered: boolean;
+  user_id: string;
+  name: string;
+  phone: string;
+  patient_ids: string[];
+  message: string;
+  channel: string;
+  lat: string;
+  lng: string;
+  accuracy_m: string;
+  status: 'open' | 'handled';
+  handled_by: string;
+  handled_at: string;
+};
 
 export function unknown(restricted = false): Answer {
   return {

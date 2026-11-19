@@ -566,6 +566,114 @@ def _run_answer(question: str, channel: str, principal: dict, doc_id: str, clien
     return answer
 
 
+# ── Emergency alerts ───────────────────────────────────────────────────────────
+# Stored in the audit table (record_type ALERT / ALERT_ACK) so no new AWS
+# resources are needed. Anyone may raise an alert; only Clinical staff see them.
+
+CLINICAL_GROUP = "Clinical"
+ALERT_ID_PATTERN = re.compile(r"^[0-9a-f-]{36}$")
+
+
+def require_clinical(principal: dict) -> None:
+    if CLINICAL_GROUP not in principal.get("groups", []):
+        raise ArchiveError(403, "Emergency alerts are only available to clinical staff.")
+
+
+def _coordinate(value, low: float, high: float) -> str:
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        return ""
+    return f"{number:.5f}" if low <= number <= high else ""
+
+
+def _now_iso() -> str:
+    return datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z")
+
+
+def create_alert(body: dict, principal: dict, audit_table) -> dict:
+    message = _optional_text(body, "message", 1000)
+    lat = _coordinate(body.get("lat"), -90, 90)
+    lng = _coordinate(body.get("lng"), -180, 180)
+    if not message and not (lat and lng):
+        raise ArchiveError(400, "Describe what is happening or share your location so the clinic can help.")
+    registered = principal["user_id"] != PUBLIC_PRINCIPAL["user_id"]
+    patient_ids = [g for g in principal.get("groups", []) if g.startswith("PAT-")]
+    timestamp = _now_iso()
+    alert_id = str(uuid.uuid4())
+    item = {
+        "user_id": principal["user_id"] if registered else "PUBLIC",
+        "timestamp_request": f"{timestamp}#{alert_id}",
+        "record_type": "ALERT",
+        "alert_id": alert_id,
+        "timestamp": timestamp,
+        "registered": registered,
+        "name": principal["name"] if registered else (_optional_text(body, "name", 100) or "Unregistered person"),
+        "phone": _optional_text(body, "phone", 30),
+        "patient_ids": patient_ids,
+        "message": message,
+        "channel": _optional_text(body, "channel", 10) or "web",
+        "lat": lat,
+        "lng": lng,
+        "accuracy_m": _coordinate(body.get("accuracy"), 0, 100000),
+    }
+    audit_table.put_item(Item=item)
+    logger.warning("EMERGENCY ALERT %s from %s (patients=%s)", alert_id, item["user_id"], patient_ids)
+    return {"alert_id": alert_id, "timestamp": timestamp, "status": "sent"}
+
+
+def list_alerts(audit_table) -> list:
+    from boto3.dynamodb.conditions import Key as DKey
+
+    def query(record_type: str, limit: int) -> list:
+        result = audit_table.query(
+            IndexName="ByTimestamp",
+            KeyConditionExpression=DKey("record_type").eq(record_type),
+            ScanIndexForward=False,
+            Limit=limit,
+        )
+        return [i for i in result.get("Items", []) if i.get("record_type") == record_type]
+
+    acks = {a.get("alert_id"): a for a in query("ALERT_ACK", 200)}
+    alerts = []
+    for item in query("ALERT", 50):
+        ack = acks.get(item.get("alert_id"))
+        alerts.append({
+            "alert_id": item.get("alert_id", ""),
+            "timestamp": item.get("timestamp", ""),
+            "registered": bool(item.get("registered")),
+            "user_id": item.get("user_id", ""),
+            "name": item.get("name", ""),
+            "phone": item.get("phone", ""),
+            "patient_ids": list(item.get("patient_ids", [])),
+            "message": item.get("message", ""),
+            "channel": item.get("channel", "web"),
+            "lat": item.get("lat", ""),
+            "lng": item.get("lng", ""),
+            "accuracy_m": item.get("accuracy_m", ""),
+            "status": "handled" if ack else "open",
+            "handled_by": ack.get("handled_by", "") if ack else "",
+            "handled_at": ack.get("timestamp", "") if ack else "",
+        })
+    return alerts
+
+
+def acknowledge_alert(body: dict, principal: dict, audit_table) -> dict:
+    alert_id = _optional_text(body, "alert_id", 36)
+    if not ALERT_ID_PATTERN.fullmatch(alert_id):
+        raise ArchiveError(400, "The alert ID is invalid.")
+    timestamp = _now_iso()
+    audit_table.put_item(Item={
+        "user_id": principal["user_id"],
+        "timestamp_request": f"{timestamp}#ack#{alert_id}",
+        "record_type": "ALERT_ACK",
+        "alert_id": alert_id,
+        "timestamp": timestamp,
+        "handled_by": principal["name"],
+    })
+    return {"alert_id": alert_id, "status": "handled"}
+
+
 # ── Main dispatcher ────────────────────────────────────────────────────────────
 
 def dispatch(body: dict, clients: dict, config: dict, auth_header: str = "") -> tuple[int, dict]:
@@ -646,8 +754,20 @@ def dispatch(body: dict, clients: dict, config: dict, auth_header: str = "") -> 
                 "sources": item.get("sources", []),
             }
             for item in result.get("Items", [])
+            if item.get("record_type", "ARCHIVE") == "ARCHIVE"
         ]
         return 200, {"logs": entries}
+
+    if action == "alert_create":
+        return 200, create_alert(body, principal, clients["audit_table"])
+
+    if action == "alert_list":
+        require_clinical(principal)
+        return 200, {"alerts": list_alerts(clients["audit_table"])}
+
+    if action == "alert_ack":
+        require_clinical(principal)
+        return 200, acknowledge_alert(body, principal, clients["audit_table"])
 
     if action == "ussd":
         return 200, handle_ussd(body, clients, config)
