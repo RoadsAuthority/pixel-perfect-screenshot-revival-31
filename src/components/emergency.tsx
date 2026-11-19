@@ -59,7 +59,10 @@ export function EmergencyDialog({ open, onOpenChange, session, url }: DialogProp
   const [locationNote, setLocationNote] = useState('');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
+  const [patientId, setPatientId] = useState('');
+  const [pin, setPin] = useState('');
   const [message, setMessage] = useState('');
+  const [sentIdentity, setSentIdentity] = useState('');
   const [listening, setListening] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState('');
@@ -104,9 +107,13 @@ export function EmergencyDialog({ open, onOpenChange, session, url }: DialogProp
         message: message.trim(),
         name: session ? '' : name.trim(),
         phone: phone.trim(),
+        patient_id: session ? '' : patientId.trim().toUpperCase(),
+        pin: session ? '' : pin,
         lat: coords?.lat, lng: coords?.lng, accuracy: coords?.accuracy,
       }, session?.token);
       setSentId(typeof data['alert_id'] === 'string' ? data['alert_id'] : 'sent');
+      setSentIdentity(typeof data['identity'] === 'string' ? data['identity'] : '');
+      setPin('');
     } catch (e) {
       setError(e instanceof Error ? e.message : 'The alert could not be sent. Call the emergency line.');
     } finally { setSending(false); }
@@ -132,7 +139,14 @@ export function EmergencyDialog({ open, onOpenChange, session, url }: DialogProp
             <div className="rounded-md border border-primary/30 bg-secondary p-4">
               <p className="flex items-center gap-2 font-semibold text-primary"><CheckCircle2 size={18} /> Alert sent to the clinic</p>
               <p className="mt-2 text-sm leading-6 text-secondary-foreground">
-                A nurse or doctor can now see your {coords ? 'location, ' : ''}message{patientIds.length ? ' and your medical record' : ''}. Keep your phone close. If things get worse, call {CLINIC_EMERGENCY_LINE}.
+                A nurse or doctor can now see your {coords ? 'location, ' : ''}message
+                {sentIdentity === 'verified_patient' ? ' and your medical record' : ''}. Keep your phone close. If things get worse, call {CLINIC_EMERGENCY_LINE}.
+              </p>
+              <p className="mt-2 text-xs text-muted-foreground">
+                {sentIdentity === 'verified_patient' && 'Your identity was confirmed.'}
+                {sentIdentity === 'claimed_patient' && 'Your patient ID could not be confirmed (no or wrong PIN), so the clinic will confirm who you are by phone.'}
+                {sentIdentity === 'unregistered' && 'Sent as a person who is not registered with the clinic.'}
+                {sentIdentity === 'staff' && 'Sent as clinic staff.'}
               </p>
               <p className="mt-2 font-mono text-[11px] text-muted-foreground">Reference: {sentId.slice(0, 8)}</p>
             </div>
@@ -168,6 +182,19 @@ export function EmergencyDialog({ open, onOpenChange, session, url }: DialogProp
                   {patientIds.length ? <> · record {patientIds.join(', ')} will be shared with the nurse or doctor</> : null}.
                 </p>
               ) : (
+                <>
+                <div className="rounded-md border border-border p-3">
+                  <p className="text-xs font-medium">Are you a registered patient? (optional)</p>
+                  <p className="mt-1 text-[11px] leading-5 text-muted-foreground">Your PIN lets the nurse or doctor open your medical record. Without it the clinic will confirm who you are by phone.</p>
+                  <div className="mt-2 grid gap-3 sm:grid-cols-2">
+                    <label className="text-xs font-medium">Patient ID
+                      <input value={patientId} onChange={(e) => setPatientId(e.target.value)} maxLength={20} placeholder="e.g. PAT-001" autoComplete="username" className="mt-1 h-11 w-full rounded-md border border-input bg-card px-3 text-sm" />
+                    </label>
+                    <label className="text-xs font-medium">PIN
+                      <input value={pin} onChange={(e) => setPin(e.target.value)} type="password" inputMode="numeric" maxLength={4} autoComplete="current-password" className="mt-1 h-11 w-full rounded-md border border-input bg-card px-3 text-sm" />
+                    </label>
+                  </div>
+                </div>
                 <div className="grid gap-3 sm:grid-cols-2">
                   <label className="text-xs font-medium">Your name (optional)
                     <input value={name} onChange={(e) => setName(e.target.value)} maxLength={100} className="mt-1 h-11 w-full rounded-md border border-input bg-card px-3 text-sm" />
@@ -176,6 +203,7 @@ export function EmergencyDialog({ open, onOpenChange, session, url }: DialogProp
                     <input value={phone} onChange={(e) => setPhone(e.target.value)} maxLength={30} inputMode="tel" className="mt-1 h-11 w-full rounded-md border border-input bg-card px-3 text-sm" />
                   </label>
                 </div>
+                </>
               )}
               {session && (
                 <label className="block text-xs font-medium">Phone number to call you back (optional)
@@ -322,7 +350,8 @@ function AlertCard({ alert, session, url, onHandled }: { alert: EmergencyAlert; 
   const [answer, setAnswer] = useState<Answer | null>(null);
   const [asking, setAsking] = useState(false);
   const [error, setError] = useState('');
-  const patient = alert.patient_ids[0] ?? '';
+  const patient = alert.patient_ids[0] || alert.claimed_patient_id || '';
+  const unverified = alert.identity === 'claimed_patient';
   const when = new Date(alert.timestamp);
 
   async function ask(q: string) {
@@ -342,9 +371,7 @@ function AlertCard({ alert, session, url, onHandled }: { alert: EmergencyAlert; 
           <p className="flex flex-wrap items-center gap-2 font-semibold">
             <AlertTriangle size={17} className="text-destructive" />
             {alert.name || 'Unknown person'}
-            {patient
-              ? <span className="rounded bg-secondary px-2 py-0.5 font-mono text-xs text-primary">{patient}</span>
-              : <span className="rounded bg-muted px-2 py-0.5 text-xs text-muted-foreground">Not registered</span>}
+            <IdentityBadge alert={alert} />
           </p>
           <p className="mt-1 text-xs text-muted-foreground">
             {when.toLocaleDateString()} {when.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
@@ -371,6 +398,14 @@ function AlertCard({ alert, session, url, onHandled }: { alert: EmergencyAlert; 
       </blockquote>
 
       <div className="mt-4">
+        {unverified && (
+          <p className="mb-2 rounded-md bg-warning-surface p-2 text-xs text-warning">
+            Identity not confirmed: this person typed {patient} without a correct PIN. Confirm who they are by phone before relying on this record.
+          </p>
+        )}
+        {alert.identity === 'staff' && (
+          <p className="mb-2 text-xs text-muted-foreground">Raised by a staff member (no patient record attached). Read the message for who needs help.</p>
+        )}
         {patient ? (
           <div className="flex flex-wrap gap-2">
             <Button variant="secondary" size="sm" disabled={asking} onClick={() => void ask('Emergency summary: allergies, long-term conditions, current medication and emergency contact.')}>
@@ -381,7 +416,9 @@ function AlertCard({ alert, session, url, onHandled }: { alert: EmergencyAlert; 
             </Button>
           </div>
         ) : (
-          <p className="text-xs text-muted-foreground">Not a registered patient: no medical record to retrieve. Call back or ask questions about clinic protocols below.</p>
+          alert.identity !== 'staff' && (
+            <p className="text-xs text-muted-foreground">Not a registered patient: no medical record to retrieve. Call back or ask questions about clinic protocols below.</p>
+          )
         )}
         <form className="mt-3 flex gap-2" onSubmit={(e) => { e.preventDefault(); void ask(question); }}>
           <input
@@ -408,4 +445,17 @@ function AlertCard({ alert, session, url, onHandled }: { alert: EmergencyAlert; 
       </div>
     </article>
   );
+}
+
+function IdentityBadge({ alert }: { alert: EmergencyAlert }) {
+  switch (alert.identity) {
+    case 'verified_patient':
+      return <span className="rounded bg-secondary px-2 py-0.5 font-mono text-xs text-primary">{alert.patient_ids[0]} · verified</span>;
+    case 'claimed_patient':
+      return <span className="rounded bg-warning-surface px-2 py-0.5 font-mono text-xs text-warning">Says {alert.claimed_patient_id} · not verified</span>;
+    case 'staff':
+      return <span className="rounded bg-accent px-2 py-0.5 text-xs text-accent-foreground">Staff member</span>;
+    default:
+      return <span className="rounded bg-muted px-2 py-0.5 text-xs text-muted-foreground">Not registered</span>;
+  }
 }

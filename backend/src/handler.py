@@ -591,13 +591,44 @@ def _now_iso() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z")
 
 
-def create_alert(body: dict, principal: dict, audit_table) -> dict:
+PATIENT_ID_PATTERN = re.compile(r"^PAT-\d{3,6}$")
+
+
+def _alert_identity(body: dict, principal: dict, users_table) -> tuple[dict, str, str]:
+    """Decide who raised the alert. Returns (principal, identity, claimed_patient_id).
+
+    identity is one of:
+      verified_patient  signed in, or patient ID + correct PIN in the alert form
+      staff             signed in as clinic staff (no patient record)
+      claimed_patient   patient ID given without a correct PIN (shown as unverified)
+      unregistered      no ID given
+    A wrong PIN never blocks an emergency alert; it only leaves the identity unverified.
+    """
+    if principal["user_id"] != PUBLIC_PRINCIPAL["user_id"]:
+        is_patient = any(g.startswith("PAT-") for g in principal.get("groups", []))
+        return principal, ("verified_patient" if is_patient else "staff"), ""
+    claimed = _optional_text(body, "patient_id", 20).upper()
+    if not claimed or not PATIENT_ID_PATTERN.fullmatch(claimed):
+        return principal, "unregistered", ""
+    pin = _optional_text(body, "pin", 32)
+    if pin:
+        try:
+            verified = authenticate(claimed, pin, users_table)
+            if claimed in verified.get("groups", []):
+                return verified, "verified_patient", ""
+        except ArchiveError:
+            pass
+    return principal, "claimed_patient", claimed
+
+
+def create_alert(body: dict, principal: dict, audit_table, users_table) -> dict:
     message = _optional_text(body, "message", 1000)
     lat = _coordinate(body.get("lat"), -90, 90)
     lng = _coordinate(body.get("lng"), -180, 180)
     if not message and not (lat and lng):
         raise ArchiveError(400, "Describe what is happening or share your location so the clinic can help.")
-    registered = principal["user_id"] != PUBLIC_PRINCIPAL["user_id"]
+    principal, identity, claimed = _alert_identity(body, principal, users_table)
+    registered = identity in ("verified_patient", "staff")
     patient_ids = [g for g in principal.get("groups", []) if g.startswith("PAT-")]
     timestamp = _now_iso()
     alert_id = str(uuid.uuid4())
@@ -608,6 +639,8 @@ def create_alert(body: dict, principal: dict, audit_table) -> dict:
         "alert_id": alert_id,
         "timestamp": timestamp,
         "registered": registered,
+        "identity": identity,
+        "claimed_patient_id": claimed,
         "name": principal["name"] if registered else (_optional_text(body, "name", 100) or "Unregistered person"),
         "phone": _optional_text(body, "phone", 30),
         "patient_ids": patient_ids,
@@ -618,8 +651,9 @@ def create_alert(body: dict, principal: dict, audit_table) -> dict:
         "accuracy_m": _coordinate(body.get("accuracy"), 0, 100000),
     }
     audit_table.put_item(Item=item)
-    logger.warning("EMERGENCY ALERT %s from %s (patients=%s)", alert_id, item["user_id"], patient_ids)
-    return {"alert_id": alert_id, "timestamp": timestamp, "status": "sent"}
+    logger.warning("EMERGENCY ALERT %s from %s identity=%s patients=%s claimed=%s",
+                   alert_id, item["user_id"], identity, patient_ids, claimed)
+    return {"alert_id": alert_id, "timestamp": timestamp, "status": "sent", "identity": identity}
 
 
 def list_alerts(audit_table) -> list:
@@ -642,6 +676,8 @@ def list_alerts(audit_table) -> list:
             "alert_id": item.get("alert_id", ""),
             "timestamp": item.get("timestamp", ""),
             "registered": bool(item.get("registered")),
+            "identity": item.get("identity") or ("verified_patient" if item.get("patient_ids") else "unregistered"),
+            "claimed_patient_id": item.get("claimed_patient_id", ""),
             "user_id": item.get("user_id", ""),
             "name": item.get("name", ""),
             "phone": item.get("phone", ""),
@@ -759,7 +795,7 @@ def dispatch(body: dict, clients: dict, config: dict, auth_header: str = "") -> 
         return 200, {"logs": entries}
 
     if action == "alert_create":
-        return 200, create_alert(body, principal, clients["audit_table"])
+        return 200, create_alert(body, principal, clients["audit_table"], clients["users_table"])
 
     if action == "alert_list":
         require_clinical(principal)

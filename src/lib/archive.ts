@@ -30,7 +30,7 @@ export type ArchiveRequest =
   | (ArchiveRequestBase & { action: 'documents' })
   | (ArchiveRequestBase & { action: 'logs'; channel: 'web'; query: '' })
   | (ArchiveRequestBase & { action: 'ussd'; channel: 'ussd'; query: ''; ussd_session_id: string; ussd_text: string })
-  | (ArchiveRequestBase & { action: 'alert_create'; channel: 'web' | 'voice'; message: string; name: string; phone: string; lat?: number | undefined; lng?: number | undefined; accuracy?: number | undefined })
+  | (ArchiveRequestBase & { action: 'alert_create'; channel: 'web' | 'voice'; message: string; name: string; phone: string; patient_id: string; pin: string; lat?: number | undefined; lng?: number | undefined; accuracy?: number | undefined })
   | (ArchiveRequestBase & { action: 'alert_list' })
   | (ArchiveRequestBase & { action: 'alert_ack'; alert_id: string });
 
@@ -39,6 +39,10 @@ export type EmergencyAlert = {
   alert_id: string;
   timestamp: string;
   registered: boolean;
+  /** How the sender was identified by the server. */
+  identity: 'verified_patient' | 'staff' | 'claimed_patient' | 'unregistered';
+  /** Patient ID typed without a correct PIN (unverified). */
+  claimed_patient_id: string;
   user_id: string;
   name: string;
   phone: string;

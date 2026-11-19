@@ -418,6 +418,39 @@ class DispatchTests(unittest.TestCase):
         self.assertEqual(item["name"], "PAT-001")  # from the account, not the request
         self.assertTrue(item["registered"])
 
+    def _public_alert(self, extra: dict) -> dict:
+        users = FakeTable(stored_user("1111", "PAT-001", ["PAT-001"]))
+        audit = FakeTable()
+        status, body = handler.dispatch({"action": "alert_create", "message": "Help", **extra},
+                                        make_clients(users=users, audit=audit), CONFIG, auth_header="")
+        self.assertEqual(status, 200)
+        return audit.items[0]
+
+    def test_not_signed_in_without_id_is_unregistered(self):
+        item = self._public_alert({"name": "Maria Nangolo"})  # typing a name proves nothing
+        self.assertEqual(item["identity"], "unregistered")
+        self.assertEqual(item["patient_ids"], [])
+
+    def test_patient_id_with_correct_pin_is_verified(self):
+        item = self._public_alert({"patient_id": "pat-001", "pin": "1111"})
+        self.assertEqual(item["identity"], "verified_patient")
+        self.assertEqual(item["patient_ids"], ["PAT-001"])
+        self.assertTrue(item["registered"])
+
+    def test_patient_id_with_wrong_or_no_pin_is_claimed_but_still_sent(self):
+        for extra in ({"patient_id": "PAT-001", "pin": "9999"}, {"patient_id": "PAT-001"}):
+            item = self._public_alert(extra)
+            self.assertEqual(item["identity"], "claimed_patient")
+            self.assertEqual(item["claimed_patient_id"], "PAT-001")
+            self.assertEqual(item["patient_ids"], [])
+            self.assertFalse(item["registered"])
+
+    def test_signed_in_staff_alert_is_labelled_staff(self):
+        token, clients, _ = self._login(CLERK)
+        handler.dispatch({"action": "alert_create", "message": "Patient fainted in waiting room"},
+                         clients, CONFIG, auth_header=f"Bearer {token}")
+        self.assertEqual(clients["audit_table"].items[0]["identity"], "staff")
+
     def test_alert_needs_message_or_location(self):
         with self.assertRaises(handler.ArchiveError):
             handler.dispatch({"action": "alert_create"}, make_clients(), CONFIG, auth_header="")
