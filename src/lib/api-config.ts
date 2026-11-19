@@ -1,10 +1,10 @@
 /**
- * The clinic archive API endpoint baked in at build time.
+ * The clinic archive API endpoint.
  *
- * Set VITE_ARCHIVE_API_URL (in Lovable's environment settings or a local
- * `.env.local`) to the API Gateway / Lambda URL, e.g.
- *   https://abc123.execute-api.eu-north-1.amazonaws.com/archive
- * When it is set, sign-in defaults to Live API mode. The URL is not a secret:
- * AWS still validates the PIN and enforces access on every request.
+ * Defaults to the Render backend. Override with VITE_ARCHIVE_API_URL (e.g. in
+ * `.env.local`) to point at another deployment. The URL is not a secret: the
+ * server still validates the PIN and enforces access on every request.
  */
-export const DEFAULT_API_URL: string = (import.meta.env['VITE_ARCHIVE_API_URL'] ?? '').trim();
+const RENDER_API_URL = 'https://aws-system.onrender.com/archive';
+
+export const DEFAULT_API_URL: string = (import.meta.env['VITE_ARCHIVE_API_URL'] ?? '').trim() || RENDER_API_URL;
