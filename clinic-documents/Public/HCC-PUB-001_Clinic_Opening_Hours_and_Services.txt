@@ -1,30 +1,59 @@
 ========================================================================
 HOPEWELL COMMUNITY CLINIC
-15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+15 Moringa Street, Khomasdal, Windhoek, Namibia
+Tel: +264 61 555 0100 | Emergency line: +264 61 555 0199 (fictional)
 FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
 ========================================================================
 CLINIC OPENING HOURS AND SERVICES
 Document ID: HCC-PUB-001
 Date: 2026-11-01
 ========================================================================
-OPENING HOURS
-- Monday to Friday: 07:30 - 17:00
-- Saturday: 08:00 - 12:00 (immunisation and minor ailments only)
-- Sunday and public holidays: closed. For emergencies call the clinic emergency line
-  +264 61 555 0199 (fictional) or go to Windhoek Central Hospital.
+ABOUT THE CLINIC
+Hopewell Community Clinic is a primary health care clinic serving Khomasdal,
+Okahandja Park and Havana. About 1 900 patients are registered. The clinic has one
+doctor (two days a week), two nurses and a clinic clerk.
 
-SERVICES
-- General consultations with the doctor (Tuesday and Thursday) and nurses (daily)
-- Childhood and adult immunisation
-- Chronic care: high blood pressure, diabetes, asthma
-- Antenatal care (Wednesday mornings)
-- Basic laboratory tests (blood glucose, HbA1c, haemoglobin, urine tests)
-- Mobile outreach clinic (see the vaccination clinic dates document)
+OPENING HOURS
+- Monday to Friday: 07:30 - 17:00 (last patient registered at 16:00)
+- Saturday: 08:00 - 12:00 (immunisation and minor ailments only)
+- Sunday and public holidays: closed
+- Holiday closure: 24 December 2026 to 2 January 2027
+For emergencies when the clinic is closed, call the emergency line
++264 61 555 0199 (fictional) or go to Katutura State Hospital or Windhoek Central
+Hospital casualty, which are open 24 hours.
+
+SERVICES BY DAY
+DAY         SERVICE                                         WHO
+Monday      Immunisation, child health, family planning     Nurses
+Tuesday     Doctor consultations, chronic care review       Doctor + nurses
+Wednesday   Antenatal care (morning), HIV testing           Nurses
+Thursday    Doctor consultations, minor procedures          Doctor + nurses
+Friday      Chronic medicine collection, wound care         Nurses
+Saturday    Immunisation, minor ailments                    Nurse on duty
+
+Basic laboratory tests done at the clinic: blood glucose, HbA1c, haemoglobin,
+urine dipstick, pregnancy test, rapid HIV and malaria tests. Other samples are sent
+to the Namibia Institute of Pathology; results take 3-5 working days.
+
+FEES
+- Consultation: N$ 10 (free for children under 5, pregnant women and pensioners)
+- Chronic medicine collection: free
+- Immunisation: free
 
 WHAT TO BRING
 - Your clinic card or ID document
 - The child's Road-to-Health booklet for immunisation visits
-- All medicines you currently take
+- All medicines you currently take, in their boxes
+- Any letters or results from other hospitals
+
+CHRONIC MEDICINE COLLECTION
+Patients with stable high blood pressure or diabetes may collect medicine every
+month on Fridays without seeing the doctor. A review with the doctor is needed every
+6 months, or sooner if readings are not controlled.
+
+COMPLAINTS AND COMPLIMENTS
+Speak to the clinic clerk or write in the book at reception. The clinic manager
+replies within 10 working days.
 
 ------------------------------------------------------------------------
 FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a

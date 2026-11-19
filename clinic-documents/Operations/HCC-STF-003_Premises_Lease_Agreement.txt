@@ -1,25 +1,43 @@
 ========================================================================
 HOPEWELL COMMUNITY CLINIC
-15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+15 Moringa Street, Khomasdal, Windhoek, Namibia
+Tel: +264 61 555 0100 | Emergency line: +264 61 555 0199 (fictional)
 FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
 ========================================================================
 PREMISES LEASE AGREEMENT
 Document ID: HCC-STF-003
 Date: 2024-02-01
 ========================================================================
-Landlord: Khomasdal Property Trust (fictional)
+Landlord: Khomasdal Property Trust (fictional), represented by Ms R. Beukes
 Tenant: Hopewell Community Clinic
-Premises: 15 Moringa Street, Khomasdal, Windhoek
+Premises: 15 Moringa Street, Khomasdal, Windhoek (Erf 4417, 310 square metres,
+6 consulting/treatment rooms, waiting area, store room, yard with parking for 8 cars)
 
 Lease start: 2024-02-01
 Lease end: 2027-01-31
 Notice period: 3 months. Notice to renew or end the lease must be given by 2026-10-31.
-Status note (2026-10-28, CLK-001): renewal notice sent to the landlord; reply awaited.
+Status note (2026-10-28, CLK-001): renewal notice sent to the landlord by e-mail and
+registered post; reply awaited. Follow up again on 2026-11-30 if there is no answer.
 
-Monthly rent: N$ 18 500, increasing by 6% on 2026-02-01 to N$ 19 610.
-Maintenance: the landlord repairs the roof and plumbing; the clinic maintains the
-interior and the generator.
-The clinic may not sublet any part of the premises.
+RENT
+- Monthly rent: N$ 18 500, increasing by 6% on 2026-02-01 to N$ 19 610.
+- Rent is due on the 1st of each month. Late payment interest: prime rate + 2%.
+- Deposit held by the landlord: N$ 37 000 (two months' original rent), refundable
+  within 30 days after the lease ends, less the cost of any damage.
+- Water is included; electricity is paid by the clinic through a prepaid meter.
+
+MAINTENANCE
+- The landlord repairs the roof, outside walls, plumbing and the electrical supply.
+- The clinic maintains the interior, the generator and the air-conditioning units.
+- Open maintenance request: automatic generator change-over switch (requested
+  2026-11-09 after the power cut on 2026-11-08), landlord quote awaited.
+
+OTHER CLAUSES
+- The clinic may not sublet any part of the premises.
+- Alterations need the landlord's written approval.
+- The clinic must keep public liability insurance of at least N$ 2 million.
+- Either party may end the lease early if the other party breaches a clause and does
+  not fix it within 20 business days after written notice.
 
 ------------------------------------------------------------------------
 FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a

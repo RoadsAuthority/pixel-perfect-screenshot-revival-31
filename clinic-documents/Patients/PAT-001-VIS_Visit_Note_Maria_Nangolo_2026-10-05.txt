@@ -1,6 +1,7 @@
 ========================================================================
 HOPEWELL COMMUNITY CLINIC
-15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+15 Moringa Street, Khomasdal, Windhoek, Namibia
+Tel: +264 61 555 0100 | Emergency line: +264 61 555 0199 (fictional)
 FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
 ========================================================================
 VISIT NOTE - MARIA NANGOLO - 2026-10-05
@@ -11,22 +12,34 @@ Patient: PAT-001 Maria Nangolo
 Seen by: DOC-001 Dr Anna-Marie van Wyk
 
 REASON FOR VISIT
-Headaches for two weeks.
+Headaches for two weeks, mostly in the morning, at the back of the head. No vision
+changes, no chest pain, no weakness.
+
+BLOOD PRESSURE HISTORY (mmHg)
+DATE          READING     WHERE / BY
+2025-03-14    136/86      Clinic, routine check, NUR-002
+2025-11-20    142/90      Outreach, Okahandja Park, NUR-002 (advised to return)
+2026-10-05    148/94      Clinic, DOC-001
+2026-10-05    146/92      Clinic, repeated after 10 minutes rest
 
 FINDINGS
-- Blood pressure 148/94 mmHg, repeated 146/92 mmHg
-- Weight 78 kg
+- Weight 78 kg, height 1.62 m (BMI 29.7)
+- Pulse 82, regular. Heart and lungs normal. No ankle swelling.
+- Urine dipstick: no protein, no glucose.
 
 ASSESSMENT
-High blood pressure (hypertension).
+High blood pressure (hypertension), confirmed on several readings over 18 months.
 
 PLAN
 - Started amlodipine 5 mg once daily.
-- Reduce salt, walk 30 minutes a day.
+- Reduce salt, walk 30 minutes a day, aim to lose 3-5 kg over 6 months.
 - Follow-up blood pressure check: 2026-11-23 at 09:30 with NUR-001.
 - Blood tests requested: kidney function and cholesterol.
+- If blood pressure is still above 140/90 at follow-up, increase amlodipine to 10 mg.
 
-NURSE NOTE 2026-11-02 (NUR-001): blood pressure 132/84 mmHg. Patient feels better.
+NURSE NOTE 2026-11-02 (NUR-001): blood pressure 132/84 mmHg. Patient feels better,
+headaches gone. Taking amlodipine every morning, no side effects. Mild ankle swelling
+in the evening discussed - common with amlodipine, to be checked at the follow-up.
 
 ------------------------------------------------------------------------
 FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a

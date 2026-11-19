@@ -1,6 +1,7 @@
 ========================================================================
 HOPEWELL COMMUNITY CLINIC
-15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+15 Moringa Street, Khomasdal, Windhoek, Namibia
+Tel: +264 61 555 0100 | Emergency line: +264 61 555 0199 (fictional)
 FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
 ========================================================================
 VACCINE STOCK AND COLD CHAIN LOG
@@ -9,22 +10,38 @@ Date: 2026-11-15
 ========================================================================
 VACCINE STOCK (fridge 1, checked 2026-11-15 by CLK-001 Selma Amutenya)
 
-VACCINE              BATCH       DOSES   EXPIRY DATE
-BCG                  BCG-2611    40      2027-02-28
-OPV                  OPV-2604    120     2027-05-31
-Pentavalent          PEN-2609    60      2027-08-31
-PCV                  PCV-2602    55      2026-12-31   <- use first
-Rotavirus            ROT-2607    48      2027-07-31
-Measles-Rubella      MR-2603     30      2027-03-31
-HPV                  HPV-2610    25      2028-01-31
-Tetanus-diphtheria   TD-2512     35      2026-12-15   <- use first, expires soon
+VACCINE              BATCH       DOSES   EXPIRY DATE   USED OCT   NOTE
+BCG                  BCG-2611    40      2027-02-28    12
+OPV                  OPV-2604    120     2027-05-31    41
+Pentavalent          PEN-2609    60      2027-08-31    23
+PCV                  PCV-2602    55      2026-12-31    22         <- use first
+Rotavirus            ROT-2607    48      2027-07-31    16
+Measles-Rubella      MR-2603     30      2027-03-31    9
+HPV                  HPV-2610    25      2028-01-31    0          for 10 Dec campaign
+Tetanus-diphtheria   TD-2512     35      2026-12-15    6          <- use first, expires soon
+
+Earlier batches used this year: PEN-2601 (finished June 2026), PCV-2511 (finished
+May 2026), OPV-2512 (finished August 2026).
 
 COLD CHAIN
-- Fridge temperature range required: +2 C to +8 C.
+- Fridge temperature range required: +2 C to +8 C, checked twice daily.
 - Temperature excursion on 2026-11-08 (9.5 C for 40 minutes after a power cut);
   vaccine vial monitors checked by NUR-001, all usable.
+- Generator switched on manually during power cuts; automatic switch requested
+  from the landlord (see lease maintenance clause).
 - Fridge thermometer calibration due: 2027-04-30.
-- Next stock order: 2026-12-01 (PCV and Td needed).
+- Cool boxes for outreach: 3, ice packs frozen the night before each outreach day.
+
+TEMPERATURE LOG, NOVEMBER 2026 (morning / afternoon, degrees C)
+01 Nov 4.6/5.1   02 Nov 4.8/5.0   03 Nov 4.4/5.3   04 Nov 4.9/5.2
+05 Nov 5.0/5.4   06 Nov 4.7/5.1   07 Nov 4.5/4.9   08 Nov 5.2/9.5 (power cut)
+09 Nov 4.9/5.0   10 Nov 4.8/5.2   11 Nov 4.6/5.1   12 Nov 4.7/5.0
+13 Nov 4.9/5.3   14 Nov 4.8/5.1   15 Nov 4.6/5.0
+
+ORDERS
+- Next stock order: 2026-12-01 (PCV and Td needed). Order PCV 60 doses, Td 40 doses.
+- Expired or damaged vaccines are returned to the regional medical store with the
+  disposal form; never thrown in the general waste.
 
 ------------------------------------------------------------------------
 FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a

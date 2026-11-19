@@ -1,6 +1,7 @@
 ========================================================================
 HOPEWELL COMMUNITY CLINIC
-15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+15 Moringa Street, Khomasdal, Windhoek, Namibia
+Tel: +264 61 555 0100 | Emergency line: +264 61 555 0199 (fictional)
 FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
 ========================================================================
 PATIENT PROFILE - JOHANNES HAUFIKU
@@ -11,7 +12,10 @@ Patient ID: PAT-002
 Name: Johannes Haufiku
 Date of birth: 1968-07-21 (age 58)
 Sex: Male
+Address: Erf 875, Havana Extension 3, Windhoek (fictional)
 Phone: 081 555 0201 (fictional)
+Occupation: Taxi driver
+Registered at the clinic: 2011-01-17
 
 ALLERGIES
 - No known drug allergies.
@@ -19,8 +23,25 @@ ALLERGIES
 LONG-TERM CONDITIONS
 - Type 2 diabetes (since 2019)
 
-CURRENT MEDICATION
-- Metformin 1000 mg twice daily with meals (increased from 500 mg on 2026-10-12)
+MEDICATION HISTORY
+- Metformin 500 mg twice daily: 2019-03 to 2026-10-12
+- Metformin 1000 mg twice daily with meals: since 2026-10-12 (current)
+- Gliclazide: not started; to be considered if HbA1c stays above 8% in January 2027
+
+DIABETES CARE CHECKLIST
+CHECK                     LAST DONE     RESULT                    NEXT DUE
+Eye (retina) screening    2025-06-18    No retinopathy            2026-06 (overdue)
+Foot examination          2025-10-09    Normal sensation          next visit
+Kidney (urine protein)    2026-10-12    Negative                  2027-10
+Blood pressure            2026-10-12    128/80 mmHg               every visit
+
+PAST MEDICAL HISTORY
+- 2022-08: injury to left hand at work, stitched at clinic, healed well
+- No admissions
+
+LIFESTYLE
+- Smokes 5 cigarettes a day; wants to stop (referred to the quit-smoking group).
+- Long hours sitting while driving; eats at taxi ranks.
 
 Emergency contact: Hilma Haufiku (daughter), 081 555 0202 (fictional)
 

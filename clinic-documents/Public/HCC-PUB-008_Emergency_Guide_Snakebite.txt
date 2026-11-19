@@ -1,6 +1,7 @@
 ========================================================================
 HOPEWELL COMMUNITY CLINIC
-15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+15 Moringa Street, Khomasdal, Windhoek, Namibia
+Tel: +264 61 555 0100 | Emergency line: +264 61 555 0199 (fictional)
 FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
 ========================================================================
 EMERGENCY GUIDE - SNAKEBITE
@@ -15,13 +16,24 @@ DO
 3. Keep the bitten limb still, for example with a splint, at about heart level.
 4. Get the person to a hospital quickly - antivenom is only given in hospital.
 5. If safe, take a photo of the snake. Do not try to catch or kill it.
+6. Note the time of the bite and any changes (swelling, drooping eyelids,
+   difficulty swallowing or breathing).
 
 DO NOT
 - Cut the wound, suck out venom, or apply ice or electric shocks
 - Apply a tight tourniquet
 - Give alcohol or traditional remedies
 
-If venom was spat into the eyes, rinse the eyes with plenty of water.
+SPITTING COBRA - VENOM IN THE EYES
+Rinse the eyes with plenty of water (or milk if no water) for 15 minutes and go to
+the clinic. Do not rub the eyes.
+
+DANGER SIGNS ON THE WAY TO HOSPITAL
+Drooping eyelids, slurred speech, difficulty breathing or swallowing, bleeding from
+the gums, or fast spreading swelling. If breathing stops, start rescue breaths/CPR.
+
+Most snakebites happen at night and in long grass. Wear closed shoes and use a torch
+when walking outside after dark.
 
 ------------------------------------------------------------------------
 FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a

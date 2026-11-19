@@ -1,27 +1,44 @@
 ========================================================================
 HOPEWELL COMMUNITY CLINIC
-15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+15 Moringa Street, Khomasdal, Windhoek, Namibia
+Tel: +264 61 555 0100 | Emergency line: +264 61 555 0199 (fictional)
 FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
 ========================================================================
 OXYGEN AND MEDICAL GAS SUPPLY CONTRACT
 Document ID: HCC-STF-002
 Date: 2026-07-01
 ========================================================================
-Supplier: AirMed Supplies (Pty) Ltd (fictional)
+Supplier: AirMed Supplies (Pty) Ltd (fictional), Northern Industrial Area, Windhoek
 Contract number: AMS-HCC-2025-07
+Signed for the clinic by: Clinic manager, 2025-06-20
 Start date: 2025-07-01
 End date: 2027-06-30
 Renewal: the clinic must give written notice of renewal or cancellation by 2027-03-31.
+If no notice is given, the contract renews automatically for 12 months at the
+supplier's list price at that time.
 
 SERVICES
-- Monthly delivery of 4 medical oxygen cylinders (size F)
-- Cylinder pressure testing every 6 months
-- Emergency delivery within 24 hours at no extra cost
+- Monthly delivery of 4 medical oxygen cylinders (size F), first Monday of the month
+- Collection of empty cylinders at each delivery
+- Cylinder pressure testing every 6 months (last test 2026-07-06, next 2027-01-05)
+- Emergency delivery within 24 hours at no extra cost (maximum 3 per year)
+- Two regulators and flow meters on loan, replaced free if faulty
 
-PRICE
-N$ 2 450 per month, fixed until the end date.
+PRICE AND PAYMENT
+N$ 2 450 per month, fixed until the end date. Invoices are sent on the 1st of the
+month and must be paid within 30 days. Late payment interest: 1.5% per month.
+Extra cylinders: N$ 520 each.
 
-Contact person: Mr K. Iyambo, accounts@airmed.example (fictional)
+SERVICE LEVEL
+If a scheduled delivery is more than 2 working days late, the clinic receives a 10%
+credit on that month's invoice. Three late deliveries in 12 months allow the clinic
+to cancel with 30 days' notice.
+
+DELIVERY HISTORY 2026 (late deliveries)
+- 2026-03-02: delivered 2026-03-05 (3 working days late, credit N$ 245 received)
+- All other deliveries on time.
+
+Contact person: Mr K. Iyambo, accounts@airmed.example (fictional), 061 555 0450
 
 ------------------------------------------------------------------------
 FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a

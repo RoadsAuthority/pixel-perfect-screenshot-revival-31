@@ -1,6 +1,7 @@
 ========================================================================
 HOPEWELL COMMUNITY CLINIC
-15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+15 Moringa Street, Khomasdal, Windhoek, Namibia
+Tel: +264 61 555 0100 | Emergency line: +264 61 555 0199 (fictional)
 FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
 ========================================================================
 LABORATORY RESULTS - MARIA NANGOLO - 2026-10-06
@@ -8,15 +9,28 @@ Document ID: PAT-001-LAB
 Date: 2026-10-06
 ========================================================================
 Patient: PAT-001 Maria Nangolo
-Sample collected: 2026-10-06
+Sample collected: 2026-10-06 08:15 (fasting) by NUR-001
+Laboratory: Namibia Institute of Pathology, Windhoek (fictional report)
+Reported: 2026-10-09. Reviewed by DOC-001 on 2026-10-13.
 
 TEST                 RESULT        REFERENCE RANGE     FLAG
 Creatinine           68 umol/L     45-90 umol/L        NORMAL
+eGFR                 >90 mL/min    >60 mL/min          NORMAL
+Sodium               139 mmol/L    135-145 mmol/L      NORMAL
+Potassium            4.1 mmol/L    3.5-5.1 mmol/L      NORMAL
 Total cholesterol    5.9 mmol/L    below 5.0 mmol/L    HIGH
+LDL cholesterol      3.8 mmol/L    below 3.0 mmol/L    HIGH
+HDL cholesterol      1.2 mmol/L    above 1.2 mmol/L    NORMAL
+Triglycerides        1.9 mmol/L    below 1.7 mmol/L    HIGH
 Random glucose       5.4 mmol/L    3.9-7.8 mmol/L      NORMAL
 HIV test             not requested                     NOT AVAILABLE
 
-Comment: cholesterol is above the target. To be discussed at the follow-up visit.
+PREVIOUS RESULTS
+- 2025-03-14 random glucose 5.1 mmol/L (normal). No cholesterol test before 2026.
+
+Comment: kidney function is normal. Cholesterol is above the target. To be discussed
+at the follow-up visit on 2026-11-23: diet advice first, consider a statin if still
+high after 3 months.
 
 ------------------------------------------------------------------------
 FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a

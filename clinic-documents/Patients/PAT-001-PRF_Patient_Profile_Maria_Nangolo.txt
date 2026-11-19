@@ -1,6 +1,7 @@
 ========================================================================
 HOPEWELL COMMUNITY CLINIC
-15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+15 Moringa Street, Khomasdal, Windhoek, Namibia
+Tel: +264 61 555 0100 | Emergency line: +264 61 555 0199 (fictional)
 FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
 ========================================================================
 PATIENT PROFILE - MARIA NANGOLO
@@ -11,16 +12,35 @@ Patient ID: PAT-001
 Name: Maria Nangolo
 Date of birth: 1985-03-12 (age 41)
 Sex: Female
+Address: Erf 2210, Okahandja Park, Windhoek (fictional)
 Phone: 081 555 0101 (fictional)
+Occupation: School cook at Havana Primary School
+Registered at the clinic: 2014-06-03
 
 ALLERGIES
 - Penicillin: rash and swelling of the face (2019). Do not prescribe penicillins.
+  Use azithromycin or erythromycin instead if an antibiotic is needed.
 
 LONG-TERM CONDITIONS
 - High blood pressure (diagnosed 2026-10-05)
 
+PAST MEDICAL HISTORY
+- 2019-05: throat infection, treated with amoxicillin; developed rash and facial
+  swelling the next day (penicillin allergy recorded)
+- 2016-08: normal delivery of a son at Katutura State Hospital
+- 2012-02: normal delivery of a daughter
+- No operations. No admissions apart from the two deliveries.
+
 CURRENT MEDICATION
 - Amlodipine 5 mg once daily (since 2026-10-05)
+
+FAMILY HISTORY
+- Mother: high blood pressure, stroke at age 62
+- Father: type 2 diabetes
+
+LIFESTYLE
+- Does not smoke. Drinks alcohol occasionally (weekends).
+- Adds salt at the table; advised to stop (2026-10-05).
 
 Blood group: not tested.
 Emergency contact: Petrus Nangolo (husband), 081 555 0102 (fictional)

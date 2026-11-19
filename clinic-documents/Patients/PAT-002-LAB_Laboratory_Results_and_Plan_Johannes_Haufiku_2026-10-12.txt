@@ -1,6 +1,7 @@
 ========================================================================
 HOPEWELL COMMUNITY CLINIC
-15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+15 Moringa Street, Khomasdal, Windhoek, Namibia
+Tel: +264 61 555 0100 | Emergency line: +264 61 555 0199 (fictional)
 FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
 ========================================================================
 LABORATORY RESULTS AND PLAN - JOHANNES HAUFIKU - 2026-10-12
@@ -14,13 +15,30 @@ TEST                 RESULT        REFERENCE RANGE     FLAG
 HbA1c                8.1 %         4.0-5.6 %           HIGH
 Fasting glucose      9.8 mmol/L    3.9-5.5 mmol/L      HIGH
 Creatinine           82 umol/L     60-110 umol/L       NORMAL
+Urine protein        negative      negative            NORMAL
 Cholesterol          not requested                     NOT AVAILABLE
+
+HbA1c TREND (target below 7.0 %)
+DATE          HbA1c
+2025-04-10    7.4 %
+2025-10-09    7.6 %
+2026-04-14    7.9 %
+2026-10-12    8.1 %
+The HbA1c has risen steadily over 18 months.
+
+WEIGHT TREND
+2025-04-10: 91 kg | 2025-10-09: 92 kg | 2026-04-14: 94 kg | 2026-10-12: 95 kg
+
+DOCTOR'S DISCUSSION WITH PATIENT (2026-10-12)
+Patient reports missing evening metformin doses on long driving shifts and eating
+late. Agreed to keep tablets in the taxi and take them with the evening meal.
 
 PLAN
 - Metformin increased to 1000 mg twice daily.
-- Foot and eye check at the next visit.
+- Foot and eye check at the next visit (eye screening is overdue).
 - Follow-up appointment: 2026-11-26 at 10:00 with DOC-001.
 - Repeat HbA1c in January 2027.
+- Referred to the diabetes education group (first Tuesday of the month, 14:00).
 
 ------------------------------------------------------------------------
 FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a

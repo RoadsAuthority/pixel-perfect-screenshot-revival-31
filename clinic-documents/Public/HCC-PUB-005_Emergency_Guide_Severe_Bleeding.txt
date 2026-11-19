@@ -1,6 +1,7 @@
 ========================================================================
 HOPEWELL COMMUNITY CLINIC
-15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+15 Moringa Street, Khomasdal, Windhoek, Namibia
+Tel: +264 61 555 0100 | Emergency line: +264 61 555 0199 (fictional)
 FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
 ========================================================================
 EMERGENCY GUIDE - SEVERE BLEEDING
@@ -13,12 +14,30 @@ Follows standard first-aid practice.
 2. Press firmly and directly on the wound with a clean cloth or dressing.
 3. Keep pressing without stopping for at least 10 minutes. If blood soaks through,
    add more cloth on top - do not remove the first one.
-4. If possible, have the person lie down.
+4. If possible, have the person lie down and raise their legs if there is no leg
+   injury.
 5. Call the emergency line or bring the person to the clinic or hospital.
 6. Do not remove objects stuck in a wound; press around them instead.
 
-Signs of shock (pale, cold, sweaty skin, fast breathing, confusion) mean the person
-needs urgent hospital care.
+LIFE-THREATENING BLEEDING FROM AN ARM OR LEG
+If firm pressure does not stop blood spurting from an arm or leg, and you are trained,
+a tourniquet may be applied 5-7 cm above the wound. Note the time it was applied and
+tell the ambulance crew. Never apply a tourniquet to the neck, head or body.
+
+NOSEBLEED
+Sit up, lean forward, pinch the soft part of the nose for 10-15 minutes and breathe
+through the mouth. Do not tip the head back. Get help if bleeding lasts more than
+20 minutes, or after a head injury.
+
+SIGNS OF SHOCK (URGENT HOSPITAL CARE)
+- Pale, cold, sweaty skin
+- Fast, weak pulse and fast breathing
+- Confusion, drowsiness or fainting
+Keep the person lying down and warm with a blanket, and do not give food or drink.
+
+PATIENTS ON BLOOD THINNERS
+People who take warfarin or similar medicines bleed for longer. Even small wounds
+should be checked at the clinic.
 
 ------------------------------------------------------------------------
 FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a

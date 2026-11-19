@@ -1,6 +1,7 @@
 ========================================================================
 HOPEWELL COMMUNITY CLINIC
-15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+15 Moringa Street, Khomasdal, Windhoek, Namibia
+Tel: +264 61 555 0100 | Emergency line: +264 61 555 0199 (fictional)
 FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
 ========================================================================
 VISIT NOTE - NDAPANDULA IIPINGE - 2026-11-02
@@ -11,21 +12,32 @@ Patient: PAT-003 Ndapandula Iipinge (8 months)
 Seen by: NUR-002 Nurse Martha Iipinge
 
 REASON FOR VISIT
-Watery diarrhoea for 2 days, still breastfeeding and drinking.
+Watery diarrhoea for 2 days (5-6 times a day), still breastfeeding and drinking.
+No blood in the stool. Vomited once yesterday. No fever at home.
 
 FINDINGS
-- Alert, no signs of severe dehydration
-- Temperature 37.6 C, weight 7.9 kg
+- Alert and playful, no signs of severe dehydration (eyes not sunken, skin pinch
+  goes back quickly, drinking eagerly)
+- Temperature 37.6 C, weight 7.9 kg (8.1 kg on 2026-10-19)
+- Nappy wet this morning
 
 TREATMENT
-- Oral rehydration solution (ORS) after every loose stool
+- Oral rehydration solution (ORS) after every loose stool: 50-100 mL each time
 - Zinc 10 mg once daily for 10 days
-- Continue breastfeeding
+- Continue breastfeeding and solid food
 
 ADVICE TO MOTHER
 Return immediately if the child cannot drink or breastfeed, vomits everything,
 becomes very sleepy, or has blood in the stool.
-Review visit: 2026-11-05 (attended, diarrhoea resolved).
+Wash hands with soap after changing nappies and before preparing food. Boil drinking
+water for the child.
+
+Review visit: 2026-11-05 (attended, diarrhoea resolved, weight 8.0 kg).
+
+EARLIER VISITS
+- 2026-10-19: cough and runny nose for 3 days, no fast breathing, no fever.
+  Advised fluids and saline nose drops. Resolved.
+- 2026-07-28: nappy rash, treated with zinc oxide cream. Resolved.
 
 ------------------------------------------------------------------------
 FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a

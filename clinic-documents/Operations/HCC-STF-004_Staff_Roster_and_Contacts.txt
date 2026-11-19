@@ -1,6 +1,7 @@
 ========================================================================
 HOPEWELL COMMUNITY CLINIC
-15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+15 Moringa Street, Khomasdal, Windhoek, Namibia
+Tel: +264 61 555 0100 | Emergency line: +264 61 555 0199 (fictional)
 FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
 ========================================================================
 STAFF ROSTER AND CONTACTS
@@ -8,14 +9,30 @@ Document ID: HCC-STF-004
 Date: 2026-11-01
 ========================================================================
 STAFF
-- DOC-001 Dr Anna-Marie van Wyk, medical doctor - Tuesday and Thursday
-- NUR-001 Sister Ndapewa Haufiku, registered nurse - Monday to Friday
+- DOC-001 Dr Anna-Marie van Wyk, medical doctor - Tuesday and Thursday 08:00-16:00
+- NUR-001 Sister Ndapewa Haufiku, registered nurse (clinic in charge) - Monday to Friday
 - NUR-002 Nurse Martha Iipinge, enrolled nurse - Monday to Saturday (shifts)
-- CLK-001 Selma Amutenya, clinic clerk - Monday to Friday
+- CLK-001 Selma Amutenya, clinic clerk - Monday to Friday 07:30-16:30
+- Cleaner and security are contracted (fictional company SafeClean), 06:00-18:00
 
-ON-CALL NURSE, NOVEMBER - DECEMBER 2026
+NURSE SHIFTS, NOVEMBER - DECEMBER 2026
+WEEK STARTING   NUR-001                  NUR-002
+16 Nov          Mon-Fri 07:30-16:00      Mon-Fri 09:00-17:00, Sat 08:00-12:00
+23 Nov          Mon-Fri 07:30-16:00      Tue-Sat (Mon off)
+30 Nov          Mon-Fri 07:30-16:00      Mon-Fri 09:00-17:00, Thu outreach
+7 Dec           Mon-Thu (Fri leave)      Mon-Sat
+
+ON-CALL NURSE (after hours, by phone)
 - Weeks starting 16 Nov and 30 Nov: NUR-001
 - Weeks starting 23 Nov and 7 Dec: NUR-002
+
+LEAVE
+- NUR-001: 11 December 2026 (1 day)
+- DOC-001: 21-23 December 2026 (relief doctor arranged with Katutura State Hospital)
+
+TRAINING
+- Basic life support refresher for all clinical staff: 1 December 2026, 14:00
+- Cold-chain training for CLK-001: completed 2026-09-15
 
 Clinic emergency line: +264 61 555 0199 (fictional)
 Staff home addresses and personal phone numbers are not kept in this archive.

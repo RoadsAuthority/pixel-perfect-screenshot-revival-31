@@ -1,6 +1,7 @@
 ========================================================================
 HOPEWELL COMMUNITY CLINIC
-15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+15 Moringa Street, Khomasdal, Windhoek, Namibia
+Tel: +264 61 555 0100 | Emergency line: +264 61 555 0199 (fictional)
 FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
 ========================================================================
 PROTOCOL - ANAPHYLAXIS AFTER VACCINATION
@@ -8,10 +9,13 @@ Document ID: HCC-CLN-001
 Date: 2026-03-01
 ========================================================================
 For trained clinical staff. Based on standard anaphylaxis guidance.
+Approved by DOC-001 Dr Anna-Marie van Wyk, 2026-03-01. Review date: 2027-03-01.
 
 RECOGNISE
 Sudden onset (usually within 30 minutes) of breathing difficulty, wheeze, swelling of
 the lips or throat, widespread rash, collapse or low blood pressure.
+Do not confuse with fainting: a faint has a slow pulse, pale skin and quick recovery
+when lying flat, with no rash or wheeze.
 
 TREAT
 1. Call for help. Lay the patient flat with legs raised (sitting up if breathing is
@@ -20,11 +24,27 @@ TREAT
    0.01 mL/kg (0.01 mg/kg), maximum 0.5 mL (0.5 mg) adult, 0.3 mL child 6-12 years,
    0.15 mL child under 6 years.
 3. Repeat after 5 minutes if there is no improvement.
-4. Give oxygen if available. Monitor breathing and pulse.
-5. Transfer every patient with anaphylaxis to hospital, even after recovery.
+4. Give oxygen if available (15 L/min by mask). Monitor breathing and pulse.
+5. Start IV fluids (normal saline 20 mL/kg) if blood pressure is low and a line can
+   be placed.
+6. Transfer every patient with anaphylaxis to hospital, even after recovery, because
+   symptoms can return within 12 hours.
+
+AFTER THE EVENT
+- Record the vaccine, batch number, time and treatment in the patient file.
+- Report the reaction on the national adverse-event (AEFI) form within 24 hours.
+- Write the allergy on the patient's clinic card.
+
+ANAPHYLAXIS KIT CHECKLIST (checked weekly, last check 2026-11-16 by NUR-002)
+- Adrenaline 1 mg/mL ampoules x 3 (expiry 2027-05-31)
+- 1 mL syringes and 25 mm needles x 5
+- Oxygen cylinder and mask (cylinder full)
+- IV cannulas, giving set, normal saline 1 L x 2
+- Blood pressure machine and pulse oximeter
 
 Every vaccination session must have an anaphylaxis kit (adrenaline, syringes) ready.
 Observe every vaccinated person for 15 minutes.
+Clinic record: no anaphylaxis after vaccination in 2025 or 2026.
 
 ------------------------------------------------------------------------
 FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a

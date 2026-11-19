@@ -1,6 +1,7 @@
 ========================================================================
 HOPEWELL COMMUNITY CLINIC
-15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+15 Moringa Street, Khomasdal, Windhoek, Namibia
+Tel: +264 61 555 0100 | Emergency line: +264 61 555 0199 (fictional)
 FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
 ========================================================================
 EMERGENCY GUIDE - BURNS
@@ -9,17 +10,38 @@ Date: 2026-02-01
 ========================================================================
 Follows standard first-aid practice.
 
-1. Stop the burning: move away from the heat source.
-2. Cool the burn under cool (not ice-cold) running water for 20 minutes.
+1. Stop the burning: move away from the heat source. If clothes are on fire: stop,
+   drop and roll, or smother the flames with a blanket.
+2. Cool the burn under cool (not ice-cold) running water for 20 minutes. Cooling
+   still helps up to 3 hours after the burn.
 3. Remove rings, watches and clothing near the burn unless stuck to the skin.
-4. Cover loosely with cling film or a clean plastic bag.
-5. Do NOT apply ice, butter, oil, toothpaste or traditional remedies.
+4. Cover loosely with cling film or a clean plastic bag (lengthways, not wrapped
+   tightly around a limb).
+5. Do NOT apply ice, butter, oil, toothpaste, egg white or traditional remedies.
 6. Do not burst blisters.
+7. Keep the person warm - especially small children, who lose heat quickly.
+
+PAIN
+Paracetamol or ibuprofen by the dose on the package can be given for pain.
 
 GO TO THE CLINIC OR HOSPITAL IF
 - The burn is larger than the person's palm, is deep, or on the face, hands, feet,
   genitals or over a joint
-- The person is a child, elderly, or the burn is from electricity or chemicals
+- The person is a child, elderly, pregnant or has diabetes
+- The burn is from electricity or chemicals
+- The person breathed in smoke (hoarse voice, coughing, soot around the nose)
+
+CHEMICAL BURNS
+Brush off dry powder first, then rinse with plenty of running water for at least
+20 minutes. Keep the chemical container to show the health worker.
+
+ELECTRICAL BURNS
+Switch off the power before touching the person. Electrical burns can damage the
+heart even when the skin burn looks small - always go to hospital.
+
+PARAFFIN STOVE AND OPEN FIRE SAFETY
+Most burns in children at home come from hot water, paraffin stoves and open fires.
+Keep children away from cooking areas and turn pot handles inwards.
 
 ------------------------------------------------------------------------
 FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a

@@ -1,6 +1,7 @@
 ========================================================================
 HOPEWELL COMMUNITY CLINIC
-15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+15 Moringa Street, Khomasdal, Windhoek, Namibia
+Tel: +264 61 555 0100 | Emergency line: +264 61 555 0199 (fictional)
 FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
 ========================================================================
 VACCINATION CLINIC DAYS AND OUTREACH DATES NOV 2026 - FEB 2027
@@ -9,20 +10,35 @@ Date: 2026-11-01
 ========================================================================
 IMMUNISATION DAYS AT THE CLINIC
 Every Monday and Saturday morning, 08:00 - 12:00. No appointment needed.
+Please arrive before 11:30 so the nurse can finish the queue.
 
-MOBILE OUTREACH CLINIC (immunisation, blood pressure and glucose checks)
-- Okahandja Park Community Hall: 3 December 2026, 09:00 - 14:00
-- Havana Primary School: 10 December 2026, 09:00 - 14:00
-- Okahandja Park Community Hall: 7 January 2027, 09:00 - 14:00
-- Havana Primary School: 14 January 2027, 09:00 - 14:00
-- Okahandja Park Community Hall: 4 February 2027, 09:00 - 14:00
+MOBILE OUTREACH CLINIC
+The outreach team brings immunisation, blood pressure checks, blood glucose checks,
+family planning and vitamin A to the community.
+
+DATE               PLACE                                   TIME            TEAM
+3 December 2026    Okahandja Park Community Hall           09:00 - 14:00   NUR-002 + CLK-001
+10 December 2026   Havana Primary School                   09:00 - 14:00   NUR-001 + NUR-002
+7 January 2027     Okahandja Park Community Hall           09:00 - 14:00   NUR-002 + CLK-001
+14 January 2027    Havana Primary School                   09:00 - 14:00   NUR-001 + CLK-001
+4 February 2027    Okahandja Park Community Hall           09:00 - 14:00   NUR-002 + CLK-001
+11 February 2027   Havana Primary School                   09:00 - 14:00   NUR-001 + NUR-002
 
 SPECIAL CAMPAIGN
 HPV vaccination for girls aged 9-14 years at Havana Primary School on
-10 December 2026. Parents must sign the consent form beforehand.
+10 December 2026. Parents must sign the consent form beforehand (forms available at
+the clinic reception and from the school office).
 
+WHAT THE OUTREACH CLINIC CANNOT DO
+No doctor consultations, no laboratory tests other than glucose, and no chronic
+medicine collection. Patients who need these must come to the clinic.
+
+HOLIDAY CLOSURE
 The clinic is closed for the holidays from 24 December 2026 to 2 January 2027.
 No outreach visit takes place in that period.
+
+If an outreach day is cancelled (for example because of heavy rain), a notice is put
+up at the venue and announced on community radio the day before.
 
 ------------------------------------------------------------------------
 FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a

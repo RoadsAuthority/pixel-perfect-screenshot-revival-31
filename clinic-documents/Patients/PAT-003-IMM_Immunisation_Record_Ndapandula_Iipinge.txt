@@ -1,6 +1,7 @@
 ========================================================================
 HOPEWELL COMMUNITY CLINIC
-15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+15 Moringa Street, Khomasdal, Windhoek, Namibia
+Tel: +264 61 555 0100 | Emergency line: +264 61 555 0199 (fictional)
 FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
 ========================================================================
 IMMUNISATION RECORD - NDAPANDULA IIPINGE
@@ -9,21 +10,31 @@ Date: 2026-11-02
 ========================================================================
 Patient ID: PAT-003
 Name: Ndapandula Iipinge (child)
-Date of birth: 2026-03-10
+Date of birth: 2026-03-10 (born at Katutura State Hospital, birth weight 3.1 kg)
 Parent/guardian: Loide Iipinge (mother), 081 555 0301 (fictional)
 
 VACCINES GIVEN
-- 2026-03-10  BCG, OPV 0
-- 2026-04-21  Pentavalent 1, OPV 1, PCV 1, Rotavirus 1
-- 2026-05-19  Pentavalent 2, OPV 2, PCV 2, Rotavirus 2
-- 2026-06-16  Pentavalent 3, OPV 3, PCV 3, IPV
+DATE         VACCINES                                        BATCH        GIVEN BY
+2026-03-10   BCG, OPV 0                                      BCG-2511     Hospital
+2026-04-21   Pentavalent 1, OPV 1, PCV 1, Rotavirus 1        PEN-2601     NUR-002
+2026-05-19   Pentavalent 2, OPV 2, PCV 2, Rotavirus 2        PEN-2601     NUR-002
+2026-06-16   Pentavalent 3, OPV 3, PCV 3, IPV                PEN-2601     NUR-001
+2026-09-14   Vitamin A (100 000 IU) at 6 months              -            NUR-002
+
+GROWTH (Road-to-Health chart)
+DATE         AGE         WEIGHT    LENGTH    COMMENT
+2026-04-21   6 weeks     4.6 kg    55 cm     Growing well
+2026-06-16   14 weeks    6.2 kg    61 cm     Growing well
+2026-09-14   6 months    7.6 kg    66 cm     Growing well, started solid food
+2026-11-02   8 months    7.9 kg    69 cm     Small weight gain (diarrhoea this week)
 
 NEXT DUE
 - Measles-Rubella 1 at 9 months: on or after 2026-12-10.
   Suggested: outreach clinic at Havana Primary School on 10 December 2026.
+- Vitamin A at 12 months: 2027-03-10. Deworming from 12 months.
 - Measles-Rubella 2 and DTP booster at 18 months: on or after 2027-09-10.
 
-Reactions: none recorded.
+Reactions: none recorded. BCG scar present (checked 2026-06-16).
 
 ------------------------------------------------------------------------
 FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a

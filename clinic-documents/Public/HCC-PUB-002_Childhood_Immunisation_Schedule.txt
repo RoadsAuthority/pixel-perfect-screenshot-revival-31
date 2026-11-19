@@ -1,6 +1,7 @@
 ========================================================================
 HOPEWELL COMMUNITY CLINIC
-15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+15 Moringa Street, Khomasdal, Windhoek, Namibia
+Tel: +264 61 555 0100 | Emergency line: +264 61 555 0199 (fictional)
 FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
 ========================================================================
 CHILDHOOD IMMUNISATION SCHEDULE
@@ -10,18 +11,37 @@ Date: 2026-01-15
 This is the routine childhood schedule followed at the clinic. It follows the national
 Expanded Programme on Immunisation (EPI). Always bring the Road-to-Health booklet.
 
-AGE              VACCINES GIVEN
-At birth         BCG (tuberculosis), OPV 0 (oral polio)
-6 weeks          Pentavalent 1 (DTP-HepB-Hib), OPV 1, PCV 1 (pneumococcal), Rotavirus 1
-10 weeks         Pentavalent 2, OPV 2, PCV 2, Rotavirus 2
-14 weeks         Pentavalent 3, OPV 3, PCV 3, IPV (injectable polio)
-9 months         Measles-Rubella 1 (MR1)
-18 months        Measles-Rubella 2 (MR2), DTP booster
-Girls 9-14 years HPV (cervical cancer prevention), 1 dose
+AGE              VACCINES GIVEN                                          HOW
+At birth         BCG (tuberculosis)                                      Injection, right upper arm
+                 OPV 0 (oral polio)                                      2 drops by mouth
+6 weeks          Pentavalent 1 (diphtheria, tetanus, whooping cough,     Injection, left thigh
+                 hepatitis B, Hib)
+                 OPV 1                                                   2 drops by mouth
+                 PCV 1 (pneumococcal)                                    Injection, right thigh
+                 Rotavirus 1                                             Drops by mouth
+10 weeks         Pentavalent 2, OPV 2, PCV 2, Rotavirus 2                As above
+14 weeks         Pentavalent 3, OPV 3, PCV 3, IPV (injectable polio)     As above
+9 months         Measles-Rubella 1 (MR1)                                 Injection, right upper arm
+18 months        Measles-Rubella 2 (MR2), DTP booster                    Injections
+Girls 9-14 years HPV (cervical cancer prevention), 1 dose                Injection, upper arm
+
+VITAMIN A AND DEWORMING
+- Vitamin A at 6 months, 12 months and then every 6 months until 5 years
+- Deworming (albendazole) every 6 months from 12 months
+
+AFTER VACCINATION - WHAT IS NORMAL
+- Mild fever, crying or a sore, red spot where the injection was given for 1-2 days
+- A small sore that forms a scar at the BCG site after 2-6 weeks (this is expected)
+Give paracetamol syrup by weight if the child has fever, and keep breastfeeding.
+
+COME BACK TO THE CLINIC IF
+- Fever lasts more than 2 days, or the child has a fit (convulsion)
+- The child is very sleepy, will not feed, or has difficulty breathing
+- Swelling of the face or lips, or a widespread rash (allergic reaction)
 
 MISSED A DOSE?
 Come to any immunisation day. Missed doses are caught up; the schedule does not
-restart. A mild fever or sore leg for 1-2 days after vaccination is normal.
+restart. Children up to 5 years can catch up on missed vaccines.
 
 ------------------------------------------------------------------------
 FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a

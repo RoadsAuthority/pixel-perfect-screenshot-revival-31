@@ -1,6 +1,7 @@
 ========================================================================
 HOPEWELL COMMUNITY CLINIC
-15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+15 Moringa Street, Khomasdal, Windhoek, Namibia
+Tel: +264 61 555 0100 | Emergency line: +264 61 555 0199 (fictional)
 FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
 ========================================================================
 EMERGENCY GUIDE - STROKE AND HEART ATTACK
@@ -14,16 +15,32 @@ STROKE - think FAST
 - Arms: can they lift both arms and keep them up?
 - Speech: is their speech slurred or confused?
 - Time: call for emergency help immediately. Note the time the signs started.
+Other signs: sudden loss of vision, sudden severe headache, loss of balance.
 Do not give food, drink or medicines to someone who may be having a stroke.
+Lay them on their side if they are drowsy or vomiting.
+
+Treatment in hospital works best within the first few hours - do not wait to see if
+the signs go away.
 
 HEART ATTACK
 Signs: chest pain or pressure that may spread to the arm, neck, jaw or back;
-shortness of breath; sweating; nausea.
+shortness of breath; sweating; nausea. Women, older people and people with diabetes
+may have only breathlessness, tiredness or upper stomach pain.
 1. Call for emergency help immediately.
 2. Sit the person down and keep them calm.
 3. If they are not allergic and are able to chew, give one adult aspirin (300 mg)
    to chew slowly.
-4. If they become unresponsive and are not breathing normally, start CPR.
+4. If they have their own heart spray (GTN), help them use it.
+5. If they become unresponsive and are not breathing normally, start CPR.
+
+CPR (ADULT)
+Push hard and fast in the centre of the chest, 100-120 times a minute, at least 5 cm
+deep. If an automated defibrillator (AED) is available, switch it on and follow the
+voice instructions.
+
+PEOPLE AT HIGHER RISK
+High blood pressure, diabetes, smoking, high cholesterol and being overweight raise
+the risk of stroke and heart attack. Taking chronic medicine every day lowers it.
 
 ------------------------------------------------------------------------
 FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a
