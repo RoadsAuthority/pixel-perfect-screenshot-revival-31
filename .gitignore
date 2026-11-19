@@ -31,6 +31,10 @@ dist-ssr
 *.sln
 *.sw?
 
+# Secrets (AWS keys etc.) — never commit
+.env
+backend/.env
+
 # Python
 __pycache__/
 *.pyc
