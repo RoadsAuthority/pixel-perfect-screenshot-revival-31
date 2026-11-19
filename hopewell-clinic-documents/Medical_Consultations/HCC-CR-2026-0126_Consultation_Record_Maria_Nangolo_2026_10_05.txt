@@ -1,0 +1,69 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+MEDICAL CONSULTATION AND DIAGNOSIS RECORD
+Document ID: HCC-CR-2026-0126
+Patient ID: PAT-1001
+Patient: Maria Nangolo
+========================================================================
+CONSULTATION
+------------
+Consultation date and time: 2026-10-05 09:15
+Doctor: DOC-001 (Dr Anna-Marie van Wyk)
+Known allergies: Penicillin (skin rash, reported at registration 2022-02-14)
+
+PRESENTING COMPLAINT
+--------------------
+Routine blood pressure review; morning headaches for 2 weeks.
+
+SYMPTOMS
+--------
+- Headaches on waking
+- Missed about 3 doses of amlodipine the previous week
+- No chest pain, no visual changes
+
+CLINICAL EXAMINATION FINDINGS
+-----------------------------
+- Blood pressure 148/94 mmHg (repeat 146/92 mmHg)
+- Pulse 78/min
+- Heart sounds normal
+- No ankle oedema
+
+DIAGNOSIS
+---------
+Essential hypertension, suboptimally controlled.
+
+PREVIOUS RELEVANT DIAGNOSES
+---------------------------
+Essential hypertension (2022-02-21); urinary tract infection (2024-08-06).
+
+TREATMENT PLAN
+--------------
+- Increase amlodipine from 5 mg to 10 mg once daily
+- Reinforce adherence and salt reduction
+- Nurse blood pressure check in 4 weeks
+
+PRESCRIBED MEDICATION (DOSAGE, FREQUENCY, DURATION)
+---------------------------------------------------
+- Amlodipine 10 mg orally once daily in the morning (3-month supply, to 2027-01-02)
+
+FOLLOW-UP
+---------
+Follow-up: 2026-11-02 at 09:00 (nurse blood pressure check)
+
+REFERRALS
+---------
+None
+
+LABORATORY INVESTIGATIONS
+-------------------------
+LAB-RPT-2026-0402 (full blood count, blood group, random glucose, creatinine)
+
+ADDENDUM
+--------
+2026-10-05 15:05: laboratory results reviewed; all within reference range; no change to plan.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

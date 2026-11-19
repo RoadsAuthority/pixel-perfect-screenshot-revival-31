@@ -1,0 +1,14 @@
+{
+  "metadataAttributes": {
+    "documentId": "HCC-HIS-1006",
+    "documentType": "Medical History Summary",
+    "folder": "Patients",
+    "accessGroups": [
+      "Nursing",
+      "Doctors",
+      "Records"
+    ],
+    "patientId": "PAT-1006",
+    "documentDate": "2026-11-19"
+  }
+}

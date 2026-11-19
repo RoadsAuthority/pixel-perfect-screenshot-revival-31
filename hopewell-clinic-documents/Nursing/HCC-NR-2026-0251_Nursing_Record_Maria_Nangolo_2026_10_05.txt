@@ -1,0 +1,66 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+NURSING RECORD
+Document ID: HCC-NR-2026-0251
+Patient ID: PAT-1001
+Patient: Maria Nangolo
+========================================================================
+ATTENDANCE
+----------
+Date and time: 2026-10-05 08:45
+Attending nurse: NUR-001 (Sister Ndapewa Haufiku)
+Medical practitioner involved: DOC-001 (Dr Anna-Marie van Wyk)
+
+REPORTED SYMPTOMS
+-----------------
+- Headaches on waking for about 2 weeks
+- Reports missing about 3 doses of amlodipine last week
+- No chest pain and no visual disturbance
+
+VITAL SIGNS
+-----------
+- Blood pressure: 148/94 mmHg (repeat after 10 minutes of rest: 146/92 mmHg)
+- Pulse: 78/min
+- Temperature: 36.6 C
+- Respiratory rate: 16/min
+- Oxygen saturation: 98% on room air
+- Weight: 72.4 kg
+
+NURSING OBSERVATIONS
+--------------------
+- Alert and comfortable
+- No ankle swelling
+- Patient worried about 'high readings'
+
+NURSING ASSESSMENT
+------------------
+Raised blood pressure on two readings with reported missed doses. This is a nursing assessment, not a medical diagnosis. Diagnosis and prescribing are done by the medical practitioner.
+
+CARE PROVIDED
+-------------
+- Allergy alert checked: penicillin
+- Escorted to the laboratory for blood tests (full blood count, random glucose, creatinine, blood group)
+
+MEDICATION ADMINISTERED
+-----------------------
+None administered by nursing staff.
+
+PATIENT EDUCATION AND ADVICE
+----------------------------
+- Take amlodipine at the same time every day
+- Reduce salt intake
+- Keep a home blood pressure diary
+
+FOLLOW-UP INSTRUCTIONS
+----------------------
+Doctor review the same day (HCC-CR-2026-0126); nurse blood pressure check on 2026-11-02.
+
+REFERRAL OR ESCALATION
+----------------------
+Escalated to DOC-001 (Dr Anna-Marie van Wyk) at 09:05 because blood pressure was above 140/90 mmHg on two readings.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

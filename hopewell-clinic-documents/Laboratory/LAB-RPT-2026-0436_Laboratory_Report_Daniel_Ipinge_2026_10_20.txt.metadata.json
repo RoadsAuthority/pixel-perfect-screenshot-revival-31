@@ -1,0 +1,15 @@
+{
+  "metadataAttributes": {
+    "documentId": "LAB-RPT-2026-0436",
+    "documentType": "Laboratory Report",
+    "folder": "Laboratory",
+    "accessGroups": [
+      "Laboratory",
+      "Nursing",
+      "Doctors",
+      "Records"
+    ],
+    "patientId": "PAT-1006",
+    "documentDate": "2026-10-20"
+  }
+}

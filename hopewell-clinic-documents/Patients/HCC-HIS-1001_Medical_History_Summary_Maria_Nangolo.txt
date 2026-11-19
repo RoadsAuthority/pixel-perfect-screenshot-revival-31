@@ -1,0 +1,46 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+MEDICAL HISTORY SUMMARY
+Document ID: HCC-HIS-1001
+Patient ID: PAT-1001
+Patient: Maria Nangolo
+Prepared by: REC-001 (Beata Nakale), Medical Records Department
+Prepared on: 2026-11-19
+========================================================================
+SUMMARY
+-------
+Maria Nangolo (PAT-1001), 41-year-old female, registered 2022-02-14. Status: Active.
+Known allergies: Penicillin (skin rash, reported at registration 2022-02-14)
+Blood group: O Positive (LAB-RPT-2026-0402)
+
+CONDITIONS AND DIAGNOSES (CHRONOLOGICAL)
+----------------------------------------
+- 2022-02-21: Essential hypertension
+- 2024-08-06: Urinary tract infection
+- 2026-10-05: Essential hypertension, suboptimally controlled
+
+CURRENT MEDICATION
+------------------
+- Amlodipine 10 mg, oral, Once daily (morning) (from 2026-10-05; prescribed by DOC-001 (Dr Anna-Marie van Wyk))
+
+CLINIC CONTACTS IN 2026
+-----------------------
+- 2026-10-05 08:45 | Nursing record HCC-NR-2026-0251 | Nurse: NUR-001 (Sister Ndapewa Haufiku) | Doctor involved: DOC-001 (Dr Anna-Marie van Wyk)
+- 2026-10-05 09:15 | Consultation HCC-CR-2026-0126 | Doctor: DOC-001 (Dr Anna-Marie van Wyk) | Diagnosis: Essential hypertension, suboptimally controlled.
+- 2026-10-05 09:40 | Laboratory report LAB-RPT-2026-0402 | Technician: LAB-001 (Elias Shilongo)
+- 2026-11-02 09:10 | Nursing record HCC-NR-2026-0320 | Nurse: NUR-002 (Nurse Martha Iipinge) | No doctor involved
+
+UPCOMING APPOINTMENTS
+---------------------
+- 2026-12-07 08:45 | Nurse check | NUR-002 (Nurse Martha Iipinge)
+
+FAMILY MEDICAL HISTORY
+----------------------
+- Mother: hypertension
+- Father: type 2 diabetes mellitus
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

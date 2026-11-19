@@ -1,0 +1,27 @@
+{
+  "user_id": {
+    "S": "NUR-001"
+  },
+  "username": {
+    "S": "ndapewa.haufiku"
+  },
+  "name": {
+    "S": "Sister Ndapewa Haufiku"
+  },
+  "groups": {
+    "L": [
+      {
+        "S": "Nursing"
+      },
+      {
+        "S": "Everyone"
+      }
+    ]
+  },
+  "pin_salt": {
+    "S": "b2e345affc9f3f7f47a9c1d779952737"
+  },
+  "pin_hash": {
+    "S": "044bf91568beeb233fb99d9ba01e5bf884d1f834a6c0b2cc5ba3a33dede2e2fafe62601d4d916caa1c052dfc00c3517abf4eaab4ed1b2229eecc4b9d65e76300"
+  }
+}

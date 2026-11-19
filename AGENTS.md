@@ -30,6 +30,6 @@ use the editor.
 <!-- LOVABLE:END -->
 
 ## Application boundaries
-- Keep fictional demo documents and access evaluation in a browser-safe archive module; demo verification is illustrative, not production authentication.
-- Send live archive actions directly to the user-configured HTTPS AWS API endpoint; AWS must validate PINs, enforce access control, and retain authoritative audit logs.
-- Keep demo audit history in memory only and mark demo content explicitly; never persist patient information or PINs in browser storage.
+- The browser holds no archive documents and makes no access decisions; it calls the user-configured HTTPS clinic API (FastAPI on Render).
+- The backend validates PINs, filters Bedrock retrieval by the user's access groups, enforces access on every action, and keeps the authoritative audit log in DynamoDB.
+- All archive data is fictional (hopewell-clinic-documents). Never persist patient information, PINs, or tokens in browser storage.

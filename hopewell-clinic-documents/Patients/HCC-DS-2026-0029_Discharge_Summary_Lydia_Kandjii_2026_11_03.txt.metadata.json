@@ -1,0 +1,14 @@
+{
+  "metadataAttributes": {
+    "documentId": "HCC-DS-2026-0029",
+    "documentType": "Discharge Summary",
+    "folder": "Patients",
+    "accessGroups": [
+      "Nursing",
+      "Doctors",
+      "Records"
+    ],
+    "patientId": "PAT-1003",
+    "documentDate": "2026-11-03"
+  }
+}

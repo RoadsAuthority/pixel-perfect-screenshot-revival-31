@@ -1,0 +1,33 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+CLINIC CONFIDENTIALITY POLICY
+Document ID: HCC-POL-001
+Effective date: 2026-01-15
+Approved by: Clinic management
+Review date: 2027-01-15
+========================================================================
+PURPOSE
+-------
+All patient information is confidential. Staff may access only the information needed for their role.
+
+ACCESS BY ROLE
+--------------
+- Administration (clerks): patient profiles, registration records, appointment registers, clerk work logs. No access to nursing, consultation, laboratory or medication records.
+- Nursing: patient profiles, medical history summaries, nursing records, laboratory reports, medication records, referral records, discharge summaries and appointment registers. Consultation records are restricted to doctors and Medical Records.
+- Doctors: all clinical records of patients, plus profiles and appointment registers.
+- Laboratory: laboratory reports only (plus policies and the staff directory).
+- Medical Records: all patient records for filing, summarising and quality control.
+- Policies and the staff directory are open to all staff.
+
+RULES
+-----
+- Staff must not discuss patients in public areas.
+- Patient information is released to third parties only with the patient's written consent or as required by law.
+- Every access to electronic records must be logged.
+- Suspected breaches must be reported to the clinic manager within 24 hours.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

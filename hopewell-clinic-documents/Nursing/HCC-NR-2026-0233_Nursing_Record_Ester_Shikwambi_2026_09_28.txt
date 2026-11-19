@@ -1,0 +1,68 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+NURSING RECORD
+Document ID: HCC-NR-2026-0233
+Patient ID: PAT-1005
+Patient: Ester Shikwambi
+========================================================================
+ATTENDANCE
+----------
+Date and time: 2026-09-28 10:05
+Attending nurse: NUR-001 (Sister Ndapewa Haufiku)
+Medical practitioner involved: DOC-002 (Dr Samuel Katjiuanjo)
+
+REPORTED SYMPTOMS
+-----------------
+- Pain in both knees, worse on the right, for about 2 weeks
+- Morning stiffness of about 30 minutes
+- Pain worse when climbing stairs
+
+VITAL SIGNS
+-----------
+- Blood pressure: 142/88 mmHg
+- Pulse: 76/min
+- Temperature: 36.4 C
+- Respiratory rate: 16/min
+- Oxygen saturation: 97% on room air
+- Weight: 81.0 kg
+- Pain score: 6/10 (knees)
+
+NURSING OBSERVATIONS
+--------------------
+- Visible swelling of the right knee, no redness
+- Reduced flexion of the right knee
+- Walks slowly with a mild limp
+
+NURSING ASSESSMENT
+------------------
+Knee pain with reduced mobility and mildly raised blood pressure. This is a nursing assessment, not a medical diagnosis. Diagnosis and prescribing are done by the medical practitioner.
+
+CARE PROVIDED
+-------------
+- Advised to rest and elevate the right leg
+- Allergy alert checked: aspirin and NSAIDs must NOT be given (documented stomach bleeding)
+- Escorted to the laboratory for blood tests (full blood count, blood group, creatinine)
+
+MEDICATION ADMINISTERED
+-----------------------
+None administered by nursing staff.
+
+PATIENT EDUCATION AND ADVICE
+----------------------------
+- Gentle range-of-motion exercises
+- Avoid over-the-counter anti-inflammatory tablets (NSAIDs) because of documented intolerance
+- Use a walking stick on stairs
+
+FOLLOW-UP INSTRUCTIONS
+----------------------
+Doctor review as per consultation record HCC-CR-2026-0118.
+
+REFERRAL OR ESCALATION
+----------------------
+Raised blood pressure and knee findings escalated to DOC-002 (Dr Samuel Katjiuanjo) at 10:25.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

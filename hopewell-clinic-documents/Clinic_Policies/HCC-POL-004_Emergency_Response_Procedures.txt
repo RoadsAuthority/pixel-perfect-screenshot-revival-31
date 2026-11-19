@@ -1,0 +1,30 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+EMERGENCY RESPONSE PROCEDURES
+Document ID: HCC-POL-004
+Effective date: 2026-01-15
+Approved by: Clinic management
+Review date: 2027-01-15
+========================================================================
+RAISING THE ALARM
+-----------------
+- Any staff member who sees a collapsed or seriously unwell patient calls for help and alerts the nearest nurse and doctor.
+- The emergency ambulance number displayed at reception is 061 555 0199 (fictional placeholder).
+
+IMMEDIATE RESPONSE
+------------------
+- The nurse checks airway, breathing, circulation and vital signs and starts basic life support if needed.
+- The doctor on duty directs treatment and decides on transfer to hospital.
+- Check the allergy alert on the patient file before giving any medication.
+
+DOCUMENTATION
+-------------
+- The nurse records times, observations and treatment in a nursing record.
+- The doctor completes a consultation record, and a discharge or transfer summary is completed.
+- The clinic manager is informed of every emergency within 24 hours.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

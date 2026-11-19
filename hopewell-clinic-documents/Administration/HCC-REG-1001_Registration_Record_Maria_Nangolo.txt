@@ -1,0 +1,42 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+PATIENT REGISTRATION RECORD
+Document ID: HCC-REG-1001
+Patient ID: PAT-1001
+Patient: Maria Nangolo
+========================================================================
+REGISTRATION
+------------
+Registered by: CLK-001 (Selma Amutenya)
+Registration date: 2022-02-14
+Registration time: 09:20
+Patient file created: HCC-F-1001
+First appointment: 2022-02-14 09:20 (same-day nursing triage)
+
+PATIENT INFORMATION CAPTURED
+----------------------------
+Full name: Maria Nangolo
+Date of birth: 1985-03-12
+Gender: Female
+Identity document: Namibian national ID (sighted)
+Address: Erf 1840, Moringa Street, Khomasdal, Windhoek
+Telephone: 081 555 0111
+Email: maria.nangolo@mail.example
+Emergency contact: Paulus Nangolo (Husband), 081 555 0112
+Allergies stated by patient at registration: Penicillin (skin rash, reported at registration 2022-02-14)
+Payment method: Self-paying (no medical aid on file)
+Consent to treatment and privacy notice signed: Yes
+
+CONTACT UPDATES AND CORRECTIONS LOG
+-----------------------------------
+- 2025-03-04 10:15 | Contact update by CLK-002 (Petrus Nghidinwa): mobile number changed from 081 555 0109 to 081 555 0111 at the patient's request.
+
+SCOPE NOTE
+----------
+Clerks capture and maintain administrative information only. Clerks do not make medical diagnoses, interpret results or prescribe medication.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

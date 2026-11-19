@@ -1,0 +1,42 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+PATIENT REGISTRATION RECORD
+Document ID: HCC-REG-1004
+Patient ID: PAT-1004
+Patient: Joseph Mbumba
+========================================================================
+REGISTRATION
+------------
+Registered by: CLK-002 (Petrus Nghidinwa)
+Registration date: 2025-02-17
+Registration time: 11:10
+Patient file created: HCC-F-1004
+First appointment: 2025-02-17 11:10 (same-day nursing triage)
+
+PATIENT INFORMATION CAPTURED
+----------------------------
+Full name: Joseph Mbumba
+Date of birth: 2015-01-08
+Gender: Male
+Identity document: Birth certificate (sighted); mother's national ID (sighted)
+Address: 34 Ruacana Street, Wanaheda, Windhoek
+Telephone: 081 555 0144 (mother)
+Email: Not provided
+Emergency contact: Rachel Mbumba (Mother (legal guardian)), 081 555 0144
+Allergies stated by patient at registration: No known allergies
+Payment method: Self-paying (no medical aid on file)
+Consent to treatment and privacy notice signed: Yes
+
+CONTACT UPDATES AND CORRECTIONS LOG
+-----------------------------------
+- 2025-02-18 08:40 | Correction by CLK-001 (Selma Amutenya): house number corrected from 43 to 34 Ruacana Street after the mother brought proof of address.
+
+SCOPE NOTE
+----------
+Clerks capture and maintain administrative information only. Clerks do not make medical diagnoses, interpret results or prescribe medication.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

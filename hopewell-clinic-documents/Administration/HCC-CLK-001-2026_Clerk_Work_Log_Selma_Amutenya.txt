@@ -1,0 +1,29 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+CLERK WORK LOG
+Document ID: HCC-CLK-001-2026
+Clerk: CLK-001 (Selma Amutenya)
+Role: Registration Clerk
+Period: 2026-09-21 to 2026-11-19
+========================================================================
+ACTIVITY
+--------
+2026-09-21 09:12 | Appointment booked | PAT-1005 Ester Shikwambi | Consultation on 2026-09-28 at 10:00 with DOC-002.
+2026-09-28 09:55 | Check-in and file retrieval | PAT-1005 Ester Shikwambi | Patient file HCC-F-1005 retrieved for the consultation.
+2026-09-28 11:00 | Follow-up appointment booked | PAT-1005 Ester Shikwambi | Follow-up on 2026-10-26 at 10:00 with DOC-002.
+2026-09-29 11:10 | Referral administration | PAT-1005 Ester Shikwambi | REF-2026-0031 (physiotherapy) typed from the doctor's request and sent.
+2026-10-06 14:20 | Appointment booked | PAT-1002 Tobias Hamutenya | Consultation on 2026-10-12 at 08:00 with DOC-002.
+2026-10-12 07:50 | Check-in | PAT-1002 Tobias Hamutenya | Patient file HCC-F-1002 retrieved.
+2026-10-12 13:50 | Follow-up appointment booked | PAT-1002 Tobias Hamutenya | Follow-up on 2026-11-23 at 08:30 with DOC-002.
+2026-10-13 09:30 | Referral administration | PAT-1002 Tobias Hamutenya | REF-2026-0036 (dietetics) typed from the doctor's request and sent.
+2026-10-26 10:20 | Attendance recorded | PAT-1005 Ester Shikwambi | Appointment of 2026-10-26 at 10:00 marked 'Did not attend'.
+
+SCOPE NOTE
+----------
+Clerks capture and maintain administrative information only. Clerks do not make medical diagnoses, interpret results or prescribe medication.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

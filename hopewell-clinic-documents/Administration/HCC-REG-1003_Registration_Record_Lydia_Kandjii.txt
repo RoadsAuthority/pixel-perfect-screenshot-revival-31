@@ -1,0 +1,42 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+PATIENT REGISTRATION RECORD
+Document ID: HCC-REG-1003
+Patient ID: PAT-1003
+Patient: Lydia Kandjii
+========================================================================
+REGISTRATION
+------------
+Registered by: CLK-001 (Selma Amutenya)
+Registration date: 2024-01-22
+Registration time: 08:45
+Patient file created: HCC-F-1003
+First appointment: 2024-01-22 08:45 (same-day nursing triage)
+
+PATIENT INFORMATION CAPTURED
+----------------------------
+Full name: Lydia Kandjii
+Date of birth: 1998-06-21
+Gender: Female
+Identity document: Namibian national ID (sighted)
+Address: 7 Mahogany Avenue, Pioneerspark, Windhoek
+Telephone: 081 555 0133
+Email: lydia.kandjii@mail.example
+Emergency contact: Rebecca Kandjii (Mother), 081 555 0134
+Allergies stated by patient at registration: Sulfonamide antibiotics (skin rash); house dust mites (wheeze)
+Payment method: Self-paying (no medical aid on file)
+Consent to treatment and privacy notice signed: Yes
+
+CONTACT UPDATES AND CORRECTIONS LOG
+-----------------------------------
+- 2025-06-02 11:30 | Address updated by CLK-002 (Petrus Nghidinwa): patient moved to 7 Mahogany Avenue, Pioneerspark (previous address: 22 Jacaranda Street, Windhoek West).
+
+SCOPE NOTE
+----------
+Clerks capture and maintain administrative information only. Clerks do not make medical diagnoses, interpret results or prescribe medication.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

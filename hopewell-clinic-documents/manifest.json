@@ -1,0 +1,818 @@
+[
+  {
+    "documentId": "HCC-PRF-1001",
+    "title": "Patient Profile Maria Nangolo",
+    "documentType": "Patient Profile",
+    "folder": "Patients",
+    "file": "Patients/HCC-PRF-1001_Patient_Profile_Maria_Nangolo.txt",
+    "patientId": "PAT-1001",
+    "date": "2026-11-19",
+    "accessGroups": [
+      "Administration",
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-PRF-1002",
+    "title": "Patient Profile Tobias Hamutenya",
+    "documentType": "Patient Profile",
+    "folder": "Patients",
+    "file": "Patients/HCC-PRF-1002_Patient_Profile_Tobias_Hamutenya.txt",
+    "patientId": "PAT-1002",
+    "date": "2026-11-19",
+    "accessGroups": [
+      "Administration",
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-PRF-1003",
+    "title": "Patient Profile Lydia Kandjii",
+    "documentType": "Patient Profile",
+    "folder": "Patients",
+    "file": "Patients/HCC-PRF-1003_Patient_Profile_Lydia_Kandjii.txt",
+    "patientId": "PAT-1003",
+    "date": "2026-11-19",
+    "accessGroups": [
+      "Administration",
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-PRF-1004",
+    "title": "Patient Profile Joseph Mbumba",
+    "documentType": "Patient Profile",
+    "folder": "Patients",
+    "file": "Patients/HCC-PRF-1004_Patient_Profile_Joseph_Mbumba.txt",
+    "patientId": "PAT-1004",
+    "date": "2026-11-19",
+    "accessGroups": [
+      "Administration",
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-PRF-1005",
+    "title": "Patient Profile Ester Shikwambi",
+    "documentType": "Patient Profile",
+    "folder": "Patients",
+    "file": "Patients/HCC-PRF-1005_Patient_Profile_Ester_Shikwambi.txt",
+    "patientId": "PAT-1005",
+    "date": "2026-11-19",
+    "accessGroups": [
+      "Administration",
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-PRF-1006",
+    "title": "Patient Profile Daniel Ipinge",
+    "documentType": "Patient Profile",
+    "folder": "Patients",
+    "file": "Patients/HCC-PRF-1006_Patient_Profile_Daniel_Ipinge.txt",
+    "patientId": "PAT-1006",
+    "date": "2026-11-19",
+    "accessGroups": [
+      "Administration",
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-HIS-1001",
+    "title": "Medical History Summary Maria Nangolo",
+    "documentType": "Medical History Summary",
+    "folder": "Patients",
+    "file": "Patients/HCC-HIS-1001_Medical_History_Summary_Maria_Nangolo.txt",
+    "patientId": "PAT-1001",
+    "date": "2026-11-19",
+    "accessGroups": [
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-HIS-1002",
+    "title": "Medical History Summary Tobias Hamutenya",
+    "documentType": "Medical History Summary",
+    "folder": "Patients",
+    "file": "Patients/HCC-HIS-1002_Medical_History_Summary_Tobias_Hamutenya.txt",
+    "patientId": "PAT-1002",
+    "date": "2026-11-19",
+    "accessGroups": [
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-HIS-1003",
+    "title": "Medical History Summary Lydia Kandjii",
+    "documentType": "Medical History Summary",
+    "folder": "Patients",
+    "file": "Patients/HCC-HIS-1003_Medical_History_Summary_Lydia_Kandjii.txt",
+    "patientId": "PAT-1003",
+    "date": "2026-11-19",
+    "accessGroups": [
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-HIS-1004",
+    "title": "Medical History Summary Joseph Mbumba",
+    "documentType": "Medical History Summary",
+    "folder": "Patients",
+    "file": "Patients/HCC-HIS-1004_Medical_History_Summary_Joseph_Mbumba.txt",
+    "patientId": "PAT-1004",
+    "date": "2026-11-19",
+    "accessGroups": [
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-HIS-1005",
+    "title": "Medical History Summary Ester Shikwambi",
+    "documentType": "Medical History Summary",
+    "folder": "Patients",
+    "file": "Patients/HCC-HIS-1005_Medical_History_Summary_Ester_Shikwambi.txt",
+    "patientId": "PAT-1005",
+    "date": "2026-11-19",
+    "accessGroups": [
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-HIS-1006",
+    "title": "Medical History Summary Daniel Ipinge",
+    "documentType": "Medical History Summary",
+    "folder": "Patients",
+    "file": "Patients/HCC-HIS-1006_Medical_History_Summary_Daniel_Ipinge.txt",
+    "patientId": "PAT-1006",
+    "date": "2026-11-19",
+    "accessGroups": [
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-DS-2026-0021",
+    "title": "Discharge Summary Daniel Ipinge 2026-10-20",
+    "documentType": "Discharge Summary",
+    "folder": "Patients",
+    "file": "Patients/HCC-DS-2026-0021_Discharge_Summary_Daniel_Ipinge_2026_10_20.txt",
+    "patientId": "PAT-1006",
+    "date": "2026-10-20",
+    "accessGroups": [
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-DS-2026-0029",
+    "title": "Discharge Summary Lydia Kandjii 2026-11-03",
+    "documentType": "Discharge Summary",
+    "folder": "Patients",
+    "file": "Patients/HCC-DS-2026-0029_Discharge_Summary_Lydia_Kandjii_2026_11_03.txt",
+    "patientId": "PAT-1003",
+    "date": "2026-11-03",
+    "accessGroups": [
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-DS-2026-0032",
+    "title": "Discharge Summary Joseph Mbumba 2026-11-10",
+    "documentType": "Discharge Summary",
+    "folder": "Patients",
+    "file": "Patients/HCC-DS-2026-0032_Discharge_Summary_Joseph_Mbumba_2026_11_10.txt",
+    "patientId": "PAT-1004",
+    "date": "2026-11-10",
+    "accessGroups": [
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-ADM-STAFF",
+    "title": "Staff Directory and Departments",
+    "documentType": "Staff Directory",
+    "folder": "Administration",
+    "file": "Administration/HCC-ADM-STAFF_Staff_Directory_and_Departments.txt",
+    "patientId": null,
+    "date": "2026-11-19",
+    "accessGroups": [
+      "Everyone"
+    ]
+  },
+  {
+    "documentId": "HCC-REG-1001",
+    "title": "Registration Record Maria Nangolo",
+    "documentType": "Registration Record",
+    "folder": "Administration",
+    "file": "Administration/HCC-REG-1001_Registration_Record_Maria_Nangolo.txt",
+    "patientId": "PAT-1001",
+    "date": "2022-02-14",
+    "accessGroups": [
+      "Administration",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-REG-1002",
+    "title": "Registration Record Tobias Hamutenya",
+    "documentType": "Registration Record",
+    "folder": "Administration",
+    "file": "Administration/HCC-REG-1002_Registration_Record_Tobias_Hamutenya.txt",
+    "patientId": "PAT-1002",
+    "date": "2023-06-05",
+    "accessGroups": [
+      "Administration",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-REG-1003",
+    "title": "Registration Record Lydia Kandjii",
+    "documentType": "Registration Record",
+    "folder": "Administration",
+    "file": "Administration/HCC-REG-1003_Registration_Record_Lydia_Kandjii.txt",
+    "patientId": "PAT-1003",
+    "date": "2024-01-22",
+    "accessGroups": [
+      "Administration",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-REG-1004",
+    "title": "Registration Record Joseph Mbumba",
+    "documentType": "Registration Record",
+    "folder": "Administration",
+    "file": "Administration/HCC-REG-1004_Registration_Record_Joseph_Mbumba.txt",
+    "patientId": "PAT-1004",
+    "date": "2025-02-17",
+    "accessGroups": [
+      "Administration",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-REG-1005",
+    "title": "Registration Record Ester Shikwambi",
+    "documentType": "Registration Record",
+    "folder": "Administration",
+    "file": "Administration/HCC-REG-1005_Registration_Record_Ester_Shikwambi.txt",
+    "patientId": "PAT-1005",
+    "date": "2021-09-13",
+    "accessGroups": [
+      "Administration",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-REG-1006",
+    "title": "Registration Record Daniel Ipinge",
+    "documentType": "Registration Record",
+    "folder": "Administration",
+    "file": "Administration/HCC-REG-1006_Registration_Record_Daniel_Ipinge.txt",
+    "patientId": "PAT-1006",
+    "date": "2023-04-18",
+    "accessGroups": [
+      "Administration",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-APT-2026-A",
+    "title": "Appointment Register 28 Sep to 31 Oct 2026",
+    "documentType": "Appointment Register",
+    "folder": "Administration",
+    "file": "Administration/HCC-APT-2026-A_Appointment_Register_28_Sep_to_31_Oct_2026.txt",
+    "patientId": null,
+    "date": "2026-10-31",
+    "accessGroups": [
+      "Administration",
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-APT-2026-B",
+    "title": "Appointment Register 1 Nov to 31 Dec 2026",
+    "documentType": "Appointment Register",
+    "folder": "Administration",
+    "file": "Administration/HCC-APT-2026-B_Appointment_Register_1_Nov_to_31_Dec_2026.txt",
+    "patientId": null,
+    "date": "2026-11-19",
+    "accessGroups": [
+      "Administration",
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "REF-2026-0031",
+    "title": "Referral Record Ester Shikwambi Physiotherapy",
+    "documentType": "Referral Record",
+    "folder": "Administration",
+    "file": "Administration/REF-2026-0031_Referral_Record_Ester_Shikwambi_Physiotherapy.txt",
+    "patientId": "PAT-1005",
+    "date": "2026-09-28",
+    "accessGroups": [
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "REF-2026-0036",
+    "title": "Referral Record Tobias Hamutenya Dietetics",
+    "documentType": "Referral Record",
+    "folder": "Administration",
+    "file": "Administration/REF-2026-0036_Referral_Record_Tobias_Hamutenya_Dietetics.txt",
+    "patientId": "PAT-1002",
+    "date": "2026-10-12",
+    "accessGroups": [
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "REF-2026-0041",
+    "title": "Referral Record Daniel Ipinge Gastroenterology",
+    "documentType": "Referral Record",
+    "folder": "Administration",
+    "file": "Administration/REF-2026-0041_Referral_Record_Daniel_Ipinge_Gastroenterology.txt",
+    "patientId": "PAT-1006",
+    "date": "2026-10-20",
+    "accessGroups": [
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "REF-2026-0052",
+    "title": "Referral Record Joseph Mbumba Ear, nose and throat (ENT)",
+    "documentType": "Referral Record",
+    "folder": "Administration",
+    "file": "Administration/REF-2026-0052_Referral_Record_Joseph_Mbumba_Ear_nose_and_throat_ENT.txt",
+    "patientId": "PAT-1004",
+    "date": "2026-11-10",
+    "accessGroups": [
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-CLK-001-2026",
+    "title": "Clerk Work Log Selma Amutenya",
+    "documentType": "Clerk Work Log",
+    "folder": "Administration",
+    "file": "Administration/HCC-CLK-001-2026_Clerk_Work_Log_Selma_Amutenya.txt",
+    "patientId": null,
+    "date": "2026-11-19",
+    "accessGroups": [
+      "Administration",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-CLK-002-2026",
+    "title": "Clerk Work Log Petrus Nghidinwa",
+    "documentType": "Clerk Work Log",
+    "folder": "Administration",
+    "file": "Administration/HCC-CLK-002-2026_Clerk_Work_Log_Petrus_Nghidinwa.txt",
+    "patientId": null,
+    "date": "2026-11-19",
+    "accessGroups": [
+      "Administration",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-NR-2026-0233",
+    "title": "Nursing Record Ester Shikwambi 2026-09-28",
+    "documentType": "Nursing Record",
+    "folder": "Nursing",
+    "file": "Nursing/HCC-NR-2026-0233_Nursing_Record_Ester_Shikwambi_2026_09_28.txt",
+    "patientId": "PAT-1005",
+    "date": "2026-09-28",
+    "accessGroups": [
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-NR-2026-0251",
+    "title": "Nursing Record Maria Nangolo 2026-10-05",
+    "documentType": "Nursing Record",
+    "folder": "Nursing",
+    "file": "Nursing/HCC-NR-2026-0251_Nursing_Record_Maria_Nangolo_2026_10_05.txt",
+    "patientId": "PAT-1001",
+    "date": "2026-10-05",
+    "accessGroups": [
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-NR-2026-0268",
+    "title": "Nursing Record Tobias Hamutenya 2026-10-12",
+    "documentType": "Nursing Record",
+    "folder": "Nursing",
+    "file": "Nursing/HCC-NR-2026-0268_Nursing_Record_Tobias_Hamutenya_2026_10_12.txt",
+    "patientId": "PAT-1002",
+    "date": "2026-10-12",
+    "accessGroups": [
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-NR-2026-0289",
+    "title": "Nursing Record Daniel Ipinge 2026-10-20",
+    "documentType": "Nursing Record",
+    "folder": "Nursing",
+    "file": "Nursing/HCC-NR-2026-0289_Nursing_Record_Daniel_Ipinge_2026_10_20.txt",
+    "patientId": "PAT-1006",
+    "date": "2026-10-20",
+    "accessGroups": [
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-NR-2026-0320",
+    "title": "Nursing Record Maria Nangolo 2026-11-02",
+    "documentType": "Nursing Record",
+    "folder": "Nursing",
+    "file": "Nursing/HCC-NR-2026-0320_Nursing_Record_Maria_Nangolo_2026_11_02.txt",
+    "patientId": "PAT-1001",
+    "date": "2026-11-02",
+    "accessGroups": [
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-NR-2026-0324",
+    "title": "Nursing Record Lydia Kandjii 2026-11-03",
+    "documentType": "Nursing Record",
+    "folder": "Nursing",
+    "file": "Nursing/HCC-NR-2026-0324_Nursing_Record_Lydia_Kandjii_2026_11_03.txt",
+    "patientId": "PAT-1003",
+    "date": "2026-11-03",
+    "accessGroups": [
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-NR-2026-0341",
+    "title": "Nursing Record Joseph Mbumba 2026-11-10",
+    "documentType": "Nursing Record",
+    "folder": "Nursing",
+    "file": "Nursing/HCC-NR-2026-0341_Nursing_Record_Joseph_Mbumba_2026_11_10.txt",
+    "patientId": "PAT-1004",
+    "date": "2026-11-10",
+    "accessGroups": [
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-CR-2026-0118",
+    "title": "Consultation Record Ester Shikwambi 2026-09-28",
+    "documentType": "Consultation Record",
+    "folder": "Medical_Consultations",
+    "file": "Medical_Consultations/HCC-CR-2026-0118_Consultation_Record_Ester_Shikwambi_2026_09_28.txt",
+    "patientId": "PAT-1005",
+    "date": "2026-09-28",
+    "accessGroups": [
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-CR-2026-0126",
+    "title": "Consultation Record Maria Nangolo 2026-10-05",
+    "documentType": "Consultation Record",
+    "folder": "Medical_Consultations",
+    "file": "Medical_Consultations/HCC-CR-2026-0126_Consultation_Record_Maria_Nangolo_2026_10_05.txt",
+    "patientId": "PAT-1001",
+    "date": "2026-10-05",
+    "accessGroups": [
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-CR-2026-0133",
+    "title": "Consultation Record Tobias Hamutenya 2026-10-12",
+    "documentType": "Consultation Record",
+    "folder": "Medical_Consultations",
+    "file": "Medical_Consultations/HCC-CR-2026-0133_Consultation_Record_Tobias_Hamutenya_2026_10_12.txt",
+    "patientId": "PAT-1002",
+    "date": "2026-10-12",
+    "accessGroups": [
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-CR-2026-0141",
+    "title": "Consultation Record Daniel Ipinge 2026-10-20",
+    "documentType": "Consultation Record",
+    "folder": "Medical_Consultations",
+    "file": "Medical_Consultations/HCC-CR-2026-0141_Consultation_Record_Daniel_Ipinge_2026_10_20.txt",
+    "patientId": "PAT-1006",
+    "date": "2026-10-20",
+    "accessGroups": [
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-CR-2026-0162",
+    "title": "Consultation Record Lydia Kandjii 2026-11-03",
+    "documentType": "Consultation Record",
+    "folder": "Medical_Consultations",
+    "file": "Medical_Consultations/HCC-CR-2026-0162_Consultation_Record_Lydia_Kandjii_2026_11_03.txt",
+    "patientId": "PAT-1003",
+    "date": "2026-11-03",
+    "accessGroups": [
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-CR-2026-0170",
+    "title": "Consultation Record Joseph Mbumba 2026-11-10",
+    "documentType": "Consultation Record",
+    "folder": "Medical_Consultations",
+    "file": "Medical_Consultations/HCC-CR-2026-0170_Consultation_Record_Joseph_Mbumba_2026_11_10.txt",
+    "patientId": "PAT-1004",
+    "date": "2026-11-10",
+    "accessGroups": [
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "LAB-RPT-2026-0391",
+    "title": "Laboratory Report Ester Shikwambi 2026-09-28",
+    "documentType": "Laboratory Report",
+    "folder": "Laboratory",
+    "file": "Laboratory/LAB-RPT-2026-0391_Laboratory_Report_Ester_Shikwambi_2026_09_28.txt",
+    "patientId": "PAT-1005",
+    "date": "2026-09-28",
+    "accessGroups": [
+      "Laboratory",
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "LAB-RPT-2026-0402",
+    "title": "Laboratory Report Maria Nangolo 2026-10-05",
+    "documentType": "Laboratory Report",
+    "folder": "Laboratory",
+    "file": "Laboratory/LAB-RPT-2026-0402_Laboratory_Report_Maria_Nangolo_2026_10_05.txt",
+    "patientId": "PAT-1001",
+    "date": "2026-10-05",
+    "accessGroups": [
+      "Laboratory",
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "LAB-RPT-2026-0418",
+    "title": "Laboratory Report Tobias Hamutenya 2026-10-12",
+    "documentType": "Laboratory Report",
+    "folder": "Laboratory",
+    "file": "Laboratory/LAB-RPT-2026-0418_Laboratory_Report_Tobias_Hamutenya_2026_10_12.txt",
+    "patientId": "PAT-1002",
+    "date": "2026-10-12",
+    "accessGroups": [
+      "Laboratory",
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "LAB-RPT-2026-0436",
+    "title": "Laboratory Report Daniel Ipinge 2026-10-20",
+    "documentType": "Laboratory Report",
+    "folder": "Laboratory",
+    "file": "Laboratory/LAB-RPT-2026-0436_Laboratory_Report_Daniel_Ipinge_2026_10_20.txt",
+    "patientId": "PAT-1006",
+    "date": "2026-10-20",
+    "accessGroups": [
+      "Laboratory",
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "LAB-RPT-2026-0471",
+    "title": "Laboratory Report Lydia Kandjii 2026-11-03",
+    "documentType": "Laboratory Report",
+    "folder": "Laboratory",
+    "file": "Laboratory/LAB-RPT-2026-0471_Laboratory_Report_Lydia_Kandjii_2026_11_03.txt",
+    "patientId": "PAT-1003",
+    "date": "2026-11-03",
+    "accessGroups": [
+      "Laboratory",
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "LAB-RPT-2026-0489",
+    "title": "Laboratory Report Joseph Mbumba 2026-11-10",
+    "documentType": "Laboratory Report",
+    "folder": "Laboratory",
+    "file": "Laboratory/LAB-RPT-2026-0489_Laboratory_Report_Joseph_Mbumba_2026_11_10.txt",
+    "patientId": "PAT-1004",
+    "date": "2026-11-10",
+    "accessGroups": [
+      "Laboratory",
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-MED-1001",
+    "title": "Medication Record Maria Nangolo",
+    "documentType": "Medication Record",
+    "folder": "Medication",
+    "file": "Medication/HCC-MED-1001_Medication_Record_Maria_Nangolo.txt",
+    "patientId": "PAT-1001",
+    "date": "2026-11-19",
+    "accessGroups": [
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-MED-1002",
+    "title": "Medication Record Tobias Hamutenya",
+    "documentType": "Medication Record",
+    "folder": "Medication",
+    "file": "Medication/HCC-MED-1002_Medication_Record_Tobias_Hamutenya.txt",
+    "patientId": "PAT-1002",
+    "date": "2026-11-19",
+    "accessGroups": [
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-MED-1003",
+    "title": "Medication Record Lydia Kandjii",
+    "documentType": "Medication Record",
+    "folder": "Medication",
+    "file": "Medication/HCC-MED-1003_Medication_Record_Lydia_Kandjii.txt",
+    "patientId": "PAT-1003",
+    "date": "2026-11-19",
+    "accessGroups": [
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-MED-1004",
+    "title": "Medication Record Joseph Mbumba",
+    "documentType": "Medication Record",
+    "folder": "Medication",
+    "file": "Medication/HCC-MED-1004_Medication_Record_Joseph_Mbumba.txt",
+    "patientId": "PAT-1004",
+    "date": "2026-11-19",
+    "accessGroups": [
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-MED-1005",
+    "title": "Medication Record Ester Shikwambi",
+    "documentType": "Medication Record",
+    "folder": "Medication",
+    "file": "Medication/HCC-MED-1005_Medication_Record_Ester_Shikwambi.txt",
+    "patientId": "PAT-1005",
+    "date": "2026-11-19",
+    "accessGroups": [
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-MED-1006",
+    "title": "Medication Record Daniel Ipinge",
+    "documentType": "Medication Record",
+    "folder": "Medication",
+    "file": "Medication/HCC-MED-1006_Medication_Record_Daniel_Ipinge.txt",
+    "patientId": "PAT-1006",
+    "date": "2026-11-19",
+    "accessGroups": [
+      "Nursing",
+      "Doctors",
+      "Records"
+    ]
+  },
+  {
+    "documentId": "HCC-POL-001",
+    "title": "Clinic Confidentiality Policy",
+    "documentType": "Policy or Procedure",
+    "folder": "Clinic_Policies",
+    "file": "Clinic_Policies/HCC-POL-001_Clinic_Confidentiality_Policy.txt",
+    "patientId": null,
+    "date": "2026-01-15",
+    "accessGroups": [
+      "Everyone"
+    ]
+  },
+  {
+    "documentId": "HCC-POL-002",
+    "title": "Laboratory Testing Procedures",
+    "documentType": "Policy or Procedure",
+    "folder": "Clinic_Policies",
+    "file": "Clinic_Policies/HCC-POL-002_Laboratory_Testing_Procedures.txt",
+    "patientId": null,
+    "date": "2026-01-15",
+    "accessGroups": [
+      "Everyone"
+    ]
+  },
+  {
+    "documentId": "HCC-POL-003",
+    "title": "Patient Registration Procedures",
+    "documentType": "Policy or Procedure",
+    "folder": "Clinic_Policies",
+    "file": "Clinic_Policies/HCC-POL-003_Patient_Registration_Procedures.txt",
+    "patientId": null,
+    "date": "2026-01-15",
+    "accessGroups": [
+      "Everyone"
+    ]
+  },
+  {
+    "documentId": "HCC-POL-004",
+    "title": "Emergency Response Procedures",
+    "documentType": "Policy or Procedure",
+    "folder": "Clinic_Policies",
+    "file": "Clinic_Policies/HCC-POL-004_Emergency_Response_Procedures.txt",
+    "patientId": null,
+    "date": "2026-01-15",
+    "accessGroups": [
+      "Everyone"
+    ]
+  }
+]

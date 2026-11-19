@@ -1,0 +1,14 @@
+{
+  "metadataAttributes": {
+    "documentId": "HCC-NR-2026-0320",
+    "documentType": "Nursing Record",
+    "folder": "Nursing",
+    "accessGroups": [
+      "Nursing",
+      "Doctors",
+      "Records"
+    ],
+    "patientId": "PAT-1001",
+    "documentDate": "2026-11-02"
+  }
+}

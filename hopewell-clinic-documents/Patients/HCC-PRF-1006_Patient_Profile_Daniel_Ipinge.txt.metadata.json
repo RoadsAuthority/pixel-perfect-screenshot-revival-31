@@ -1,0 +1,15 @@
+{
+  "metadataAttributes": {
+    "documentId": "HCC-PRF-1006",
+    "documentType": "Patient Profile",
+    "folder": "Patients",
+    "accessGroups": [
+      "Administration",
+      "Nursing",
+      "Doctors",
+      "Records"
+    ],
+    "patientId": "PAT-1006",
+    "documentDate": "2026-11-19"
+  }
+}

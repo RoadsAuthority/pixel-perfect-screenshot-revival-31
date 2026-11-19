@@ -1,0 +1,73 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+MEDICAL CONSULTATION AND DIAGNOSIS RECORD
+Document ID: HCC-CR-2026-0162
+Patient ID: PAT-1003
+Patient: Lydia Kandjii
+========================================================================
+CONSULTATION
+------------
+Consultation date and time: 2026-11-03 10:15
+Doctor: DOC-001 (Dr Anna-Marie van Wyk)
+Known allergies: Sulfonamide antibiotics (skin rash); house dust mites (wheeze)
+
+PRESENTING COMPLAINT
+--------------------
+Wheeze, cough and chest tightness for 3 days after a cold.
+
+SYMPTOMS
+--------
+- Expiratory wheeze
+- Night-time cough
+- Reliever inhaler use more than 4 times daily
+
+CLINICAL EXAMINATION FINDINGS
+-----------------------------
+- Bilateral expiratory wheeze, no crackles
+- Respiratory rate 22/min
+- Oxygen saturation 96% before and 98% after nebulisation
+- Peak flow 320 L/min before and 410 L/min after nebulisation (personal best 480 L/min)
+
+DIAGNOSIS
+---------
+Mild to moderate asthma exacerbation, triggered by a viral upper respiratory tract infection.
+
+PREVIOUS RELEVANT DIAGNOSES
+---------------------------
+Asthma (confirmed 2024-01-29); acute bronchitis (2025-05-14).
+
+TREATMENT PLAN
+--------------
+- Nebulised salbutamol 2.5 mg (given 10:00)
+- Oral prednisolone for 5 days
+- Continue salbutamol inhaler when needed
+- Start inhaled budesonide as a regular preventer
+- Avoid sulfonamide antibiotics (documented allergy)
+
+PRESCRIBED MEDICATION (DOSAGE, FREQUENCY, DURATION)
+---------------------------------------------------
+- Prednisolone 40 mg orally once daily for 5 days (2026-11-03 to 2026-11-07)
+- Salbutamol 100 mcg inhaler, 2 puffs every 4 to 6 hours when needed (continued)
+- Budesonide 200 mcg inhaled, 1 puff twice daily for 3 months (2026-11-03 to 2027-02-03)
+
+FOLLOW-UP
+---------
+Follow-up: 2026-11-24 at 09:00 (asthma review)
+
+REFERRALS
+---------
+None
+
+LABORATORY INVESTIGATIONS
+-------------------------
+LAB-RPT-2026-0471 (full blood count, blood group)
+
+ADDENDUM
+--------
+2026-11-03 11:55: laboratory results reviewed; eosinophil count mildly raised; no change to plan.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

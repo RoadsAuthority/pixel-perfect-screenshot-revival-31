@@ -1,0 +1,72 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+MEDICAL CONSULTATION AND DIAGNOSIS RECORD
+Document ID: HCC-CR-2026-0170
+Patient ID: PAT-1004
+Patient: Joseph Mbumba
+========================================================================
+CONSULTATION
+------------
+Consultation date and time: 2026-11-10 09:55
+Doctor: DOC-001 (Dr Anna-Marie van Wyk)
+Known allergies: No known allergies
+
+PRESENTING COMPLAINT
+--------------------
+Sore throat and fever for 2 days with painful swallowing.
+
+SYMPTOMS
+--------
+- Fever
+- Odynophagia
+- Reduced appetite
+
+CLINICAL EXAMINATION FINDINGS
+-----------------------------
+- Temperature 38.6 C
+- Weight 35.0 kg
+- Tonsils enlarged and red with white exudate
+- Tender anterior cervical lymph nodes
+- Chest clear
+
+DIAGNOSIS
+---------
+Acute tonsillitis (recurrent; third documented episode).
+
+PREVIOUS RELEVANT DIAGNOSES
+---------------------------
+Acute tonsillitis on 2025-02-17 and on 2025-09-22.
+
+TREATMENT PLAN
+--------------
+- Amoxicillin for 7 days
+- Paracetamol for fever and pain
+- ENT referral to assess for recurrent tonsillitis (REF-2026-0052)
+- Review after the antibiotic course
+
+PRESCRIBED MEDICATION (DOSAGE, FREQUENCY, DURATION)
+---------------------------------------------------
+- Amoxicillin 500 mg orally three times daily for 7 days (2026-11-10 to 2026-11-16)
+- Paracetamol 500 mg orally every 6 hours when needed, maximum 4 doses in 24 hours, for 5 days (2026-11-10 to 2026-11-15)
+
+FOLLOW-UP
+---------
+Follow-up: 2026-11-24 at 10:30
+
+REFERRALS
+---------
+ENT assessment: REF-2026-0052
+
+LABORATORY INVESTIGATIONS
+-------------------------
+LAB-RPT-2026-0489 (full blood count). Blood group: Not available (not requested).
+
+ADDENDUM
+--------
+2026-11-10 12:30: laboratory results reviewed; white cell count and neutrophils raised; plan unchanged.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

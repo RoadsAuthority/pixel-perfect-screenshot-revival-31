@@ -1,0 +1,71 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+MEDICAL CONSULTATION AND DIAGNOSIS RECORD
+Document ID: HCC-CR-2026-0141
+Patient ID: PAT-1006
+Patient: Daniel Ipinge
+========================================================================
+CONSULTATION
+------------
+Consultation date and time: 2026-10-20 10:00
+Doctor: DOC-001 (Dr Anna-Marie van Wyk)
+Known allergies: No known allergies
+
+PRESENTING COMPLAINT
+--------------------
+Tiredness, dizziness on standing and shortness of breath for about 6 weeks.
+
+SYMPTOMS
+--------
+- Fatigue
+- Postural dizziness
+- Breathlessness on stairs
+- Pallor noticed by colleagues
+
+CLINICAL EXAMINATION FINDINGS
+-----------------------------
+- Marked pallor of conjunctivae
+- Pulse 98/min
+- Blood pressure 112/70 mmHg sitting, 104/66 mmHg standing
+- No jaundice, abdomen soft
+
+DIAGNOSIS
+---------
+Iron-deficiency anaemia, cause under investigation (based on haemoglobin 8.9 g/dL, MCV 71 fL and ferritin 6 ug/L).
+
+PREVIOUS RELEVANT DIAGNOSES
+---------------------------
+Allergic rhinitis (2023-04-18).
+
+TREATMENT PLAN
+--------------
+- Start oral iron
+- Take iron with vitamin C-rich food or drink; warn that stools may turn dark
+- Gastroenterology referral to look for a source of blood loss (REF-2026-0041)
+- Repeat full blood count and ferritin at review
+
+PRESCRIBED MEDICATION (DOSAGE, FREQUENCY, DURATION)
+---------------------------------------------------
+- Ferrous sulfate 200 mg (65 mg elemental iron) orally three times daily for 3 months (2026-10-20 to 2027-01-19)
+
+FOLLOW-UP
+---------
+Follow-up: 2026-11-24 at 11:00
+
+REFERRALS
+---------
+Gastroenterology: REF-2026-0041
+
+LABORATORY INVESTIGATIONS
+-------------------------
+LAB-RPT-2026-0436 (blood group, full blood count, MCV, ferritin, random glucose)
+
+ADDENDUM
+--------
+2026-10-20 14:20: laboratory results reviewed; diagnosis recorded. Stool occult blood test: Not available (not requested).
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

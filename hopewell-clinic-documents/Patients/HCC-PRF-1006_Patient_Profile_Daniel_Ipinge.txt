@@ -1,0 +1,69 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+PATIENT PROFILE
+Document ID: HCC-PRF-1006
+Patient ID: PAT-1006
+Patient file number: HCC-F-1006
+Maintained by: Medical Records Department, REC-001 (Beata Nakale)
+Record as at: 2026-11-19
+========================================================================
+PERSONAL DETAILS
+----------------
+Full name: Daniel Ipinge
+Patient ID: PAT-1006
+Date of birth: 1990-04-17
+Age: 36 years (as at 2026-11-19)
+Gender: Male
+Patient status: Active
+
+RESIDENTIAL ADDRESS AND CONTACT
+-------------------------------
+Address: 21 Eucalyptus Street, Hochland Park, Windhoek
+Area: Hochland Park
+Telephone: 081 555 0166
+Email: daniel.ipinge@mail.example
+
+EMERGENCY CONTACT
+-----------------
+Name: Selma Ipinge
+Relationship: Sister
+Telephone: 081 555 0167
+
+REGISTRATION
+------------
+Registration date: 2023-04-18
+Registration time: 14:35
+Registered by: CLK-002 (Petrus Nghidinwa)
+
+CLINICAL ALERTS
+---------------
+Known allergies: No known allergies
+Blood group: A Negative (LAB-RPT-2026-0436)
+
+EXISTING MEDICAL CONDITIONS
+---------------------------
+- Iron-deficiency anaemia (diagnosed 2026-10-20, cause under investigation)
+
+RELEVANT MEDICAL HISTORY
+------------------------
+- Allergic rhinitis diagnosed 2023-04-18; treated with cetirizine.
+- 2026-10-20: tiredness and dizziness for 6 weeks; low haemoglobin; iron-deficiency anaemia diagnosed; iron tablets started and gastroenterology referral made.
+
+PREVIOUS DIAGNOSES
+------------------
+- 2023-04-18: Allergic rhinitis
+- 2026-10-20: Iron-deficiency anaemia (cause under investigation)
+
+PREVIOUS MEDICATION RECEIVED
+----------------------------
+- Cetirizine 10 mg once daily when needed (2023-04-18 to 2023-07-18)
+
+FAMILY MEDICAL HISTORY
+----------------------
+- Father: type 2 diabetes mellitus
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

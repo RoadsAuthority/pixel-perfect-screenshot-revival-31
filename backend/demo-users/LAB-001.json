@@ -1,0 +1,27 @@
+{
+  "user_id": {
+    "S": "LAB-001"
+  },
+  "username": {
+    "S": "elias.shilongo"
+  },
+  "name": {
+    "S": "Elias Shilongo"
+  },
+  "groups": {
+    "L": [
+      {
+        "S": "Laboratory"
+      },
+      {
+        "S": "Everyone"
+      }
+    ]
+  },
+  "pin_salt": {
+    "S": "b4420e05729290291aa183726d0710bc"
+  },
+  "pin_hash": {
+    "S": "71286c79f5b1cbe52d70acd8eb0e6691ee7237f1e610a78b642082b88f4aedc6adc1212efeef860c277c89e716eac142926d155487aeeeed47336de679d77b45"
+  }
+}

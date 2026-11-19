@@ -1,0 +1,72 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+MEDICAL CONSULTATION AND DIAGNOSIS RECORD
+Document ID: HCC-CR-2026-0118
+Patient ID: PAT-1005
+Patient: Ester Shikwambi
+========================================================================
+CONSULTATION
+------------
+Consultation date and time: 2026-09-28 10:30
+Doctor: DOC-002 (Dr Samuel Katjiuanjo)
+Known allergies: Aspirin and other NSAIDs (stomach bleeding in 2019, reported at registration)
+
+PRESENTING COMPLAINT
+--------------------
+Worsening knee pain and stiffness for 2 weeks.
+
+SYMPTOMS
+--------
+- Pain in both knees, worse on the right
+- Morning stiffness of about 30 minutes
+- Pain on stairs
+
+CLINICAL EXAMINATION FINDINGS
+-----------------------------
+- Blood pressure 142/88 mmHg
+- Crepitus in both knees
+- Mild effusion of the right knee, no warmth
+- Reduced flexion on the right
+
+DIAGNOSIS
+---------
+Osteoarthritis of the knees, flare.
+
+PREVIOUS RELEVANT DIAGNOSES
+---------------------------
+Osteoarthritis of the knees (2021-09-20); hypertension (reported 2018); peptic ulcer with bleeding (2019, patient-reported).
+
+TREATMENT PLAN
+--------------
+- Paracetamol for pain control
+- NSAIDs are contraindicated because of documented aspirin/NSAID intolerance
+- Continue losartan 50 mg daily
+- Physiotherapy referral (REF-2026-0031)
+- Review in 4 weeks
+
+PRESCRIBED MEDICATION (DOSAGE, FREQUENCY, DURATION)
+---------------------------------------------------
+- Paracetamol 1 g orally every 6 to 8 hours when needed, maximum 4 g in 24 hours, for 4 weeks (2026-09-28 to 2026-10-26)
+- Losartan 50 mg orally once daily (continued)
+
+FOLLOW-UP
+---------
+Follow-up: 2026-10-26 at 10:00 (later rescheduled to 2026-12-07 at 10:00 after the patient did not attend)
+
+REFERRALS
+---------
+Physiotherapy: REF-2026-0031
+
+LABORATORY INVESTIGATIONS
+-------------------------
+LAB-RPT-2026-0391 (full blood count, blood group, creatinine)
+
+ADDENDUM
+--------
+2026-09-28 15:10: laboratory results reviewed; no change to plan.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

@@ -1,0 +1,51 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+PATIENT DISCHARGE SUMMARY
+Document ID: HCC-DS-2026-0021
+Patient ID: PAT-1006
+Patient: Daniel Ipinge
+Date: 2026-10-20
+========================================================================
+STAY
+----
+Day-ward observation from 09:50 to 14:30 on 2026-10-20
+Responsible doctor: DOC-001 (Dr Anna-Marie van Wyk)
+Responsible nurse: NUR-002 (Nurse Martha Iipinge)
+
+DIAGNOSIS
+---------
+Iron-deficiency anaemia, cause under investigation.
+
+TREATMENT GIVEN
+---------------
+- Day-ward observation for postural dizziness
+- Blood tests (LAB-RPT-2026-0436)
+- Oral iron started
+
+CONDITION AT DISCHARGE
+----------------------
+Stable. Dizziness settled; blood pressure sitting 114/72 mmHg at 14:00. Walked unaided.
+
+MEDICATION ON DISCHARGE
+-----------------------
+- Ferrous sulfate 200 mg three times daily for 3 months
+
+ADVICE GIVEN
+------------
+- Rise slowly
+- Return at once if fainting, chest pain, black stools or worsening breathlessness
+- Do not drive until dizziness has fully settled
+
+FOLLOW-UP
+---------
+Review on 2026-11-24 at 11:00 with DOC-001; gastroenterology referral REF-2026-0041.
+
+DISCHARGED TO
+-------------
+Left alone; sister (Selma Ipinge) informed by telephone at the patient's request.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

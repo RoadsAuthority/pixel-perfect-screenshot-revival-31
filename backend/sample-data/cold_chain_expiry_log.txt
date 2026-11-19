@@ -1,3 +1,0 @@
-DEMO DOCUMENT - FICTIONAL DATA
-
-Cold chain expiry log: temperature-monitoring calibration expires on 31 May 2027. Cold-box service agreement expires on 30 September 2027. Arrange calibration and renewal before these dates. No vaccine batch expiry information is recorded in this log.

@@ -1,0 +1,82 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+MEDICATION RECORD
+Document ID: HCC-MED-1003
+Patient ID: PAT-1003
+Patient: Lydia Kandjii
+Record as at: 2026-11-19
+========================================================================
+ALLERGY ALERT
+-------------
+Sulfonamide antibiotics (skin rash); house dust mites (wheeze)
+
+ENTRY 1: SALBUTAMOL INHALER
+---------------------------
+Medication name: Salbutamol inhaler
+Dosage: 100 mcg per puff, 2 puffs
+Route: Inhaled
+Frequency: Every 4 to 6 hours when needed
+Start date: 2024-01-29
+End date: Ongoing
+Prescribing practitioner: DOC-001 (Dr Anna-Marie van Wyk)
+Reason for prescription: Asthma (reliever)
+Warnings: Sulfonamide antibiotic allergy and house dust mite allergy on file.
+Status: Prescribed - active
+
+ENTRY 2: AMOXICILLIN
+--------------------
+Medication name: Amoxicillin
+Dosage: 500 mg
+Route: Oral
+Frequency: Three times daily for 5 days
+Start date: 2025-05-14
+End date: 2025-05-18
+Prescribing practitioner: DOC-002 (Dr Samuel Katjiuanjo)
+Reason for prescription: Acute bronchitis
+Warnings: Sulfonamide antibiotic allergy on file.
+Status: Prescribed - completed
+
+ENTRY 3: SALBUTAMOL NEBULISER SOLUTION
+--------------------------------------
+Medication name: Salbutamol nebuliser solution
+Dosage: 2.5 mg
+Route: Nebulised
+Frequency: Single dose at 10:00 on 2026-11-03
+Start date: 2026-11-03
+End date: 2026-11-03
+Prescribing practitioner: DOC-001 (Dr Anna-Marie van Wyk) (authorised); administered by NUR-002 (Nurse Martha Iipinge)
+Reason for prescription: Asthma exacerbation
+Warnings: Monitor pulse and oxygen saturation.
+Status: Administered
+
+ENTRY 4: PREDNISOLONE
+---------------------
+Medication name: Prednisolone
+Dosage: 40 mg
+Route: Oral
+Frequency: Once daily for 5 days
+Start date: 2026-11-03
+End date: 2026-11-07
+Prescribing practitioner: DOC-001 (Dr Anna-Marie van Wyk)
+Reason for prescription: Asthma exacerbation
+Warnings: Take in the morning with food.
+Status: Prescribed - completed
+
+ENTRY 5: BUDESONIDE INHALER
+---------------------------
+Medication name: Budesonide inhaler
+Dosage: 200 mcg, 1 puff
+Route: Inhaled
+Frequency: Twice daily
+Start date: 2026-11-03
+End date: 2027-02-03
+Prescribing practitioner: DOC-001 (Dr Anna-Marie van Wyk)
+Reason for prescription: Asthma (regular preventer)
+Warnings: Rinse mouth after use.
+Status: Prescribed - active
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

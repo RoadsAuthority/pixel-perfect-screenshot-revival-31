@@ -1,0 +1,31 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+LABORATORY TESTING PROCEDURES
+Document ID: HCC-POL-002
+Effective date: 2026-01-15
+Approved by: Clinic management
+Review date: 2027-01-15
+========================================================================
+SAMPLE COLLECTION
+-----------------
+- Confirm the patient's name and Patient ID against the request form.
+- Label every sample at the bedside with Patient ID, date and time of collection.
+- Record the technician ID of the person collecting the sample.
+
+TESTING AND VERIFICATION
+------------------------
+- Routine full blood count results are verified within 6 hours of collection.
+- Each result is compared with the reference range and flagged HIGH or LOW when outside it.
+- A technician verifies the report and an authorised practitioner reviews it.
+
+REPORTING
+---------
+- Laboratory reports state test results only. They are not diagnoses; interpretation is done by the treating practitioner.
+- Tests that were not requested or not performed are reported as 'Not available'. No value may be estimated or invented.
+- Critical values are telephoned to the treating practitioner immediately.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

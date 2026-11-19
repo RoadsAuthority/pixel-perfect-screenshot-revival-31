@@ -1,0 +1,46 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+MEDICAL HISTORY SUMMARY
+Document ID: HCC-HIS-1003
+Patient ID: PAT-1003
+Patient: Lydia Kandjii
+Prepared by: REC-001 (Beata Nakale), Medical Records Department
+Prepared on: 2026-11-19
+========================================================================
+SUMMARY
+-------
+Lydia Kandjii (PAT-1003), 28-year-old female, registered 2024-01-22. Status: Active.
+Known allergies: Sulfonamide antibiotics (skin rash); house dust mites (wheeze)
+Blood group: B Positive (LAB-RPT-2026-0471)
+
+CONDITIONS AND DIAGNOSES (CHRONOLOGICAL)
+----------------------------------------
+- 2024-01-29: Asthma
+- 2025-05-14: Acute bronchitis
+- 2026-11-03: Mild to moderate asthma exacerbation (viral trigger)
+
+CURRENT MEDICATION
+------------------
+- Salbutamol inhaler 100 mcg per puff, 2 puffs, inhaled, Every 4 to 6 hours when needed (from 2024-01-29; prescribed by DOC-001 (Dr Anna-Marie van Wyk))
+- Budesonide inhaler 200 mcg, 1 puff, inhaled, Twice daily (from 2026-11-03; prescribed by DOC-001 (Dr Anna-Marie van Wyk))
+
+CLINIC CONTACTS IN 2026
+-----------------------
+- 2026-11-03 09:50 | Nursing record HCC-NR-2026-0324 | Nurse: NUR-002 (Nurse Martha Iipinge) | Doctor involved: DOC-001 (Dr Anna-Marie van Wyk)
+- 2026-11-03 10:00 | Discharge summary HCC-DS-2026-0029 | Discharged 12:30
+- 2026-11-03 10:15 | Consultation HCC-CR-2026-0162 | Doctor: DOC-001 (Dr Anna-Marie van Wyk) | Diagnosis: Mild to moderate asthma exacerbation, triggered by a viral upper respiratory tract infection.
+- 2026-11-03 10:25 | Laboratory report LAB-RPT-2026-0471 | Technician: LAB-001 (Elias Shilongo)
+
+UPCOMING APPOINTMENTS
+---------------------
+- 2026-11-24 09:00 | Follow-up review | DOC-001 (Dr Anna-Marie van Wyk)
+
+FAMILY MEDICAL HISTORY
+----------------------
+- Mother: asthma
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

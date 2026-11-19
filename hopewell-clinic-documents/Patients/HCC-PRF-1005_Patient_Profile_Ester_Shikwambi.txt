@@ -1,0 +1,75 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+PATIENT PROFILE
+Document ID: HCC-PRF-1005
+Patient ID: PAT-1005
+Patient file number: HCC-F-1005
+Maintained by: Medical Records Department, REC-001 (Beata Nakale)
+Record as at: 2026-11-19
+========================================================================
+PERSONAL DETAILS
+----------------
+Full name: Ester Shikwambi
+Patient ID: PAT-1005
+Date of birth: 1960-12-02
+Age: 65 years (as at 2026-11-19)
+Gender: Female
+Patient status: Active
+
+RESIDENTIAL ADDRESS AND CONTACT
+-------------------------------
+Address: 9 Baobab Close, Olympia, Windhoek
+Area: Olympia
+Telephone: 081 555 0155
+Email: Not provided
+
+EMERGENCY CONTACT
+-----------------
+Name: Gideon Shikwambi
+Relationship: Son
+Telephone: 081 555 0156
+
+REGISTRATION
+------------
+Registration date: 2021-09-13
+Registration time: 09:50
+Registered by: CLK-001 (Selma Amutenya)
+
+CLINICAL ALERTS
+---------------
+Known allergies: Aspirin and other NSAIDs (stomach bleeding in 2019, reported at registration)
+Blood group: AB Positive (LAB-RPT-2026-0391)
+
+EXISTING MEDICAL CONDITIONS
+---------------------------
+- Hypertension
+- Osteoarthritis of the knees
+
+RELEVANT MEDICAL HISTORY
+------------------------
+- Hypertension diagnosed elsewhere in 2018 (reported at registration); on losartan.
+- Peptic ulcer with stomach bleeding in 2019 (reported by patient; treated elsewhere with omeprazole).
+- Osteoarthritis of the knees diagnosed at the clinic on 2021-09-20.
+- 2026-09-28: osteoarthritis flare; paracetamol course and physiotherapy referral.
+
+PREVIOUS DIAGNOSES
+------------------
+- 2018 (reported at registration): Hypertension
+- 2019 (reported by patient): Peptic ulcer with bleeding
+- 2021-09-20: Osteoarthritis of the knees
+- 2026-09-28: Osteoarthritis of the knees, flare
+
+PREVIOUS MEDICATION RECEIVED
+----------------------------
+- Omeprazole 20 mg once daily (2019, external prescriber, patient-reported)
+- Losartan 50 mg once daily (continued at the clinic since 2021-09-13)
+
+FAMILY MEDICAL HISTORY
+----------------------
+- Mother: stroke
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

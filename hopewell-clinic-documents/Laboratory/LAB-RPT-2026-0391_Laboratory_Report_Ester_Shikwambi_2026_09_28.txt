@@ -1,0 +1,38 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+LABORATORY REPORT
+Document ID: LAB-RPT-2026-0391
+Patient ID: PAT-1005
+Patient: Ester Shikwambi
+========================================================================
+SAMPLE
+------
+Sample collected: 2026-09-28 10:50
+Sample type: Venous blood (EDTA and serum)
+Laboratory technician: LAB-002 (Rauna Tjivikua)
+
+RESULTS
+-------
+- Blood group (ABO) | Result: AB | Reference range: - | Flag: N/A
+- Rh factor | Result: Positive | Reference range: - | Flag: N/A
+- Haemoglobin | Result: 12.4 g/dL | Reference range: 12.0-15.5 g/dL | Flag: NORMAL
+- White blood cell count | Result: 7.0 x10^9/L | Reference range: 4.0-11.0 x10^9/L | Flag: NORMAL
+- Platelet count | Result: 301 x10^9/L | Reference range: 150-450 x10^9/L | Flag: NORMAL
+- Serum creatinine | Result: 74 umol/L | Reference range: 45-84 umol/L | Flag: NORMAL
+- eGFR | Result: Not available (not reported by the laboratory) | Reference range: - | Flag: NOT AVAILABLE
+
+LABORATORY COMMENTS
+-------------------
+- All reported values within reference range.
+- Results are laboratory test results only. Interpretation and diagnosis are the responsibility of the treating practitioner.
+
+VERIFICATION
+------------
+Results verified: 2026-09-28 15:00 by LAB-002 (Rauna Tjivikua)
+Authorised reviewing practitioner: DOC-002 (Dr Samuel Katjiuanjo)
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

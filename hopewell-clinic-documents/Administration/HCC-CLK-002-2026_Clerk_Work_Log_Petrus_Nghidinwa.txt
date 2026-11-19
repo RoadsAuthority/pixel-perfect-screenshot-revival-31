@@ -1,0 +1,34 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+CLERK WORK LOG
+Document ID: HCC-CLK-002-2026
+Clerk: CLK-002 (Petrus Nghidinwa)
+Role: Appointments Clerk
+Period: 2026-09-21 to 2026-11-19
+========================================================================
+ACTIVITY
+--------
+2026-09-29 15:40 | Appointment booked | PAT-1001 Maria Nangolo | Consultation on 2026-10-05 at 08:30 with DOC-001.
+2026-10-05 08:25 | Check-in | PAT-1001 Maria Nangolo | Patient file HCC-F-1001 retrieved.
+2026-10-05 09:50 | Follow-up appointment booked | PAT-1001 Maria Nangolo | Nurse check on 2026-11-02 at 09:00 with NUR-002.
+2026-10-20 09:30 | Walk-in check-in | PAT-1006 Daniel Ipinge | Walk-in registered in the appointment register; file HCC-F-1006 retrieved.
+2026-10-20 14:35 | Follow-up appointment booked | PAT-1006 Daniel Ipinge | Follow-up on 2026-11-24 at 11:00 with DOC-001.
+2026-10-21 10:05 | Referral administration | PAT-1006 Daniel Ipinge | REF-2026-0041 (gastroenterology) typed from the doctor's request and sent.
+2026-10-27 09:00 | Appointment rescheduled | PAT-1005 Ester Shikwambi | Appointment moved from 2026-10-26 to 2026-12-07 at 10:00 after the patient telephoned.
+2026-11-02 09:00 | Check-in | PAT-1001 Maria Nangolo | Patient file HCC-F-1001 retrieved.
+2026-11-02 09:25 | Follow-up appointment booked | PAT-1001 Maria Nangolo | Nurse check on 2026-12-07 at 08:45 with NUR-002.
+2026-11-03 09:45 | Walk-in check-in | PAT-1003 Lydia Kandjii | Walk-in registered; file HCC-F-1003 retrieved.
+2026-11-03 12:35 | Follow-up appointment booked | PAT-1003 Lydia Kandjii | Follow-up on 2026-11-24 at 09:00 with DOC-001.
+2026-11-10 09:15 | Walk-in check-in | PAT-1004 Joseph Mbumba | Walk-in registered; mother (Rachel Mbumba) present; file HCC-F-1004 retrieved.
+2026-11-10 12:50 | Follow-up appointment booked | PAT-1004 Joseph Mbumba | Follow-up on 2026-11-24 at 10:30 with DOC-001.
+2026-11-11 09:40 | Referral administration | PAT-1004 Joseph Mbumba | REF-2026-0052 (ENT) typed from the doctor's request and sent.
+
+SCOPE NOTE
+----------
+Clerks capture and maintain administrative information only. Clerks do not make medical diagnoses, interpret results or prescribe medication.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

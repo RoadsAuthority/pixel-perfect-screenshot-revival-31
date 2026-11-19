@@ -1,0 +1,14 @@
+{
+  "metadataAttributes": {
+    "documentId": "HCC-APT-2026-B",
+    "documentType": "Appointment Register",
+    "folder": "Administration",
+    "accessGroups": [
+      "Administration",
+      "Nursing",
+      "Doctors",
+      "Records"
+    ],
+    "documentDate": "2026-11-19"
+  }
+}

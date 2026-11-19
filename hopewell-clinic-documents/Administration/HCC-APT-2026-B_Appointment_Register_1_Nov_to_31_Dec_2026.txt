@@ -1,0 +1,29 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+APPOINTMENT REGISTER
+Document ID: HCC-APT-2026-B
+Period: 2026-11-01 to 2026-12-31
+Register last updated: 2026-11-19
+Maintained by: Patient Registration and Administration
+========================================================================
+ENTRIES
+-------
+2026-11-02 09:00 | PAT-1001 Maria Nangolo | Nurse check | Clinician: NUR-002 (Nurse Martha Iipinge) | Status: Attended | Booked: CLK-002 (Petrus Nghidinwa) on 2026-10-05
+2026-11-03 09:45 | PAT-1003 Lydia Kandjii | Walk-in consultation | Clinician: NUR-002 (Nurse Martha Iipinge) / DOC-001 (Dr Anna-Marie van Wyk) | Status: Attended | Booked: Walk-in, registered by CLK-002 (Petrus Nghidinwa) on 2026-11-03
+2026-11-10 09:15 | PAT-1004 Joseph Mbumba | Walk-in consultation | Clinician: NUR-001 (Sister Ndapewa Haufiku) / DOC-001 (Dr Anna-Marie van Wyk) | Status: Attended | Booked: Walk-in, registered by CLK-002 (Petrus Nghidinwa) on 2026-11-10 | Note: Accompanied by mother.
+2026-11-23 08:30 | PAT-1002 Tobias Hamutenya | Follow-up review | Clinician: DOC-002 (Dr Samuel Katjiuanjo) | Status: Scheduled | Booked: CLK-001 (Selma Amutenya) on 2026-10-12
+2026-11-24 09:00 | PAT-1003 Lydia Kandjii | Follow-up review | Clinician: DOC-001 (Dr Anna-Marie van Wyk) | Status: Scheduled | Booked: CLK-002 (Petrus Nghidinwa) on 2026-11-03
+2026-11-24 10:30 | PAT-1004 Joseph Mbumba | Follow-up review | Clinician: DOC-001 (Dr Anna-Marie van Wyk) | Status: Scheduled | Booked: CLK-002 (Petrus Nghidinwa) on 2026-11-10 | Note: Parent or guardian must attend.
+2026-11-24 11:00 | PAT-1006 Daniel Ipinge | Follow-up review | Clinician: DOC-001 (Dr Anna-Marie van Wyk) | Status: Scheduled | Booked: CLK-002 (Petrus Nghidinwa) on 2026-10-20
+2026-12-07 08:45 | PAT-1001 Maria Nangolo | Nurse check | Clinician: NUR-002 (Nurse Martha Iipinge) | Status: Scheduled | Booked: CLK-002 (Petrus Nghidinwa) on 2026-11-02
+2026-12-07 10:00 | PAT-1005 Ester Shikwambi | Follow-up review | Clinician: DOC-002 (Dr Samuel Katjiuanjo) | Status: Scheduled | Booked: CLK-002 (Petrus Nghidinwa) on 2026-10-27 | Note: Rescheduled from 2026-10-26.
+
+SCOPE NOTE
+----------
+Clerks capture and maintain administrative information only. Clerks do not make medical diagnoses, interpret results or prescribe medication.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

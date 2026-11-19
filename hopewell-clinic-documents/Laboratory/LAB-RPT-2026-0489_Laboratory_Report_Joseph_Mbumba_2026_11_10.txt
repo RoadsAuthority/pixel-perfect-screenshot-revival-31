@@ -1,0 +1,38 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+LABORATORY REPORT
+Document ID: LAB-RPT-2026-0489
+Patient ID: PAT-1004
+Patient: Joseph Mbumba
+========================================================================
+SAMPLE
+------
+Sample collected: 2026-11-10 10:05
+Sample type: Venous blood (EDTA)
+Laboratory technician: LAB-002 (Rauna Tjivikua)
+
+RESULTS
+-------
+- Blood group (ABO) | Result: Not available (not requested) | Reference range: - | Flag: NOT AVAILABLE
+- Rh factor | Result: Not available (not requested) | Reference range: - | Flag: NOT AVAILABLE
+- Haemoglobin | Result: 12.6 g/dL | Reference range: 11.5-15.5 g/dL | Flag: NORMAL
+- White blood cell count | Result: 14.2 x10^9/L | Reference range: 4.5-13.5 x10^9/L | Flag: HIGH
+- Neutrophil count | Result: 9.8 x10^9/L | Reference range: 1.5-8.0 x10^9/L | Flag: HIGH
+- Platelet count | Result: 310 x10^9/L | Reference range: 150-450 x10^9/L | Flag: NORMAL
+- Throat swab culture | Result: Not available (not requested) | Reference range: - | Flag: NOT AVAILABLE
+
+LABORATORY COMMENTS
+-------------------
+- White cell count and neutrophils above the paediatric reference range.
+- Results are laboratory test results only. Interpretation and diagnosis are the responsibility of the treating practitioner.
+
+VERIFICATION
+------------
+Results verified: 2026-11-10 12:20 by LAB-002 (Rauna Tjivikua)
+Authorised reviewing practitioner: DOC-001 (Dr Anna-Marie van Wyk)
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

@@ -1,0 +1,38 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+LABORATORY REPORT
+Document ID: LAB-RPT-2026-0471
+Patient ID: PAT-1003
+Patient: Lydia Kandjii
+========================================================================
+SAMPLE
+------
+Sample collected: 2026-11-03 10:25
+Sample type: Venous blood (EDTA)
+Laboratory technician: LAB-001 (Elias Shilongo)
+
+RESULTS
+-------
+- Blood group (ABO) | Result: B | Reference range: - | Flag: N/A
+- Rh factor | Result: Positive | Reference range: - | Flag: N/A
+- Haemoglobin | Result: 12.9 g/dL | Reference range: 12.0-15.5 g/dL | Flag: NORMAL
+- White blood cell count | Result: 9.9 x10^9/L | Reference range: 4.0-11.0 x10^9/L | Flag: NORMAL
+- Platelet count | Result: 288 x10^9/L | Reference range: 150-450 x10^9/L | Flag: NORMAL
+- Eosinophil count | Result: 0.6 x10^9/L | Reference range: 0.0-0.5 x10^9/L | Flag: HIGH
+- Blood glucose | Result: Not available (not requested) | Reference range: - | Flag: NOT AVAILABLE
+
+LABORATORY COMMENTS
+-------------------
+- Eosinophil count mildly above reference range.
+- Results are laboratory test results only. Interpretation and diagnosis are the responsibility of the treating practitioner.
+
+VERIFICATION
+------------
+Results verified: 2026-11-03 11:50 by LAB-001 (Elias Shilongo)
+Authorised reviewing practitioner: DOC-001 (Dr Anna-Marie van Wyk)
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

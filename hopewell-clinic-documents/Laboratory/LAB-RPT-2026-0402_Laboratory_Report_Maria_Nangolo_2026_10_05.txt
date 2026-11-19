@@ -1,0 +1,38 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+LABORATORY REPORT
+Document ID: LAB-RPT-2026-0402
+Patient ID: PAT-1001
+Patient: Maria Nangolo
+========================================================================
+SAMPLE
+------
+Sample collected: 2026-10-05 09:40
+Sample type: Venous blood (EDTA and serum)
+Laboratory technician: LAB-001 (Elias Shilongo)
+
+RESULTS
+-------
+- Blood group (ABO) | Result: O | Reference range: - | Flag: N/A
+- Rh factor | Result: Positive | Reference range: - | Flag: N/A
+- Haemoglobin | Result: 13.2 g/dL | Reference range: 12.0-15.5 g/dL | Flag: NORMAL
+- White blood cell count | Result: 6.8 x10^9/L | Reference range: 4.0-11.0 x10^9/L | Flag: NORMAL
+- Platelet count | Result: 265 x10^9/L | Reference range: 150-450 x10^9/L | Flag: NORMAL
+- Random blood glucose | Result: 5.4 mmol/L | Reference range: 3.9-7.8 mmol/L | Flag: NORMAL
+- Serum creatinine | Result: 68 umol/L | Reference range: 45-84 umol/L | Flag: NORMAL
+
+LABORATORY COMMENTS
+-------------------
+- All reported values within reference range.
+- Results are laboratory test results only. Interpretation and diagnosis are the responsibility of the treating practitioner.
+
+VERIFICATION
+------------
+Results verified: 2026-10-05 14:30 by LAB-001 (Elias Shilongo)
+Authorised reviewing practitioner: DOC-001 (Dr Anna-Marie van Wyk)
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

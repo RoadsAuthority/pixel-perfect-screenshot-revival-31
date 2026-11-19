@@ -1,0 +1,42 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+PATIENT REGISTRATION RECORD
+Document ID: HCC-REG-1002
+Patient ID: PAT-1002
+Patient: Tobias Hamutenya
+========================================================================
+REGISTRATION
+------------
+Registered by: CLK-002 (Petrus Nghidinwa)
+Registration date: 2023-06-05
+Registration time: 10:05
+Patient file created: HCC-F-1002
+First appointment: 2023-06-05 10:05 (same-day nursing triage)
+
+PATIENT INFORMATION CAPTURED
+----------------------------
+Full name: Tobias Hamutenya
+Date of birth: 1972-09-30
+Gender: Male
+Identity document: Namibian national ID (sighted)
+Address: 12 Omuramba Road, Katutura, Windhoek
+Telephone: 081 555 0122
+Email: tobias.hamutenya@mail.example
+Emergency contact: Helena Hamutenya (Wife), 081 555 0123
+Allergies stated by patient at registration: No known allergies
+Payment method: Self-paying (no medical aid on file)
+Consent to treatment and privacy notice signed: Yes
+
+CONTACT UPDATES AND CORRECTIONS LOG
+-----------------------------------
+- 2024-08-19 14:05 | Correction by CLK-001 (Selma Amutenya): surname spelling corrected from 'Hamutenia' to 'Hamutenya' after the national ID was sighted.
+
+SCOPE NOTE
+----------
+Clerks capture and maintain administrative information only. Clerks do not make medical diagnoses, interpret results or prescribe medication.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

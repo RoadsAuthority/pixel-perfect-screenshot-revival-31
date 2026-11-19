@@ -1,0 +1,14 @@
+{
+  "metadataAttributes": {
+    "documentId": "HCC-MED-1002",
+    "documentType": "Medication Record",
+    "folder": "Medication",
+    "accessGroups": [
+      "Nursing",
+      "Doctors",
+      "Records"
+    ],
+    "patientId": "PAT-1002",
+    "documentDate": "2026-11-19"
+  }
+}

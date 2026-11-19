@@ -1,0 +1,56 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+MEDICATION RECORD
+Document ID: HCC-MED-1005
+Patient ID: PAT-1005
+Patient: Ester Shikwambi
+Record as at: 2026-11-19
+========================================================================
+ALLERGY ALERT
+-------------
+Aspirin and other NSAIDs (stomach bleeding in 2019, reported at registration)
+
+ENTRY 1: OMEPRAZOLE
+-------------------
+Medication name: Omeprazole
+Dosage: 20 mg
+Route: Oral
+Frequency: Once daily
+Start date: 2019 (month not recorded)
+End date: Not available
+Prescribing practitioner: Not available (external prescriber, patient-reported)
+Reason for prescription: Peptic ulcer (2019)
+Warnings: Historical, patient-reported only.
+Status: Discontinued (not current)
+
+ENTRY 2: LOSARTAN
+-----------------
+Medication name: Losartan
+Dosage: 50 mg
+Route: Oral
+Frequency: Once daily
+Start date: 2021-09-13 (continued from previous prescriber)
+End date: Ongoing
+Prescribing practitioner: DOC-001 (Dr Anna-Marie van Wyk)
+Reason for prescription: Hypertension
+Warnings: Kidney function monitored (creatinine 74 umol/L on 2026-09-28). NSAIDs contraindicated.
+Status: Prescribed - active
+
+ENTRY 3: PARACETAMOL
+--------------------
+Medication name: Paracetamol
+Dosage: 1 g
+Route: Oral
+Frequency: Every 6 to 8 hours when needed, maximum 4 g in 24 hours
+Start date: 2026-09-28
+End date: 2026-10-26
+Prescribing practitioner: DOC-002 (Dr Samuel Katjiuanjo)
+Reason for prescription: Osteoarthritis of the knees (flare)
+Warnings: ASPIRIN AND ALL NSAIDs CONTRAINDICATED (documented stomach bleeding 2019).
+Status: Prescribed - completed
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

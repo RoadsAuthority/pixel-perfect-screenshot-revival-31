@@ -1,0 +1,13 @@
+{
+  "metadataAttributes": {
+    "documentId": "HCC-CR-2026-0133",
+    "documentType": "Consultation Record",
+    "folder": "Medical_Consultations",
+    "accessGroups": [
+      "Doctors",
+      "Records"
+    ],
+    "patientId": "PAT-1002",
+    "documentDate": "2026-10-12"
+  }
+}

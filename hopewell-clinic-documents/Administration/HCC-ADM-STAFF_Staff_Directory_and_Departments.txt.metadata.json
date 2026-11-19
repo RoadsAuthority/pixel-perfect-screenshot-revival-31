@@ -1,0 +1,11 @@
+{
+  "metadataAttributes": {
+    "documentId": "HCC-ADM-STAFF",
+    "documentType": "Staff Directory",
+    "folder": "Administration",
+    "accessGroups": [
+      "Everyone"
+    ],
+    "documentDate": "2026-11-19"
+  }
+}

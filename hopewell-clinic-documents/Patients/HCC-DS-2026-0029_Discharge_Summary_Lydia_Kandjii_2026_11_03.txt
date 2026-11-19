@@ -1,0 +1,53 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+PATIENT DISCHARGE SUMMARY
+Document ID: HCC-DS-2026-0029
+Patient ID: PAT-1003
+Patient: Lydia Kandjii
+Date: 2026-11-03
+========================================================================
+STAY
+----
+Day-ward observation from 10:00 to 12:30 on 2026-11-03
+Responsible doctor: DOC-001 (Dr Anna-Marie van Wyk)
+Responsible nurse: NUR-002 (Nurse Martha Iipinge)
+
+DIAGNOSIS
+---------
+Mild to moderate asthma exacerbation, viral trigger.
+
+TREATMENT GIVEN
+---------------
+- Nebulised salbutamol 2.5 mg at 10:00
+- Observed for 2 hours
+- Blood tests (LAB-RPT-2026-0471)
+- Oral prednisolone and inhaled budesonide started
+
+CONDITION AT DISCHARGE
+----------------------
+Improved. Oxygen saturation 98%, peak flow 410 L/min at 10:35; no wheeze at discharge.
+
+MEDICATION ON DISCHARGE
+-----------------------
+- Prednisolone 40 mg daily for 5 days
+- Salbutamol inhaler when needed
+- Budesonide 200 mcg twice daily
+
+ADVICE GIVEN
+------------
+- Avoid dust and cold air
+- Return urgently if the reliever is needed more often than every 4 hours or breathing worsens
+
+FOLLOW-UP
+---------
+Asthma review on 2026-11-24 at 09:00 with DOC-001.
+
+DISCHARGED TO
+-------------
+Mother (Rebecca Kandjii) collected the patient.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

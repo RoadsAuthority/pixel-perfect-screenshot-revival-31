@@ -1,0 +1,46 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+MEDICAL HISTORY SUMMARY
+Document ID: HCC-HIS-1004
+Patient ID: PAT-1004
+Patient: Joseph Mbumba
+Prepared by: REC-001 (Beata Nakale), Medical Records Department
+Prepared on: 2026-11-19
+========================================================================
+SUMMARY
+-------
+Joseph Mbumba (PAT-1004), 11-year-old male, registered 2025-02-17. Status: Active (minor; guardian is Rachel Mbumba).
+Known allergies: No known allergies
+Blood group: Not available (never tested at this clinic)
+
+CONDITIONS AND DIAGNOSES (CHRONOLOGICAL)
+----------------------------------------
+- 2025-02-17: Acute tonsillitis
+- 2025-09-22: Acute tonsillitis
+- 2026-11-10: Acute tonsillitis (third documented episode)
+
+CURRENT MEDICATION
+------------------
+- None
+
+CLINIC CONTACTS IN 2026
+-----------------------
+- 2026-11-10 09:30 | Nursing record HCC-NR-2026-0341 | Nurse: NUR-001 (Sister Ndapewa Haufiku) | Doctor involved: DOC-001 (Dr Anna-Marie van Wyk)
+- 2026-11-10 09:50 | Discharge summary HCC-DS-2026-0032 | Discharged 12:45
+- 2026-11-10 09:55 | Consultation HCC-CR-2026-0170 | Doctor: DOC-001 (Dr Anna-Marie van Wyk) | Diagnosis: Acute tonsillitis (recurrent; third documented episode).
+- 2026-11-10 10:05 | Laboratory report LAB-RPT-2026-0489 | Technician: LAB-002 (Rauna Tjivikua)
+- 2026-11-10 | Referral REF-2026-0052 | Ear, nose and throat (ENT) | Raised by DOC-001 (Dr Anna-Marie van Wyk)
+
+UPCOMING APPOINTMENTS
+---------------------
+- 2026-11-24 10:30 | Follow-up review | DOC-001 (Dr Anna-Marie van Wyk)
+
+FAMILY MEDICAL HISTORY
+----------------------
+- No significant family history recorded
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

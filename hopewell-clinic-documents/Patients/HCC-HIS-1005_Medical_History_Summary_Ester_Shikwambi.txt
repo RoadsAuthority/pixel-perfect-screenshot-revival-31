@@ -1,0 +1,46 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+MEDICAL HISTORY SUMMARY
+Document ID: HCC-HIS-1005
+Patient ID: PAT-1005
+Patient: Ester Shikwambi
+Prepared by: REC-001 (Beata Nakale), Medical Records Department
+Prepared on: 2026-11-19
+========================================================================
+SUMMARY
+-------
+Ester Shikwambi (PAT-1005), 65-year-old female, registered 2021-09-13. Status: Active.
+Known allergies: Aspirin and other NSAIDs (stomach bleeding in 2019, reported at registration)
+Blood group: AB Positive (LAB-RPT-2026-0391)
+
+CONDITIONS AND DIAGNOSES (CHRONOLOGICAL)
+----------------------------------------
+- 2018 (reported at registration): Hypertension
+- 2019 (reported by patient): Peptic ulcer with bleeding
+- 2021-09-20: Osteoarthritis of the knees
+- 2026-09-28: Osteoarthritis of the knees, flare
+
+CURRENT MEDICATION
+------------------
+- Losartan 50 mg, oral, Once daily (from 2021-09-13 (continued from previous prescriber); prescribed by DOC-001 (Dr Anna-Marie van Wyk))
+
+CLINIC CONTACTS IN 2026
+-----------------------
+- 2026-09-28 10:05 | Nursing record HCC-NR-2026-0233 | Nurse: NUR-001 (Sister Ndapewa Haufiku) | Doctor involved: DOC-002 (Dr Samuel Katjiuanjo)
+- 2026-09-28 10:30 | Consultation HCC-CR-2026-0118 | Doctor: DOC-002 (Dr Samuel Katjiuanjo) | Diagnosis: Osteoarthritis of the knees, flare.
+- 2026-09-28 10:50 | Laboratory report LAB-RPT-2026-0391 | Technician: LAB-002 (Rauna Tjivikua)
+- 2026-09-28 | Referral REF-2026-0031 | Physiotherapy | Raised by DOC-002 (Dr Samuel Katjiuanjo)
+
+UPCOMING APPOINTMENTS
+---------------------
+- 2026-12-07 10:00 | Follow-up review | DOC-002 (Dr Samuel Katjiuanjo)
+
+FAMILY MEDICAL HISTORY
+----------------------
+- Mother: stroke
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

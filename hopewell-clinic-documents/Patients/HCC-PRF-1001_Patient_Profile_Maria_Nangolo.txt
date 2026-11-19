@@ -1,0 +1,74 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+PATIENT PROFILE
+Document ID: HCC-PRF-1001
+Patient ID: PAT-1001
+Patient file number: HCC-F-1001
+Maintained by: Medical Records Department, REC-001 (Beata Nakale)
+Record as at: 2026-11-19
+========================================================================
+PERSONAL DETAILS
+----------------
+Full name: Maria Nangolo
+Patient ID: PAT-1001
+Date of birth: 1985-03-12
+Age: 41 years (as at 2026-11-19)
+Gender: Female
+Patient status: Active
+
+RESIDENTIAL ADDRESS AND CONTACT
+-------------------------------
+Address: Erf 1840, Moringa Street, Khomasdal, Windhoek
+Area: Khomasdal
+Telephone: 081 555 0111
+Email: maria.nangolo@mail.example
+
+EMERGENCY CONTACT
+-----------------
+Name: Paulus Nangolo
+Relationship: Husband
+Telephone: 081 555 0112
+
+REGISTRATION
+------------
+Registration date: 2022-02-14
+Registration time: 09:20
+Registered by: CLK-001 (Selma Amutenya)
+
+CLINICAL ALERTS
+---------------
+Known allergies: Penicillin (skin rash, reported at registration 2022-02-14)
+Blood group: O Positive (LAB-RPT-2026-0402)
+
+EXISTING MEDICAL CONDITIONS
+---------------------------
+- Essential hypertension (on treatment)
+
+RELEVANT MEDICAL HISTORY
+------------------------
+- Hypertension diagnosed 2022-02-21 and treated with amlodipine.
+- Urinary tract infection treated 2024-08-06; resolved.
+- 2026-10-05: blood pressure above target; amlodipine increased to 10 mg daily.
+- 2026-11-02: nurse blood pressure check 132/84 mmHg; headaches resolved.
+
+PREVIOUS DIAGNOSES
+------------------
+- 2022-02-21: Essential hypertension
+- 2024-08-06: Urinary tract infection
+- 2026-10-05: Essential hypertension, suboptimally controlled
+
+PREVIOUS MEDICATION RECEIVED
+----------------------------
+- Amlodipine 5 mg once daily (2022-02-21 to 2026-10-05, dose increased)
+- Nitrofurantoin 100 mg twice daily for 5 days (2024-08-06 to 2024-08-10)
+
+FAMILY MEDICAL HISTORY
+----------------------
+- Mother: hypertension
+- Father: type 2 diabetes mellitus
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

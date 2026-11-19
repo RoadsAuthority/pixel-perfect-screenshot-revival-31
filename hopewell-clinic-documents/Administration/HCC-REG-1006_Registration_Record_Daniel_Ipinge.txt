@@ -1,0 +1,42 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+PATIENT REGISTRATION RECORD
+Document ID: HCC-REG-1006
+Patient ID: PAT-1006
+Patient: Daniel Ipinge
+========================================================================
+REGISTRATION
+------------
+Registered by: CLK-002 (Petrus Nghidinwa)
+Registration date: 2023-04-18
+Registration time: 14:35
+Patient file created: HCC-F-1006
+First appointment: 2023-04-18 14:35 (same-day nursing triage)
+
+PATIENT INFORMATION CAPTURED
+----------------------------
+Full name: Daniel Ipinge
+Date of birth: 1990-04-17
+Gender: Male
+Identity document: Namibian national ID (sighted)
+Address: 21 Eucalyptus Street, Hochland Park, Windhoek
+Telephone: 081 555 0166
+Email: daniel.ipinge@mail.example
+Emergency contact: Selma Ipinge (Sister), 081 555 0167
+Allergies stated by patient at registration: No known allergies
+Payment method: Self-paying (no medical aid on file)
+Consent to treatment and privacy notice signed: Yes
+
+CONTACT UPDATES AND CORRECTIONS LOG
+-----------------------------------
+- 2024-03-05 09:10 | Email address added by CLK-002 (Petrus Nghidinwa) at the patient's request.
+
+SCOPE NOTE
+----------
+Clerks capture and maintain administrative information only. Clerks do not make medical diagnoses, interpret results or prescribe medication.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

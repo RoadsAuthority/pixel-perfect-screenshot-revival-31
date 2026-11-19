@@ -1,0 +1,72 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+PATIENT PROFILE
+Document ID: HCC-PRF-1003
+Patient ID: PAT-1003
+Patient file number: HCC-F-1003
+Maintained by: Medical Records Department, REC-001 (Beata Nakale)
+Record as at: 2026-11-19
+========================================================================
+PERSONAL DETAILS
+----------------
+Full name: Lydia Kandjii
+Patient ID: PAT-1003
+Date of birth: 1998-06-21
+Age: 28 years (as at 2026-11-19)
+Gender: Female
+Patient status: Active
+
+RESIDENTIAL ADDRESS AND CONTACT
+-------------------------------
+Address: 7 Mahogany Avenue, Pioneerspark, Windhoek
+Area: Pioneerspark
+Telephone: 081 555 0133
+Email: lydia.kandjii@mail.example
+
+EMERGENCY CONTACT
+-----------------
+Name: Rebecca Kandjii
+Relationship: Mother
+Telephone: 081 555 0134
+
+REGISTRATION
+------------
+Registration date: 2024-01-22
+Registration time: 08:45
+Registered by: CLK-001 (Selma Amutenya)
+
+CLINICAL ALERTS
+---------------
+Known allergies: Sulfonamide antibiotics (skin rash); house dust mites (wheeze)
+Blood group: B Positive (LAB-RPT-2026-0471)
+
+EXISTING MEDICAL CONDITIONS
+---------------------------
+- Asthma
+
+RELEVANT MEDICAL HISTORY
+------------------------
+- Asthma since childhood; confirmed at the clinic on 2024-01-29.
+- Acute bronchitis 2025-05-14; treated and resolved.
+- 2026-11-03: asthma exacerbation after a viral cold; nebulised salbutamol given, oral prednisolone course and inhaled budesonide started.
+
+PREVIOUS DIAGNOSES
+------------------
+- 2024-01-29: Asthma
+- 2025-05-14: Acute bronchitis
+- 2026-11-03: Mild to moderate asthma exacerbation (viral trigger)
+
+PREVIOUS MEDICATION RECEIVED
+----------------------------
+- Salbutamol 100 mcg inhaler, 2 puffs when needed (from 2024-01-29, continuing)
+- Amoxicillin 500 mg three times daily for 5 days (2025-05-14 to 2025-05-18)
+
+FAMILY MEDICAL HISTORY
+----------------------
+- Mother: asthma
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

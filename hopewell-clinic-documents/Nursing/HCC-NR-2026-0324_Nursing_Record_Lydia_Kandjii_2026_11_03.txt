@@ -1,0 +1,68 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+NURSING RECORD
+Document ID: HCC-NR-2026-0324
+Patient ID: PAT-1003
+Patient: Lydia Kandjii
+========================================================================
+ATTENDANCE
+----------
+Date and time: 2026-11-03 09:50
+Attending nurse: NUR-002 (Nurse Martha Iipinge)
+Medical practitioner involved: DOC-001 (Dr Anna-Marie van Wyk)
+
+REPORTED SYMPTOMS
+-----------------
+- Wheeze and cough for 3 days after a cold
+- Chest tightness, worse at night
+- Using the salbutamol inhaler more than 4 times a day
+
+VITAL SIGNS
+-----------
+- Blood pressure: 118/72 mmHg
+- Pulse: 102/min
+- Temperature: 37.4 C
+- Respiratory rate: 22/min
+- Oxygen saturation: 96% on room air
+- Peak expiratory flow: 320 L/min (personal best 480 L/min)
+
+NURSING OBSERVATIONS
+--------------------
+- Audible wheeze
+- Speaking in full sentences
+- No blue discolouration of lips
+
+NURSING ASSESSMENT
+------------------
+Wheeze, fast breathing and peak flow well below personal best. This is a nursing assessment, not a medical diagnosis. Diagnosis and prescribing are done by the medical practitioner.
+
+CARE PROVIDED
+-------------
+- Allergy alert checked: sulfonamide antibiotics and house dust mites
+- Nebulised salbutamol given at 10:00 on the authorisation of DOC-001
+- Re-check at 10:35: oxygen saturation 98%, peak flow 410 L/min
+- Observed in the day ward from 10:00 until 12:30
+
+MEDICATION ADMINISTERED
+-----------------------
+Salbutamol 2.5 mg by nebuliser, single dose at 10:00 (authorised by DOC-001, administered by NUR-002 Nurse Martha Iipinge).
+
+PATIENT EDUCATION AND ADVICE
+----------------------------
+- Inhaler technique re-demonstrated
+- Avoid dust and cold air
+- Return urgently if breathing worsens or the reliever inhaler is needed more often than every 4 hours
+
+FOLLOW-UP INSTRUCTIONS
+----------------------
+Asthma review on 2026-11-24 at 09:00 with DOC-001. Discharge summary HCC-DS-2026-0029.
+
+REFERRAL OR ESCALATION
+----------------------
+DOC-001 (Dr Anna-Marie van Wyk) reviewed the patient at 10:15.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

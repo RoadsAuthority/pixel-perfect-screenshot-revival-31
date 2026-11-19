@@ -1,0 +1,42 @@
+[
+  {
+    "username": "selma.amutenya",
+    "displayName": "Selma Amutenya (CLK-001)",
+    "groups": [
+      "Administration",
+      "Everyone"
+    ]
+  },
+  {
+    "username": "ndapewa.haufiku",
+    "displayName": "Sister Ndapewa Haufiku (NUR-001)",
+    "groups": [
+      "Nursing",
+      "Everyone"
+    ]
+  },
+  {
+    "username": "annamarie.vanwyk",
+    "displayName": "Dr Anna-Marie van Wyk (DOC-001)",
+    "groups": [
+      "Doctors",
+      "Everyone"
+    ]
+  },
+  {
+    "username": "elias.shilongo",
+    "displayName": "Elias Shilongo (LAB-001)",
+    "groups": [
+      "Laboratory",
+      "Everyone"
+    ]
+  },
+  {
+    "username": "beata.nakale",
+    "displayName": "Beata Nakale (REC-001)",
+    "groups": [
+      "Records",
+      "Everyone"
+    ]
+  }
+]

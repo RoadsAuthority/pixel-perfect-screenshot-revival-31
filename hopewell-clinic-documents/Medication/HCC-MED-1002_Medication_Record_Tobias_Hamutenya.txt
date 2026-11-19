@@ -1,0 +1,56 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+MEDICATION RECORD
+Document ID: HCC-MED-1002
+Patient ID: PAT-1002
+Patient: Tobias Hamutenya
+Record as at: 2026-11-19
+========================================================================
+ALLERGY ALERT
+-------------
+No known allergies
+
+ENTRY 1: METFORMIN
+------------------
+Medication name: Metformin
+Dosage: 500 mg
+Route: Oral
+Frequency: Twice daily with meals
+Start date: 2023-06-12
+End date: 2026-10-12
+Prescribing practitioner: DOC-001 (Dr Anna-Marie van Wyk)
+Reason for prescription: Type 2 diabetes mellitus
+Warnings: No known allergies.
+Status: Discontinued (dose increased on 2026-10-12)
+
+ENTRY 2: METFORMIN
+------------------
+Medication name: Metformin
+Dosage: 1000 mg
+Route: Oral
+Frequency: Twice daily with meals
+Start date: 2026-10-12
+End date: Ongoing (90-day supply issued)
+Prescribing practitioner: DOC-002 (Dr Samuel Katjiuanjo)
+Reason for prescription: Type 2 diabetes mellitus with suboptimal glycaemic control
+Warnings: Take with food; may cause stomach upset. Kidney function to be monitored.
+Status: Prescribed - active
+
+ENTRY 3: ATORVASTATIN
+---------------------
+Medication name: Atorvastatin
+Dosage: 20 mg
+Route: Oral
+Frequency: Once daily at night
+Start date: 2025-03-10
+End date: Ongoing
+Prescribing practitioner: DOC-001 (Dr Anna-Marie van Wyk)
+Reason for prescription: Hyperlipidaemia
+Warnings: Report unexplained muscle pain. No known allergies.
+Status: Prescribed - active
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

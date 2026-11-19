@@ -1,0 +1,30 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+PATIENT REGISTRATION PROCEDURES
+Document ID: HCC-POL-003
+Effective date: 2026-01-15
+Approved by: Clinic management
+Review date: 2027-01-15
+========================================================================
+REGISTRATION STEPS
+------------------
+1. Verify identity from an identity document (birth certificate and guardian's ID for minors).
+2. Capture name, date of birth, gender, address, telephone, email and emergency contact.
+3. Record allergies exactly as stated by the patient and tell the nurse.
+4. Create the patient file and assign a unique Patient ID (format PAT-nnnn).
+5. Obtain signed consent to treatment and the privacy notice.
+6. Book or log the appointment in the appointment register.
+
+CORRECTIONS
+-----------
+- Corrections to administrative details require sighting a supporting document and must be logged with the clerk ID, date and time.
+
+SCOPE
+-----
+Clerks capture and maintain administrative information only. Clerks do not make medical diagnoses, interpret results or prescribe medication.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

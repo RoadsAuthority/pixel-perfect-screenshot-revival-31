@@ -1,0 +1,14 @@
+{
+  "metadataAttributes": {
+    "documentId": "REF-2026-0036",
+    "documentType": "Referral Record",
+    "folder": "Administration",
+    "accessGroups": [
+      "Nursing",
+      "Doctors",
+      "Records"
+    ],
+    "patientId": "PAT-1002",
+    "documentDate": "2026-10-12"
+  }
+}

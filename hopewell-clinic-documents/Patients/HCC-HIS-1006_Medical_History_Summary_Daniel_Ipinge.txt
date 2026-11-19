@@ -1,0 +1,45 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+MEDICAL HISTORY SUMMARY
+Document ID: HCC-HIS-1006
+Patient ID: PAT-1006
+Patient: Daniel Ipinge
+Prepared by: REC-001 (Beata Nakale), Medical Records Department
+Prepared on: 2026-11-19
+========================================================================
+SUMMARY
+-------
+Daniel Ipinge (PAT-1006), 36-year-old male, registered 2023-04-18. Status: Active.
+Known allergies: No known allergies
+Blood group: A Negative (LAB-RPT-2026-0436)
+
+CONDITIONS AND DIAGNOSES (CHRONOLOGICAL)
+----------------------------------------
+- 2023-04-18: Allergic rhinitis
+- 2026-10-20: Iron-deficiency anaemia (cause under investigation)
+
+CURRENT MEDICATION
+------------------
+- Ferrous sulfate 200 mg (65 mg elemental iron), oral, Three times daily (from 2026-10-20; prescribed by DOC-001 (Dr Anna-Marie van Wyk))
+
+CLINIC CONTACTS IN 2026
+-----------------------
+- 2026-10-20 09:40 | Nursing record HCC-NR-2026-0289 | Nurse: NUR-002 (Nurse Martha Iipinge) | Doctor involved: DOC-001 (Dr Anna-Marie van Wyk)
+- 2026-10-20 09:50 | Discharge summary HCC-DS-2026-0021 | Discharged 14:30
+- 2026-10-20 10:00 | Consultation HCC-CR-2026-0141 | Doctor: DOC-001 (Dr Anna-Marie van Wyk) | Diagnosis: Iron-deficiency anaemia, cause under investigation (based on haemoglobin 8.9 g/dL, MCV 71 fL and ferritin 6 ug/L).
+- 2026-10-20 10:15 | Laboratory report LAB-RPT-2026-0436 | Technician: LAB-001 (Elias Shilongo)
+- 2026-10-20 | Referral REF-2026-0041 | Gastroenterology | Raised by DOC-001 (Dr Anna-Marie van Wyk)
+
+UPCOMING APPOINTMENTS
+---------------------
+- 2026-11-24 11:00 | Follow-up review | DOC-001 (Dr Anna-Marie van Wyk)
+
+FAMILY MEDICAL HISTORY
+----------------------
+- Father: type 2 diabetes mellitus
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

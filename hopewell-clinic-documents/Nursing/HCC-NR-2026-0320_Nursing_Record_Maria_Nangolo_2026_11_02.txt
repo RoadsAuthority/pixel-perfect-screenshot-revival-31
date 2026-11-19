@@ -1,0 +1,63 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+NURSING RECORD
+Document ID: HCC-NR-2026-0320
+Patient ID: PAT-1001
+Patient: Maria Nangolo
+========================================================================
+ATTENDANCE
+----------
+Date and time: 2026-11-02 09:10
+Attending nurse: NUR-002 (Nurse Martha Iipinge)
+Medical practitioner involved: None
+
+REPORTED SYMPTOMS
+-----------------
+- Headaches have resolved
+- No new complaints
+- Reports taking amlodipine 10 mg every morning with no missed doses
+
+VITAL SIGNS
+-----------
+- Blood pressure: 132/84 mmHg
+- Pulse: 74/min
+- Temperature: 36.5 C
+- Respiratory rate: 16/min
+- Oxygen saturation: 99% on room air
+- Weight: 71.8 kg
+
+NURSING OBSERVATIONS
+--------------------
+- Comfortable, no ankle swelling
+
+NURSING ASSESSMENT
+------------------
+Blood pressure below the 140/90 mmHg target at this visit. This is a nursing assessment, not a medical diagnosis. Diagnosis and prescribing are done by the medical practitioner.
+
+CARE PROVIDED
+-------------
+- Allergy alert checked: penicillin
+- Medication supply checked: sufficient until 2027-01-02
+
+MEDICATION ADMINISTERED
+-----------------------
+None administered by nursing staff.
+
+PATIENT EDUCATION AND ADVICE
+----------------------------
+- Continue amlodipine 10 mg every morning
+- Low-salt diet and regular walking
+
+FOLLOW-UP INSTRUCTIONS
+----------------------
+Next nurse blood pressure check on 2026-12-07 at 08:45.
+
+REFERRAL OR ESCALATION
+----------------------
+None required. No medical practitioner was involved in this visit (routine nurse check as planned by DOC-001).
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

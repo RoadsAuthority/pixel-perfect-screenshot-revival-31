@@ -1,0 +1,66 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+NURSING RECORD
+Document ID: HCC-NR-2026-0268
+Patient ID: PAT-1002
+Patient: Tobias Hamutenya
+========================================================================
+ATTENDANCE
+----------
+Date and time: 2026-10-12 08:15
+Attending nurse: NUR-002 (Nurse Martha Iipinge)
+Medical practitioner involved: DOC-002 (Dr Samuel Katjiuanjo)
+
+REPORTED SYMPTOMS
+-----------------
+- Increased thirst and passing urine more often for about 3 weeks
+- Tiredness
+- Home glucose readings of 11 to 14 mmol/L
+
+VITAL SIGNS
+-----------
+- Blood pressure: 136/84 mmHg
+- Pulse: 80/min
+- Temperature: 36.5 C
+- Respiratory rate: 16/min
+- Oxygen saturation: 97% on room air
+- Weight: 94.0 kg
+- Point-of-care fasting capillary glucose: 10.2 mmol/L
+
+NURSING OBSERVATIONS
+--------------------
+- Foot inspection: skin intact, no wounds or ulcers
+- Dry mouth noted
+
+NURSING ASSESSMENT
+------------------
+Symptoms and readings suggest raised blood sugar; needs medical review and laboratory tests. This is a nursing assessment, not a medical diagnosis. Diagnosis and prescribing are done by the medical practitioner.
+
+CARE PROVIDED
+-------------
+- Fasting blood sample taken by the laboratory at 08:30 (HbA1c, fasting glucose, full blood count, blood group)
+- Oral fluids encouraged
+
+MEDICATION ADMINISTERED
+-----------------------
+None administered by nursing staff.
+
+PATIENT EDUCATION AND ADVICE
+----------------------------
+- Reduce sugary drinks and refined carbohydrates
+- Take metformin with meals
+- Check feet daily
+
+FOLLOW-UP INSTRUCTIONS
+----------------------
+Doctor review (HCC-CR-2026-0133); diabetes follow-up on 2026-11-23 at 08:30.
+
+REFERRAL OR ESCALATION
+----------------------
+Escalated to DOC-002 (Dr Samuel Katjiuanjo) at 08:40.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

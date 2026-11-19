@@ -1,0 +1,34 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+PATIENT REFERRAL RECORD
+Document ID: REF-2026-0052
+Patient ID: PAT-1004
+Patient: Joseph Mbumba
+========================================================================
+REFERRAL
+--------
+Referral ID: REF-2026-0052
+Date raised: 2026-11-10
+Raised by: DOC-001 (Dr Anna-Marie van Wyk)
+Destination: Windhoek ENT Specialists (fictional)
+Specialty: Ear, nose and throat (ENT)
+Priority: Routine
+Reason for referral: Recurrent acute tonsillitis (three episodes: 2025-02-17, 2025-09-22, 2026-11-10): assessment for tonsillectomy.
+
+REFERRAL ADMINISTRATION
+-----------------------
+Processed by: CLK-002 (Petrus Nghidinwa) on 2026-11-11 at 09:40
+Status: Sent, awaiting appointment date
+External appointment date: Not yet allocated
+Outcome or report from the referral destination: Not available (appointment not yet allocated)
+Patient contact for the destination: 081 555 0144 (mother)
+
+SCOPE NOTE
+----------
+Clerks capture and maintain administrative information only. Clerks do not make medical diagnoses, interpret results or prescribe medication.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

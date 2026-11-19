@@ -1,0 +1,43 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+MEDICATION RECORD
+Document ID: HCC-MED-1006
+Patient ID: PAT-1006
+Patient: Daniel Ipinge
+Record as at: 2026-11-19
+========================================================================
+ALLERGY ALERT
+-------------
+No known allergies
+
+ENTRY 1: CETIRIZINE
+-------------------
+Medication name: Cetirizine
+Dosage: 10 mg
+Route: Oral
+Frequency: Once daily when needed
+Start date: 2023-04-18
+End date: 2023-07-18
+Prescribing practitioner: DOC-002 (Dr Samuel Katjiuanjo)
+Reason for prescription: Allergic rhinitis
+Warnings: May cause drowsiness. No known allergies.
+Status: Prescribed - completed
+
+ENTRY 2: FERROUS SULFATE
+------------------------
+Medication name: Ferrous sulfate
+Dosage: 200 mg (65 mg elemental iron)
+Route: Oral
+Frequency: Three times daily
+Start date: 2026-10-20
+End date: 2027-01-19
+Prescribing practitioner: DOC-001 (Dr Anna-Marie van Wyk)
+Reason for prescription: Iron-deficiency anaemia
+Warnings: Stools may turn dark. Take with vitamin C-rich food or drink.
+Status: Prescribed - active
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

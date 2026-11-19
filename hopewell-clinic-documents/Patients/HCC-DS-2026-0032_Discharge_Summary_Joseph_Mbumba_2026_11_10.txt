@@ -1,0 +1,53 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+PATIENT DISCHARGE SUMMARY
+Document ID: HCC-DS-2026-0032
+Patient ID: PAT-1004
+Patient: Joseph Mbumba
+Date: 2026-11-10
+========================================================================
+STAY
+----
+Day-ward observation from 09:50 to 12:45 on 2026-11-10
+Responsible doctor: DOC-001 (Dr Anna-Marie van Wyk)
+Responsible nurse: NUR-001 (Sister Ndapewa Haufiku)
+
+DIAGNOSIS
+---------
+Acute tonsillitis (recurrent).
+
+TREATMENT GIVEN
+---------------
+- Oral paracetamol 500 mg at 09:45
+- Day-ward observation for fever
+- Blood tests (LAB-RPT-2026-0489)
+- Amoxicillin started
+
+CONDITION AT DISCHARGE
+----------------------
+Improved. Temperature 37.8 C at 12:30; drinking well.
+
+MEDICATION ON DISCHARGE
+-----------------------
+- Amoxicillin 500 mg three times daily for 7 days
+- Paracetamol 500 mg every 6 hours when needed
+
+ADVICE GIVEN
+------------
+- Complete the full antibiotic course
+- Keep up fluids
+- Return if breathing or swallowing becomes difficult
+
+FOLLOW-UP
+---------
+Review on 2026-11-24 at 10:30 with DOC-001; ENT referral REF-2026-0052.
+
+DISCHARGED TO
+-------------
+Discharged into the care of his mother, Rachel Mbumba.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

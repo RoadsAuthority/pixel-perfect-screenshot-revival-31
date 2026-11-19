@@ -1,0 +1,27 @@
+{
+  "user_id": {
+    "S": "DOC-001"
+  },
+  "username": {
+    "S": "annamarie.vanwyk"
+  },
+  "name": {
+    "S": "Dr Anna-Marie van Wyk"
+  },
+  "groups": {
+    "L": [
+      {
+        "S": "Doctors"
+      },
+      {
+        "S": "Everyone"
+      }
+    ]
+  },
+  "pin_salt": {
+    "S": "a2697bf9b7401b3b784e9a22a15fe0cd"
+  },
+  "pin_hash": {
+    "S": "49af856a40f69985616dd30a5157b801cfcd39e9488ba6fa455b6c582fb46bc274d3d47a1d4bb6cb612366b4b587a3abe029b7511f6f5dce06c575666a3aa048"
+  }
+}

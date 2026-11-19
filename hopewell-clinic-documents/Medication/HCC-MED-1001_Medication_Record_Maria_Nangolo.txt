@@ -1,0 +1,56 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+MEDICATION RECORD
+Document ID: HCC-MED-1001
+Patient ID: PAT-1001
+Patient: Maria Nangolo
+Record as at: 2026-11-19
+========================================================================
+ALLERGY ALERT
+-------------
+Penicillin (skin rash, reported at registration 2022-02-14)
+
+ENTRY 1: AMLODIPINE
+-------------------
+Medication name: Amlodipine
+Dosage: 5 mg
+Route: Oral
+Frequency: Once daily (morning)
+Start date: 2022-02-21
+End date: 2026-10-05
+Prescribing practitioner: DOC-001 (Dr Anna-Marie van Wyk)
+Reason for prescription: Hypertension
+Warnings: Penicillin allergy (not related to this drug).
+Status: Discontinued (dose increased on 2026-10-05)
+
+ENTRY 2: AMLODIPINE
+-------------------
+Medication name: Amlodipine
+Dosage: 10 mg
+Route: Oral
+Frequency: Once daily (morning)
+Start date: 2026-10-05
+End date: Ongoing (3-month supply issued, to 2027-01-02)
+Prescribing practitioner: DOC-001 (Dr Anna-Marie van Wyk)
+Reason for prescription: Hypertension, suboptimally controlled
+Warnings: May cause ankle swelling. Penicillin allergy on file.
+Status: Prescribed - active
+
+ENTRY 3: NITROFURANTOIN
+-----------------------
+Medication name: Nitrofurantoin
+Dosage: 100 mg
+Route: Oral
+Frequency: Twice daily for 5 days
+Start date: 2024-08-06
+End date: 2024-08-10
+Prescribing practitioner: DOC-002 (Dr Samuel Katjiuanjo)
+Reason for prescription: Urinary tract infection
+Warnings: Penicillin allergy on file.
+Status: Prescribed - completed
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

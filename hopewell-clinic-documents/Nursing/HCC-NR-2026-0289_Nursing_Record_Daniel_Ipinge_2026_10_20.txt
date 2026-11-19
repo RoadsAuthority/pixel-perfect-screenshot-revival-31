@@ -1,0 +1,67 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+NURSING RECORD
+Document ID: HCC-NR-2026-0289
+Patient ID: PAT-1006
+Patient: Daniel Ipinge
+========================================================================
+ATTENDANCE
+----------
+Date and time: 2026-10-20 09:40
+Attending nurse: NUR-002 (Nurse Martha Iipinge)
+Medical practitioner involved: DOC-001 (Dr Anna-Marie van Wyk)
+
+REPORTED SYMPTOMS
+-----------------
+- Tiredness for about 6 weeks
+- Dizziness on standing up
+- Shortness of breath when climbing stairs
+- Colleagues say he looks pale
+
+VITAL SIGNS
+-----------
+- Blood pressure sitting: 112/70 mmHg
+- Blood pressure standing: 104/66 mmHg (dizzy)
+- Pulse: 98/min
+- Temperature: 36.7 C
+- Respiratory rate: 18/min
+- Oxygen saturation: 98% on room air
+- Weight: 68.5 kg
+
+NURSING OBSERVATIONS
+--------------------
+- Marked pallor of palms and inner eyelids
+- Mild dizziness on standing, settled after sitting
+
+NURSING ASSESSMENT
+------------------
+Pallor, fast pulse and dizziness on standing; needs urgent medical review and blood tests. This is a nursing assessment, not a medical diagnosis. Diagnosis and prescribing are done by the medical practitioner.
+
+CARE PROVIDED
+-------------
+- Seated rest and oral fluids
+- Placed in the day-ward observation bay from 09:50
+- Escorted to the laboratory for blood tests at 10:15
+
+MEDICATION ADMINISTERED
+-----------------------
+None administered by nursing staff.
+
+PATIENT EDUCATION AND ADVICE
+----------------------------
+- Rise slowly from lying or sitting
+- Report fainting, chest pain or black stools immediately
+
+FOLLOW-UP INSTRUCTIONS
+----------------------
+Doctor review (HCC-CR-2026-0141); review on 2026-11-24 at 11:00; discharge summary HCC-DS-2026-0021.
+
+REFERRAL OR ESCALATION
+----------------------
+Escalated to DOC-001 (Dr Anna-Marie van Wyk) at 09:55.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

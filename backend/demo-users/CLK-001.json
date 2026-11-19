@@ -1,0 +1,27 @@
+{
+  "user_id": {
+    "S": "CLK-001"
+  },
+  "username": {
+    "S": "selma.amutenya"
+  },
+  "name": {
+    "S": "Selma Amutenya"
+  },
+  "groups": {
+    "L": [
+      {
+        "S": "Administration"
+      },
+      {
+        "S": "Everyone"
+      }
+    ]
+  },
+  "pin_salt": {
+    "S": "77883057b1102481f8954e82bb15e29f"
+  },
+  "pin_hash": {
+    "S": "e6f3efe5a56d0e85657ecfdc4693c41cddbdd1e3a8cc0ce4853e35e9aa31ccfaf52fff66e013303ddb0b3180bff5d6d8789537ad029740444a5bdbdba9f52514"
+  }
+}

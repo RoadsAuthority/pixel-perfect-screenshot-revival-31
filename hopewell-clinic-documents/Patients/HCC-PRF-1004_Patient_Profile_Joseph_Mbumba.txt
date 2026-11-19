@@ -1,0 +1,73 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+PATIENT PROFILE
+Document ID: HCC-PRF-1004
+Patient ID: PAT-1004
+Patient file number: HCC-F-1004
+Maintained by: Medical Records Department, REC-001 (Beata Nakale)
+Record as at: 2026-11-19
+========================================================================
+PERSONAL DETAILS
+----------------
+Full name: Joseph Mbumba
+Patient ID: PAT-1004
+Date of birth: 2015-01-08
+Age: 11 years (as at 2026-11-19)
+Gender: Male
+Patient status: Active (minor; guardian is Rachel Mbumba)
+Patient is a minor. All consultations require a parent or guardian.
+
+RESIDENTIAL ADDRESS AND CONTACT
+-------------------------------
+Address: 34 Ruacana Street, Wanaheda, Windhoek
+Area: Wanaheda
+Telephone: 081 555 0144 (mother)
+Email: Not provided
+
+EMERGENCY CONTACT
+-----------------
+Name: Rachel Mbumba
+Relationship: Mother (legal guardian)
+Telephone: 081 555 0144
+
+REGISTRATION
+------------
+Registration date: 2025-02-17
+Registration time: 11:10
+Registered by: CLK-002 (Petrus Nghidinwa)
+
+CLINICAL ALERTS
+---------------
+Known allergies: No known allergies
+Blood group: Not available (never tested at this clinic)
+
+EXISTING MEDICAL CONDITIONS
+---------------------------
+- Recurrent tonsillitis
+
+RELEVANT MEDICAL HISTORY
+------------------------
+- Acute tonsillitis first recorded at registration on 2025-02-17; treated with amoxicillin.
+- Second episode of acute tonsillitis on 2025-09-22; treated with amoxicillin.
+- Third episode on 2026-11-10; amoxicillin prescribed and referral made for ENT assessment.
+
+PREVIOUS DIAGNOSES
+------------------
+- 2025-02-17: Acute tonsillitis
+- 2025-09-22: Acute tonsillitis
+- 2026-11-10: Acute tonsillitis (third documented episode)
+
+PREVIOUS MEDICATION RECEIVED
+----------------------------
+- Amoxicillin 250 mg three times daily for 7 days (2025-02-17 to 2025-02-23)
+- Amoxicillin 250 mg three times daily for 7 days (2025-09-22 to 2025-09-28)
+
+FAMILY MEDICAL HISTORY
+----------------------
+- No significant family history recorded
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

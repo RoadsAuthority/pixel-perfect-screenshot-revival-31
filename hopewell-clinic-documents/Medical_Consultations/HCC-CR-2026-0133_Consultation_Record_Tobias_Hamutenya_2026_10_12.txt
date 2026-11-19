@@ -1,0 +1,70 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+MEDICAL CONSULTATION AND DIAGNOSIS RECORD
+Document ID: HCC-CR-2026-0133
+Patient ID: PAT-1002
+Patient: Tobias Hamutenya
+========================================================================
+CONSULTATION
+------------
+Consultation date and time: 2026-10-12 08:45
+Doctor: DOC-002 (Dr Samuel Katjiuanjo)
+Known allergies: No known allergies
+
+PRESENTING COMPLAINT
+--------------------
+Increased thirst, passing urine often and tiredness for 3 weeks.
+
+SYMPTOMS
+--------
+- Polydipsia and polyuria
+- Fatigue
+- Home glucose readings 11 to 14 mmol/L
+
+CLINICAL EXAMINATION FINDINGS
+-----------------------------
+- Blood pressure 136/84 mmHg
+- Weight 94.0 kg, BMI 31.4
+- Foot sensation intact, no ulcers
+
+DIAGNOSIS
+---------
+Type 2 diabetes mellitus with suboptimal glycaemic control (HbA1c 8.1%).
+
+PREVIOUS RELEVANT DIAGNOSES
+---------------------------
+Type 2 diabetes mellitus (2023-06-12); hyperlipidaemia (2025-03-10).
+
+TREATMENT PLAN
+--------------
+- Increase metformin from 500 mg to 1000 mg twice daily with meals
+- Continue atorvastatin 20 mg at night
+- Dietitian referral (REF-2026-0036)
+- Repeat HbA1c in 3 months (January 2027)
+
+PRESCRIBED MEDICATION (DOSAGE, FREQUENCY, DURATION)
+---------------------------------------------------
+- Metformin 1000 mg orally twice daily with meals (90 days, from 2026-10-12)
+- Atorvastatin 20 mg orally at night (continued)
+
+FOLLOW-UP
+---------
+Follow-up: 2026-11-23 at 08:30
+
+REFERRALS
+---------
+Dietetics: REF-2026-0036
+
+LABORATORY INVESTIGATIONS
+-------------------------
+LAB-RPT-2026-0418 (fasting glucose, HbA1c, full blood count, blood group)
+
+ADDENDUM
+--------
+2026-10-12 13:40: record finalised after laboratory results (fasting glucose 9.8 mmol/L and HbA1c 8.1%, both above reference range).
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

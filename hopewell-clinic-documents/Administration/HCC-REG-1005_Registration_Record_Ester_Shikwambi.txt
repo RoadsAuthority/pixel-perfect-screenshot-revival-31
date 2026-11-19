@@ -1,0 +1,42 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+PATIENT REGISTRATION RECORD
+Document ID: HCC-REG-1005
+Patient ID: PAT-1005
+Patient: Ester Shikwambi
+========================================================================
+REGISTRATION
+------------
+Registered by: CLK-001 (Selma Amutenya)
+Registration date: 2021-09-13
+Registration time: 09:50
+Patient file created: HCC-F-1005
+First appointment: 2021-09-13 09:50 (same-day nursing triage)
+
+PATIENT INFORMATION CAPTURED
+----------------------------
+Full name: Ester Shikwambi
+Date of birth: 1960-12-02
+Gender: Female
+Identity document: Namibian national ID (sighted)
+Address: 9 Baobab Close, Olympia, Windhoek
+Telephone: 081 555 0155
+Email: Not provided
+Emergency contact: Gideon Shikwambi (Son), 081 555 0156
+Allergies stated by patient at registration: Aspirin and other NSAIDs (stomach bleeding in 2019, reported at registration)
+Payment method: Self-paying (pensioner rate applied)
+Consent to treatment and privacy notice signed: Yes
+
+CONTACT UPDATES AND CORRECTIONS LOG
+-----------------------------------
+- 2024-11-12 13:20 | Emergency contact updated by CLK-001 (Selma Amutenya): Gideon Shikwambi (son) replaces previous contact Magdalena Shikwambi (sister) at the patient's request.
+
+SCOPE NOTE
+----------
+Clerks capture and maintain administrative information only. Clerks do not make medical diagnoses, interpret results or prescribe medication.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

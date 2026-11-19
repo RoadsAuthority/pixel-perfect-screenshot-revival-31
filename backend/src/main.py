@@ -7,6 +7,12 @@ Root dir:              backend/
 
 import logging
 import os
+import sys
+from pathlib import Path
+
+# Make sibling modules (handler.py) importable whether uvicorn is started as
+# `src.main:app` from backend/ or as `main:app --app-dir src`.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import boto3
 from botocore.exceptions import ClientError

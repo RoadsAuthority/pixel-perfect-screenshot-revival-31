@@ -1,0 +1,66 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+NURSING RECORD
+Document ID: HCC-NR-2026-0341
+Patient ID: PAT-1004
+Patient: Joseph Mbumba
+========================================================================
+ATTENDANCE
+----------
+Date and time: 2026-11-10 09:30
+Attending nurse: NUR-001 (Sister Ndapewa Haufiku)
+Medical practitioner involved: DOC-001 (Dr Anna-Marie van Wyk)
+
+REPORTED SYMPTOMS
+-----------------
+- Sore throat and fever for 2 days (reported by his mother, Rachel Mbumba)
+- Pain on swallowing
+- Reduced appetite
+
+VITAL SIGNS
+-----------
+- Temperature: 38.6 C
+- Pulse: 108/min
+- Respiratory rate: 22/min
+- Blood pressure: 100/64 mmHg
+- Oxygen saturation: 98% on room air
+- Weight: 35.0 kg
+
+NURSING OBSERVATIONS
+--------------------
+- Red throat with enlarged tonsils and white patches
+- Child alert and drinking small sips
+
+NURSING ASSESSMENT
+------------------
+Febrile child with painful swallowing; needs medical review. This is a nursing assessment, not a medical diagnosis. Diagnosis and prescribing are done by the medical practitioner.
+
+CARE PROVIDED
+-------------
+- Allergy alert checked: no known allergies
+- Oral fluids encouraged
+- Placed in the day-ward observation bay from 09:50
+
+MEDICATION ADMINISTERED
+-----------------------
+Paracetamol 500 mg orally, single dose at 09:45 (administered by NUR-001 Sister Ndapewa Haufiku under the clinic fever standing order; confirmed by DOC-001 at 09:55).
+
+PATIENT EDUCATION AND ADVICE
+----------------------------
+- Keep up fluids and rest
+- Complete the full antibiotic course if prescribed
+- Return if breathing or swallowing becomes difficult
+
+FOLLOW-UP INSTRUCTIONS
+----------------------
+Doctor review (HCC-CR-2026-0170); post-antibiotic review on 2026-11-24 at 10:30. Discharge summary HCC-DS-2026-0032.
+
+REFERRAL OR ESCALATION
+----------------------
+Escalated to DOC-001 (Dr Anna-Marie van Wyk) at 09:50.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

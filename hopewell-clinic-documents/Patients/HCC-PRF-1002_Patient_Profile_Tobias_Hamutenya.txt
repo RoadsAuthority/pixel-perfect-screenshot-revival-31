@@ -1,0 +1,74 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+PATIENT PROFILE
+Document ID: HCC-PRF-1002
+Patient ID: PAT-1002
+Patient file number: HCC-F-1002
+Maintained by: Medical Records Department, REC-001 (Beata Nakale)
+Record as at: 2026-11-19
+========================================================================
+PERSONAL DETAILS
+----------------
+Full name: Tobias Hamutenya
+Patient ID: PAT-1002
+Date of birth: 1972-09-30
+Age: 54 years (as at 2026-11-19)
+Gender: Male
+Patient status: Active
+
+RESIDENTIAL ADDRESS AND CONTACT
+-------------------------------
+Address: 12 Omuramba Road, Katutura, Windhoek
+Area: Katutura
+Telephone: 081 555 0122
+Email: tobias.hamutenya@mail.example
+
+EMERGENCY CONTACT
+-----------------
+Name: Helena Hamutenya
+Relationship: Wife
+Telephone: 081 555 0123
+
+REGISTRATION
+------------
+Registration date: 2023-06-05
+Registration time: 10:05
+Registered by: CLK-002 (Petrus Nghidinwa)
+
+CLINICAL ALERTS
+---------------
+Known allergies: No known allergies
+Blood group: A Positive (LAB-RPT-2026-0418)
+
+EXISTING MEDICAL CONDITIONS
+---------------------------
+- Type 2 diabetes mellitus
+- Hyperlipidaemia
+
+RELEVANT MEDICAL HISTORY
+------------------------
+- Type 2 diabetes mellitus diagnosed 2023-06-12; started on metformin 500 mg twice daily.
+- Hyperlipidaemia diagnosed 2025-03-10; atorvastatin 20 mg at night started.
+- 2026-10-12: raised thirst and tiredness; HbA1c 8.1%; metformin increased to 1000 mg twice daily; dietitian referral.
+
+PREVIOUS DIAGNOSES
+------------------
+- 2023-06-12: Type 2 diabetes mellitus
+- 2025-03-10: Hyperlipidaemia
+- 2026-10-12: Type 2 diabetes mellitus with suboptimal glycaemic control
+
+PREVIOUS MEDICATION RECEIVED
+----------------------------
+- Metformin 500 mg twice daily (2023-06-12 to 2026-10-12, dose increased)
+- Atorvastatin 20 mg at night (from 2025-03-10, continuing)
+
+FAMILY MEDICAL HISTORY
+----------------------
+- Father: type 2 diabetes mellitus
+- Brother: heart disease
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

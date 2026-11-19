@@ -1,0 +1,39 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia | Tel: +264 61 555 0100
+CONFIDENTIAL - FICTIONAL DEMONSTRATION RECORD
+========================================================================
+STAFF DIRECTORY AND DEPARTMENTS
+Document ID: HCC-ADM-STAFF
+Record as at: 2026-11-19
+========================================================================
+DEPARTMENTS
+-----------
+- Patient Registration and Administration
+- Nursing Department
+- Medical Consultation Department
+- Laboratory and Blood Testing Department
+- Medical Records Department
+
+STAFF
+-----
+- CLK-001 | Selma Amutenya | Registration Clerk | Patient Registration and Administration
+- CLK-002 | Petrus Nghidinwa | Appointments Clerk | Patient Registration and Administration
+- NUR-001 | Sister Ndapewa Haufiku | Senior Registered Nurse | Nursing Department
+- NUR-002 | Nurse Martha Iipinge | Enrolled Nurse | Nursing Department
+- DOC-001 | Dr Anna-Marie van Wyk | Medical Practitioner (General Practice) | Medical Consultation Department
+- DOC-002 | Dr Samuel Katjiuanjo | Medical Practitioner (General Practice) | Medical Consultation Department
+- LAB-001 | Elias Shilongo | Laboratory Technician | Laboratory and Blood Testing Department
+- LAB-002 | Rauna Tjivikua | Laboratory Technician | Laboratory and Blood Testing Department
+- REC-001 | Beata Nakale | Medical Records Officer | Medical Records Department
+
+SCOPE OF PRACTICE
+-----------------
+- Clerks (CLK): administrative work only. They do not make medical diagnoses or prescribe medication.
+- Nurses (NUR): assess, monitor and care for patients, and administer medication on a doctor's authorisation or an approved standing order. They do not make medical diagnoses or prescribe.
+- Doctors (DOC): examine patients, make diagnoses, prescribe medication and authorise referrals.
+- Laboratory technicians (LAB): collect samples, perform tests and report results. They do not make diagnoses.
+- Medical records officer (REC): maintains and summarises patient records.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not real medical advice.

@@ -1,3 +1,0 @@
-DEMO DOCUMENT - FICTIONAL DATA
-
-Patient P042 attended a routine visit on 9 November 2026. The report records a haemoglobin result below the laboratory reference range. The nurse requested a follow-up visit to discuss the result. No diagnosis or medication change is recorded. Follow-up is scheduled for 23 November 2026.

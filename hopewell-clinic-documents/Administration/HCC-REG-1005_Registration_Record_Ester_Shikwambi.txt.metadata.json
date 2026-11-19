@@ -1,0 +1,13 @@
+{
+  "metadataAttributes": {
+    "documentId": "HCC-REG-1005",
+    "documentType": "Registration Record",
+    "folder": "Administration",
+    "accessGroups": [
+      "Administration",
+      "Records"
+    ],
+    "patientId": "PAT-1005",
+    "documentDate": "2021-09-13"
+  }
+}
