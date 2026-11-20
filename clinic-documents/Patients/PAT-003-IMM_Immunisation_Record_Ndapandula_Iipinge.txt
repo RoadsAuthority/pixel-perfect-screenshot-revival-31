@@ -36,6 +36,10 @@ NEXT DUE
 
 Reactions: none recorded. BCG scar present (checked 2026-06-16).
 
+NORMAL PLACE OF STAY
+Home: Erf 3318, Havana, Windhoek.
+Home GPS location (approximate): -22.502, 17.0335
+
 ------------------------------------------------------------------------
 FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a
 substitute for advice from a qualified health worker.

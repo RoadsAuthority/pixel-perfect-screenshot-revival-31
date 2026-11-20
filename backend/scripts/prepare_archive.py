@@ -19,12 +19,15 @@ import json
 import re
 import secrets
 import shutil
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "clinic-documents"
 BACKEND = ROOT / "backend"
 UPLOAD = BACKEND / "archive-upload"
+# Original scan images go to s3://<bucket>/scans/ (outside the Knowledge Base data source).
+SCANS_UPLOAD = BACKEND / "scans-upload"
 CATALOG = BACKEND / "src" / "documents.json"
 USERS_OUT = BACKEND / "demo-users"
 
@@ -40,13 +43,19 @@ def hash_pin(pin: str) -> tuple[str, str]:
 
 def prepare_documents() -> None:
     manifest = json.loads((SOURCE / "manifest.json").read_text(encoding="utf-8"))
-    if UPLOAD.exists():
-        shutil.rmtree(UPLOAD)
+    for folder in (UPLOAD, SCANS_UPLOAD):
+        if folder.exists():
+            shutil.rmtree(folder)
+    SCANS_UPLOAD.mkdir(parents=True)
     catalog = []
     for entry in manifest:
         rel = Path(entry["file"])
         src_txt = SOURCE / rel
         src_meta = SOURCE / f"{rel}.metadata.json"
+        if not src_txt.exists() or not src_meta.exists():
+            # A scanned document whose text has not been produced by OCR yet.
+            print(f"Skipped {entry['documentId']}: no text yet (run backend/scripts/ocr_scans.py)")
+            continue
         attrs = json.loads(src_meta.read_text(encoding="utf-8"))["metadataAttributes"]
         groups = attrs["accessGroups"]
         attrs["doc_id"] = entry["documentId"]
@@ -74,6 +83,12 @@ def prepare_documents() -> None:
                 "text": src_txt.read_text(encoding="utf-8"),
             }
         )
+        if entry.get("home"):
+            catalog[-1]["home"] = entry["home"]
+        if entry.get("scanFile"):
+            scan = SOURCE / entry["scanFile"]
+            shutil.copyfile(scan, SCANS_UPLOAD / scan.name)
+            catalog[-1]["scan_key"] = f"scans/{scan.name}"
     catalog.sort(key=lambda d: (d["folder"], d["doc_id"]))
     CATALOG.write_text(json.dumps(catalog, indent=2) + "\n", encoding="utf-8")
     print(f"Prepared {len(catalog)} documents in {UPLOAD} and catalogue {CATALOG}")
@@ -81,14 +96,15 @@ def prepare_documents() -> None:
 
 def prepare_users() -> None:
     users = json.loads((SOURCE / "users.json").read_text(encoding="utf-8"))
-    if USERS_OUT.exists():
-        shutil.rmtree(USERS_OUT)
-    USERS_OUT.mkdir()
+    USERS_OUT.mkdir(exist_ok=True)
+    force = "--force-users" in sys.argv
     for user in users:
         match = re.search(r"\(([A-Z]+-\d+)\)", user["displayName"])
         if not match:
             raise SystemExit(f"No staff code in displayName: {user['displayName']}")
         code = match.group(1)
+        if (USERS_OUT / f"{code}.json").exists() and not force:
+            continue  # keep the existing hash, which matches DynamoDB
         pin = user["demoPin"]  # fictional demo PIN, stored only as a hash
         name = user["displayName"].replace(f"({code})", "").strip()
         salt, pin_hash = hash_pin(pin)
@@ -105,11 +121,6 @@ def prepare_users() -> None:
 
 
 if __name__ == "__main__":
-    import sys
-
     prepare_documents()
-    # Users are only regenerated on request: new salts would no longer match DynamoDB.
-    if "--users" in sys.argv:
-        prepare_users()
-    else:
-        print("Users unchanged (pass --users to regenerate backend/demo-users/).")
+    # Only users without a file are added; --force-users regenerates all (new salts no longer match DynamoDB).
+    prepare_users()

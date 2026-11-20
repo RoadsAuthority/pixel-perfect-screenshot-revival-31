@@ -1,0 +1,13 @@
+{
+  "metadataAttributes": {
+    "documentId": "PAT-004-PRF",
+    "documentType": "Patient Profile",
+    "folder": "Patients",
+    "accessGroups": [
+      "Clinical",
+      "PAT-004"
+    ],
+    "documentDate": "2026-11-10",
+    "patientId": "PAT-004"
+  }
+}

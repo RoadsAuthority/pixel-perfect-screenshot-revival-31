@@ -1,7 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   AlertTriangle,
+  Camera,
   CheckCircle2,
+  House,
+  ImagePlus,
+  Radio,
+  Trash2,
   ExternalLink,
   HeartPulse,
   LoaderCircle,
@@ -20,6 +25,11 @@ import { callArchive, normalizeAnswer, type Answer, type EmergencyAlert, type So
 import type { AuthSession } from '@/lib/auth';
 import { AnswerCard } from '@/components/answer-card';
 import { DocumentViewer, MOBILE_FULLSCREEN } from '@/components/document-viewer';
+import { LiveMap } from '@/components/live-map';
+import { distanceKm, SIMULATIONS, simulatedPosition, type Coords } from '@/lib/geo';
+import { prepareImage, type PreparedImage } from '@/lib/image';
+import type { LiveShare } from '@/hooks/use-live-share';
+import type { PhotoAssessment } from '@/lib/archive';
 
 export const CLINIC_EMERGENCY_LINE = '+264 61 555 0199 (fictional)';
 
@@ -32,15 +42,6 @@ const FACILITIES = [
   { name: 'Mediclinic Windhoek', note: 'Private hospital, emergency unit', lat: -22.555, lng: 17.094, query: 'Mediclinic Windhoek' },
 ];
 
-type Coords = { lat: number; lng: number; accuracy: number };
-
-function distanceKm(a: { lat: number; lng: number }, b: { lat: number; lng: number }): number {
-  const rad = (d: number) => (d * Math.PI) / 180;
-  const dLat = rad(b.lat - a.lat);
-  const dLng = rad(b.lng - a.lng);
-  const h = Math.sin(dLat / 2) ** 2 + Math.cos(rad(a.lat)) * Math.cos(rad(b.lat)) * Math.sin(dLng / 2) ** 2;
-  return 6371 * 2 * Math.asin(Math.sqrt(h));
-}
 
 function directionsUrl(destination: string, from?: Coords | null): string {
   const params = new URLSearchParams({ api: '1', destination });
@@ -54,9 +55,24 @@ type SpeechWindow = Window & { SpeechRecognition?: new () => Recognition; webkit
 
 // ── Distress dialog (patients and the public) ────────────────────────────────
 
-type DialogProps = { open: boolean; onOpenChange: (open: boolean) => void; session: AuthSession | null; url: string };
+type DialogProps = {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  session: AuthSession | null;
+  url: string;
+  /** Called after an alert is sent, to start sharing live location. */
+  onSent?: ((share: LiveShare) => void) | undefined;
+};
 
-export function EmergencyDialog({ open, onOpenChange, session, url }: DialogProps) {
+const URGENCY_STYLE: Record<string, string> = {
+  emergency: 'bg-destructive text-destructive-foreground',
+  high: 'bg-destructive/15 text-destructive',
+  medium: 'bg-warning-surface text-warning',
+  low: 'bg-secondary text-primary',
+  unknown: 'bg-muted text-muted-foreground',
+};
+
+export function EmergencyDialog({ open, onOpenChange, session, url, onSent }: DialogProps) {
   const [coords, setCoords] = useState<Coords | null>(null);
   const [locating, setLocating] = useState(false);
   const [locationNote, setLocationNote] = useState('');
@@ -70,7 +86,12 @@ export function EmergencyDialog({ open, onOpenChange, session, url }: DialogProp
   const [sending, setSending] = useState(false);
   const [error, setError] = useState('');
   const [sentId, setSentId] = useState('');
+  const [photo, setPhoto] = useState<PreparedImage | null>(null);
+  const [simId, setSimId] = useState('');
+  const [assessment, setAssessment] = useState<PhotoAssessment | null>(null);
+  const [guide, setGuide] = useState<Source | null>(null);
   const recognition = useRef<Recognition | null>(null);
+  const simulation = SIMULATIONS.find((x) => x.id === simId);
 
   const locate = useCallback(() => {
     if (!navigator.geolocation) { setLocationNote('This device cannot share its location. Describe where you are in the message.'); return; }
@@ -83,9 +104,22 @@ export function EmergencyDialog({ open, onOpenChange, session, url }: DialogProp
   }, []);
 
   useEffect(() => {
-    if (open) { setSentId(''); setError(''); locate(); }
+    if (open) { setSentId(''); setError(''); setAssessment(null); setPhoto(null); locate(); }
     else recognition.current?.stop();
   }, [open, locate]);
+
+  // Demo simulation replaces the GPS position with a simulated one elsewhere in Windhoek.
+  useEffect(() => {
+    if (simulation) { setCoords(simulatedPosition(simulation, 0)); setLocationNote(''); }
+    else if (open) locate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [simId]);
+
+  async function pickPhoto(file: File | undefined) {
+    if (!file) return;
+    try { setPhoto(await prepareImage(file)); setError(''); }
+    catch (e) { setError(e instanceof Error ? e.message : 'The photo could not be used.'); }
+  }
 
   function speak() {
     if (listening) { recognition.current?.stop(); return; }
@@ -113,8 +147,15 @@ export function EmergencyDialog({ open, onOpenChange, session, url }: DialogProp
         patient_id: session ? '' : patientId.trim().toUpperCase(),
         pin: session ? '' : pin,
         lat: coords?.lat, lng: coords?.lng, accuracy: coords?.accuracy,
+        image_base64: photo?.base64, image_type: photo?.type,
       }, session?.token);
-      setSentId(typeof data['alert_id'] === 'string' ? data['alert_id'] : 'sent');
+      const alertId = typeof data['alert_id'] === 'string' ? data['alert_id'] : '';
+      setSentId(alertId || 'sent');
+      setAssessment(data['image_assessment'] && typeof data['image_assessment'] === 'object' && Object.keys(data['image_assessment']).length
+        ? data['image_assessment'] as PhotoAssessment : null);
+      if (alertId && typeof data['update_key'] === 'string' && (coords || simulation)) {
+        onSent?.({ alertId, updateKey: data['update_key'], url, simulation });
+      }
       setSentIdentity(typeof data['identity'] === 'string' ? data['identity'] : '');
       setPin('');
     } catch (e) {
@@ -153,6 +194,31 @@ export function EmergencyDialog({ open, onOpenChange, session, url }: DialogProp
               </p>
               <p className="mt-2 font-mono text-[11px] text-muted-foreground">Reference: {sentId.slice(0, 8)}</p>
             </div>
+            {(coords || simulation) && (
+              <p className="flex items-start gap-2 rounded-md bg-muted/60 p-3 text-xs leading-5">
+                <Radio size={15} className="mt-0.5 shrink-0 text-destructive" />
+                Your live location is being shared with the clinic every 10 seconds{simulation ? ' (demo simulation)' : ''}, so help can find you if you move. You can stop it from the bar at the top.
+              </p>
+            )}
+            {assessment && (
+              <div className="rounded-md border border-border p-4">
+                <p className="flex flex-wrap items-center gap-2 text-sm font-semibold">
+                  <Camera size={15} /> What the clinic sees in your photo
+                  {assessment.urgency && (
+                    <span className={`rounded-full px-2 py-0.5 text-[11px] font-medium capitalize ${URGENCY_STYLE[assessment.urgency] ?? URGENCY_STYLE['unknown']}`}>
+                      {assessment.urgency === 'unknown' ? 'urgency unclear' : `${assessment.urgency} urgency`}
+                    </span>
+                  )}
+                </p>
+                <p className="mt-2 text-sm leading-6">{assessment.description || assessment.error}</p>
+                <p className="mt-2 text-[11px] text-muted-foreground">Read automatically by AI to help the nurse. It is not a diagnosis.</p>
+                {assessment.guide_doc_id && (
+                  <Button variant="clinic" size="sm" className="mt-3" onClick={() => setGuide({ doc_id: assessment.guide_doc_id ?? '', title: 'First-aid guide', snippet: '', reference: assessment.guide_doc_id ?? '', quotes: [] })}>
+                    <HeartPulse size={13} /> Open the first-aid guide while you wait
+                  </Button>
+                )}
+              </div>
+            )}
             <FacilityList facilities={nearest.slice(0, 3)} coords={coords} />
             <Button variant="outline" size="touch" className="w-full" onClick={() => onOpenChange(false)}>Close</Button>
           </div>
@@ -173,6 +239,14 @@ export function EmergencyDialog({ open, onOpenChange, session, url }: DialogProp
                   <button type="button" className="underline" onClick={locate}>Try again</button>
                 </p>
               )}
+              <label className="mt-2 block text-[11px] text-muted-foreground">
+                Demo only: pretend to be somewhere else
+                <select value={simId} onChange={(e) => setSimId(e.target.value)} className="mt-1 h-9 w-full rounded-md border border-input bg-card px-2 text-xs">
+                  <option value="">Use my real location (GPS)</option>
+                  {SIMULATIONS.map((x) => <option key={x.id} value={x.id}>Simulate: {x.label}</option>)}
+                </select>
+              </label>
+              {simulation && <p className="mt-1 text-[11px] font-medium text-warning">Demo simulation: the clinic will see a simulated, moving position.</p>}
             </section>
 
             <FacilityList facilities={nearest.slice(0, 3)} coords={coords} />
@@ -213,6 +287,27 @@ export function EmergencyDialog({ open, onOpenChange, session, url }: DialogProp
                   <input value={phone} onChange={(e) => setPhone(e.target.value)} maxLength={30} inputMode="tel" className="mt-1 h-11 w-full rounded-md border border-input bg-card px-3 text-sm" />
                 </label>
               )}
+              <div className="rounded-md border border-dashed border-border p-3">
+                <p className="text-xs font-medium">Add a photo (optional)</p>
+                <p className="mt-0.5 text-[11px] leading-5 text-muted-foreground">If it is hard to explain, for example a burn, wound or rash, send a photo. The nurse sees it with a short description.</p>
+                {photo ? (
+                  <div className="mt-2 flex items-center gap-3">
+                    <img src={photo.previewUrl} alt="Photo to send" className="h-20 w-20 rounded-md object-cover" />
+                    <Button type="button" variant="ghost" size="sm" onClick={() => setPhoto(null)}><Trash2 size={13} /> Remove</Button>
+                  </div>
+                ) : (
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    <label className="inline-flex h-10 cursor-pointer items-center gap-2 rounded-md bg-secondary px-3 text-sm font-medium text-secondary-foreground">
+                      <Camera size={15} /> Take photo
+                      <input type="file" accept="image/*" capture="environment" className="sr-only" onChange={(e) => void pickPhoto(e.target.files?.[0])} />
+                    </label>
+                    <label className="inline-flex h-10 cursor-pointer items-center gap-2 rounded-md border border-border px-3 text-sm">
+                      <ImagePlus size={15} /> Choose photo
+                      <input type="file" accept="image/*" className="sr-only" onChange={(e) => void pickPhoto(e.target.files?.[0])} />
+                    </label>
+                  </div>
+                )}
+              </div>
               <div>
                 <label htmlFor="emergency-message" className="text-xs font-medium">What is wrong? (symptoms, who is affected, where you are)</label>
                 <textarea
@@ -236,7 +331,7 @@ export function EmergencyDialog({ open, onOpenChange, session, url }: DialogProp
               variant="destructive"
               size="touch"
               className="w-full text-base"
-              disabled={sending || (!message.trim() && !coords)}
+              disabled={sending || (!message.trim() && !coords && !photo)}
               onClick={() => void send()}
             >
               {sending ? <LoaderCircle className="animate-spin" /> : <Send size={16} />}
@@ -248,6 +343,7 @@ export function EmergencyDialog({ open, onOpenChange, session, url }: DialogProp
           </div>
         )}
       </DialogContent>
+      <DocumentViewer source={guide} onClose={() => setGuide(null)} url={url} token={session?.token} userId={session?.user_id ?? 'PUBLIC'} />
     </Dialog>
   );
 }
@@ -492,44 +588,85 @@ const AVG_CITY_KMH = 35;   // assumed average driving speed in Windhoek without 
 const ROAD_FACTOR = 1.4;   // roads are longer than a straight line
 const CLINIC = { lat: -22.544, lng: 17.05 }; // Hopewell Community Clinic (fictional), Khomasdal
 
-function RouteBox({ alert }: { alert: EmergencyAlert }) {
-  const lat = Number(alert.lat);
-  const lng = Number(alert.lng);
-  if (!alert.lat || !alert.lng || !Number.isFinite(lat) || !Number.isFinite(lng)) {
-    return <p className="mt-4 text-xs text-muted-foreground">No location shared — call the person to find out where they are.</p>;
+function LocationBox({ alert }: { alert: EmergencyAlert }) {
+  const first = alert.lat && alert.lng ? [{ lat: Number(alert.lat), lng: Number(alert.lng) }] : [];
+  const live = alert.track.map((p) => ({ lat: Number(p.lat), lng: Number(p.lng) })).filter((p) => Number.isFinite(p.lat) && Number.isFinite(p.lng));
+  const track = [...first, ...live];
+  const now = track[track.length - 1];
+  const home = alert.home && typeof alert.home.lat === 'number' && typeof alert.home.lng === 'number'
+    ? { lat: alert.home.lat, lng: alert.home.lng, address: alert.home.address }
+    : undefined;
+  const lastPoint = alert.track[alert.track.length - 1];
+  const lastSeen = lastPoint ? Math.round((Date.now() - new Date(lastPoint.timestamp).getTime()) / 1000) : null;
+  const isLive = lastSeen !== null && lastSeen < 60;
+  const simulated = alert.track.some((p) => p.simulated);
+
+  if (!now) {
+    return (
+      <div className="mt-4 space-y-2 text-sm">
+        {alert.home?.address && <p className="flex items-start gap-2"><House size={15} className="mt-0.5 shrink-0 text-primary" /> Normally lives at {alert.home.address}</p>}
+        <p className="text-xs text-muted-foreground">No location shared. Call the person to find out where they are.</p>
+      </div>
+    );
   }
-  const clinic = CLINIC;
-  const straightKm = distanceKm(clinic, { lat, lng });
-  const roadKm = straightKm * ROAD_FACTOR;
+  const fromHome = home ? distanceKm(home, now) : null;
+  const roadKm = distanceKm(CLINIC, now) * ROAD_FACTOR;
   const minutes = Math.max(2, Math.round((roadKm / AVG_CITY_KMH) * 60));
-  const dest = `${lat},${lng}`;
+  const dest = `${now.lat},${now.lng}`;
   const navigate = `https://www.google.com/maps/dir/?api=1&destination=${dest}&travelmode=driving&dir_action=navigate`;
-  const fromClinic = `https://www.google.com/maps/dir/?api=1&origin=${clinic.lat},${clinic.lng}&destination=${dest}&travelmode=driving`;
-  const d = 0.008;
-  const embed = `https://www.openstreetmap.org/export/embed.html?bbox=${lng - d},${lat - d * 0.7},${lng + d},${lat + d * 0.7}&layer=mapnik&marker=${lat},${lng}`;
+  const fromClinic = `https://www.google.com/maps/dir/?api=1&origin=${CLINIC.lat},${CLINIC.lng}&destination=${dest}&travelmode=driving`;
   return (
-    <section className="mt-4 grid gap-4 md:grid-cols-[1fr_260px]">
-      <iframe
-        title={`Location of ${alert.name || 'patient'}`}
-        src={embed}
-        loading="lazy"
-        className="h-52 w-full rounded-md border border-border"
-      />
+    <section className="mt-4 grid gap-4 md:grid-cols-[1fr_280px]">
+      <LiveMap home={home} track={track} className="h-60 w-full overflow-hidden rounded-md border border-border md:h-72" />
       <div className="space-y-3 text-sm">
-        <h3 className="flex items-center gap-2 font-semibold"><Navigation size={15} /> Route to the patient</h3>
+        <p className="flex items-center gap-2 text-xs font-semibold">
+          {isLive
+            ? <span className="inline-flex items-center gap-1.5 rounded-full bg-destructive/15 px-2 py-0.5 text-destructive"><Radio size={12} className="animate-pulse" /> Live · updated {lastSeen}s ago</span>
+            : <span className="rounded-full bg-muted px-2 py-0.5 text-muted-foreground">{alert.track.length ? 'Last known position' : 'Position when the alert was sent'}</span>}
+          {simulated && <span className="rounded-full bg-warning-surface px-2 py-0.5 text-warning">demo simulation</span>}
+        </p>
+        {alert.home?.address ? (
+          <p className="flex items-start gap-2">
+            <House size={15} className="mt-0.5 shrink-0 text-primary" />
+            <span>Normally lives at <strong>{alert.home.address}</strong>
+              {fromHome !== null && <span className="block text-xs text-muted-foreground">{fromHome < 0.3 ? 'The patient is at or near home.' : `Now about ${fromHome.toFixed(1)} km from home (straight line).`}</span>}
+            </span>
+          </p>
+        ) : (
+          <p className="text-xs text-muted-foreground">No home address on record.</p>
+        )}
         <p>
           About <strong>{roadKm.toFixed(1)} km</strong> from the clinic.
-          <span className="block text-xs text-muted-foreground">
-            Rough estimate: {minutes} min by car without traffic. Google Maps uses live traffic for the real time and route.
-          </span>
+          <span className="block text-xs text-muted-foreground">Rough estimate: {minutes} min by car without traffic. Google Maps uses live traffic for the real time and route.</span>
         </p>
         <Button asChild variant="destructive" size="sm" className="w-full">
-          <a href={navigate} target="_blank" rel="noreferrer"><Navigation size={13} /> Navigate from my location (live traffic)</a>
+          <a href={navigate} target="_blank" rel="noreferrer"><Navigation size={13} /> Navigate to patient now (live traffic)</a>
         </Button>
         <Button asChild variant="outline" size="sm" className="w-full">
           <a href={fromClinic} target="_blank" rel="noreferrer"><MapPin size={13} /> Route from the clinic</a>
         </Button>
-        {alert.accuracy_m && <p className="text-xs text-muted-foreground">Location accurate to about {Math.round(Number(alert.accuracy_m))} m.</p>}
+      </div>
+    </section>
+  );
+}
+
+function PhotoBox({ alert }: { alert: EmergencyAlert }) {
+  const a = alert.image_assessment;
+  if (!alert.image_url && !a?.description) return null;
+  return (
+    <section className="mt-4 grid gap-4 rounded-md border border-border bg-card p-3 sm:grid-cols-[160px_1fr]">
+      {alert.image_url
+        ? <a href={alert.image_url} target="_blank" rel="noreferrer"><img src={alert.image_url} alt={`Photo sent by ${alert.name || 'the patient'}`} className="h-40 w-full rounded-md object-cover" /></a>
+        : <div className="grid h-40 place-items-center rounded-md bg-muted text-xs text-muted-foreground">Photo not stored</div>}
+      <div className="space-y-2 text-sm">
+        <p className="flex flex-wrap items-center gap-2 font-semibold">
+          <Camera size={15} /> Photo from the patient
+          {a?.urgency && <span className={`rounded-full px-2 py-0.5 text-[11px] font-medium capitalize ${URGENCY_STYLE[a.urgency] ?? URGENCY_STYLE['unknown']}`}>{a.urgency === 'unknown' ? 'urgency unclear' : `AI: ${a.urgency} urgency`}</span>}
+        </p>
+        {a?.description && <p className="leading-6">{a.description}</p>}
+        {a?.for_staff && <p className="text-xs"><strong>Check first:</strong> {a.for_staff}</p>}
+        {a?.photo_clear === false && <p className="text-xs text-warning">The photo is unclear. Ask for another one or call the patient.</p>}
+        <p className="text-[11px] text-muted-foreground">AI description to support triage. Not a diagnosis. Look at the photo yourself.</p>
       </div>
     </section>
   );
@@ -571,13 +708,6 @@ function AlertCard({ alert, session, url, onHandled }: { alert: EmergencyAlert; 
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
-          {alert.lat && alert.lng && (
-            <Button asChild variant="outline" size="sm">
-              <a href={`https://www.google.com/maps?q=${alert.lat},${alert.lng}`} target="_blank" rel="noreferrer">
-                <MapPin size={13} /> Location{alert.accuracy_m ? ` (±${Math.round(Number(alert.accuracy_m))} m)` : ''}
-              </a>
-            </Button>
-          )}
           {alert.status === 'open' && (
             <Button variant="clinic" size="sm" onClick={() => void onHandled(alert.alert_id)}><CheckCircle2 size={13} /> Mark handled</Button>
           )}
@@ -588,7 +718,8 @@ function AlertCard({ alert, session, url, onHandled }: { alert: EmergencyAlert; 
         {alert.message || <span className="text-muted-foreground">No message — location only.</span>}
       </blockquote>
 
-      <RouteBox alert={alert} />
+      <PhotoBox alert={alert} />
+      <LocationBox alert={alert} />
 
       <div className="mt-4">
         {unverified && (

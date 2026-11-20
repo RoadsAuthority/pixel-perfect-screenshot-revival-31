@@ -45,6 +45,10 @@ LIFESTYLE
 Blood group: not tested.
 Emergency contact: Petrus Nangolo (husband), 081 555 0102 (fictional)
 
+NORMAL PLACE OF STAY
+Home: Erf 2210, Okahandja Park, Windhoek.
+Home GPS location (approximate): -22.5135, 17.0405
+
 ------------------------------------------------------------------------
 FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a
 substitute for advice from a qualified health worker.

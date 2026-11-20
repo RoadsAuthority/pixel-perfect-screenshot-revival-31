@@ -54,5 +54,14 @@
       "Everyone"
     ],
     "demoPin": "6666"
+  },
+  {
+    "username": "tomas.amukoto",
+    "displayName": "Tomas Amukoto (PAT-004)",
+    "groups": [
+      "PAT-004",
+      "Everyone"
+    ],
+    "demoPin": "7777"
   }
 ]

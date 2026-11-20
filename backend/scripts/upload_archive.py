@@ -50,6 +50,13 @@ def main() -> None:
         s3.upload_file(str(path), bucket, key, ExtraArgs={"ContentType": content_type})
     print(f"Uploaded {len(files)} files")
 
+    # 2b. Original scan images, outside the Knowledge Base data source (scans/).
+    scans = sorted(p for p in (BACKEND / "scans-upload").glob("*") if p.is_file())
+    for path in scans:
+        s3.upload_file(str(path), bucket, f"scans/{path.name}", ExtraArgs={"ContentType": "image/jpeg"})
+    if scans:
+        print(f"Uploaded {len(scans)} scan images to scans/")
+
     # 3. Verify.
     keys = []
     for page in s3.get_paginator("list_objects_v2").paginate(Bucket=bucket, Prefix="archive/"):

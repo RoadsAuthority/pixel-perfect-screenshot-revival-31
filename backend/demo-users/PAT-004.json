@@ -1,0 +1,27 @@
+{
+  "user_id": {
+    "S": "PAT-004"
+  },
+  "username": {
+    "S": "tomas.amukoto"
+  },
+  "name": {
+    "S": "Tomas Amukoto"
+  },
+  "groups": {
+    "L": [
+      {
+        "S": "PAT-004"
+      },
+      {
+        "S": "Everyone"
+      }
+    ]
+  },
+  "pin_salt": {
+    "S": "04c1212324777269d438a220e8c00c63"
+  },
+  "pin_hash": {
+    "S": "767584276996cc1d988db238aa03c7940c2bcbfbd4daef25cb2c16749c2e32ebb7fc1ab2bfc65ef6a365f14cf9c609ee057299b033a0acc11cfd72d9ba6cae53"
+  }
+}

@@ -45,6 +45,10 @@ LIFESTYLE
 
 Emergency contact: Hilma Haufiku (daughter), 081 555 0202 (fictional)
 
+NORMAL PLACE OF STAY
+Home: Erf 875, Havana Extension 3, Windhoek.
+Home GPS location (approximate): -22.505, 17.029
+
 ------------------------------------------------------------------------
 FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a
 substitute for advice from a qualified health worker.

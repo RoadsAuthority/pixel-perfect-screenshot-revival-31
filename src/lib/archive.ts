@@ -40,7 +40,24 @@ export type Answer = {
   sources: Source[];
 };
 /** A full document, for the highlighted source viewer. */
-export type ArchiveDocText = { doc_id: string; title: string; type: string; date: string; patient_id: string; text: string };
+export type ArchiveDocText = { doc_id: string; title: string; type: string; date: string; patient_id: string; text: string; scan_url?: string | undefined };
+
+/** One extracted fact from a document, with the exact line it comes from. */
+export type KeyDetail = { category: 'date' | 'party' | 'amount' | 'id' | 'condition' | 'medication' | 'result' | 'other'; label: string; value: string; quote: string };
+export type KeyDetails = { doc_id: string; title: string; summary: string; details: KeyDetail[] };
+
+/** What the AI sees in an emergency photo (for staff; not a diagnosis). */
+export type PhotoAssessment = {
+  description?: string;
+  urgency?: 'low' | 'medium' | 'high' | 'emergency' | 'unknown';
+  first_aid_topic?: string;
+  guide_doc_id?: string;
+  for_staff?: string;
+  photo_clear?: boolean;
+  error?: string;
+};
+export type TrackPoint = { lat: string; lng: string; timestamp: string; accuracy_m: string; simulated: boolean };
+export type PatientHome = { address?: string; lat?: number; lng?: number };
 export type AuditEntry = { timestamp: string; user_id: string; role: Role; channel: 'web' | 'voice' | 'ussd'; question: string; status: Answer['status']; sources: string[] };
 
 type ArchiveRequestBase = { user_id: string };
@@ -50,9 +67,11 @@ export type ArchiveRequest =
   | (ArchiveRequestBase & { action: 'summary'; channel: 'web' | 'voice' | 'ussd'; query: string; doc_id: string })
   | (ArchiveRequestBase & { action: 'documents' })
   | (ArchiveRequestBase & { action: 'document'; doc_id: string })
+  | (ArchiveRequestBase & { action: 'extract'; doc_id: string })
   | (ArchiveRequestBase & { action: 'logs'; channel: 'web'; query: '' })
   | (ArchiveRequestBase & { action: 'ussd'; channel: 'ussd'; query: ''; ussd_session_id: string; ussd_text: string })
-  | (ArchiveRequestBase & { action: 'alert_create'; channel: 'web' | 'voice'; message: string; name: string; phone: string; patient_id: string; pin: string; lat?: number | undefined; lng?: number | undefined; accuracy?: number | undefined })
+  | (ArchiveRequestBase & { action: 'alert_create'; channel: 'web' | 'voice'; message: string; name: string; phone: string; patient_id: string; pin: string; lat?: number | undefined; lng?: number | undefined; accuracy?: number | undefined; image_base64?: string | undefined; image_type?: string | undefined })
+  | (ArchiveRequestBase & { action: 'alert_location'; alert_id: string; update_key: string; lat: number; lng: number; accuracy: number; simulated: boolean })
   | (ArchiveRequestBase & { action: 'alert_list' })
   | (ArchiveRequestBase & { action: 'alert_ack'; alert_id: string });
 
@@ -77,6 +96,13 @@ export type EmergencyAlert = {
   status: 'open' | 'handled';
   handled_by: string;
   handled_at: string;
+  /** Normal place of stay from the patient's record (empty if unknown). */
+  home: PatientHome;
+  /** Live positions sent after the alert, oldest first. */
+  track: TrackPoint[];
+  /** Signed link to the emergency photo, if one was sent. */
+  image_url: string;
+  image_assessment: PhotoAssessment;
 };
 
 export function unknown(restricted = false): Answer {

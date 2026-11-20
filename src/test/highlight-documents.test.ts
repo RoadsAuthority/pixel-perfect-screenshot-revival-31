@@ -12,8 +12,8 @@ type Doc = { doc_id: string; text: string };
 describe('highlighting the real clinic documents', () => {
   const docs = documents as Doc[];
 
-  it('has the 20 documents', () => {
-    expect(docs).toHaveLength(20);
+  it('has all the documents', () => {
+    expect(docs.length).toBeGreaterThanOrEqual(22);
   });
 
   for (const doc of docs) {

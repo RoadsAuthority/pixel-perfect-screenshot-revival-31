@@ -92,6 +92,10 @@ class FakeS3:
     def __init__(self):
         self.signed: list = []
 
+    def put_object(self, **kwargs):
+        self.put = getattr(self, "put", [])
+        self.put.append(kwargs)
+
     def generate_presigned_url(self, _operation, Params, ExpiresIn):
         self.signed.append((Params, ExpiresIn))
         return "https://archive.example/signed-source"
@@ -128,7 +132,8 @@ def request_filter(agent: FakeAgentRuntime) -> dict:
 
 class CatalogTests(unittest.TestCase):
     def test_catalog_has_all_documents(self):
-        self.assertEqual(len(handler.DOCUMENTS), 20)
+        self.assertGreaterEqual(len(handler.DOCUMENTS), 22)
+        self.assertEqual(len({d["doc_id"] for d in handler.DOCUMENTS}), len(handler.DOCUMENTS))
 
     def test_clerk_sees_operations_but_no_patient_records(self):
         docs = handler.accessible_documents({"groups": CLERK[2]})
@@ -142,7 +147,7 @@ class CatalogTests(unittest.TestCase):
         self.assertNotIn("Lease", {d["type"] for d in docs})
 
     def test_clinical_staff_see_everything(self):
-        self.assertEqual(len(handler.accessible_documents({"groups": DOCTOR[2]})), 20)
+        self.assertEqual(len(handler.accessible_documents({"groups": DOCTOR[2]})), len(handler.DOCUMENTS))
 
     def test_public_sees_only_everyone_documents(self):
         docs = handler.accessible_documents(handler.PUBLIC_PRINCIPAL)
@@ -537,6 +542,101 @@ class DispatchTests(unittest.TestCase):
         handler.dispatch({"action": "alert_create", "message": "Help"}, clients, CONFIG, auth_header=f"Bearer {token}")
         _, body = handler.dispatch({"action": "logs"}, clients, CONFIG, auth_header=f"Bearer {token}")
         self.assertEqual(body["logs"], [])
+
+    # ── Key details ──────────────────────────────────────────────────────────
+    def test_key_details_keep_only_traceable_facts(self):
+        handler._EXTRACT_CACHE.clear()
+        token, clients, _ = self._login(CLERK)
+        clients["bedrock_runtime"] = FakeRuntime({
+            "summary": "Lease for the clinic premises.",
+            "details": [
+                {"category": "date", "label": "Lease end", "value": "2027-01-31", "quote": "Lease end: 2027-01-31"},
+                {"category": "amount", "label": "Monthly rent", "value": "N$ 19 610", "quote": "increasing by 6% on 2026-02-01 to N$ 19 610"},
+                {"category": "party", "label": "Landlord", "value": "Made-up Holdings", "quote": "Landlord: Made-up Holdings"},
+            ],
+        })
+        status, body = handler.dispatch({"action": "extract", "doc_id": "HCC-STF-003"}, clients, CONFIG,
+                                        auth_header=f"Bearer {token}")
+        self.assertEqual(status, 200)
+        labels = [d["label"] for d in body["details"]]
+        self.assertIn("Lease end", labels)
+        self.assertIn("Monthly rent", labels)
+        for d in body["details"]:
+            self.assertIn(d["quote"], handler.DOCS_BY_ID["HCC-STF-003"]["text"])
+
+    def test_key_details_respect_access(self):
+        token, clients, _ = self._login(PATIENT1)
+        with self.assertRaises(handler.ArchiveError) as ctx:
+            handler.dispatch({"action": "extract", "doc_id": "HCC-STF-003"}, clients, CONFIG, auth_header=f"Bearer {token}")
+        self.assertEqual(ctx.exception.status_code, 404)
+
+    # ── Photos and OCR ───────────────────────────────────────────────────────
+    PNG = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+
+    def test_alert_photo_is_stored_and_assessed(self):
+        audit, s3 = FakeTable(), FakeS3()
+        runtime = FakeRuntime({"description": "Red blistered burn on the forearm, about palm size.", "urgency": "high",
+                               "first_aid_topic": "burns", "for_staff": "Check size and depth.", "photo_clear": True})
+        status, body = handler.dispatch(
+            {"action": "alert_create", "message": "Hot water burn", "image_base64": self.PNG, "image_type": "image/png"},
+            make_clients(audit=audit, runtime=runtime, s3=s3), CONFIG, auth_header="",
+        )
+        self.assertEqual(status, 200)
+        self.assertEqual(body["image_assessment"]["urgency"], "high")
+        self.assertEqual(body["image_assessment"]["guide_doc_id"], "HCC-PUB-006")
+        self.assertTrue(s3.put[0]["Key"].startswith("alerts/"))
+        self.assertIn("image", runtime.request["messages"][0]["content"][0])
+
+    def test_photo_alone_is_enough_to_send_an_alert(self):
+        status, _ = handler.dispatch({"action": "alert_create", "image_base64": self.PNG, "image_type": "image/png"},
+                                     make_clients(runtime=FakeRuntime({"description": "x", "urgency": "low"})), CONFIG, auth_header="")
+        self.assertEqual(status, 200)
+
+    def test_bad_image_type_rejected(self):
+        with self.assertRaises(handler.ArchiveError):
+            handler.dispatch({"action": "alert_create", "image_base64": self.PNG, "image_type": "application/pdf"},
+                             make_clients(), CONFIG, auth_header="")
+
+    def test_ocr_is_staff_only(self):
+        token, clients, _ = self._login(PATIENT1)
+        with self.assertRaises(handler.ArchiveError) as ctx:
+            handler.dispatch({"action": "ocr", "image_base64": self.PNG, "image_type": "image/png"}, clients, CONFIG,
+                             auth_header=f"Bearer {token}")
+        self.assertEqual(ctx.exception.status_code, 403)
+        token, clients, _ = self._login(DOCTOR)
+        clients["bedrock_runtime"] = FakeRuntime("REFERRAL\nPatient: Tomas Amukoto")
+        _, body = handler.dispatch({"action": "ocr", "image_base64": self.PNG, "image_type": "image/png"}, clients, CONFIG,
+                                   auth_header=f"Bearer {token}")
+        self.assertIn("Tomas Amukoto", body["text"])
+
+    # ── Live location and home ───────────────────────────────────────────────
+    def test_live_location_needs_the_alert_key_and_shows_in_track(self):
+        token, clients, _ = self._login(DOCTOR)
+        _, created = handler.dispatch({"action": "alert_create", "message": "Help", "lat": -22.5, "lng": 17.0},
+                                      clients, CONFIG, auth_header="")
+        aid = created["alert_id"]
+        with self.assertRaises(handler.ArchiveError) as ctx:
+            handler.dispatch({"action": "alert_location", "alert_id": aid, "update_key": "wrong", "lat": -22.6, "lng": 17.1},
+                             clients, CONFIG, auth_header="")
+        self.assertEqual(ctx.exception.status_code, 403)
+        handler.dispatch({"action": "alert_location", "alert_id": aid, "update_key": created["update_key"],
+                          "lat": -22.61, "lng": 17.12, "simulated": True}, clients, CONFIG, auth_header="")
+        _, listed = handler.dispatch({"action": "alert_list"}, clients, CONFIG, auth_header=f"Bearer {token}")
+        alert = next(a for a in listed["alerts"] if a["alert_id"] == aid)
+        self.assertEqual(alert["track"][-1]["lat"], "-22.61000")
+        self.assertTrue(alert["track"][-1]["simulated"])
+
+    def test_alert_from_patient_with_home_shows_home_from_archive(self):
+        if "PAT-004" not in handler.PATIENT_HOMES:
+            self.skipTest("dataset without PAT-004 home")
+        users = FakeTable(stored_user("7777", "PAT-004", ["PAT-004"]))
+        clients = make_clients(users=users)
+        handler.dispatch({"action": "alert_create", "patient_id": "PAT-004", "pin": "7777", "message": "Can't breathe"},
+                         clients, CONFIG, auth_header="")
+        token, staff_clients, _ = self._login(DOCTOR)
+        staff_clients["audit_table"] = clients["audit_table"]
+        _, listed = handler.dispatch({"action": "alert_list"}, staff_clients, CONFIG, auth_header=f"Bearer {token}")
+        self.assertTrue(listed["alerts"][0]["home"]["address"])
 
     def test_unknown_action_returns_400(self):
         with self.assertRaises(handler.ArchiveError) as ctx:

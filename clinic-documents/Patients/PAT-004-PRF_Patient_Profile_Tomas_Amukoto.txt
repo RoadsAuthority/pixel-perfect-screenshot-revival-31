@@ -1,0 +1,55 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia
+Tel: +264 61 555 0100 | Emergency line: +264 61 555 0199 (fictional)
+FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
+========================================================================
+PATIENT PROFILE - TOMAS AMUKOTO
+Document ID: PAT-004-PRF
+Date: 2026-11-10
+========================================================================
+Patient ID: PAT-004
+Name: Tomas Amukoto
+Date of birth: 1959-02-04 (age 67)
+Sex: Male
+Address: Erf 1204, Hans-Dietrich Genscher Street, Khomasdal, Windhoek (fictional)
+Phone: 081 555 0401 (fictional)
+Occupation: Retired railway technician
+Registered at the clinic: 2009-05-12
+Lives alone. Daughter visits on weekends.
+
+NORMAL PLACE OF STAY
+Home: Erf 1204, Hans-Dietrich Genscher Street, Khomasdal (next to The Document Warehouse).
+Home GPS location (approximate): -22.5452, 17.0468
+Usually at home on weekdays; attends church in Katutura on Sunday mornings.
+
+ALLERGIES
+- Aspirin: wheezing and shortness of breath (2018). Do not give aspirin, also not
+  in a suspected heart attack. Tell the ambulance crew.
+
+LONG-TERM CONDITIONS
+- Heart failure (diagnosed 2024-03, ejection fraction 35% on echo 2024-03-20)
+- High blood pressure (since 2012)
+- Chronic kidney disease stage 3a (eGFR 52, 2026-09)
+
+CURRENT MEDICATION
+- Furosemide 40 mg every morning (increased from 20 mg on 2026-09-18)
+- Enalapril 10 mg twice daily
+- Bisoprolol 2.5 mg once daily
+- Spironolactone 25 mg once daily (started 2026-09-18)
+
+HOSPITAL ADMISSIONS
+- 2026-09-14 to 2026-09-18: Windhoek Central Hospital, fluid overload (heart failure).
+  See the scanned discharge letter.
+- 2024-03-18 to 2024-03-22: Windhoek Central Hospital, first diagnosis of heart failure.
+
+WARNING SIGNS AGREED WITH THE PATIENT
+Weight gain of more than 2 kg in 3 days, swollen legs, breathless lying flat or
+waking up breathless at night: call the clinic the same day.
+
+Blood group: O positive (Windhoek Central Hospital, 2024-03-18).
+Emergency contact: Ndeshi Amukoto (daughter), 081 555 0402 (fictional)
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a
+substitute for advice from a qualified health worker.

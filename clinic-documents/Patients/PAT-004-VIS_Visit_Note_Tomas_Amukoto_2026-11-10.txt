@@ -1,0 +1,42 @@
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa Street, Khomasdal, Windhoek, Namibia
+Tel: +264 61 555 0100 | Emergency line: +264 61 555 0199 (fictional)
+FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
+========================================================================
+VISIT NOTE - TOMAS AMUKOTO - 2026-11-10
+Document ID: PAT-004-VIS
+Date: 2026-11-10
+========================================================================
+Patient: PAT-004 Tomas Amukoto
+Seen by: DOC-001 Dr Anna-Marie van Wyk
+Reason for visit: follow-up after hospital admission for fluid overload (2026-09).
+
+WEIGHT AND BLOOD PRESSURE SINCE DISCHARGE
+DATE          WEIGHT    BLOOD PRESSURE   ANKLE SWELLING
+2026-09-18    74.0 kg   118/72           Mild (discharge weight)
+2026-10-06    74.5 kg   122/76           None
+2026-10-27    75.1 kg   126/78           None
+2026-11-10    76.4 kg   128/80           Mild, both ankles
+
+FINDINGS 2026-11-10
+- Breathless after walking about 100 m (was 300 m in October).
+- Sleeps on 2 pillows. No chest pain.
+- Pulse 74, regular. Fine crackles at both lung bases.
+- Potassium 4.9 mmol/L (upper normal; on spironolactone and enalapril).
+
+ASSESSMENT
+Early fluid build-up, weight up 2.4 kg since discharge.
+
+PLAN
+- Furosemide increased to 40 mg in the morning and 20 mg at 14:00 for 5 days,
+  then back to 40 mg once daily.
+- Weigh every morning and write it down; call if weight goes up by 2 kg in 3 days.
+- Limit fluids to 1.5 litres a day and avoid added salt.
+- Repeat potassium and creatinine in 1 week: 2026-11-17 (blood taken, result pending).
+- Follow-up with DOC-001: 2026-11-24 at 11:30.
+- If breathless at rest or chest pain: go to Windhoek Central Hospital casualty.
+
+------------------------------------------------------------------------
+FICTIONAL HACKATHON DEMONSTRATION DATA. Not real patient information and not a
+substitute for advice from a qualified health worker.

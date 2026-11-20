@@ -3,6 +3,7 @@ Core archive logic — no framework dependencies.
 Used by both the FastAPI app (main.py) and the test suite.
 """
 
+import base64
 import hashlib
 import hmac
 import json
@@ -44,6 +45,8 @@ except FileNotFoundError:
     DOCUMENTS = []
 DOCS_BY_ID = {d["doc_id"]: d for d in DOCUMENTS}
 DOCS_BY_KEY = {d["s3_key"]: d["doc_id"] for d in DOCUMENTS}
+# Normal place of stay per patient, from the patient profiles in the archive.
+PATIENT_HOMES = {d["patient_id"]: d["home"] for d in DOCUMENTS if d.get("patient_id") and d.get("home")}
 
 RETRIEVE_RESULTS = 20          # cross-document questions need several records
 RETRIEVE_RESULTS_SUMMARY = 15  # all chunks of one document
@@ -677,6 +680,153 @@ def _run_answer(question: str, channel: str, principal: dict, doc_id: str, clien
     return answer
 
 
+# ── Model helpers ─────────────────────────────────────────────────────────────
+
+def _converse_text(runtime, model_id: str, system: str, content: list, max_tokens: int = 900) -> str:
+    try:
+        response = runtime.converse(
+            modelId=model_id,
+            system=[{"text": system}],
+            messages=[{"role": "user", "content": content}],
+            inferenceConfig={"maxTokens": max_tokens, "temperature": 0},
+        )
+    except ClientError as err:
+        code = err.response.get("Error", {}).get("Code", "")
+        if code in ("AccessDeniedException", "ValidationException", "ResourceNotFoundException"):
+            logger.error("Bedrock converse error: %s", err)
+            raise ArchiveError(502, "The archive assistant could not read this. Check the generation model settings.")
+        raise
+    parts = response.get("output", {}).get("message", {}).get("content", [])
+    return "".join(p.get("text", "") for p in parts if isinstance(p, dict)).strip()
+
+
+# ── Key details (dates, parties, amounts …) ───────────────────────────────────
+
+EXTRACT_PROMPT = (
+    "You extract key details from one clinic document for staff who need precise facts.\n"
+    "Use ONLY the document. Do not infer or calculate anything that is not written.\n"
+    "Return up to 15 details that matter most: dates and deadlines, parties and people (with their role), "
+    "money amounts, quantities, IDs and reference numbers, conditions, medicines and doses, results.\n"
+    "For each detail give an EXACT quote copied word for word from the document (under 150 characters).\n"
+    "Reply with one JSON object and nothing else:\n"
+    '{"summary": "one short sentence saying what the document is", "details": [{"category": '
+    '"date|party|amount|id|condition|medication|result|other", "label": "what it is", "value": "the value", '
+    '"quote": "exact words"}]}'
+)
+EXTRACT_CATEGORIES = {"date", "party", "amount", "id", "condition", "medication", "result", "other"}
+_EXTRACT_CACHE: dict = {}
+
+
+def extract_details(doc_id: str, principal: dict, runtime, model_id: str) -> dict:
+    document = DOCS_BY_ID.get(doc_id)
+    if document is None or not can_read(principal, document):
+        raise ArchiveError(404, "That document is not available to you.")
+    if doc_id not in _EXTRACT_CACHE:
+        text = _converse_text(runtime, model_id, EXTRACT_PROMPT, [{
+            "text": f"Document {doc_id} ({document['title']}):\n<document>\n{document.get('text', '')}\n</document>\nReply with JSON only.",
+        }], max_tokens=1500)
+        data = _parse_model_json(text) or {}
+        details = []
+        for raw in data.get("details", []) if isinstance(data.get("details"), list) else []:
+            if not isinstance(raw, dict) or not str(raw.get("value", "")).strip():
+                continue
+            label = str(raw.get("label", "")).strip()[:80]
+            value = str(raw.get("value", "")).strip()[:200]
+            quotes = verified_quotes(doc_id, [str(raw.get("quote", ""))], f"{label} {value}")
+            if not quotes:
+                continue  # never show a detail we cannot point to in the document
+            category = str(raw.get("category", "other")).lower()
+            details.append({
+                "category": category if category in EXTRACT_CATEGORIES else "other",
+                "label": label,
+                "value": value,
+                "quote": quotes[0],
+            })
+        _EXTRACT_CACHE[doc_id] = {"summary": str(data.get("summary", "")).strip()[:300], "details": details[:15]}
+    return {"doc_id": doc_id, "title": document["title"], **_EXTRACT_CACHE[doc_id]}
+
+
+# ── Images: emergency photos and scanned documents ───────────────────────────
+
+IMAGE_TYPES = {"image/jpeg": ("jpeg", "jpg"), "image/png": ("png", "png"), "image/webp": ("webp", "webp")}
+MAX_IMAGE_BYTES = 3_000_000
+
+
+def decode_image(body: dict) -> tuple[bytes, str, str, str] | None:
+    """Return (bytes, bedrock_format, file_extension, mime) for an uploaded image, or None."""
+    data = body.get("image_base64")
+    if not data:
+        return None
+    if not isinstance(data, str) or len(data) > MAX_IMAGE_BYTES * 4 // 3 + 200:
+        raise ArchiveError(400, "The photo is too large. Please send a smaller photo.")
+    mime = _optional_text(body, "image_type", 20).lower()
+    if mime not in IMAGE_TYPES:
+        raise ArchiveError(400, "Send the photo as JPEG, PNG or WebP.")
+    if data.startswith("data:"):
+        data = data.split(",", 1)[-1]
+    try:
+        raw = base64.b64decode(data, validate=True)
+    except (ValueError, TypeError):
+        raise ArchiveError(400, "The photo could not be read.")
+    if not raw or len(raw) > MAX_IMAGE_BYTES:
+        raise ArchiveError(400, "The photo is too large. Please send a smaller photo.")
+    fmt, ext = IMAGE_TYPES[mime]
+    return raw, fmt, ext, mime
+
+
+PHOTO_PROMPT = (
+    "You help a clinic nurse triage an emergency photo sent by a patient. You are not diagnosing.\n"
+    "Describe only what is visible: body area, what the injury or problem looks like, approximate size "
+    "(compared with the palm or a coin if possible), colour, blisters, bleeding, swelling.\n"
+    "Then rate how urgent it looks for a nurse to act: low, medium, high or emergency. If unsure, choose the "
+    "higher level. Pick the matching first-aid topic. Say plainly if the photo is unclear.\n"
+    "Reply with one JSON object and nothing else:\n"
+    '{"description": "2-3 short sentences of what is visible", "urgency": "low|medium|high|emergency", '
+    '"first_aid_topic": "burns|bleeding|choking|stroke_heart|snakebite|none", '
+    '"for_staff": "one short sentence on what to check first", "photo_clear": true}'
+)
+FIRST_AID_DOCS = {
+    "burns": "HCC-PUB-006",
+    "bleeding": "HCC-PUB-005",
+    "choking": "HCC-PUB-004",
+    "stroke_heart": "HCC-PUB-007",
+    "snakebite": "HCC-PUB-008",
+}
+URGENCY_LEVELS = {"low", "medium", "high", "emergency"}
+
+
+def assess_photo(raw: bytes, fmt: str, message: str, runtime, model_id: str) -> dict:
+    text = _converse_text(runtime, model_id, PHOTO_PROMPT, [
+        {"image": {"format": fmt, "source": {"bytes": raw}}},
+        {"text": f"Patient's own words: {message or '(none given)'}\nReply with JSON only."},
+    ])
+    data = _parse_model_json(text) or {"description": text[:600]}
+    urgency = str(data.get("urgency", "")).lower()
+    topic = str(data.get("first_aid_topic", "none")).lower()
+    return {
+        "description": str(data.get("description", "")).strip()[:800],
+        "urgency": urgency if urgency in URGENCY_LEVELS else "unknown",
+        "first_aid_topic": topic if topic in FIRST_AID_DOCS else "none",
+        "guide_doc_id": FIRST_AID_DOCS.get(topic, ""),
+        "for_staff": str(data.get("for_staff", "")).strip()[:300],
+        "photo_clear": data.get("photo_clear") is not False,
+    }
+
+
+OCR_PROMPT = (
+    "Transcribe ALL text in this scanned document exactly as written, line by line, including handwriting, "
+    "stamps and printed form labels. Keep numbers, dates, doses and units exactly. Write [illegible] for "
+    "anything you cannot read. Do not correct, summarise or add anything. Output plain text only."
+)
+
+
+def ocr_image(raw: bytes, fmt: str, runtime, model_id: str) -> str:
+    return _converse_text(runtime, model_id, OCR_PROMPT, [
+        {"image": {"format": fmt, "source": {"bytes": raw}}},
+        {"text": "Transcribe this scanned document."},
+    ], max_tokens=2500)
+
+
 # ── Emergency alerts ───────────────────────────────────────────────────────────
 # Stored in the audit table (record_type ALERT / ALERT_ACK) so no new AWS
 # resources are needed. Anyone may raise an alert; only Clinical staff see them.
@@ -732,12 +882,14 @@ def _alert_identity(body: dict, principal: dict, users_table) -> tuple[dict, str
     return principal, "claimed_patient", claimed
 
 
-def create_alert(body: dict, principal: dict, audit_table, users_table) -> dict:
+def create_alert(body: dict, principal: dict, clients: dict, config: dict) -> dict:
+    audit_table, users_table = clients["audit_table"], clients["users_table"]
     message = _optional_text(body, "message", 1000)
     lat = _coordinate(body.get("lat"), -90, 90)
     lng = _coordinate(body.get("lng"), -180, 180)
-    if not message and not (lat and lng):
-        raise ArchiveError(400, "Describe what is happening or share your location so the clinic can help.")
+    image = decode_image(body)
+    if not message and not (lat and lng) and not image:
+        raise ArchiveError(400, "Describe what is happening, add a photo or share your location so the clinic can help.")
     principal, identity, claimed = _alert_identity(body, principal, users_table)
     registered = identity in ("verified_patient", "staff")
     patient_ids = [g for g in principal.get("groups", []) if g.startswith("PAT-")]
@@ -760,14 +912,89 @@ def create_alert(body: dict, principal: dict, audit_table, users_table) -> dict:
         "lat": lat,
         "lng": lng,
         "accuracy_m": _coordinate(body.get("accuracy"), 0, 100000),
+        "image_key": "",
+        "image_assessment": {},
     }
+    if image:
+        raw, fmt, ext, mime = image
+        key = f"alerts/{alert_id}.{ext}"
+        try:
+            clients["s3"].put_object(Bucket=config["archive_bucket"], Key=key, Body=raw, ContentType=mime)
+            item["image_key"] = key
+        except ClientError:
+            logger.exception("Could not store the photo for alert %s.", alert_id)
+        try:
+            item["image_assessment"] = assess_photo(raw, fmt, message, clients["bedrock_runtime"], config["generation_model_arn"])
+        except ArchiveError:
+            item["image_assessment"] = {"description": "", "urgency": "unknown", "error": "The photo could not be read automatically."}
     audit_table.put_item(Item=item)
+    # Secret that lets the sender's phone keep updating its live location.
+    update_key = secrets.token_urlsafe(24)
+    audit_table.put_item(Item={
+        "user_id": f"ALERT#{alert_id}",
+        "timestamp_request": "0#key",
+        "record_type": "ALERT_KEY",
+        "timestamp": timestamp,
+        "key_hash": hashlib.sha256(update_key.encode("utf-8")).hexdigest(),
+    })
     logger.warning("EMERGENCY ALERT %s from %s identity=%s patients=%s claimed=%s",
                    alert_id, item["user_id"], identity, patient_ids, claimed)
-    return {"alert_id": alert_id, "timestamp": timestamp, "status": "sent", "identity": identity}
+    return {
+        "alert_id": alert_id,
+        "timestamp": timestamp,
+        "status": "sent",
+        "identity": identity,
+        "update_key": update_key,
+        "image_assessment": item["image_assessment"],
+    }
 
 
-def list_alerts(audit_table) -> list:
+def update_alert_location(body: dict, audit_table) -> dict:
+    """The sender's phone reports where it is now (live tracking)."""
+    alert_id = _optional_text(body, "alert_id", 36)
+    if not ALERT_ID_PATTERN.fullmatch(alert_id):
+        raise ArchiveError(400, "The alert ID is invalid.")
+    key = _optional_text(body, "update_key", 64)
+    stored = audit_table.get_item(Key={"user_id": f"ALERT#{alert_id}", "timestamp_request": "0#key"}).get("Item")
+    expected = stored.get("key_hash", "") if isinstance(stored, dict) else ""
+    if not key or not expected or not hmac.compare_digest(hashlib.sha256(key.encode("utf-8")).hexdigest(), expected):
+        raise ArchiveError(403, "This device cannot update that alert.")
+    lat = _coordinate(body.get("lat"), -90, 90)
+    lng = _coordinate(body.get("lng"), -180, 180)
+    if not (lat and lng):
+        raise ArchiveError(400, "A location is required.")
+    timestamp = _now_iso()
+    audit_table.put_item(Item={
+        "user_id": f"ALERT#{alert_id}",
+        "timestamp_request": f"{timestamp}#loc",
+        "record_type": "ALERT_LOC",
+        "alert_id": alert_id,
+        "timestamp": timestamp,
+        "lat": lat,
+        "lng": lng,
+        "accuracy_m": _coordinate(body.get("accuracy"), 0, 100000),
+        "simulated": body.get("simulated") is True,
+    })
+    return {"alert_id": alert_id, "status": "updated", "timestamp": timestamp}
+
+
+def _alert_track(audit_table, alert_id: str) -> list:
+    from boto3.dynamodb.conditions import Key as DKey
+    result = audit_table.query(
+        KeyConditionExpression=DKey("user_id").eq(f"ALERT#{alert_id}"),
+        ScanIndexForward=False,
+        Limit=40,
+    )
+    points = [
+        {"lat": i.get("lat", ""), "lng": i.get("lng", ""), "timestamp": i.get("timestamp", ""),
+         "accuracy_m": i.get("accuracy_m", ""), "simulated": bool(i.get("simulated"))}
+        for i in result.get("Items", [])
+        if i.get("record_type") == "ALERT_LOC" and i.get("user_id") == f"ALERT#{alert_id}"
+    ]
+    return list(reversed(points))  # oldest first
+
+
+def list_alerts(audit_table, s3_client=None, archive_bucket: str = "") -> list:
     from boto3.dynamodb.conditions import Key as DKey
 
     def query(record_type: str, limit: int) -> list:
@@ -783,6 +1010,12 @@ def list_alerts(audit_table) -> list:
     alerts = []
     for item in query("ALERT", 50):
         ack = acks.get(item.get("alert_id"))
+        patient = (list(item.get("patient_ids", [])) or [item.get("claimed_patient_id", "")])[0]
+        image_url = ""
+        if item.get("image_key") and s3_client is not None and archive_bucket:
+            image_url = s3_client.generate_presigned_url(
+                "get_object", Params={"Bucket": archive_bucket, "Key": item["image_key"]}, ExpiresIn=SOURCE_URL_TTL_SECONDS,
+            )
         alerts.append({
             "alert_id": item.get("alert_id", ""),
             "timestamp": item.get("timestamp", ""),
@@ -801,6 +1034,10 @@ def list_alerts(audit_table) -> list:
             "status": "handled" if ack else "open",
             "handled_by": ack.get("handled_by", "") if ack else "",
             "handled_at": ack.get("timestamp", "") if ack else "",
+            "home": PATIENT_HOMES.get(patient, {}) if patient else {},
+            "track": _alert_track(audit_table, item.get("alert_id", "")) if not ack else [],
+            "image_url": image_url,
+            "image_assessment": item.get("image_assessment") or {},
         })
     return alerts
 
@@ -910,14 +1147,36 @@ def dispatch(body: dict, clients: dict, config: dict, auth_header: str = "") -> 
         document = DOCS_BY_ID.get(doc_id)
         if document is None or not can_read(principal, document):
             raise ArchiveError(404, "That document is not available to you.")
-        return 200, {k: document.get(k, "") for k in ("doc_id", "title", "type", "date", "patient_id", "text")}
+        result = {k: document.get(k, "") for k in ("doc_id", "title", "type", "date", "patient_id", "text")}
+        if document.get("scan_key"):
+            result["scan_url"] = clients["s3"].generate_presigned_url(
+                "get_object", Params={"Bucket": config["archive_bucket"], "Key": document["scan_key"]},
+                ExpiresIn=SOURCE_URL_TTL_SECONDS,
+            )
+        return 200, result
+
+    if action == "extract":
+        doc_id = _required_text(body, "doc_id", 80)
+        return 200, extract_details(doc_id, principal, clients["bedrock_runtime"], config["generation_model_arn"])
+
+    if action == "ocr":
+        if "Staff" not in principal.get("groups", []):
+            raise ArchiveError(403, "Only clinic staff can scan documents.")
+        image = decode_image(body)
+        if not image:
+            raise ArchiveError(400, "Send the scanned page as an image.")
+        raw, fmt, _ext, _mime = image
+        return 200, {"text": ocr_image(raw, fmt, clients["bedrock_runtime"], config["generation_model_arn"])}
+
+    if action == "alert_location":
+        return 200, update_alert_location(body, clients["audit_table"])
 
     if action == "alert_create":
-        return 200, create_alert(body, principal, clients["audit_table"], clients["users_table"])
+        return 200, create_alert(body, principal, clients, config)
 
     if action == "alert_list":
         require_clinical(principal)
-        return 200, {"alerts": list_alerts(clients["audit_table"])}
+        return 200, {"alerts": list_alerts(clients["audit_table"], clients["s3"], config["archive_bucket"])}
 
     if action == "alert_ack":
         require_clinical(principal)

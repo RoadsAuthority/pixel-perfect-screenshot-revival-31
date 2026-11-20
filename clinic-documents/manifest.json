@@ -166,7 +166,12 @@
     "accessGroups": [
       "Clinical",
       "PAT-001"
-    ]
+    ],
+    "home": {
+      "address": "Erf 2210, Okahandja Park, Windhoek",
+      "lat": -22.5135,
+      "lng": 17.0405
+    }
   },
   {
     "documentId": "PAT-001-VIS",
@@ -205,7 +210,12 @@
     "accessGroups": [
       "Clinical",
       "PAT-002"
-    ]
+    ],
+    "home": {
+      "address": "Erf 875, Havana Extension 3, Windhoek",
+      "lat": -22.505,
+      "lng": 17.029
+    }
   },
   {
     "documentId": "PAT-002-LAB",
@@ -231,7 +241,12 @@
     "accessGroups": [
       "Clinical",
       "PAT-003"
-    ]
+    ],
+    "home": {
+      "address": "Erf 3318, Havana, Windhoek",
+      "lat": -22.502,
+      "lng": 17.0335
+    }
   },
   {
     "documentId": "PAT-003-VIS",
@@ -244,6 +259,65 @@
     "accessGroups": [
       "Clinical",
       "PAT-003"
+    ]
+  },
+  {
+    "documentId": "PAT-004-PRF",
+    "title": "Patient Profile - Tomas Amukoto",
+    "documentType": "Patient Profile",
+    "folder": "Patients",
+    "file": "Patients/PAT-004-PRF_Patient_Profile_Tomas_Amukoto.txt",
+    "patientId": "PAT-004",
+    "date": "2026-11-10",
+    "accessGroups": [
+      "Clinical",
+      "PAT-004"
+    ],
+    "home": {
+      "address": "Erf 1204, Hans-Dietrich Genscher Street, Khomasdal, Windhoek (next to The Document Warehouse)",
+      "lat": -22.5452,
+      "lng": 17.0468
+    }
+  },
+  {
+    "documentId": "PAT-004-VIS",
+    "title": "Visit Note - Tomas Amukoto - 2026-11-10",
+    "documentType": "Visit Note",
+    "folder": "Patients",
+    "file": "Patients/PAT-004-VIS_Visit_Note_Tomas_Amukoto_2026-11-10.txt",
+    "patientId": "PAT-004",
+    "date": "2026-11-10",
+    "accessGroups": [
+      "Clinical",
+      "PAT-004"
+    ]
+  },
+  {
+    "documentId": "PAT-004-SCN",
+    "title": "Scanned Discharge Letter - Tomas Amukoto - 2026-09-18",
+    "documentType": "Scanned Discharge Letter",
+    "folder": "Patients",
+    "file": "Patients/PAT-004-SCN_Scanned_Discharge_Letter_Tomas_Amukoto_2026-09-18.txt",
+    "scanFile": "Scans/PAT-004-SCN_Scanned_Discharge_Letter_Tomas_Amukoto.jpg",
+    "patientId": "PAT-004",
+    "date": "2026-09-18",
+    "accessGroups": [
+      "Clinical",
+      "PAT-004"
+    ]
+  },
+  {
+    "documentId": "PAT-002-SCN",
+    "title": "Scanned Referral Slip - Johannes Haufiku - Eye Screening",
+    "documentType": "Scanned Referral Slip",
+    "folder": "Patients",
+    "file": "Patients/PAT-002-SCN_Scanned_Referral_Slip_Johannes_Haufiku_Eye_Screening.txt",
+    "scanFile": "Scans/PAT-002-SCN_Scanned_Referral_Slip_Johannes_Haufiku.jpg",
+    "patientId": "PAT-002",
+    "date": "2026-11-19",
+    "accessGroups": [
+      "Clinical",
+      "PAT-002"
     ]
   }
 ]

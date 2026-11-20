@@ -12,8 +12,10 @@ import {
   LoaderCircle,
   LockKeyhole,
   LogIn,
+  ListChecks,
   LogOut,
   MessageCircleQuestion,
+  Radio,
   Mic,
   Search,
   Settings2,
@@ -29,7 +31,8 @@ import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/compone
 import { FeaturePhone } from '@/components/feature-phone';
 import { AlertBanner, AlertsPanel, EmergencyDialog, useAlertWatcher } from '@/components/emergency';
 import { AnswerCard } from '@/components/answer-card';
-import { DocumentViewer, MOBILE_FULLSCREEN } from '@/components/document-viewer';
+import { DocumentViewer, MOBILE_FULLSCREEN, type ViewerTab } from '@/components/document-viewer';
+import { useLiveShare, type LiveShare } from '@/hooks/use-live-share';
 import {
   callArchive,
   normalizeAnswer,
@@ -106,6 +109,7 @@ const DEMO_ACCOUNTS = [
   { label: 'Maria Nangolo · patient', id: 'PAT-001', pin: '1111' },
   { label: 'Johannes Haufiku · patient', id: 'PAT-002', pin: '2222' },
   { label: 'Loide Iipinge · parent', id: 'PAT-003', pin: '3333' },
+  { label: 'Tomas Amukoto · patient (heart failure)', id: 'PAT-004', pin: '7777' },
   { label: 'Selma Amutenya · clerk', id: 'CLK-001', pin: '4444' },
   { label: 'Sister Ndapewa Haufiku · nurse', id: 'NUR-001', pin: '5555' },
   { label: 'Dr Anna-Marie van Wyk · doctor', id: 'DOC-001', pin: '6666' },
@@ -137,6 +141,9 @@ function Index() {
   const [docs, setDocs] = useState<ArchiveDoc[]>([]);
   const [docFilter, setDocFilter] = useState('');
   const [source, setSource] = useState<Source | null>(null);
+  const [viewerTab, setViewerTab] = useState<ViewerTab>('text');
+  const [liveShare, setLiveShare] = useState<LiveShare | null>(null);
+  const live = useLiveShare(liveShare);
   const [listening, setListening] = useState(false);
   const [speaking, setSpeaking] = useState(false);
   const [voiceNotice, setVoiceNotice] = useState('');
@@ -317,6 +324,22 @@ function Index() {
 
       {isClinical && session && <AlertBanner watch={alertWatch} onView={() => go('alerts')} />}
 
+      {liveShare && (
+        <div role="status" className="border-b border-destructive/40 bg-destructive text-destructive-foreground">
+          <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-2 px-4 py-2 text-sm md:px-6">
+            <p className="flex items-center gap-2">
+              <Radio size={16} className="animate-pulse" />
+              Sharing your live location with the clinic{liveShare.simulation ? ' (demo simulation)' : ''}
+              <span className="text-xs opacity-90">
+                {live.lastSent ? `· last sent ${live.lastSent.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}` : '· starting…'}
+                {live.error ? ` · ${live.error}` : ''}
+              </span>
+            </p>
+            <Button size="sm" variant="secondary" onClick={() => setLiveShare(null)}>Stop sharing</Button>
+          </div>
+        </div>
+      )}
+
       <main id="main" className="mx-auto max-w-5xl px-4 py-5 md:px-6 md:py-8">
         {error && (
           <div role="alert" className="mb-4 flex items-start gap-3 rounded-xl border border-warning/20 bg-warning-surface p-3 text-sm text-warning">
@@ -380,7 +403,7 @@ function Index() {
                 ))}
               </div>
 
-              <AnswerCard answer={answer} onOpenSource={setSource} onListen={read} speaking={speaking} />
+              <AnswerCard answer={answer} onOpenSource={(src) => { setViewerTab('text'); setSource(src); }} onListen={read} speaking={speaking} />
             </section>
 
             <aside className="space-y-4">
@@ -439,7 +462,7 @@ function Index() {
                 {busy && !summary ? (
                   <p className="flex items-center gap-2 rounded-2xl border border-border bg-card p-5 text-sm text-muted-foreground"><LoaderCircle size={16} className="animate-spin" /> Summarising…</p>
                 ) : (
-                  <AnswerCard answer={summary} onOpenSource={setSource} onListen={read} speaking={speaking} />
+                  <AnswerCard answer={summary} onOpenSource={(src) => { setViewerTab('text'); setSource(src); }} onListen={read} speaking={speaking} />
                 )}
               </div>
             )}
@@ -455,8 +478,11 @@ function Index() {
                     </span>
                   </div>
                   <div className="flex gap-2 sm:shrink-0">
-                    <Button variant="outline" size="sm" className="h-10 flex-1 rounded-full sm:flex-none" onClick={() => setSource({ doc_id: d.doc_id, title: d.title, snippet: '', reference: d.doc_id, type: d.type, date: d.date, quotes: [] })}>
+                    <Button variant="outline" size="sm" className="h-10 flex-1 rounded-full sm:flex-none" onClick={() => { setViewerTab('text'); setSource({ doc_id: d.doc_id, title: d.title, snippet: '', reference: d.doc_id, type: d.type, date: d.date, quotes: [] }); }}>
                       <BookOpen size={14} /> Open
+                    </Button>
+                    <Button variant="outline" size="sm" className="h-10 flex-1 rounded-full sm:flex-none" onClick={() => { setViewerTab('details'); setSource({ doc_id: d.doc_id, title: d.title, snippet: '', reference: d.doc_id, type: d.type, date: d.date, quotes: [] }); }}>
+                      <ListChecks size={14} /> Key details
                     </Button>
                     <Button variant="clinic" size="sm" className="h-10 flex-1 rounded-full sm:flex-none" disabled={busy} onClick={() => { setSummary(null); void summarise(d); }}>
                       <Sparkles size={14} /> Summarise
@@ -563,9 +589,9 @@ function Index() {
       </nav>
 
       {/* ── Dialogs ───────────────────────────────────────────────────────── */}
-      <DocumentViewer source={source} onClose={() => setSource(null)} url={url} token={session?.token} userId={session?.user_id ?? 'PUBLIC'} />
+      <DocumentViewer source={source} onClose={() => { setSource(null); setViewerTab('text'); }} url={url} token={session?.token} userId={session?.user_id ?? 'PUBLIC'} initialTab={viewerTab} />
 
-      <EmergencyDialog open={distress} onOpenChange={setDistress} session={session} url={url} />
+      <EmergencyDialog open={distress} onOpenChange={setDistress} session={session} url={url} onSent={setLiveShare} />
 
       <Dialog open={signInOpen} onOpenChange={(v) => { setSignInOpen(v); setGateError(''); }}>
         <DialogContent className={`max-w-sm ${MOBILE_FULLSCREEN} max-sm:content-start`}>

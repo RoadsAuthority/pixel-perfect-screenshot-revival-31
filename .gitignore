@@ -44,3 +44,4 @@ backend/archive-upload/
 
 # Vercel build output
 .vercel/
+backend/scans-upload/
