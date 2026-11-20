@@ -3,6 +3,7 @@ import {
   AlertTriangle,
   Camera,
   CheckCircle2,
+  FileText,
   House,
   ImagePlus,
   Radio,
@@ -29,7 +30,7 @@ import { LiveMap } from '@/components/live-map';
 import { distanceKm, SIMULATIONS, simulatedPosition, type Coords } from '@/lib/geo';
 import { prepareImage, type PreparedImage } from '@/lib/image';
 import type { LiveShare } from '@/hooks/use-live-share';
-import type { PhotoAssessment } from '@/lib/archive';
+import { OUTCOMES, type HandleDetails, type PhotoAssessment } from '@/lib/archive';
 
 export const CLINIC_EMERGENCY_LINE = '+264 61 555 0199 (fictional)';
 
@@ -82,6 +83,7 @@ export function EmergencyDialog({ open, onOpenChange, session, url, onSent }: Di
   const [pin, setPin] = useState('');
   const [message, setMessage] = useState('');
   const [sentIdentity, setSentIdentity] = useState('');
+  const [recordId, setRecordId] = useState('');
   const [listening, setListening] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState('');
@@ -157,6 +159,7 @@ export function EmergencyDialog({ open, onOpenChange, session, url, onSent }: Di
         onSent?.({ alertId, updateKey: data['update_key'], url, simulation });
       }
       setSentIdentity(typeof data['identity'] === 'string' ? data['identity'] : '');
+      setRecordId(typeof data['record_doc_id'] === 'string' ? data['record_doc_id'] : '');
       setPin('');
     } catch (e) {
       setError(e instanceof Error ? e.message : 'The alert could not be sent. Call the emergency line.');
@@ -191,6 +194,7 @@ export function EmergencyDialog({ open, onOpenChange, session, url, onSent }: Di
                 {sentIdentity === 'claimed_patient' && 'Your patient ID could not be confirmed (no or wrong PIN), so the clinic will confirm who you are by phone.'}
                 {sentIdentity === 'unregistered' && 'Sent as a person who is not registered with the clinic.'}
                 {sentIdentity === 'staff' && 'Sent as clinic staff.'}
+                {recordId && ` Saved to your clinic file as ${recordId}, so the next nurse or doctor can see what happened.`}
               </p>
               <p className="mt-2 font-mono text-[11px] text-muted-foreground">Reference: {sentId.slice(0, 8)}</p>
             </div>
@@ -377,7 +381,7 @@ export type AlertWatch = {
   error: string;
   updated: string;
   refresh: () => Promise<void>;
-  acknowledge: (alertId: string) => Promise<void>;
+  acknowledge: (alertId: string, details?: HandleDetails) => Promise<void>;
   /** The newest alert that arrived since the page loaded and has not been viewed. */
   newAlert: EmergencyAlert | null;
   dismissNew: () => void;
@@ -477,10 +481,10 @@ export function useAlertWatcher(session: AuthSession | null, url: string): Alert
     return () => { window.clearInterval(timer); stopTitleFlash(); };
   }, [session, refresh, stopTitleFlash]);
 
-  const acknowledge = useCallback(async (alertId: string) => {
+  const acknowledge = useCallback(async (alertId: string, details: HandleDetails = {}) => {
     if (!session) return;
     try {
-      await callArchive(url, { action: 'alert_ack', user_id: session.user_id, alert_id: alertId }, session.token);
+      await callArchive(url, { action: 'alert_ack', user_id: session.user_id, alert_id: alertId, ...details }, session.token);
       await refresh();
     } catch (e) { setError(e instanceof Error ? e.message : 'Could not update the alert.'); }
   }, [url, session, refresh]);
@@ -672,8 +676,9 @@ function PhotoBox({ alert }: { alert: EmergencyAlert }) {
   );
 }
 
-function AlertCard({ alert, session, url, onHandled }: { alert: EmergencyAlert; session: AuthSession; url: string; onHandled: (id: string) => Promise<void> }) {
+function AlertCard({ alert, session, url, onHandled }: { alert: EmergencyAlert; session: AuthSession; url: string; onHandled: (id: string, details?: HandleDetails) => Promise<void> }) {
   const [question, setQuestion] = useState('');
+  const [handling, setHandling] = useState(false);
   const [answer, setAnswer] = useState<Answer | null>(null);
   const [source, setSource] = useState<Source | null>(null);
   const [asking, setAsking] = useState(false);
@@ -708,11 +713,26 @@ function AlertCard({ alert, session, url, onHandled }: { alert: EmergencyAlert; 
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
-          {alert.status === 'open' && (
-            <Button variant="clinic" size="sm" onClick={() => void onHandled(alert.alert_id)}><CheckCircle2 size={13} /> Mark handled</Button>
+          {alert.status === 'open' && !handling && (
+            <Button variant="clinic" size="sm" onClick={() => setHandling(true)}><CheckCircle2 size={13} /> Mark handled</Button>
+          )}
+          {alert.record_doc_id && (
+            <Button variant="outline" size="sm" onClick={() => setSource({ doc_id: alert.record_doc_id, title: 'Emergency record', snippet: '', reference: alert.record_doc_id, quotes: [] })}>
+              <FileText size={13} /> {alert.status === 'open' ? 'In patient file' : 'Filed record'} · {alert.record_doc_id}
+            </Button>
           )}
         </div>
       </div>
+
+      {handling && alert.status === 'open' && (
+        <HandleForm alert={alert} onCancel={() => setHandling(false)} onSubmit={async (details) => { await onHandled(alert.alert_id, details); setHandling(false); }} />
+      )}
+      {alert.status !== 'open' && (alert.outcome || alert.notes) && (
+        <div className="mt-4 rounded-md bg-secondary p-3 text-sm leading-6">
+          <p className="text-xs font-semibold text-primary">Handled by {alert.handled_by}{alert.outcome ? ` · ${alert.outcome}` : ''}</p>
+          {alert.notes && <p className="mt-1">{alert.notes}</p>}
+        </div>
+      )}
 
       <blockquote className="mt-4 rounded-md border-l-4 border-destructive/50 bg-card p-3 text-sm leading-6">
         {alert.message || <span className="text-muted-foreground">No message — location only.</span>}
@@ -762,6 +782,60 @@ function AlertCard({ alert, session, url, onHandled }: { alert: EmergencyAlert; 
       </div>
       <DocumentViewer source={source} onClose={() => setSource(null)} url={url} token={session.token} userId={session.user_id} />
     </article>
+  );
+}
+
+function HandleForm({ alert, onCancel, onSubmit }: { alert: EmergencyAlert; onCancel: () => void; onSubmit: (d: HandleDetails) => Promise<void> }) {
+  const verified = alert.identity === 'verified_patient';
+  const claimed = alert.identity === 'claimed_patient';
+  const patient = alert.patient_ids[0] || alert.claimed_patient_id;
+  const [notes, setNotes] = useState('');
+  const [outcome, setOutcome] = useState('');
+  const [file, setFile] = useState(verified);
+  const [confirmed, setConfirmed] = useState(false);
+  const [saving, setSaving] = useState(false);
+  return (
+    <form
+      className="mt-4 space-y-3 rounded-md border border-primary/30 bg-card p-4"
+      onSubmit={(e) => {
+        e.preventDefault();
+        setSaving(true);
+        void onSubmit({ notes: notes.trim(), outcome, file_to_record: (verified || claimed) && file, identity_confirmed: claimed && confirmed })
+          .finally(() => setSaving(false));
+      }}
+    >
+      <p className="text-sm font-semibold">Close this alert</p>
+      <label className="block text-xs font-medium">What was done (treatment, advice, referral, who went)
+        <textarea id={`notes-${alert.alert_id}`} value={notes} onChange={(e) => setNotes(e.target.value)} rows={3} maxLength={1500}
+          placeholder="e.g. Called patient, extra furosemide 40 mg given, brought to clinic by NUR-002, review tomorrow"
+          className="mt-1 w-full rounded-md border border-input bg-card p-2 text-sm" />
+      </label>
+      <label className="block text-xs font-medium">Outcome
+        <select id={`outcome-${alert.alert_id}`} value={outcome} onChange={(e) => setOutcome(e.target.value)} className="mt-1 h-10 w-full rounded-md border border-input bg-card px-2 text-sm">
+          <option value="">Choose…</option>
+          {OUTCOMES.map((o) => <option key={o} value={o}>{o}</option>)}
+        </select>
+      </label>
+      {verified && (
+        <label className="flex items-start gap-2 text-sm">
+          <input type="checkbox" checked={file} onChange={(e) => setFile(e.target.checked)} className="mt-1" />
+          <span>Add this emergency and what was done to {patient}'s file</span>
+        </label>
+      )}
+      {claimed && (
+        <div className="space-y-2 rounded-md bg-warning-surface p-3 text-sm text-warning">
+          <label className="flex items-start gap-2">
+            <input type="checkbox" checked={confirmed} onChange={(e) => { setConfirmed(e.target.checked); setFile(e.target.checked); }} className="mt-1" />
+            <span>I confirmed by phone that this person is {patient}. Add this emergency to their file.</span>
+          </label>
+        </div>
+      )}
+      {!verified && !claimed && <p className="text-xs text-muted-foreground">Not a registered patient: the alert stays in the audit log but is not added to any patient file.</p>}
+      <div className="flex gap-2">
+        <Button type="submit" variant="clinic" size="sm" disabled={saving}>{saving ? <LoaderCircle className="animate-spin" /> : <CheckCircle2 size={13} />} Save and close alert</Button>
+        <Button type="button" variant="ghost" size="sm" onClick={onCancel}>Cancel</Button>
+      </div>
+    </form>
   );
 }
 

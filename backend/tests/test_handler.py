@@ -638,6 +638,102 @@ class DispatchTests(unittest.TestCase):
         _, listed = handler.dispatch({"action": "alert_list"}, staff_clients, CONFIG, auth_header=f"Bearer {token}")
         self.assertTrue(listed["alerts"][0]["home"]["address"])
 
+    # ── Emergencies filed in the patient's record ────────────────────────────
+    def _reset_events(self):
+        handler.EVENT_DOCS.clear()
+        handler.EVENT_KEYS.clear()
+        handler._EVENTS_LOADED_AT = 0.0
+
+    def test_verified_patient_emergency_is_filed_and_handling_is_recorded(self):
+        self._reset_events()
+        token, clients, _ = self._login(PATIENT1)
+        clients["bedrock_runtime"] = FakeRuntime({"description": "Swollen red ankle.", "urgency": "medium", "first_aid_topic": "none"})
+        _, created = handler.dispatch(
+            {"action": "alert_create", "message": "My ankle is swollen and very painful", "lat": -22.52, "lng": 17.04,
+             "image_base64": self.PNG, "image_type": "image/png"},
+            clients, CONFIG, auth_header=f"Bearer {token}")
+        doc_id = created["record_doc_id"]
+        self.assertTrue(doc_id.startswith("EVT-"))
+        record = handler.get_doc(doc_id)
+        self.assertEqual(record["groups"], ["Clinical", "PAT-001"])
+        self.assertIn("My ankle is swollen", record["text"])
+        self.assertIn("Swollen red ankle", record["text"])
+        self.assertIn("not yet handled", record["text"])
+        self.assertTrue(any(k.startswith("archive/Emergencies/") for k in [p["Key"] for p in clients["s3"].put]))
+
+        doc_token, doc_clients, _ = self._login(DOCTOR)
+        doc_clients["audit_table"] = clients["audit_table"]
+        doc_clients["s3"] = clients["s3"]
+        _, acked = handler.dispatch(
+            {"action": "alert_ack", "alert_id": created["alert_id"], "file_to_record": True,
+             "outcome": "Brought to the clinic", "notes": "Ankle X-ray referral, ice and elevation, paracetamol."},
+            doc_clients, CONFIG, auth_header=f"Bearer {doc_token}")
+        self.assertEqual(acked["record_doc_id"], doc_id)
+        text = handler.get_doc(doc_id)["text"]
+        self.assertIn("Handled by: DOC-001 (DOC-001)", text)
+        self.assertIn("Ankle X-ray referral", text)
+        self.assertIn("Brought to the clinic", text)
+
+        # Patient and clinical staff can open it; another patient and the clerk cannot.
+        for user, allowed in ((PATIENT1, True), (DOCTOR, True), (PATIENT2, False), (CLERK, False)):
+            t, c, _ = self._login(user)
+            c["audit_table"] = clients["audit_table"]
+            if allowed:
+                _, body = handler.dispatch({"action": "document", "doc_id": doc_id}, c, CONFIG, auth_header=f"Bearer {t}")
+                self.assertIn("EMERGENCY RECORD", body["text"])
+                self.assertEqual(body["attachment"], "photo")
+            else:
+                with self.assertRaises(handler.ArchiveError):
+                    handler.dispatch({"action": "document", "doc_id": doc_id}, c, CONFIG, auth_header=f"Bearer {t}")
+
+    def test_filed_emergency_is_found_by_questions_without_a_sync(self):
+        self._reset_events()
+        token, clients, _ = self._login(PATIENT1)
+        _, created = handler.dispatch({"action": "alert_create", "message": "Severe headache and blurred vision"},
+                                      clients, CONFIG, auth_header=f"Bearer {token}")
+        doc_id = created["record_doc_id"]
+        runtime = FakeRuntime({"known": True, "summary": "You had an emergency for a severe headache.",
+                               "citations": [{"doc_id": doc_id, "quote": "Severe headache and blurred vision"}]})
+        _, body = self._ask(token, clients, FakeAgentRuntime([]), runtime, query="What happened in my last emergency with the headache?")
+        self.assertFalse(body["is_unknown"])
+        self.assertEqual(body["sources"][0]["doc_id"], doc_id)
+        self.assertIn(doc_id, runtime.request["messages"][0]["content"][0]["text"])
+
+    def test_unverified_id_is_filed_only_after_phone_confirmation(self):
+        self._reset_events()
+        users = FakeTable(stored_user("1111", "PAT-001", ["PAT-001"]))
+        clients = make_clients(users=users)
+        _, created = handler.dispatch({"action": "alert_create", "patient_id": "PAT-001", "message": "Help"},
+                                      clients, CONFIG, auth_header="")
+        self.assertEqual(created["record_doc_id"], "")
+        token, staff, _ = self._login(DOCTOR)
+        staff["audit_table"], staff["s3"] = clients["audit_table"], clients["s3"]
+        _, acked = handler.dispatch({"action": "alert_ack", "alert_id": created["alert_id"], "file_to_record": True},
+                                    staff, CONFIG, auth_header=f"Bearer {token}")
+        self.assertEqual(acked["record_doc_id"], "")
+        _, acked = handler.dispatch({"action": "alert_ack", "alert_id": created["alert_id"], "file_to_record": True,
+                                     "identity_confirmed": True, "outcome": "Advice by phone"},
+                                    staff, CONFIG, auth_header=f"Bearer {token}")
+        self.assertTrue(acked["record_doc_id"])
+        self.assertEqual(handler.get_doc(acked["record_doc_id"])["patient_id"], "PAT-001")
+
+    def test_unregistered_person_is_never_filed(self):
+        self._reset_events()
+        clients = make_clients()
+        _, created = handler.dispatch({"action": "alert_create", "name": "Visitor", "message": "Help"}, clients, CONFIG, auth_header="")
+        token, staff, _ = self._login(DOCTOR)
+        staff["audit_table"] = clients["audit_table"]
+        _, acked = handler.dispatch({"action": "alert_ack", "alert_id": created["alert_id"], "file_to_record": True,
+                                     "identity_confirmed": True}, staff, CONFIG, auth_header=f"Bearer {token}")
+        self.assertEqual(acked["record_doc_id"], "")
+        self.assertEqual(handler.EVENT_DOCS, {})
+
+    def test_unknown_outcome_rejected(self):
+        token, clients, _ = self._login(DOCTOR)
+        with self.assertRaises(handler.ArchiveError):
+            handler.dispatch({"action": "alert_ack", "alert_id": "0" * 8 + "-0000-0000-0000-" + "0" * 12, "outcome": "Teleported"},
+                             clients, CONFIG, auth_header=f"Bearer {token}")
+
     def test_unknown_action_returns_400(self):
         with self.assertRaises(handler.ArchiveError) as ctx:
             handler.dispatch({"action": "explode"}, make_clients(), CONFIG)

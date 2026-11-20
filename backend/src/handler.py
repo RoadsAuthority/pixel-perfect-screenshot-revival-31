@@ -48,6 +48,21 @@ DOCS_BY_KEY = {d["s3_key"]: d["doc_id"] for d in DOCUMENTS}
 # Normal place of stay per patient, from the patient profiles in the archive.
 PATIENT_HOMES = {d["patient_id"]: d["home"] for d in DOCUMENTS if d.get("patient_id") and d.get("home")}
 
+# Emergency records filed into patients' files at run time (stored in the audit table,
+# record_type EVENT_RECORD). Merged with the static catalogue for every access check.
+EVENT_DOCS: dict = {}
+EVENT_KEYS: dict = {}
+_EVENTS_LOADED_AT = 0.0
+EVENT_REFRESH_SECONDS = 15
+
+
+def get_doc(doc_id: str) -> dict | None:
+    return DOCS_BY_ID.get(doc_id) or EVENT_DOCS.get(doc_id)
+
+
+def all_docs() -> list:
+    return DOCUMENTS + sorted(EVENT_DOCS.values(), key=lambda d: d["date"], reverse=True)
+
 RETRIEVE_RESULTS = 20          # cross-document questions need several records
 RETRIEVE_RESULTS_SUMMARY = 15  # all chunks of one document
 RETRIEVE_RESULTS_WIDE = 100    # unfiltered fallback, filtered on the server
@@ -277,7 +292,7 @@ def can_read(principal: dict, document: dict) -> bool:
 
 
 def accessible_documents(principal: dict) -> list:
-    return [d for d in DOCUMENTS if can_read(principal, d)]
+    return [d for d in all_docs() if can_read(principal, d)]
 
 
 def access_filter(principal: dict, doc_id: str = "") -> dict:
@@ -301,7 +316,7 @@ def _chunk_doc_id(result: dict) -> str:
         return doc_id
     uri = ((result.get("location") or {}).get("s3Location") or {}).get("uri", "")
     key = uri.split("/", 3)[3] if uri.startswith("s3://") and uri.count("/") >= 3 else ""
-    return DOCS_BY_KEY.get(key, "")
+    return DOCS_BY_KEY.get(key) or EVENT_KEYS.get(key, "")
 
 
 def _search(agent_runtime, knowledge_base_id: str, query: str, count: int, flt: dict | None) -> list:
@@ -328,7 +343,7 @@ def _permitted(results: list, principal: dict, doc_id: str) -> list:
     chunks = []
     for result in results:
         chunk_doc = _chunk_doc_id(result)
-        document = DOCS_BY_ID.get(chunk_doc)
+        document = get_doc(chunk_doc)
         if document is None or not can_read(principal, document):
             continue
         if doc_id and chunk_doc != doc_id:
@@ -337,6 +352,22 @@ def _permitted(results: list, principal: dict, doc_id: str) -> list:
         if isinstance(text, str) and text.strip():
             chunks.append({"doc_id": chunk_doc, "text": text.strip()})
     return chunks
+
+
+def _event_chunks(query: str, principal: dict, doc_id: str) -> list:
+    """Emergency records the user may read that match the question (or the requested record)."""
+    readable = [d for d in EVENT_DOCS.values() if can_read(principal, d)]
+    if doc_id:
+        return [{"doc_id": d["doc_id"], "text": d["text"]} for d in readable if d["doc_id"] == doc_id]
+    wanted = _tokens(query)
+    emergency_words = {"emergency", "emergencies", "alert", "alerts", "urgent", "before", "previous", "last", "happened", "treated", "treatment"}
+    scored = []
+    for d in readable:
+        overlap = len(wanted & _tokens(d["text"])) + (2 if wanted & emergency_words else 0)
+        if overlap >= 3:
+            scored.append((overlap, d))
+    scored.sort(key=lambda pair: pair[0], reverse=True)
+    return [{"doc_id": d["doc_id"], "text": d["text"]} for _, d in scored[:3]]
 
 
 def retrieve_chunks(query: str, principal: dict, doc_id: str, agent_runtime, knowledge_base_id: str) -> list:
@@ -355,6 +386,11 @@ def retrieve_chunks(query: str, principal: dict, doc_id: str, agent_runtime, kno
         results = _search(agent_runtime, knowledge_base_id, query, RETRIEVE_RESULTS_WIDE, None)
         chunks = _permitted(results, principal, doc_id)[:limit]
         mode = "unfiltered+server-side"
+    # Emergency records filed since the last Knowledge Base sync are searched here directly.
+    seen_text = {c["text"] for c in chunks}
+    for extra in _event_chunks(query, principal, doc_id):
+        if extra["text"] not in seen_text:
+            chunks.append(extra)
     logger.info(
         "retrieve user=%s mode=%s results=%d permitted=%d docs=%s",
         principal.get("user_id"), mode, len(results), len(chunks),
@@ -488,7 +524,7 @@ def verified_quotes(doc_id: str, quotes: list, answer_text: str = "") -> list:
     3. If no quote survives, the lines that best match the answer are used.
     Every returned passage is text that really is in the document.
     """
-    document = DOCS_BY_ID.get(doc_id)
+    document = get_doc(doc_id)
     if not document:
         return []
     text = document.get("text", "")
@@ -522,7 +558,7 @@ def verified_quotes(doc_id: str, quotes: list, answer_text: str = "") -> list:
 
 def _source_for(doc_id: str, chunks: list, s3_client, archive_bucket: str, quotes: list | None = None,
                 answer_text: str = "") -> dict:
-    document = next(d for d in DOCUMENTS if d["doc_id"] == doc_id)
+    document = get_doc(doc_id)
     snippet = next((c["text"] for c in chunks if c["doc_id"] == doc_id), "")
     good = verified_quotes(doc_id, quotes or [], answer_text)
     return {
@@ -718,7 +754,7 @@ _EXTRACT_CACHE: dict = {}
 
 
 def extract_details(doc_id: str, principal: dict, runtime, model_id: str) -> dict:
-    document = DOCS_BY_ID.get(doc_id)
+    document = get_doc(doc_id)
     if document is None or not can_read(principal, document):
         raise ArchiveError(404, "That document is not available to you.")
     if doc_id not in _EXTRACT_CACHE:
@@ -928,6 +964,11 @@ def create_alert(body: dict, principal: dict, clients: dict, config: dict) -> di
         except ArchiveError:
             item["image_assessment"] = {"description": "", "urgency": "unknown", "error": "The photo could not be read automatically."}
     audit_table.put_item(Item=item)
+    if identity == "verified_patient" and patient_ids:
+        try:
+            item["record_doc_id"] = write_event_record(clients, config, item, patient_ids[0], None)
+        except ClientError:
+            logger.exception("Could not file alert %s in the patient's record.", alert_id)
     # Secret that lets the sender's phone keep updating its live location.
     update_key = secrets.token_urlsafe(24)
     audit_table.put_item(Item={
@@ -946,7 +987,158 @@ def create_alert(body: dict, principal: dict, clients: dict, config: dict) -> di
         "identity": identity,
         "update_key": update_key,
         "image_assessment": item["image_assessment"],
+        "record_doc_id": item.get("record_doc_id", ""),
     }
+
+
+EVENT_PREFIX = "archive/Emergencies/"
+
+
+def event_doc_id(alert_id: str) -> str:
+    return "EVT-" + alert_id.replace("-", "")[:8].upper()
+
+
+def _fmt_time(iso: str) -> str:
+    return iso.replace("T", " ")[:16] + " UTC" if iso else ""
+
+
+def build_event_text(alert: dict, patient_id: str, handling: dict | None) -> str:
+    doc_id = event_doc_id(alert["alert_id"])
+    identity = {
+        "verified_patient": "verified (signed in or correct PIN)",
+        "claimed_patient": "confirmed by clinic staff by phone",
+    }.get(alert.get("identity", ""), alert.get("identity", ""))
+    lines = [
+        "========================================================================",
+        "HOPEWELL COMMUNITY CLINIC",
+        "FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA",
+        "========================================================================",
+        f"EMERGENCY RECORD - {alert.get('name', '')}".upper(),
+        f"Document ID: {doc_id}",
+        f"Date: {alert.get('timestamp', '')[:10]}",
+        "========================================================================",
+        f"Patient: {patient_id} {alert.get('name', '')}",
+        f"Identity: {identity}",
+        f"Reported: {_fmt_time(alert.get('timestamp', ''))} via {alert.get('channel', 'web')}",
+    ]
+    if alert.get("phone"):
+        lines.append(f"Call-back number: {alert['phone']}")
+    lat, lng = alert.get("lat", ""), alert.get("lng", "")
+    home = PATIENT_HOMES.get(patient_id) or {}
+    if lat and lng:
+        where = f"Location when reported: {lat}, {lng}"
+        if home.get("lat") is not None:
+            km = _haversine_km(float(lat), float(lng), float(home["lat"]), float(home["lng"]))
+            where += f" (about {km:.1f} km from home: {home.get('address', '')})"
+        lines.append(where)
+    else:
+        lines.append("Location when reported: not shared")
+    lines += ["", "PATIENT'S OWN WORDS", alert.get("message") or "(no message)"]
+    assessment = alert.get("image_assessment") or {}
+    if alert.get("image_key") or assessment.get("description"):
+        lines += ["", "PHOTO SENT BY THE PATIENT",
+                  f"AI description (triage support, not a diagnosis): {assessment.get('description', 'not available')}",
+                  f"Urgency estimated from the photo: {assessment.get('urgency', 'unknown')}"]
+        if assessment.get("first_aid_topic") and assessment["first_aid_topic"] != "none":
+            lines.append(f"First-aid guide suggested to the patient: {assessment['first_aid_topic']} ({assessment.get('guide_doc_id', '')})")
+    lines += ["", "HANDLING"]
+    if handling:
+        lines += [
+            f"Handled by: {handling['by_name']} ({handling['by_id']})",
+            f"Handled at: {_fmt_time(handling['at'])}",
+            f"Outcome: {handling.get('outcome') or 'not recorded'}",
+            f"What was done: {handling.get('notes') or 'not recorded'}",
+        ]
+    else:
+        lines.append("Status: open - not yet handled by clinic staff")
+    lines += ["", "------------------------------------------------------------------------",
+              "Filed automatically from an emergency alert in Ask the Archive."]
+    return "\n".join(lines) + "\n"
+
+
+def _haversine_km(lat1: float, lng1: float, lat2: float, lng2: float) -> float:
+    import math
+    r = math.radians
+    h = math.sin(r(lat2 - lat1) / 2) ** 2 + math.cos(r(lat1)) * math.cos(r(lat2)) * math.sin(r(lng2 - lng1) / 2) ** 2
+    return 6371 * 2 * math.asin(math.sqrt(h))
+
+
+def write_event_record(clients: dict, config: dict, alert: dict, patient_id: str, handling: dict | None) -> str:
+    """File the emergency in the patient's record (DynamoDB now; S3 for the next Knowledge Base sync)."""
+    doc_id = event_doc_id(alert["alert_id"])
+    title = f"Emergency Record - {alert.get('name') or patient_id} - {alert.get('timestamp', '')[:10]}"
+    groups = ["Clinical", patient_id]
+    s3_key = f"{EVENT_PREFIX}{doc_id}_Emergency_Record_{patient_id}.txt"
+    text = build_event_text(alert, patient_id, handling)
+    clients["audit_table"].put_item(Item={
+        "user_id": f"RECORD#{patient_id}",
+        "timestamp_request": f"{alert.get('timestamp', '')}#{alert['alert_id']}",
+        "record_type": "EVENT_RECORD",
+        "timestamp": _now_iso(),
+        "doc_id": doc_id,
+        "alert_id": alert["alert_id"],
+        "title": title,
+        "patient_id": patient_id,
+        "date": alert.get("timestamp", "")[:10],
+        "groups": groups,
+        "s3_key": s3_key,
+        "image_key": alert.get("image_key", ""),
+        "text": text,
+    })
+    try:
+        meta = {"metadataAttributes": {
+            "documentId": doc_id, "doc_id": doc_id, "title": title, "documentType": "Emergency Record",
+            "folder": "Emergencies", "accessGroups": groups, "patientId": patient_id,
+            "documentDate": alert.get("timestamp", "")[:10],
+            **{group_key(g): "yes" for g in groups},
+        }}
+        clients["s3"].put_object(Bucket=config["archive_bucket"], Key=s3_key, Body=text.encode("utf-8"),
+                                 ContentType="text/plain; charset=utf-8")
+        clients["s3"].put_object(Bucket=config["archive_bucket"], Key=f"{s3_key}.metadata.json",
+                                 Body=json.dumps(meta).encode("utf-8"), ContentType="application/json")
+    except ClientError:
+        logger.exception("Could not copy emergency record %s to S3 (it is still in the record store).", doc_id)
+    refresh_events(clients["audit_table"], force=True)
+    return doc_id
+
+
+def refresh_events(audit_table, force: bool = False) -> None:
+    """Reload emergency records into the dynamic catalogue (cached for a few seconds)."""
+    global _EVENTS_LOADED_AT
+    if not force and time.time() - _EVENTS_LOADED_AT < EVENT_REFRESH_SECONDS:
+        return
+    from boto3.dynamodb.conditions import Key as DKey
+    try:
+        items = audit_table.query(
+            IndexName="ByTimestamp",
+            KeyConditionExpression=DKey("record_type").eq("EVENT_RECORD"),
+            ScanIndexForward=False,
+            Limit=300,
+        ).get("Items", [])
+    except ClientError:
+        logger.exception("Could not load emergency records.")
+        return
+    docs, keys = {}, {}
+    for item in items:
+        if item.get("record_type") != "EVENT_RECORD" or not item.get("doc_id") or item["doc_id"] in docs:
+            continue
+        docs[item["doc_id"]] = {
+            "doc_id": item["doc_id"],
+            "title": item.get("title", item["doc_id"]),
+            "type": "Emergency Record",
+            "folder": "Emergencies",
+            "date": item.get("date", ""),
+            "patient_id": item.get("patient_id", ""),
+            "groups": list(item.get("groups", [])),
+            "s3_key": item.get("s3_key", ""),
+            "text": item.get("text", ""),
+            **({"scan_key": item["image_key"], "attachment": "photo"} if item.get("image_key") else {}),
+        }
+        if item.get("s3_key"):
+            keys[item["s3_key"]] = item["doc_id"]
+    EVENT_DOCS.clear(); EVENT_DOCS.update(docs)
+    EVENT_KEYS.clear(); EVENT_KEYS.update(keys)
+    _EVENTS_LOADED_AT = time.time()
 
 
 def update_alert_location(body: dict, audit_table) -> dict:
@@ -1034,6 +1226,10 @@ def list_alerts(audit_table, s3_client=None, archive_bucket: str = "") -> list:
             "status": "handled" if ack else "open",
             "handled_by": ack.get("handled_by", "") if ack else "",
             "handled_at": ack.get("timestamp", "") if ack else "",
+            "outcome": ack.get("outcome", "") if ack else "",
+            "notes": ack.get("notes", "") if ack else "",
+            "record_doc_id": (ack.get("record_doc_id") if ack else "") or (
+                event_doc_id(item.get("alert_id", "")) if item.get("identity") == "verified_patient" and item.get("patient_ids") else ""),
             "home": PATIENT_HOMES.get(patient, {}) if patient else {},
             "track": _alert_track(audit_table, item.get("alert_id", "")) if not ack else [],
             "image_url": image_url,
@@ -1042,11 +1238,44 @@ def list_alerts(audit_table, s3_client=None, archive_bucket: str = "") -> list:
     return alerts
 
 
-def acknowledge_alert(body: dict, principal: dict, audit_table) -> dict:
+OUTCOMES = {"Treated at home", "Brought to the clinic", "Sent to hospital", "Advice by phone", "Ambulance called", "No action needed", "Could not reach the person"}
+
+
+def _find_alert(audit_table, alert_id: str) -> dict | None:
+    from boto3.dynamodb.conditions import Key as DKey
+    items = audit_table.query(
+        IndexName="ByTimestamp",
+        KeyConditionExpression=DKey("record_type").eq("ALERT"),
+        ScanIndexForward=False,
+        Limit=200,
+    ).get("Items", [])
+    return next((i for i in items if i.get("record_type") == "ALERT" and i.get("alert_id") == alert_id), None)
+
+
+def acknowledge_alert(body: dict, principal: dict, clients: dict, config: dict) -> dict:
+    """Mark an alert handled, record what was done, and file it in the patient's record."""
+    audit_table = clients["audit_table"]
     alert_id = _optional_text(body, "alert_id", 36)
     if not ALERT_ID_PATTERN.fullmatch(alert_id):
         raise ArchiveError(400, "The alert ID is invalid.")
+    notes = _optional_text(body, "notes", 1500)
+    outcome = _optional_text(body, "outcome", 60)
+    if outcome and outcome not in OUTCOMES:
+        raise ArchiveError(400, "Choose one of the listed outcomes.")
     timestamp = _now_iso()
+    record_doc_id = ""
+    alert = _find_alert(audit_table, alert_id)
+    if alert and body.get("file_to_record") is True:
+        patient = ""
+        if alert.get("identity") == "verified_patient" and alert.get("patient_ids"):
+            patient = list(alert["patient_ids"])[0]
+        elif alert.get("identity") == "claimed_patient" and body.get("identity_confirmed") is True:
+            patient = alert.get("claimed_patient_id", "")
+        if patient:
+            record_doc_id = write_event_record(clients, config, alert, patient, {
+                "by_name": principal["name"], "by_id": principal["user_id"], "at": timestamp,
+                "notes": notes, "outcome": outcome,
+            })
     audit_table.put_item(Item={
         "user_id": principal["user_id"],
         "timestamp_request": f"{timestamp}#ack#{alert_id}",
@@ -1054,8 +1283,11 @@ def acknowledge_alert(body: dict, principal: dict, audit_table) -> dict:
         "alert_id": alert_id,
         "timestamp": timestamp,
         "handled_by": principal["name"],
+        "notes": notes,
+        "outcome": outcome,
+        "record_doc_id": record_doc_id,
     })
-    return {"alert_id": alert_id, "status": "handled"}
+    return {"alert_id": alert_id, "status": "handled", "record_doc_id": record_doc_id}
 
 
 # ── Main dispatcher ────────────────────────────────────────────────────────────
@@ -1088,6 +1320,9 @@ def dispatch(body: dict, clients: dict, config: dict, auth_header: str = "") -> 
         principal = authenticate_session(auth_header, clients)
     else:
         principal = dict(PUBLIC_PRINCIPAL)
+
+    if action in {"documents", "document", "ask", "summary", "extract", "ussd"}:
+        refresh_events(clients["audit_table"])
 
     if action == "documents":
         return 200, {"documents": document_summaries(principal), "scope": scope_label(principal)}
@@ -1144,11 +1379,12 @@ def dispatch(body: dict, clients: dict, config: dict, auth_header: str = "") -> 
 
     if action == "document":
         doc_id = _required_text(body, "doc_id", 80)
-        document = DOCS_BY_ID.get(doc_id)
+        document = get_doc(doc_id)
         if document is None or not can_read(principal, document):
             raise ArchiveError(404, "That document is not available to you.")
         result = {k: document.get(k, "") for k in ("doc_id", "title", "type", "date", "patient_id", "text")}
         if document.get("scan_key"):
+            result["attachment"] = document.get("attachment", "scan")
             result["scan_url"] = clients["s3"].generate_presigned_url(
                 "get_object", Params={"Bucket": config["archive_bucket"], "Key": document["scan_key"]},
                 ExpiresIn=SOURCE_URL_TTL_SECONDS,
@@ -1180,7 +1416,7 @@ def dispatch(body: dict, clients: dict, config: dict, auth_header: str = "") -> 
 
     if action == "alert_ack":
         require_clinical(principal)
-        return 200, acknowledge_alert(body, principal, clients["audit_table"])
+        return 200, acknowledge_alert(body, principal, clients, config)
 
     if action == "ussd":
         return 200, handle_ussd(body, clients, config)

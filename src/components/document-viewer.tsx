@@ -95,7 +95,7 @@ export function DocumentViewer({ source, onClose, url, token, userId, initialTab
   const tabs: { id: ViewerTab; label: string; icon: typeof FileText }[] = [
     { id: 'text', label: 'Document', icon: FileText },
     { id: 'details', label: 'Key details', icon: ListChecks },
-    ...(doc?.scan_url ? [{ id: 'scan' as const, label: 'Original scan', icon: ScanLine }] : []),
+    ...(doc?.scan_url ? [{ id: 'scan' as const, label: doc.attachment === 'photo' ? 'Photo' : 'Original scan', icon: ScanLine }] : []),
   ];
 
   return (
@@ -196,7 +196,11 @@ export function DocumentViewer({ source, onClose, url, token, userId, initialTab
 
           {tab === 'scan' && doc?.scan_url && (
             <div className="space-y-2 py-1">
-              <p className="text-xs text-muted-foreground">The original scanned page. The “Document” tab shows the text read from it by OCR.</p>
+              <p className="text-xs text-muted-foreground">
+                {doc.attachment === 'photo'
+                  ? 'The photo the patient sent with the emergency alert.'
+                  : 'The original scanned page. The “Document” tab shows the text read from it by OCR.'}
+              </p>
               <a href={doc.scan_url} target="_blank" rel="noreferrer">
                 <img src={doc.scan_url} alt={`Original scan of ${doc.title}`} className="w-full rounded-md border border-border" />
               </a>

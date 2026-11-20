@@ -40,7 +40,7 @@ export type Answer = {
   sources: Source[];
 };
 /** A full document, for the highlighted source viewer. */
-export type ArchiveDocText = { doc_id: string; title: string; type: string; date: string; patient_id: string; text: string; scan_url?: string | undefined };
+export type ArchiveDocText = { doc_id: string; title: string; type: string; date: string; patient_id: string; text: string; scan_url?: string | undefined; attachment?: 'scan' | 'photo' | undefined };
 
 /** One extracted fact from a document, with the exact line it comes from. */
 export type KeyDetail = { category: 'date' | 'party' | 'amount' | 'id' | 'condition' | 'medication' | 'result' | 'other'; label: string; value: string; quote: string };
@@ -73,7 +73,11 @@ export type ArchiveRequest =
   | (ArchiveRequestBase & { action: 'alert_create'; channel: 'web' | 'voice'; message: string; name: string; phone: string; patient_id: string; pin: string; lat?: number | undefined; lng?: number | undefined; accuracy?: number | undefined; image_base64?: string | undefined; image_type?: string | undefined })
   | (ArchiveRequestBase & { action: 'alert_location'; alert_id: string; update_key: string; lat: number; lng: number; accuracy: number; simulated: boolean })
   | (ArchiveRequestBase & { action: 'alert_list' })
-  | (ArchiveRequestBase & { action: 'alert_ack'; alert_id: string });
+  | (ArchiveRequestBase & { action: 'alert_ack'; alert_id: string } & HandleDetails);
+
+/** What staff record when they close an alert. */
+export type HandleDetails = { notes?: string; outcome?: string; file_to_record?: boolean; identity_confirmed?: boolean };
+export const OUTCOMES = ['Treated at home', 'Brought to the clinic', 'Sent to hospital', 'Advice by phone', 'Ambulance called', 'No action needed', 'Could not reach the person'] as const;
 
 /** A distress alert as returned to clinical staff. */
 export type EmergencyAlert = {
@@ -103,6 +107,11 @@ export type EmergencyAlert = {
   /** Signed link to the emergency photo, if one was sent. */
   image_url: string;
   image_assessment: PhotoAssessment;
+  /** Outcome and notes recorded when the alert was handled. */
+  outcome: string;
+  notes: string;
+  /** The emergency record filed in the patient's file, if any. */
+  record_doc_id: string;
 };
 
 export function unknown(restricted = false): Answer {

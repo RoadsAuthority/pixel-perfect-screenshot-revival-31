@@ -79,6 +79,7 @@ const PROMPTS = {
     { text: "What are Maria Nangolo's allergies?", icon: HeartPulse },
     { text: "What was Johannes Haufiku's HbA1c result?", icon: FlaskConical },
     { text: 'What is the adrenaline dose for anaphylaxis in an adult?', icon: AlertTriangle },
+    { text: 'Has Tomas Amukoto had an emergency before? What was done?', icon: Siren },
   ],
   staff: [
     { text: 'Which contracts or leases expire next year?', icon: ClipboardList },
@@ -89,6 +90,7 @@ const PROMPTS = {
     { text: 'What allergies do I have?', icon: HeartPulse },
     { text: 'When is my next appointment or vaccine due?', icon: CalendarDays },
     { text: 'What were my latest test results?', icon: FlaskConical },
+    { text: 'What happened in my last emergency?', icon: Siren },
   ],
   public: [
     { text: 'When is the next vaccination outreach clinic?', icon: CalendarDays },
