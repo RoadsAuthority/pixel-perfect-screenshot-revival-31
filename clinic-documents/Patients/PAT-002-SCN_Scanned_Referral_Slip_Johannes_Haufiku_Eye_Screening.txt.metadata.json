@@ -1,0 +1,14 @@
+{
+  "metadataAttributes": {
+    "documentId": "PAT-002-SCN",
+    "documentType": "Scanned Referral Slip",
+    "folder": "Patients",
+    "accessGroups": [
+      "Clinical",
+      "PAT-002"
+    ],
+    "documentDate": "2026-11-19",
+    "patientId": "PAT-002",
+    "source": "ocr"
+  }
+}

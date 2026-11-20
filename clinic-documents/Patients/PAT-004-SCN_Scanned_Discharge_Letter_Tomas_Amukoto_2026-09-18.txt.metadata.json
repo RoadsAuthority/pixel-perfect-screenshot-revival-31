@@ -1,0 +1,14 @@
+{
+  "metadataAttributes": {
+    "documentId": "PAT-004-SCN",
+    "documentType": "Scanned Discharge Letter",
+    "folder": "Patients",
+    "accessGroups": [
+      "Clinical",
+      "PAT-004"
+    ],
+    "documentDate": "2026-09-18",
+    "patientId": "PAT-004",
+    "source": "ocr"
+  }
+}

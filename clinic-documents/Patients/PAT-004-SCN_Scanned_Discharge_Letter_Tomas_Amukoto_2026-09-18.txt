@@ -1,0 +1,41 @@
+========================================================================
+SCANNED DOCUMENT - TEXT EXTRACTED BY OCR
+Document ID: PAT-004-SCN
+Title: Scanned Discharge Letter - Tomas Amukoto - 2026-09-18
+Original scan: PAT-004-SCN_Scanned_Discharge_Letter_Tomas_Amukoto.jpg
+OCR: Claude vision on Amazon Bedrock, 2026-11-20. Check the original scan for exact wording.
+FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
+========================================================================
+WINDHOEK CENTRAL HOSPITAL
+Department of Internal Medicine - Ward 7B
+Private Bag 13215, Windhoek Tel 061 555 9000 (fictional)
+
+DISCHARGE SUMMARY
+
+Patient: Tomas AMUKOTO     DOB: 04/02/1959     Hosp no: WCH-778213
+Admitted: 14/09/2026     Discharged: 18/09/2026
+Referred back to: Hopewell Community Clinic, Khomasdal
+
+Diagnosis: Acute decompensated heart failure (fluid overload)
+Background: Heart failure (EF 35%), hypertension, CKD 3a
+Allergy: ASPIRIN (bronchospasm)
+
+Treatment given: IV furosemide 40 mg twice daily for 3 days.
+Weight on admission 78.6 kg, on discharge 74.0 kg.
+
+Medication on discharge:
+Furosemide 40 mg mane (was 20 mg)
+Enalapril 10 mg bd
+Bisoprolol 2.5 mg od
+Spironolactone 25 mg od (NEW)
+
+Follow-up: clinic review within 2 weeks; check K+ and creatinine.
+
+Dr P. Nghipondoka (fictional), Medical Officer
+
+Pt lives alone - daughter Ndeshi
+081 555 0402. Please do home visit
+if he misses review. P.N. 18/9
+
+WCH WARD 7B
+18 SEP 2026

@@ -145,6 +145,21 @@
     }
   },
   {
+    "doc_id": "PAT-002-SCN",
+    "title": "Scanned Referral Slip - Johannes Haufiku - Eye Screening",
+    "type": "Scanned Referral Slip",
+    "folder": "Patients",
+    "date": "2026-11-19",
+    "patient_id": "PAT-002",
+    "groups": [
+      "Clinical",
+      "PAT-002"
+    ],
+    "s3_key": "archive/Patients/PAT-002-SCN_Scanned_Referral_Slip_Johannes_Haufiku_Eye_Screening.txt",
+    "text": "========================================================================\nSCANNED DOCUMENT - TEXT EXTRACTED BY OCR\nDocument ID: PAT-002-SCN\nTitle: Scanned Referral Slip - Johannes Haufiku - Eye Screening\nOriginal scan: PAT-002-SCN_Scanned_Referral_Slip_Johannes_Haufiku.jpg\nOCR: Claude vision on Amazon Bedrock, 2026-11-20. Check the original scan for exact wording.\nFICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA\n========================================================================\nHOPEWELL COMMUNITY CLINIC\n15 Moringa St, Khomasdal   Tel 061 555 0100 (fictional)\n\nREFERRAL SLIP\n\nTo: Eye Clinic, Windhoek Central Hosp.\n\nPatient: Johannes Haufiku\n\nClinic no: PAT-002\n\nReason for referral:\n\nType 2 diabetes since 2019, HbA1c 8.1%\n(rising). Retina screening overdue since\nJune 2026. Please screen for retinopathy.\n\nUrgency: [  ] routine [X] soon [  ] urgent\n\nReferred by: Dr A-M van Wyk\n\nDate: 19/11/2026\n\nHOPEWELL\n19 NOV 2026\n",
+    "scan_key": "scans/PAT-002-SCN_Scanned_Referral_Slip_Johannes_Haufiku.jpg"
+  },
+  {
     "doc_id": "PAT-003-IMM",
     "title": "Immunisation Record - Ndapandula Iipinge",
     "type": "Immunisation Record",
@@ -195,6 +210,21 @@
       "lat": -22.5452,
       "lng": 17.0468
     }
+  },
+  {
+    "doc_id": "PAT-004-SCN",
+    "title": "Scanned Discharge Letter - Tomas Amukoto - 2026-09-18",
+    "type": "Scanned Discharge Letter",
+    "folder": "Patients",
+    "date": "2026-09-18",
+    "patient_id": "PAT-004",
+    "groups": [
+      "Clinical",
+      "PAT-004"
+    ],
+    "s3_key": "archive/Patients/PAT-004-SCN_Scanned_Discharge_Letter_Tomas_Amukoto_2026-09-18.txt",
+    "text": "========================================================================\nSCANNED DOCUMENT - TEXT EXTRACTED BY OCR\nDocument ID: PAT-004-SCN\nTitle: Scanned Discharge Letter - Tomas Amukoto - 2026-09-18\nOriginal scan: PAT-004-SCN_Scanned_Discharge_Letter_Tomas_Amukoto.jpg\nOCR: Claude vision on Amazon Bedrock, 2026-11-20. Check the original scan for exact wording.\nFICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA\n========================================================================\nWINDHOEK CENTRAL HOSPITAL\nDepartment of Internal Medicine - Ward 7B\nPrivate Bag 13215, Windhoek Tel 061 555 9000 (fictional)\n\nDISCHARGE SUMMARY\n\nPatient: Tomas AMUKOTO     DOB: 04/02/1959     Hosp no: WCH-778213\nAdmitted: 14/09/2026     Discharged: 18/09/2026\nReferred back to: Hopewell Community Clinic, Khomasdal\n\nDiagnosis: Acute decompensated heart failure (fluid overload)\nBackground: Heart failure (EF 35%), hypertension, CKD 3a\nAllergy: ASPIRIN (bronchospasm)\n\nTreatment given: IV furosemide 40 mg twice daily for 3 days.\nWeight on admission 78.6 kg, on discharge 74.0 kg.\n\nMedication on discharge:\nFurosemide 40 mg mane (was 20 mg)\nEnalapril 10 mg bd\nBisoprolol 2.5 mg od\nSpironolactone 25 mg od (NEW)\n\nFollow-up: clinic review within 2 weeks; check K+ and creatinine.\n\nDr P. Nghipondoka (fictional), Medical Officer\n\nPt lives alone - daughter Ndeshi\n081 555 0402. Please do home visit\nif he misses review. P.N. 18/9\n\nWCH WARD 7B\n18 SEP 2026\n",
+    "scan_key": "scans/PAT-004-SCN_Scanned_Discharge_Letter_Tomas_Amukoto.jpg"
   },
   {
     "doc_id": "PAT-004-VIS",

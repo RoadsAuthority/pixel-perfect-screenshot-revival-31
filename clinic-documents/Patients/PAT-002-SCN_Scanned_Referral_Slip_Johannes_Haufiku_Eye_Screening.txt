@@ -1,0 +1,33 @@
+========================================================================
+SCANNED DOCUMENT - TEXT EXTRACTED BY OCR
+Document ID: PAT-002-SCN
+Title: Scanned Referral Slip - Johannes Haufiku - Eye Screening
+Original scan: PAT-002-SCN_Scanned_Referral_Slip_Johannes_Haufiku.jpg
+OCR: Claude vision on Amazon Bedrock, 2026-11-20. Check the original scan for exact wording.
+FICTIONAL DEMONSTRATION RECORD - NOT REAL PATIENT DATA
+========================================================================
+HOPEWELL COMMUNITY CLINIC
+15 Moringa St, Khomasdal   Tel 061 555 0100 (fictional)
+
+REFERRAL SLIP
+
+To: Eye Clinic, Windhoek Central Hosp.
+
+Patient: Johannes Haufiku
+
+Clinic no: PAT-002
+
+Reason for referral:
+
+Type 2 diabetes since 2019, HbA1c 8.1%
+(rising). Retina screening overdue since
+June 2026. Please screen for retinopathy.
+
+Urgency: [  ] routine [X] soon [  ] urgent
+
+Referred by: Dr A-M van Wyk
+
+Date: 19/11/2026
+
+HOPEWELL
+19 NOV 2026
